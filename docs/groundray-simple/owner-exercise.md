@@ -1,9 +1,13 @@
 # Does inspecting the evidence help you decide?
 
-This is a small owner exercise, not a completed benchmark. No owner decision,
+This is a small human owner exercise, not a completed human benchmark. No human decision,
 inspection time or usefulness result has been measured. A person who has already
 read both views can give product feedback, but cannot supply a clean first-exposure
 comparison.
+
+The [model simulation](simulated-owner-trial.md) separately records four fresh
+simulated participants. Those results cannot supply a person's inspection time
+or replace the human feedback requested here.
 
 ## First-use check
 

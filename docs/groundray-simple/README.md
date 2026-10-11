@@ -40,3 +40,10 @@ claims. The candidate now cites every consequential assertion, with expanded
 reasoning where needed. Follow-up review found no new actionable issues. Source
 hashes, arithmetic and links after moving the demo folder were checked; these
 checks do not measure actual owner usefulness.
+
+A [four-participant model simulation](simulated-owner-trial.md) now compares reading
+the two presentations under a three-source allowance. Both produce supported
+recommendations, with no observed quality advantage for the longer evidence view.
+It finds and preserves a reader-adapter defect, repaired for future runs. This is
+not measured human benefit or execution of the experimental skill; the owner
+exercise still needs an actual person's decisions and inspection feedback.
