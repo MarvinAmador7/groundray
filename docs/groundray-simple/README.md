@@ -47,3 +47,9 @@ recommendations, with no observed quality advantage for the longer evidence view
 It finds and preserves a reader-adapter defect, repaired for future runs. This is
 not measured human benefit or execution of the experimental skill; the owner
 exercise still needs an actual person's decisions and inspection feedback.
+
+A [fresh-agent Lite answer run](lite-agent-run/README.md) now exercises the actual
+unchanged skill directly on the source packet, with no prepared answer. Its
+unedited response, source reads/citations and input-integrity checks are available
+for inspection. This is one explicit answer-workflow execution, not a comparative
+accuracy result or measured owner benefit.
