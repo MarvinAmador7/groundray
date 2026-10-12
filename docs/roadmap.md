@@ -18,6 +18,11 @@ plugin packaging and integrated collaboration are planned, not released. Existin
 hosted infrastructure, custom authorization and external integrations keep their
 separate scope gates.
 
+G0 now has a [reproducible development fit](groundray-engine-fit.md): three wiki
+pages, 21 unchanged sources, native retrieval and explicit local sync. The
+production source interface and remote-installed authoring flow remain open
+before the integrated G1 workflow; no profile change was needed for this fixture.
+
 ## Implementation status
 
 | Phase | Status | Evidence |

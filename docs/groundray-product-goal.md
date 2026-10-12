@@ -67,7 +67,7 @@ include it. No universal platform support is assumed.
 
 | Milestone | Deliverable and exit condition | Status |
 | --- | --- | --- |
-| G0 — Storage and interface fit | Specify how company wiki prose, source bytes, definitions and authority records use the current validated bundle and retrieval/mutation interfaces. Demonstrate one usable company brain with portable evidence links. Resolve any needed adapter explicitly. | Next |
+| G0 — Storage and interface fit | Specify how company wiki prose, source bytes, definitions and authority records use the current validated bundle and retrieval/mutation interfaces. Demonstrate one usable company brain with portable evidence links. Resolve any needed adapter explicitly. | Development fit demonstrated; production integration open |
 | G1 — Two-employee workflow | Run the acceptance scenario below using isolated employee installations and a shared test remote. Record versions, saved-state integrity, proposal/review flow and refusal states. | Planned |
 | G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Planned |
 | G3 — Employee pilot | Validate packaged behavior on supported platforms and have people inspect answers and contribute a reviewed change. Record decisions, source inspections, effort and failures separately. | Planned |
@@ -79,6 +79,12 @@ source bytes and meaningful body prose; generate required engine metadata throug
 supported tools. Do not silently rewrite originals, discard unknown fields or
 promise whole-wiki import. Any adapter, new source-read surface or profile change
 needs its own explicit implementation scope and validation.
+
+The [first G0 demonstration](groundray-engine-fit.md) distributes three linked
+drafts and 21 unchanged source captures, retrieves their evidence through a
+development reader, and exercises local installation/search/update/sync. It does
+not execute Lite in a fresh agent or complete G1. Source capture/read interfaces,
+original Markdown handling and remote-installed authoring remain integration work.
 
 G1 can first use two isolated employee homes on one Linux host to prove the
 workflow. That is a development test, not proof of distinct computers or OS

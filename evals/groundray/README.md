@@ -1,5 +1,11 @@
 # Company-decision continuity pilot
 
+The [G0 engine-fit demonstration](../../docs/groundray-engine-fit.md) is a separate
+mechanical CLI exercise with a real native index, isolated local installations
+and a development saved-source reader. It calls no model and does not measure
+Groundray Lite behavior. Run `python -m evals.groundray.engine_fit --help` for its
+explicit output/native-sidecar inputs.
+
 The later [natural-question suite](NATURAL.md) exercises five ordinary business
 questions without evidence instructions in the user prompts.
 

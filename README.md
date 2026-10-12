@@ -311,6 +311,10 @@ Its next milestones cover storage/interface fit, a two-employee workflow,
 packaging and an employee pilot. The integrated product remains planned; the
 released CLI and installation instructions above are still `pkb`.
 
+The [first engine-fit demo](docs/groundray-engine-fit.md) shows three linked company
+pages and 21 unchanged original records installed, retrieved and synced using
+the engine. Raw evidence reading currently uses a development helper.
+
 ## Documentation
 
 | Guide | What it covers |

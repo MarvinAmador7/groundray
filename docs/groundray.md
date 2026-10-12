@@ -8,6 +8,11 @@ KB provides the engine foundation. The next milestones establish storage/interfa
 fit, a two-employee sharing workflow, packaging and an employee pilot. This page
 describes the current skill prototypes; the integrated product remains planned.
 
+The [first engine-fit demonstration](groundray-engine-fit.md) shows how three
+Groundray-style pages and their original records use current storage/retrieval
+interfaces. Source handling still uses a development adapter; it is not a fresh
+Lite agent trial or released plugin integration.
+
 Groundray is a first agent-skill prototype for building and querying a company's
 understanding of its business in an interlinked Markdown wiki. Its working
 contract is simple: a comment copied from a conversation must remain distinguishable
