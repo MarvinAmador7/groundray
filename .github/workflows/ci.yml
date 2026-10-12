@@ -102,10 +102,14 @@ jobs:
           node-version: "24"
           package-manager-cache: false
       - name: Install benchmark dependencies
+        env:
+          # Avoid component collisions with the hosted runner's preinstalled Rust.
+          RUSTUP_HOME: ${{ runner.temp }}/pkb-prototype-rustup
         run: |
           python -m pip install -e ".[dev]"
           npm install --global @tobilu/qmd@2.8.3
           rustup toolchain install 1.90.0 --profile minimal --component rustfmt --component clippy
+          printf 'RUSTUP_HOME=%s\n' "$RUSTUP_HOME" >> "$GITHUB_ENV"
       - name: Check and build the Rust prototype
         run: |
           cargo fmt --all -- --check
