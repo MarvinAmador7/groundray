@@ -305,6 +305,12 @@ The experimental [Groundray skill](docs/groundray.md) builds portable company
 brains in a Markdown wiki, preserving evidence and authority for each claim.
 It is a separate draft skill with manual installation and a fictional walkthrough.
 
+The adopted [Groundray product goal](docs/groundray-product-goal.md) combines plugin,
+skill, CLI and shared Git-backed company brains using Portable KB as the engine.
+Its next milestones cover storage/interface fit, a two-employee workflow,
+packaging and an employee pilot. The integrated product remains planned; the
+released CLI and installation instructions above are still `pkb`.
+
 ## Documentation
 
 | Guide | What it covers |
@@ -320,6 +326,7 @@ It is a separate draft skill with manual installation and a fictional walkthroug
 | [Architecture](docs/architecture.md) | Product boundaries, compatibility, and design decisions |
 | [Schema](docs/schema.md) · [Lifecycle](docs/lifecycle.md) | The governed OKF-compatible profile |
 | [Roadmap](docs/roadmap.md) | Current scope and planned capabilities |
+| [Groundray product goal](docs/groundray-product-goal.md) | Plugin, skill, CLI, shared infrastructure and two-employee acceptance criteria |
 
 Brains target Open Knowledge Format v0.2 with a stricter local profile for
 identity, provenance, lifecycle, and validation. The profile's requirements are

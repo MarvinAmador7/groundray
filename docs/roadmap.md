@@ -3,6 +3,21 @@
 The phases stabilize the canonical files before adding operations and only then
 describe retrieval/integrations. Phases are gates, not calendar estimates.
 
+## Current product goal — Groundray
+
+The adopted [Groundray product goal](groundray-product-goal.md) combines an agent
+plugin, the **answer → evidence → guidance** skill, a CLI and Git-backed shared
+company brains. Portable KB supplies the engine foundation. The product target
+is employees on separate computers recovering the same published evidence and
+decisions, proposing reviewed changes and syncing without losing history or scope.
+
+The next delivery sequence is **storage/interface fit → two-employee workflow →
+Groundray packaging → employee pilot**. These milestones are defined in the goal;
+plugin packaging and integrated collaboration are planned, not released. Existing
+`pkb` commands and profile behavior remain the implementation baseline. Broader
+hosted infrastructure, custom authorization and external integrations keep their
+separate scope gates.
+
 ## Implementation status
 
 | Phase | Status | Evidence |
@@ -262,7 +277,12 @@ rate/API change, and proprietary metadata coupling.
 Slack, Gmail, GitHub, or any other connector; authentication, authorization,
 multitenancy, hosted APIs, or production infrastructure.
 
-## Recommended first milestone
+## Original core-model milestone
+
+This initial core-model plan is retained as design context. The implementation
+status above records the engine work delivered since then; real content review
+and governance remain deployment responsibilities. The current next product
+milestone is Groundray G0/G1 in [the adopted goal](groundray-product-goal.md).
 
 Complete Phase 0 and a deliberately narrow slice of Phase 1:
 

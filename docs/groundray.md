@@ -2,6 +2,12 @@
 
 **Portable business brains, grounded in evidence.**
 
+The [adopted product goal](groundray-product-goal.md) combines plugin, skill, CLI
+and Git-backed infrastructure around **answer → evidence → guidance**. Portable
+KB provides the engine foundation. The next milestones establish storage/interface
+fit, a two-employee sharing workflow, packaging and an employee pilot. This page
+describes the current skill prototypes; the integrated product remains planned.
+
 Groundray is a first agent-skill prototype for building and querying a company's
 understanding of its business in an interlinked Markdown wiki. Its working
 contract is simple: a comment copied from a conversation must remain distinguishable
