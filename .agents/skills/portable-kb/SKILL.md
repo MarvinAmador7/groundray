@@ -274,7 +274,11 @@ request a future supersession workflow when identity or scope materially changes
 ## Sharing and synchronization
 
 Saving locally and sharing with the organization are separate authority
-boundaries. Only after explicit sharing intent, run:
+boundaries. For attaching a clone, submitting a proposal or reviewing an exact
+version, follow [the collaboration workflow](references/collaboration.md). Never
+accept a proposal merely because its validation passes.
+
+Only after explicit sharing intent and authorization for direct publication, run:
 
 ```console
 pkb brain push <slug> --json

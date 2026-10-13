@@ -23,6 +23,11 @@ Claude Code the same workflow for finding, citing, and updating that knowledge.
 - **Portable files.** Each brain is its own Git repository with an OKF-compatible
   Markdown bundle. Search indexes are disposable local state.
 
+**Groundray development:** the draft branch now supports
+[authoring attachment and reviewed Git proposals](docs/brain-collaboration.md).
+The [employee handoff demonstration](docs/groundray-employee-handoff.md) preserves
+original evidence through publication and sync. These additions are unreleased.
+
 ## Install
 
 Standalone releases support **macOS and Linux, on Intel and ARM**. They include

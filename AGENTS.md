@@ -40,6 +40,11 @@ or declared local sources are also authorized. Captures under
 `knowledge/references/captures/` remain opaque artifacts, not verified concepts;
 Markdown originals use `.md.txt` names without content changes. Binary extraction,
 remote source fetching and production whole-wiki import remain deferred.
+Explicit attachment of a checked authoring clone to a URL-installed brain,
+plan-first creation of new Git proposal refs, exact-commit read-only review, and
+explicit commit/base-pinned fast-forward acceptance through existing Git host
+permissions are now authorized. These operations do not record company approval
+or human verification; custom authorization and hosted collaboration remain deferred.
 Do not expand into automatic QMD installation, embeddings, semantic/hybrid
 querying, vector databases, other lifecycle CLI mutations, MCP servers, APIs,
 native/web UI, authentication/authorization, multitenancy, background agents,

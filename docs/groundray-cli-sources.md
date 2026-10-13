@@ -74,3 +74,8 @@ Same-host isolation does not demonstrate distinct computers or platform coverage
 The [Groundray goal](groundray-product-goal.md) retains these as G0/G1 integration
 gates. Neither capture receipts nor a valid KB file turn a saved opinion into a
 business fact; the agent must still inspect sources, company definitions and scope.
+
+The next [employee handoff demonstration](groundray-employee-handoff.md)
+exercises authoring attachment and reviewed proposal publication through a shared
+local bare Git remote. The limitations above describe this source-only study;
+fresh agent behavior and real host permissions remain untested in both.

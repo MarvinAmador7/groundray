@@ -41,6 +41,7 @@ from .brains import (
     use_brain,
 )
 from .changes import ConcurrentChangeError
+from .collaboration import attach_authoring, propose_brain, publish_proposal, review_proposal
 from .knowledge_prompt import confirm_knowledge_apply, run_knowledge_create_prompts
 from .locks import LockError, inspect_operation_lock, operation_lock
 from .operations import OperationError
@@ -726,6 +727,103 @@ def brain_push(
         typer.echo(f"Published version: {result['published_commit']}")
     if result["validation_warnings"]:
         typer.echo(f"Validation warnings: {len(result['validation_warnings'])}")
+
+
+@brain_app.command("attach")
+def brain_attach(
+    repository: Annotated[Path, typer.Argument(help="Existing clean clone at the installed commit.")],
+    slug: Annotated[str | None, typer.Option("--brain", help="Brain slug; defaults to active.")] = None,
+    apply: Annotated[bool, typer.Option("--apply", help="Apply the previewed action.")] = False,
+    config_path: Annotated[Path | None, typer.Option("--config", help="User configuration path.")] = None,
+    as_of: Annotated[str | None, typer.Option("--as-of", help="ISO validation date.")] = None,
+    json_output: Annotated[bool, typer.Option("--json", help="Emit machine-readable details.")] = False,
+) -> None:
+    """Preview attaching an existing authoring clone; use --apply to save."""
+    settings = _load_cli_settings(config_path)
+    try:
+        with operation_lock(settings.data_dir, "brain attach"):
+            result = attach_authoring(settings, repository, slug, apply=apply, as_of=as_of)
+    except (BrainError, LockError, OSError, ValueError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from None
+    if json_output:
+        typer.echo(json.dumps(result, indent=2, sort_keys=True))
+    else:
+        for key, value in result.items():
+            typer.echo(f"{key}: {value}")
+
+
+@brain_app.command("propose")
+def brain_propose(
+    name: Annotated[str, typer.Argument(help="New immutable proposal name.")],
+    slug: Annotated[str | None, typer.Option("--brain", help="Brain slug; defaults to active.")] = None,
+    apply: Annotated[bool, typer.Option("--apply", help="Apply the previewed action.")] = False,
+    config_path: Annotated[Path | None, typer.Option("--config", help="User configuration path.")] = None,
+    as_of: Annotated[str | None, typer.Option("--as-of", help="ISO validation date.")] = None,
+    json_output: Annotated[bool, typer.Option("--json", help="Emit machine-readable details.")] = False,
+) -> None:
+    """Preview sharing a saved update on a proposal branch; use --apply to push."""
+    settings = _load_cli_settings(config_path)
+    try:
+        with operation_lock(settings.data_dir, "brain propose"):
+            result = propose_brain(settings, name, slug, apply=apply, as_of=as_of)
+    except (BrainError, LockError, OSError, ValueError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from None
+    if json_output:
+        typer.echo(json.dumps(result, indent=2, sort_keys=True))
+    else:
+        for key, value in result.items():
+            typer.echo(f"{key}: {value}")
+
+
+@brain_app.command("review")
+def brain_review(
+    name: Annotated[str, typer.Argument(help="Proposal name.")],
+    commit: Annotated[str, typer.Option("--commit", help="Full reviewed proposal commit.")],
+    slug: Annotated[str | None, typer.Option("--brain", help="Brain slug; defaults to active.")] = None,
+    config_path: Annotated[Path | None, typer.Option("--config", help="User configuration path.")] = None,
+    as_of: Annotated[str | None, typer.Option("--as-of", help="ISO validation date.")] = None,
+    json_output: Annotated[bool, typer.Option("--json", help="Emit machine-readable details.")] = False,
+) -> None:
+    """Inspect an exact proposal commit without activating it or recording approval."""
+    settings = _load_cli_settings(config_path)
+    try:
+        with operation_lock(settings.data_dir, "brain review"):
+            result = review_proposal(settings, name, commit, slug, as_of=as_of)
+    except (BrainError, LockError, OSError, ValueError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from None
+    if json_output:
+        typer.echo(json.dumps(result, indent=2, sort_keys=True))
+    else:
+        for key, value in result.items():
+            typer.echo(f"{key}: {value}")
+
+
+@brain_app.command("accept")
+def brain_accept(
+    name: Annotated[str, typer.Argument(help="Reviewed proposal name.")],
+    commit: Annotated[str, typer.Option("--commit", help="Full reviewed proposal commit.")],
+    base: Annotated[str, typer.Option("--base", help="Full published base from review.")],
+    slug: Annotated[str | None, typer.Option("--brain", help="Brain slug; defaults to active.")] = None,
+    config_path: Annotated[Path | None, typer.Option("--config", help="User configuration path.")] = None,
+    as_of: Annotated[str | None, typer.Option("--as-of", help="ISO validation date.")] = None,
+    json_output: Annotated[bool, typer.Option("--json", help="Emit machine-readable details.")] = False,
+) -> None:
+    """Publish an explicitly reviewed commit and base; requires publisher permission."""
+    settings = _load_cli_settings(config_path)
+    try:
+        with operation_lock(settings.data_dir, "brain accept"):
+            result = publish_proposal(settings, name, commit, base, slug, as_of=as_of)
+    except (BrainError, LockError, OSError, ValueError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from None
+    if json_output:
+        typer.echo(json.dumps(result, indent=2, sort_keys=True))
+    else:
+        for key, value in result.items():
+            typer.echo(f"{key}: {value}")
 
 
 @knowledge_app.command("create")
