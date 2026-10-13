@@ -22,5 +22,8 @@
     "os": "Darwin",
     "architecture": "arm64"
   },
-  "employee_machine_reported": null
+  "employee_machine_reported": {
+    "os": "Darwin",
+    "architecture": "arm64"
+  }
 }

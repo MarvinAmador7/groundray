@@ -6,8 +6,8 @@ Publisher: MarvinAmador7. Contributor/receiver: KarolGarcia712.
 The publisher reported successful private seed recovery and collaborator access
 request. Main is unprotected; publisher and review roles are workflow conventions.
 No participant native session or effective employee permission is yet recorded.
-The publisher supplied `Darwin arm64`; use the Apple Silicon macOS package for
-the publisher. Karol's actual machine/architecture remains unsupplied.
+The publisher supplied `Darwin arm64` and confirmed Karol also uses Apple
+Silicon. Both participants use the Apple Silicon macOS package.
 
 ## Check each person's own login and access
 
