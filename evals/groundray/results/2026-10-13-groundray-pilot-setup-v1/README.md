@@ -8,13 +8,24 @@ was created. [Receipt](provisioning-receipt.json) retains only the relevant API
 fields; full account responses remain local. [Result](result.json) separates
 network reachability, identity, authorization and unobserved participant results.
 
-Use the attached handoff ZIP on the publisher's machine. It contains the original
+Use `groundray-pilot-handoff-v2.zip` on the publisher's machine. It contains the original
 verified `groundray-pilot.zip`, its recorded checksum and these instructions.
 It contains fictional records and blank participant templates, without credentials,
-Git metadata or a runtime. After extracting the handoff ZIP, verify the inner packet:
+Git metadata or a runtime. After extracting the handoff ZIP, verify the inner packet.
+Alternatively, retrieve the packet and checksum through a fresh repository clone:
 
 ```sh
-python - <<'PY'
+GROUNDRAY_PILOT_DIR=$(mktemp -d "${TMPDIR:-/tmp}/groundray-pilot.XXXXXX")
+gh repo clone MarvinAmador7/portable-kb "$GROUNDRAY_PILOT_DIR/source" -- --depth 1 --branch agent/groundray-skill
+cd "$GROUNDRAY_PILOT_DIR/source/evals/groundray/results/2026-10-13-groundray-pilot-readiness-v1/packet"
+```
+
+Run the remaining commands from that directory. On macOS, use `python3`; a
+`python` executable is not required. Relative packet filenames only work after
+cloning or extracting the files into the current directory.
+
+```sh
+python3 - <<'PY'
 import hashlib, json
 from pathlib import Path
 p = Path('groundray-pilot.zip')
@@ -33,8 +44,8 @@ The script checks publisher identity and refuses an existing repository. From th
 same directory, review the plan, then explicitly apply it with a new log path:
 
 ```sh
-python pilot-packet/tools/provision_groundray_pilot.py --packet "$PWD/pilot-packet"
-python pilot-packet/tools/provision_groundray_pilot.py --packet "$PWD/pilot-packet" \
+python3 pilot-packet/tools/provision_groundray_pilot.py --packet "$PWD/pilot-packet"
+python3 pilot-packet/tools/provision_groundray_pilot.py --packet "$PWD/pilot-packet" \
   --apply --log "$PWD/pilot-provisioning/provisioning.jsonl" \
   > pilot-provision-result.json
 ```
