@@ -1,12 +1,81 @@
-# Groundray Lite through the real CLI: one fresh-agent handoff
+# Groundray Lite through the real CLI: fresh-agent handoffs
 
-**October 13, 2026.** Three fresh agents completed a company-brain contribution,
-review and reader handoff using Groundray Lite and the actual `pkb` CLI. The
-business reasoning was generally supported, and saved-state integrity held.
-Evidence inspection exposed two interface problems: the reviewer reconstructed a
-proposed source from a text diff, and the reader produced 13 broken local source
-links. The original outputs remain unchanged. The resulting interface fixes are
-mechanically tested, not yet validated in another fresh-agent chain.
+**October 13, 2026 (UTC experiment records).** A matched follow-up with three
+fresh agents used the new candidate-source getter and produced ten working
+reader evidence targets. Saved-state integrity held in both chains. The original
+chain's diff reconstruction and 13 broken reader links remain archived unchanged.
+The follow-up also exposed unsupported certainty in suggested client wording
+and incomplete attribution of a detail taken from a compiled draft.
+
+## Follow-up with the inspection fixes
+
+The follow-up froze CLI and bundled engine skill at
+`a44e2302028246d6370ba3e8d4bc1a6426cbb0e9`, with the same 458-word Groundray Lite
+skill, initial three draft pages, 21 originals, question and 536-byte QA update.
+The author prompt is byte-identical to the first trial. Reviewer/reader tasks use
+the normal staging prompts with the actual proposal metadata, without hints to
+use `review-source` or return local links. Each role started without prior chats.
+The assessment contract and prompts were frozen before participants ran.
+
+| Participant | Shell commands | CLI calls | Shell / CLI nonzero exits | Answer words | Distinct originals returned |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Author | 16 | 65 | 0 / 0 | 632 | 19 |
+| Reviewer | 9 | 19 | 0 / 0 | 475 | 7 |
+| Reader | 11 | 27 | 1 / 1 | 652 | 11 |
+
+The reviewer discovered `brain review-source` through the bundled skill and
+retrieved all seven launch originals at candidate
+`b4d02bf787a1c59bec13cb267c419bbf9b32ac61`. Complete original bodies appeared in
+recorded output, including the exact CRLF update and matching receipt/SHA-256.
+Source and context citations both used that candidate. Disposable local paths
+were null. No diff-byte reconstruction or inspection error occurred, and review
+did not activate or publish the candidate.
+
+After root's explicit fixture publication, the reader synced, encountered the
+expected stale-index refusal, rebuilt and recovered. All **ten unique local
+evidence targets** in its reference-style Markdown resolve inside its installation,
+match actual returned `source.local_path` values and SHA-256 bytes, and refer to
+the published candidate. The reader inspected eleven distinct originals with
+complete bodies visible. Its answer includes the full commit; individual source
+hashes remain in the archived CLI returns. These are local conveniences checked
+at audit time, not immutable links that work on every employee's computer.
+The author has three valid links to retrieved compiled pages, not direct original
+links; the reviewer uses textual candidate/source citations.
+
+The original 21 captures, new record bytes, launch UUID/creation date, other pages
+and historical launch blob survived. No human verification was added. All skill
+and production fingerprints, protected inputs, prompts and responses matched the
+frozen/recorded versions. Reviewer/reader installations remained at the old pin
+before root publication; publication itself required separate reader sync.
+
+Two semantic qualifications remain. Both the author and reader suggested client
+wording saying remediation would take **“up to three” days**. The original says
+it **“may take three more days”**, which does not establish an upper bound. The
+saved launch draft preserves conditional wording correctly, and neither answer
+promises a replacement launch date; that does not justify the stronger phrase.
+The reader also repeats invoice I-71's gross/tax numbers from the compiled margin
+draft without explicitly attributing that detail to it. It never retrieved the
+available invoice export. Its main 62.5% calculation is directly backed by the
+retrieved definition, correction and ledger; the invoice detail is not evidence
+of direct original inspection.
+
+There were 36 shell commands and 111 CLI calls. Shell grouping differs from the
+first trial, and there is no randomized control or human effort measurement.
+These counts do not establish an efficiency improvement. Root's manual assessment
+is unblinded, not human or independent expert adjudication. This is one follow-up
+chain, not a broad accuracy result or proof of full G1 completion.
+
+Read the [follow-up result](../evals/groundray/results/2026-10-13-groundray-agent-cli-handoff-v2/result.json),
+unedited [author answer](../evals/groundray/results/2026-10-13-groundray-agent-cli-handoff-v2/author/answer.md),
+[review](../evals/groundray/results/2026-10-13-groundray-agent-cli-handoff-v2/reviewer/answer.md),
+[reader answer](../evals/groundray/results/2026-10-13-groundray-agent-cli-handoff-v2/reader/answer.md)
+and [saved launch draft](../evals/groundray/results/2026-10-13-groundray-agent-cli-handoff-v2/author/saved-launch.md).
+The folder retains exact prompts/answers/events, losslessly serialized CLI traces,
+freeze fingerprints, source bytes, contract, transport and mechanical audit.
+Archive hashes verify the unedited participant files. The reusable manifest retains
+its harness `v1` label; the separate contract/result label this follow-up `v2`.
+
+## Original trial
 
 ## Design
 
@@ -166,8 +235,10 @@ reads, declared-source candidate context, bad paths/receipts and cleanup,
 installed file-link targets, preserved trial prompts and honest source-exposure
 reporting. Latest-head PR CI supplies the final published-commit check.
 
-The next acceptance test should exercise these interface fixes with fresh agents
-and preserve any new failures. Real hosted roles, supported platform packages,
+The follow-up above exercises these interface fixes without repairing either
+trial's outputs. The next semantic slice should preserve source uncertainty in
+client wording and explicitly attribute compiled evidence versus inspected originals.
+Real hosted roles, supported platform packages,
 automatic plugin activation, actual human inspection effort and an employee pilot
 remain open. One chain demonstrates feasibility; it proves no accuracy or
 productivity superiority over a wiki. [G1 remains partial](groundray-product-goal.md).

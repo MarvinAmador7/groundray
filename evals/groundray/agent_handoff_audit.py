@@ -10,6 +10,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 from evals.groundray.agent_handoff import NEW_QA, git, snapshot
 from evals.groundray.engine_fit import digest
@@ -19,6 +20,65 @@ from portable_kb.validation import validate_bundle
 
 def read_json(path: Path, fallback=None):
     return json.loads(path.read_text()) if path.is_file() else fallback
+
+
+def inspect_answer_links(case: Path, answer: Path, sources: list[dict]) -> list[dict]:
+    """Check local targets against actual returned originals, not arbitrary files."""
+    known = {}
+    for source in sources:
+        if source.get("local_path"):
+            path = Path(source["local_path"]).resolve()
+            if path.is_relative_to(case.resolve()):
+                known.setdefault(path, []).append(source)
+    checks = []
+    text = answer.read_text() if answer.exists() else ""
+    targets = re.findall(r"\]\((<[^>]+>|[^)\s]+)(?:\s+\"[^\"]*\")?\)", text)
+    # Reference-style links are emitted by real participants. Count each used
+    # definition once; an unused definition is not a clickable answer citation.
+    definitions = re.findall(
+        r"^ {0,3}\[([^]\n]+)\]:[ \t]*(<[^>\n]+>|[^\s]+)(?:[ \t]+.*)?$", text, re.MULTILINE
+    )
+    body = re.sub(r"^ {0,3}\[[^]\n]+\]:.*$", "", text, flags=re.MULTILINE)
+    def normalize(value):
+        return " ".join(value.split()).casefold()
+
+    used = {
+        normalize(label or caption)
+        for caption, label in re.findall(r"\[([^]\n]+)\]\[([^]\n]*)\]", body)
+    }
+    used.update(normalize(label) for label in re.findall(r"\[([^]\n]+)\](?![\[(])", body))
+    targets.extend(
+        target for label, target in definitions
+        if not label.startswith("^") and normalize(label) in used
+    )
+    for target in targets:
+        value = target.removeprefix("<").removesuffix(">")
+        parsed = urlsplit(value)
+        if parsed.scheme or parsed.netloc or not parsed.path:
+            continue
+        raw = re.sub(r":\d+$", "", unquote(parsed.path))
+        path = Path(raw)
+        path = (path if path.is_absolute() else answer.parent / path).resolve()
+        in_case = path.is_relative_to(case.resolve())
+        matches = known.get(path, [])
+        exists = in_case and path.is_file()
+        checks.append(
+            {
+                "target": value,
+                "resolved_path": str(path),
+                "within_case": in_case,
+                "exists_at_audit": exists,
+                "matches_returned_source_path": bool(matches),
+                "matches_returned_source_hash": (
+                    exists
+                    and bool(matches)
+                    and path.stat().st_size <= 1024 * 1024
+                    and digest(path) in {source["sha256"] for source in matches}
+                ),
+                "returned_source_commits": sorted({source["commit"] for source in matches}),
+            }
+        )
+    return checks
 
 
 def role_trace(case: Path) -> dict:
@@ -41,6 +101,10 @@ def role_trace(case: Path) -> dict:
                     "path": source["path"],
                     "sha256": source["sha256"],
                     "commit": payload["citation"]["commit"],
+                    "local_path": source.get("local_path"),
+                    "command": entry.get("argv", [])[:2],
+                    "context_commit": (payload.get("context_citation") or {}).get("commit"),
+                    "inspection": payload.get("inspection"),
                     "complete_body_in_observer_output": (
                         source["content"] in observed
                         or json.dumps(source["content"], ensure_ascii=True) in observed
@@ -77,6 +141,7 @@ def role_trace(case: Path) -> dict:
                 r"\]\((/[^)]+)\)", answer.read_text() if answer.exists() else ""
             )
         ],
+        "local_source_links": inspect_answer_links(case, answer, returned),
         "artifacts": final.get("artifacts", {}),
     }
 

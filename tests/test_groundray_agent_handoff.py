@@ -117,3 +117,82 @@ def test_json_encoded_crlf_source_counts_as_visible_text(tmp_path: Path):
         + "\n"
     )
     assert role_trace(case)["cli_returned_sources"][0]["complete_body_in_observer_output"] is True
+
+
+def test_existing_unread_file_is_not_inspected_link_evidence(tmp_path: Path):
+    import hashlib
+
+    from evals.groundray.agent_handoff_audit import inspect_answer_links
+
+    case = tmp_path / "case"
+    response = case / "work/response"
+    response.mkdir(parents=True)
+    read = case / "source with spaces.txt"
+    read.write_bytes(b"Inspected original\r\n")
+    unread = case / "unread.txt"
+    unread.write_text("Not inspected")
+    answer = response / "answer.md"
+    answer.write_text(
+        f"[Read](<{read}>) [Unread]({unread}) [Relative](../../source%20with%20spaces.txt)"
+    )
+    sources = [
+        {
+            "local_path": str(read),
+            "sha256": hashlib.sha256(read.read_bytes()).hexdigest(),
+            "commit": "a" * 40,
+        }
+    ]
+    checks = inspect_answer_links(case, answer, sources)
+    assert all(c["exists_at_audit"] for c in checks)
+    assert [c["matches_returned_source_path"] for c in checks] == [True, False, True]
+    assert [c["matches_returned_source_hash"] for c in checks] == [True, False, True]
+    read.write_text("Changed after retrieval")
+    assert inspect_answer_links(case, answer, sources)[0]["matches_returned_source_hash"] is False
+
+
+def test_out_of_case_link_does_not_trigger_external_content_read(tmp_path: Path, monkeypatch):
+    from evals.groundray.agent_handoff_audit import inspect_answer_links
+
+    case = tmp_path / "case"
+    case.mkdir()
+    outside = tmp_path / "outside.txt"
+    outside.write_text("Outside case")
+    link = case / "symlink.txt"
+    link.symlink_to(outside)
+    answer = case / "answer.md"
+    answer.write_text(f"[Outside]({link})")
+
+    def fail_read(_path):
+        raise AssertionError("Must not hash an external link target")
+
+    monkeypatch.setattr("evals.groundray.agent_handoff_audit.digest", fail_read)
+    checks = inspect_answer_links(
+        case, answer, [{"local_path": str(link), "sha256": "fake", "commit": "a" * 40}]
+    )
+    assert checks[0]["within_case"] is False
+    assert checks[0]["matches_returned_source_hash"] is False
+
+
+def test_used_reference_links_include_matching_sources_and_ignore_unused_definitions(tmp_path):
+    import hashlib
+
+    from evals.groundray.agent_handoff_audit import inspect_answer_links
+
+    source = tmp_path / "original with spaces.txt"
+    source.write_bytes(b"Original\r\n")
+    answer = tmp_path / "answer.md"
+    answer.write_text(
+        "[Evidence][ OWNER ] [Again][owner] [Missing][] [Shortcut]\n\n"
+        f'[owner]: <{source}> "Owner record"\n'
+        "[missing]: absent.txt\n[shortcut]: original%20with%20spaces.txt\n"
+        "[unused]: unused.txt\nA footnote[^note]\n[^note]: [Ordinary prose]\n"
+    )
+    checks = inspect_answer_links(
+        tmp_path,
+        answer,
+        [{"local_path": str(source), "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+          "commit": "a" * 40}],
+    )
+    assert len(checks) == 3
+    assert [c["exists_at_audit"] for c in checks] == [True, False, True]
+    assert [c["matches_returned_source_hash"] for c in checks] == [True, False, True]

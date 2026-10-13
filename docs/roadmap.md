@@ -22,9 +22,12 @@ G0 now has a [reproducible development fit](groundray-engine-fit.md): three wiki
 pages, 21 unchanged sources, native retrieval and explicit local sync. The
 source capture/read interface is now [implemented and exercised through the CLI](groundray-cli-sources.md).
 Remote-installed authoring and proposal/review/publication now have a
-[mechanical shared-remote demonstration](groundray-employee-handoff.md). One [fresh Lite agent chain](groundray-agent-cli-handoff.md) now exercises the CLI
-workflow and retains its inspection/link failures. The subsequent interface fixes
-await agent validation; real host permissions and separate-computer packaging remain open for G1. No profile change was needed.
+[mechanical shared-remote demonstration](groundray-employee-handoff.md). Two [fresh Lite agent chains](groundray-agent-cli-handoff.md)
+retain the original inspection/link failures and exercise their fixes with new
+participants. The follow-up retrieved candidate originals directly and produced
+ten working reader targets. Source-uncertainty wording and compiled-evidence
+attribution need follow-up; real host permissions and separate-computer packaging
+remain open for G1. No profile change was needed.
 
 ## Implementation status
 

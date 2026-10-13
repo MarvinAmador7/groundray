@@ -67,8 +67,8 @@ include it. No universal platform support is assumed.
 
 | Milestone | Deliverable and exit condition | Status |
 | --- | --- | --- |
-| G0 — Storage and interface fit | Specify how company wiki prose, source bytes, definitions and authority records use the current validated bundle and retrieval/mutation interfaces. Demonstrate one usable company brain with portable evidence links. Resolve any needed adapter explicitly. | CLI source/proposal and one fresh Lite chain exercised; inspection fixes await agent validation |
-| G1 — Two-employee workflow | Run the acceptance scenario below using isolated employee installations and a shared test remote. Record versions, saved-state integrity, proposal/review flow and refusal states. | One fresh-agent handoff; evidence-interface fixes mechanically tested; host/platform/human gates open |
+| G0 — Storage and interface fit | Specify how company wiki prose, source bytes, definitions and authority records use the current validated bundle and retrieval/mutation interfaces. Demonstrate one usable company brain with portable evidence links. Resolve any needed adapter explicitly. | CLI source/proposal and fresh Lite chains exercised; candidate inspection and reader paths observed in one follow-up |
+| G1 — Two-employee workflow | Run the acceptance scenario below using isolated employee installations and a shared test remote. Record versions, saved-state integrity, proposal/review flow and refusal states. | Two local fresh-agent chains; uncertainty/attribution qualifications and host/platform/human gates remain |
 | G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Planned |
 | G3 — Employee pilot | Validate packaged behavior on supported platforms and have people inspect answers and contribute a reviewed change. Record decisions, source inspections, effort and failures separately. | Planned |
 
@@ -92,9 +92,12 @@ profile change. The chosen opaque `.md.txt` convention separates raw Markdown fr
 concept discovery. The [employee handoff follow-up](groundray-employee-handoff.md) now exercises
 remote-installed authoring attachment, commit-pinned proposals/review/publication
 and explicit reader sync through a local bare Git remote. The [fresh-agent follow-up](groundray-agent-cli-handoff.md) now exercises Lite
-through one CLI contribution/review/sync chain. It exposed candidate-source
-inspection overhead and broken reader file links; the resulting API/skill fixes
-are mechanically tested but await fresh-agent validation. Real host permissions
+through two CLI contribution/review/sync chains. The first exposed candidate-source
+inspection overhead and broken reader file links. The follow-up used exact candidate
+retrieval and ten working original-source targets, while retaining unsupported
+“up to three days” client wording and a compiled invoice detail without sufficient
+attribution. This is scoped agent validation, not proof of accuracy superiority.
+Real host permissions
 and separate-computer packaging remain to be tested;
 no release or full G1 completion is claimed.
 

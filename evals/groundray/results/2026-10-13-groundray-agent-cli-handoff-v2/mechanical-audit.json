@@ -1,0 +1,992 @@
+{
+  "suite": "groundray-agent-cli-handoff-v1",
+  "scope": "Mechanical audit; no automated semantic accuracy score.",
+  "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+  "author_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+  "published_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+  "roles": {
+    "author": {
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 277.358461319,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      },
+      "shell_commands": 16,
+      "shell_nonzero_exits": 0,
+      "cli_commands": 65,
+      "cli_nonzero_exits": 0,
+      "cli_errors": [],
+      "cli_returned_sources": [
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/07-exception.txt",
+          "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/07-exception.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/docs/02-rate-card.md.txt",
+          "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/docs/02-rate-card.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/ledger-reconciled.csv",
+          "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/ledger-reconciled.csv",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/2026-11-02-correction.md.txt",
+          "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/14-client.txt",
+          "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/14-client.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tickets/15-project.txt",
+          "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-06.txt",
+          "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/2026-11-06-lumen.txt",
+          "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/ops/2026-11-06-staffing.txt",
+          "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+          "commit": "f10fb64d93a687896db2588eae80431536154294",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "f10fb64d93a687896db2588eae80431536154294",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "0f254bffd3904fa8bf6cd463844c69a52a8df771",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/contracts/06-lumen.txt",
+          "sha256": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/contracts/06-lumen.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/03-sales.txt",
+          "sha256": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/03-sales.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/2026-11-06-summary.md.txt",
+          "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/notes/2026-11-06-summary.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/13-close-query.md.txt",
+          "sha256": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/notes/13-close-query.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/09-ledger.csv",
+          "sha256": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/09-ledger.csv",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/10-invoices.csv",
+          "sha256": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/10-invoices.csv",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/16-plan.txt",
+          "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/16-plan.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/18-feedback.md.txt",
+          "sha256": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/notes/18-feedback.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": null,
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": null,
+          "command": [
+            "brain",
+            "review-source"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": {
+            "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "installed_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal": "qa-nov9-launch-review",
+            "proposal_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review"
+          },
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/14-client.txt",
+          "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/14-client.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tickets/15-project.txt",
+          "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-06.txt",
+          "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/2026-11-06-lumen.txt",
+          "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/ops/2026-11-06-staffing.txt",
+          "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        }
+      ],
+      "distinct_returned_source_paths": 19,
+      "skill_text_in_observer_output": {
+        "groundray-lite": true,
+        "portable-kb": true
+      },
+      "answer_matches_recorded_final": true,
+      "answer_words": 632,
+      "absolute_file_links": [
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-commercial.md",
+          "exists_at_audit": true
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-launch.md",
+          "exists_at_audit": true
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-margin.md",
+          "exists_at_audit": true
+        }
+      ],
+      "local_source_links": [
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-commercial.md",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-commercial.md",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": false,
+          "matches_returned_source_hash": false,
+          "returned_source_commits": []
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-launch.md",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-launch.md",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": false,
+          "matches_returned_source_hash": false,
+          "returned_source_commits": []
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-margin.md",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/author/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-margin.md",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": false,
+          "matches_returned_source_hash": false,
+          "returned_source_commits": []
+        }
+      ],
+      "artifacts": {
+        "base": "f10fb64d93a687896db2588eae80431536154294",
+        "command_errors": [],
+        "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+        "proposal": "qa-nov9-launch-review",
+        "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review",
+        "published_main": false,
+        "recovery": "No command errors or restart; existing clone attached after successful preview."
+      },
+      "protected_inputs_unchanged": true,
+      "protocol_boundary": "Recorded instructions only; not an enforced filesystem sandbox."
+    },
+    "reviewer": {
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 142.536859902,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      },
+      "shell_commands": 9,
+      "shell_nonzero_exits": 0,
+      "cli_commands": 19,
+      "cli_nonzero_exits": 0,
+      "cli_errors": [],
+      "cli_returned_sources": [
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": null,
+          "command": [
+            "brain",
+            "review-source"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": {
+            "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "installed_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "proposal": "qa-nov9-launch-review",
+            "proposal_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review"
+          },
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": null,
+          "command": [
+            "brain",
+            "review-source"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": {
+            "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "installed_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "proposal": "qa-nov9-launch-review",
+            "proposal_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review"
+          },
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/14-client.txt",
+          "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": null,
+          "command": [
+            "brain",
+            "review-source"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": {
+            "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "installed_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "proposal": "qa-nov9-launch-review",
+            "proposal_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review"
+          },
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tickets/15-project.txt",
+          "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": null,
+          "command": [
+            "brain",
+            "review-source"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": {
+            "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "installed_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "proposal": "qa-nov9-launch-review",
+            "proposal_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review"
+          },
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-06.txt",
+          "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": null,
+          "command": [
+            "brain",
+            "review-source"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": {
+            "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "installed_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "proposal": "qa-nov9-launch-review",
+            "proposal_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review"
+          },
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/2026-11-06-lumen.txt",
+          "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": null,
+          "command": [
+            "brain",
+            "review-source"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": {
+            "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "installed_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "proposal": "qa-nov9-launch-review",
+            "proposal_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review"
+          },
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/ops/2026-11-06-staffing.txt",
+          "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": null,
+          "command": [
+            "brain",
+            "review-source"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": {
+            "base_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "installed_commit": "f10fb64d93a687896db2588eae80431536154294",
+            "proposal": "qa-nov9-launch-review",
+            "proposal_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+            "proposal_ref": "refs/heads/groundray/qa-nov9-launch-review"
+          },
+          "complete_body_in_observer_output": true
+        }
+      ],
+      "distinct_returned_source_paths": 7,
+      "skill_text_in_observer_output": {
+        "groundray-lite": true,
+        "portable-kb": true
+      },
+      "answer_matches_recorded_final": true,
+      "answer_words": 475,
+      "absolute_file_links": [],
+      "local_source_links": [],
+      "artifacts": {
+        "base": "f10fb64d93a687896db2588eae80431536154294",
+        "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+        "proposal": "qa-nov9-launch-review",
+        "recommendation": "suitable for explicitly authorized publication as draft internal company knowledge"
+      },
+      "protected_inputs_unchanged": true,
+      "protocol_boundary": "Recorded instructions only; not an enforced filesystem sandbox."
+    },
+    "reader": {
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 219.707950423,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      },
+      "shell_commands": 11,
+      "shell_nonzero_exits": 1,
+      "cli_commands": 27,
+      "cli_nonzero_exits": 1,
+      "cli_errors": [
+        {
+          "argv": [
+            "search",
+            "query",
+            "Mosaic Lumen October profitability launch Tint",
+            "--brain",
+            "mosaic-studio",
+            "--limit",
+            "8",
+            "--json"
+          ],
+          "exit_code": 1,
+          "stderr": "Keyword index is stale after a brain change; run `pkb search index mosaic-studio`.\n"
+        }
+      ],
+      "cli_returned_sources": [
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/07-exception.txt",
+          "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/07-exception.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/docs/02-rate-card.md.txt",
+          "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/docs/02-rate-card.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/ledger-reconciled.csv",
+          "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/ledger-reconciled.csv",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/2026-11-02-correction.md.txt",
+          "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/14-client.txt",
+          "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/14-client.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tickets/15-project.txt",
+          "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-06.txt",
+          "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/2026-11-06-lumen.txt",
+          "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/ops/2026-11-06-staffing.txt",
+          "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+          "commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "local_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+          "command": [
+            "source",
+            "get"
+          ],
+          "context_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+          "inspection": null,
+          "complete_body_in_observer_output": true
+        }
+      ],
+      "distinct_returned_source_paths": 11,
+      "skill_text_in_observer_output": {
+        "groundray-lite": true,
+        "portable-kb": true
+      },
+      "answer_matches_recorded_final": true,
+      "answer_words": 652,
+      "absolute_file_links": [],
+      "local_source_links": [
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/07-exception.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/07-exception.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/docs/02-rate-card.md.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/docs/02-rate-card.md.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/ledger-reconciled.csv",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/ledger-reconciled.csv",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+          "resolved_path": "/workspace/groundray-agent-handoff/run-2/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+          "within_case": true,
+          "exists_at_audit": true,
+          "matches_returned_source_path": true,
+          "matches_returned_source_hash": true,
+          "returned_source_commits": [
+            "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+          ]
+        }
+      ],
+      "artifacts": {},
+      "protected_inputs_unchanged": true,
+      "protocol_boundary": "Recorded instructions only; not an enforced filesystem sandbox."
+    }
+  },
+  "preservation": {
+    "original_capture_count": 21,
+    "original_capture_hashes": {
+      "knowledge/references/captures/docs/02-rate-card.md.txt": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+      "knowledge/references/captures/ops/2026-11-06-staffing.txt": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+      "knowledge/references/captures/tables/09-ledger.csv": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032",
+      "knowledge/references/captures/tables/ledger-reconciled.csv": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+      "knowledge/references/captures/tables/10-invoices.csv": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642",
+      "knowledge/references/captures/mail/14-client.txt": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+      "knowledge/references/captures/mail/01-context.txt": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501",
+      "knowledge/references/captures/mail/2026-11-06-lumen.txt": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+      "knowledge/references/captures/chat/16-plan.txt": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+      "knowledge/references/captures/chat/03-sales.txt": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556",
+      "knowledge/references/captures/chat/07-exception.txt": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+      "knowledge/references/captures/contracts/06-lumen.txt": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27",
+      "knowledge/references/captures/notes/04-team.md.txt": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c",
+      "knowledge/references/captures/notes/13-close-query.md.txt": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687",
+      "knowledge/references/captures/notes/18-feedback.md.txt": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e",
+      "knowledge/references/captures/notes/05-board.md.txt": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1",
+      "knowledge/references/captures/notes/2026-11-06-summary.md.txt": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+      "knowledge/references/captures/qa/2026-11-06.txt": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+      "knowledge/references/captures/tickets/15-project.txt": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+      "knowledge/references/captures/owner/definitions-and-authority.md.txt": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+      "knowledge/references/captures/owner/2026-11-02-correction.md.txt": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+    },
+    "all_original_captures_unchanged": true,
+    "unchanged_capture_checks": {
+      "knowledge/references/captures/docs/02-rate-card.md.txt": true,
+      "knowledge/references/captures/ops/2026-11-06-staffing.txt": true,
+      "knowledge/references/captures/tables/09-ledger.csv": true,
+      "knowledge/references/captures/tables/ledger-reconciled.csv": true,
+      "knowledge/references/captures/tables/10-invoices.csv": true,
+      "knowledge/references/captures/mail/14-client.txt": true,
+      "knowledge/references/captures/mail/01-context.txt": true,
+      "knowledge/references/captures/mail/2026-11-06-lumen.txt": true,
+      "knowledge/references/captures/chat/16-plan.txt": true,
+      "knowledge/references/captures/chat/03-sales.txt": true,
+      "knowledge/references/captures/chat/07-exception.txt": true,
+      "knowledge/references/captures/contracts/06-lumen.txt": true,
+      "knowledge/references/captures/notes/04-team.md.txt": true,
+      "knowledge/references/captures/notes/13-close-query.md.txt": true,
+      "knowledge/references/captures/notes/18-feedback.md.txt": true,
+      "knowledge/references/captures/notes/05-board.md.txt": true,
+      "knowledge/references/captures/notes/2026-11-06-summary.md.txt": true,
+      "knowledge/references/captures/qa/2026-11-06.txt": true,
+      "knowledge/references/captures/tickets/15-project.txt": true,
+      "knowledge/references/captures/owner/definitions-and-authority.md.txt": true,
+      "knowledge/references/captures/owner/2026-11-02-correction.md.txt": true
+    },
+    "new_source_captures": [
+      {
+        "path": "knowledge/references/captures/qa/2026-11-09.txt",
+        "receipt_sha256_matches": true,
+        "receipt_bytes_match": true,
+        "capture_actor": "openai/codex"
+      }
+    ],
+    "launch_id_preserved": true,
+    "launch_created_at_preserved": true,
+    "launch_generated_by": "openai/codex",
+    "human_verification_added": false,
+    "launch_status": "draft",
+    "unrelated_pages_unchanged": {
+      "knowledge/wiki/lumen-commercial.md": true,
+      "knowledge/wiki/lumen-margin.md": true
+    },
+    "old_launch_blob_retained": true,
+    "author_symlinks": [],
+    "validation": {
+      "bundle": "knowledge",
+      "as_of": "2026-10-13",
+      "concept_count": 3,
+      "okf_v0_2": "pass",
+      "core_kb_0_1": "pass",
+      "findings": []
+    }
+  }
+}
