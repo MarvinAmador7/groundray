@@ -9,6 +9,31 @@ A distinct read-only account was not supplied and remains a separate gate.
 
 ### Selected organization: fullkontrol
 
+The user explicitly chose the **full contributor pilot without main protection**,
+while retaining the private repository. The provisioner now accepts
+`--without-main-protection` with the exact-seed resume plan. It retains identity,
+private-owner/admin, commit and file-hash checks, skips all protection API calls,
+checks main immediately before the access request and grants contributor write
+access. Existing host rules are not removed. GitHub Team is no longer a setup
+requirement for this selected mode. Karol's write access includes main; publisher
+and review roles are workflow conventions, not enforced permissions.
+
+Fifty-two focused tests and Ruff pass. Both protected and unprotected modes still
+reject stale refs, modified/extra/symlinked seed files, public/wrong-owner repos
+and missing publisher admin access. Unprotected tests confirm no protection API
+calls, preserved pre-existing rules and correct handling of an already-present
+collaborator's empty-success response. The protected default retains its guards.
+
+[Selected-mode receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/unprotected-contributor-plan.json)
+records the user decision without claiming an actual invitation or participant
+outcome. Current commands are in the
+[organization handoff](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/ORGANIZATION.md).
+Employee proposal, exact-candidate review/publication, independent sync and native
+human evidence inspection remain required. Employee publication-denial and
+publisher-only host enforcement are outside this selected pilot.
+
+Earlier protected-mode failure:
+
 The publisher's subsequent local attempt reached the protection write on
 `fullkontrol/groundray-pilot-mosaic`, then returned HTTP 403 with the same generic
 “Upgrade to GitHub Pro or make this repository public” message. By that stage,

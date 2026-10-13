@@ -8,6 +8,16 @@ not supplied and its permission tests remain pending. The pilot measures whether
 exchange a reviewed update across computers. The supplied business approvals are
 fictional records; a Git publication is not a newly obtained real business approval.
 
+The user now selected a **full contributor pilot without main protection** on
+`fullkontrol/groundray-pilot-mosaic`, keeping the repository private. MarvinAmador7
+is the publisher by workflow; KarolGarcia712 contributes and receives with write
+access, including main. Review and exact-candidate publication remain the agreed
+workflow, but publisher-only main access is not enforced. Employee publication
+denial and private unrelated-account denial are separate tests: the former is
+outside this selected mode, while the latter still needs an actual unrelated
+identity. Use the current
+[unprotected contributor setup commands](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/ORGANIZATION.md).
+
 This packet is prepared, not a completed pilot. Native Codex activation and the
 participants' actual host permissions must be observed on their own machines.
 Agents do not stand in for human feedback. Credentials stay on each participant's
@@ -34,6 +44,12 @@ on another machine and initializing/pushing the dedicated repository, record the
 **actual hosted base commit** rather than expecting the preparation hash to match.
 
 ## Roles and host checks
+
+For the selected unprotected contributor mode, observe employee read/proposal
+success, publisher exact-candidate review/publication and independent employee
+sync. Do not run an employee main-publication attempt expecting host denial, and
+do not call Karol a read-only receiver. The role-denial table below documents the
+earlier protected variant, not requirements for the current unprotected pilot.
 
 Fill `roles.json` with the chosen repository, source URL and actual account handles.
 Keep publisher and employee identities distinct; do not count the employee
@@ -75,6 +91,13 @@ If an actor expected to be denied unexpectedly succeeds, stop and report the
 permission failure; do not continue or silently undo the evidence.
 
 ## Provisioning the proposed private remote
+
+The current explicit `--without-main-protection` resume option verifies the
+existing private synthetic seed, skips protection API calls and requests Karol's
+write access. It has no paid-protection plan gate and leaves any existing rules
+intact. The selected publisher/reviewer workflow remains a convention rather than
+a permission boundary. The organization handoff contains the current commands;
+the protection failure and create-only commands below are historical context.
 
 The publisher's organization attempt has now reached a private-protection plan
 failure after creating/seeding `fullkontrol/groundray-pilot-mosaic`. **Do not run
@@ -256,8 +279,11 @@ null. Store records locally until people choose an authorized sharing destinatio
 Redact secrets/private paths before sharing logs; this synthetic packet is not a
 request to publish real company or employee information.
 
-A completed pilot needs native activation evidence, actual host accept/deny
-attempts, independently synced versions and real human source inspection/feedback.
+A completed selected pilot needs native activation evidence, actual contributor
+proposal and publisher exact-candidate acceptance, independently synced versions
+and real human source inspection/feedback. It does not establish employee main
+denial or publisher-only permissions. The earlier protected variant additionally
+requires its actual host accept/deny tests.
 Report each separately. These are feasibility observations from one pilot, not
 an accuracy benchmark, authenticity certification, human business approval,
 productivity advantage or general employee deployment guarantee.

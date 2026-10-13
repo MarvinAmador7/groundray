@@ -103,13 +103,19 @@ def test_failed_private_branch_protection_never_sends_invitation(tmp_path, monke
     assert not any(any('/collaborators/' in value for value in argv) for argv in calls)
 
 
+@pytest.mark.parametrize('without_protection', [False, True])
 @pytest.mark.parametrize('failure', [None, 'owner_type', 'returned_owner', 'admin', 'restriction', 'policy'])
-def test_organization_uses_named_publisher_and_invites_only_after_verified_policy(tmp_path, monkeypatch, failure):
+def test_organization_uses_named_publisher_and_invites_only_after_verified_policy(tmp_path, monkeypatch, failure, without_protection):
     root = packet(tmp_path)
     (root / 'brain/knowledge').mkdir()
-    p = plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root, publisher='MarvinAmador7')
+    p = plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root, publisher='MarvinAmador7',
+             without_main_protection=without_protection)
     assert p['publisher'] == 'MarvinAmador7' and p['repository_owner'] == 'fullkontrol'
-    assert p['main_policy']['restrictions']['users'] == ['MarvinAmador7']
+    if without_protection:
+        assert p['main_policy'] is None and p['host_plan_gate'] is None
+        assert 'including main' in p['role_constraint']
+    else:
+        assert p['main_policy']['restrictions']['users'] == ['MarvinAmador7']
     with pytest.raises(ValueError, match='distinct'):
         plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root, publisher='KarolGarcia712')
     calls = []
@@ -139,6 +145,8 @@ def test_organization_uses_named_publisher_and_invites_only_after_verified_polic
                 body, code = {'status': '404'}, 1
             else:
                 body = {'permissions': {'admin': failure != 'admin'}}
+        elif endpoint.endswith('/branches/main'):
+            body = {'commit': {'sha': 'a' * 40}, 'protected': False}
         elif '/protection' in endpoint:
             body = {'required_pull_request_reviews': {'required_approving_review_count': 1,
                                                       'dismiss_stale_reviews': True},
@@ -156,7 +164,8 @@ def test_organization_uses_named_publisher_and_invites_only_after_verified_polic
         return subprocess.CompletedProcess(argv, code, json.dumps(body), '')
 
     monkeypatch.setattr('scripts.provision_groundray_pilot.subprocess.run', fake)
-    if failure:
+    fails = bool(failure) and not (without_protection and failure in {'restriction', 'policy'})
+    if fails:
         with pytest.raises((ValueError, RuntimeError)):
             apply(p, root, tmp_path / 'organization.jsonl')
     else:
@@ -164,21 +173,24 @@ def test_organization_uses_named_publisher_and_invites_only_after_verified_polic
         assert result['invitation_id'] == 42
         assert result['base_commit'] == 'a' * 40
     invitations = [argv for argv in calls if any('/collaborators/' in v for v in argv)]
-    assert len(invitations) == (0 if failure else 1)
+    assert len(invitations) == (0 if fails else 1)
     assert not any('user/repos' in argv for argv in calls)
+    if without_protection:
+        assert not any('/protection' in v for argv in calls for v in argv)
 
 
+@pytest.mark.parametrize('without_protection', [False, True])
 @pytest.mark.parametrize('scenario', [
-    'success', 'already_protected', 'public', 'owner', 'admin', 'main_changed',
+    'success', 'existing_collaborator', 'already_protected', 'public', 'owner', 'admin', 'main_changed',
     'fetch_changed', 'content_changed', 'extra_file', 'symlink', 'race_before_policy',
     'race_before_invite', 'policy_denied', 'existing_policy_wrong', 'inactive_policy',
 ])
-def test_resume_preserves_seed_and_requires_matching_content_ref_and_protection(tmp_path, monkeypatch, scenario):
+def test_resume_preserves_seed_and_requires_matching_content_ref_and_protection(tmp_path, monkeypatch, scenario, without_protection):
     root = packet(tmp_path)
     (root / 'brain/knowledge').mkdir()
     base = 'a' * 40
     p = plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root,
-             publisher='MarvinAmador7', resume_base=base)
+             publisher='MarvinAmador7', resume_base=base, without_main_protection=without_protection)
     assert p['create_only_new_repository'] is False
     before = snapshot(root / 'brain')
     calls = []
@@ -216,7 +228,8 @@ def test_resume_preserves_seed_and_requires_matching_content_ref_and_protection(
             moved = (scenario == 'main_changed'
                      or scenario == 'race_before_policy' and branch_reads >= 2
                      or scenario == 'race_before_invite' and branch_reads >= 3)
-            protected = (scenario in {'already_protected', 'existing_policy_wrong'} or branch_reads >= 3)
+            protected = (scenario in {'already_protected', 'existing_policy_wrong'}
+                         or not without_protection and branch_reads >= 3)
             body = {'commit': {'sha': 'b' * 40 if moved else base},
                     'protected': False if scenario == 'inactive_policy' else protected}
         elif endpoint.endswith('/protection'):
@@ -230,16 +243,26 @@ def test_resume_preserves_seed_and_requires_matching_content_ref_and_protection(
                         'allow_deletions': {'enabled': False},
                         'restrictions': {'users': [{'login': 'MarvinAmador7'}], 'teams': [], 'apps': []}}
         elif '/collaborators/' in endpoint:
+            assert json.loads(input) == {'permission': 'push'}
+            if scenario == 'existing_collaborator':
+                return subprocess.CompletedProcess(argv, 0, '', '')
             body = {'id': 42}
         else:
             body = {}
         return subprocess.CompletedProcess(argv, code, json.dumps(body), '')
 
     monkeypatch.setattr('scripts.provision_groundray_pilot.subprocess.run', fake)
-    succeeds = scenario in {'success', 'already_protected'}
+    succeeds = (scenario in {'success', 'existing_collaborator', 'already_protected'}
+                or without_protection and scenario in {'policy_denied', 'existing_policy_wrong', 'inactive_policy'})
     if succeeds:
         result = apply(p, root, tmp_path / 'resume.jsonl')
         assert result['resumed_existing_seed'] is True and result['base_commit'] == base
+        assert result['main_protection_required'] is not without_protection
+        assert result['publisher_only_main_access_tested'] is False
+        assert result['collaborator_access_request_completed'] is True
+        if without_protection:
+            assert result['host_policy_received'] is None
+            assert result['hosted_main_protected'] is (scenario in {'already_protected', 'existing_policy_wrong'})
     else:
         with pytest.raises(RuntimeError) as failure:
             apply(p, root, tmp_path / 'resume.jsonl')
@@ -254,3 +277,5 @@ def test_resume_preserves_seed_and_requires_matching_content_ref_and_protection(
     if scenario in {'already_protected', 'existing_policy_wrong', 'public', 'owner', 'admin', 'main_changed',
                     'fetch_changed', 'content_changed', 'extra_file', 'symlink', 'race_before_policy'}:
         assert policy_writes == []
+    if without_protection:
+        assert not any('/protection' in v for argv in calls for v in argv)

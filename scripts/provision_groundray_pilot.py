@@ -2,7 +2,7 @@
 
 Cloud execution is not a replacement for employee credentials. Creation refuses
 existing repositories. Explicit --resume-base checks an exact unchanged synthetic
-seed before configuring protection; it never recreates, reseeds or publishes main.
+seed before access setup; it never recreates, reseeds or publishes main.
 A failed protection setup is never deleted or made public.
 """
 from __future__ import annotations
@@ -22,7 +22,7 @@ def fingerprints(root: Path) -> dict:
 
 
 def plan(repository: str, employee: str, packet: Path, *, publisher: str | None = None,
-         resume_base: str | None = None) -> dict:
+         resume_base: str | None = None, without_main_protection: bool = False) -> dict:
     if not re.fullmatch(r'[A-Za-z0-9-]+/[A-Za-z0-9_.-]+', repository):
         raise ValueError('Use owner/repository')
     owner, name = repository.split('/')
@@ -44,7 +44,7 @@ def plan(repository: str, employee: str, packet: Path, *, publisher: str | None 
         raise ValueError('Pilot inputs must not contain symlinks')
     if fingerprints(brain) != manifest.get('brain_fingerprints'):
         raise ValueError('Packet brain changed since preparation; do not publish it')
-    return {'repository': repository, 'private': True, 'publisher': publisher,
+    proposed = {'repository': repository, 'private': True, 'publisher': publisher,
             'repository_owner': owner, 'owner_type': 'Organization' if organization else 'User',
             'employee_contributor_and_receiver': employee,
             'distinct_read_only_account': None, 'packet': str(packet),
@@ -63,6 +63,14 @@ def plan(repository: str, employee: str, packet: Path, *, publisher: str | None 
                                 + 'Publisher admin may explicitly publish the reviewed exact draft. Host enforcement still needs actual negative attempts.'),
             'notification': 'Employee collaborator invitation is sent only by explicit --apply.',
             'host_plan_gate': 'Private branch protection may require a paid GitHub plan; stop before inviting on a policy error.'}
+    proposed['main_protection_required'] = not without_main_protection
+    if without_main_protection:
+        proposed['main_policy'] = None
+        proposed['host_plan_gate'] = None
+        proposed['role_constraint'] = ('Employee has write access, including main. Proposal review and named-publisher '
+                                       'publication are workflow conventions, not host-enforced permissions. '
+                                       'Publisher-only main access and employee publication-denial tests are outside this pilot.')
+    return proposed
 
 
 def apply(proposed: dict, packet: Path, log: Path) -> dict:
@@ -99,7 +107,8 @@ def apply(proposed: dict, packet: Path, log: Path) -> dict:
         argv = ['gh', 'api', endpoint, '--method', method]
         if data is not None:
             argv += ['--input', '-']
-        return json.loads(run(argv, data=data).stdout)
+        stdout = run(argv, data=data).stdout
+        return json.loads(stdout) if stdout.strip() else {}
     current = api('user')['login']
     owner, name = proposed['repository'].split('/')
     if current.casefold() != proposed['publisher'].casefold():
@@ -138,9 +147,9 @@ def apply(proposed: dict, packet: Path, log: Path) -> dict:
     if clone.exists():
         raise ValueError('Seed clone already exists; repository remains private without invitation')
     branch_endpoint = 'repos/' + proposed['repository'] + '/branches/main'
-    def checked_seed_branch():
+    def checked_seed_branch(expected_base=None):
         branch = api(branch_endpoint)
-        if branch.get('commit', {}).get('sha') != resume_base or type(branch.get('protected')) is not bool:
+        if branch.get('commit', {}).get('sha') != (expected_base or resume_base) or type(branch.get('protected')) is not bool:
             raise RuntimeError('Hosted main no longer matches the supplied seed; no invitation follows')
         return branch
     if resume_base:
@@ -169,31 +178,40 @@ def apply(proposed: dict, packet: Path, log: Path) -> dict:
         run(['git', '-C', str(clone), 'push', 'origin', 'main'])
         base = run(['git', '-C', str(clone), 'rev-parse', 'HEAD']).stdout.strip()
         already_protected = False
-    protection_endpoint = 'repos/' + proposed['repository'] + '/branches/main/protection'
-    if not already_protected:
-        api(protection_endpoint, 'PUT', proposed['main_policy'])
-    protection = api(protection_endpoint)
-    reviews = protection.get('required_pull_request_reviews') or {}
-    if reviews.get('required_approving_review_count', 0) < 1 or protection.get('enforce_admins', {}).get('enabled') is not False:
-        raise RuntimeError('Expected owner/employee main boundary not confirmed; no invitation follows')
-    if organization:
-        restrictions = protection.get('restrictions') or {}
-        writers = [u.get('login', '').casefold() for u in restrictions.get('users', [])]
-        if (writers != [proposed['publisher'].casefold()] or restrictions.get('teams') != []
-                or restrictions.get('apps') != []):
-            raise RuntimeError('Named publisher main restriction not confirmed; no invitation follows')
-    if (reviews.get('dismiss_stale_reviews') is not True
-            or protection.get('allow_force_pushes', {}).get('enabled') is not False
-            or protection.get('allow_deletions', {}).get('enabled') is not False):
-        raise RuntimeError('Requested review/force-push/deletion protection not confirmed; no invitation follows')
-    if resume_base and not checked_seed_branch()['protected']:
+    protection_required = proposed.get('main_protection_required', True)
+    protection = None
+    if protection_required:
+        protection_endpoint = 'repos/' + proposed['repository'] + '/branches/main/protection'
+        if not already_protected:
+            api(protection_endpoint, 'PUT', proposed['main_policy'])
+        protection = api(protection_endpoint)
+        reviews = protection.get('required_pull_request_reviews') or {}
+        if reviews.get('required_approving_review_count', 0) < 1 or protection.get('enforce_admins', {}).get('enabled') is not False:
+            raise RuntimeError('Expected owner/employee main boundary not confirmed; no invitation follows')
+        if organization:
+            restrictions = protection.get('restrictions') or {}
+            writers = [u.get('login', '').casefold() for u in restrictions.get('users', [])]
+            if (writers != [proposed['publisher'].casefold()] or restrictions.get('teams') != []
+                    or restrictions.get('apps') != []):
+                raise RuntimeError('Named publisher main restriction not confirmed; no invitation follows')
+        if (reviews.get('dismiss_stale_reviews') is not True
+                or protection.get('allow_force_pushes', {}).get('enabled') is not False
+                or protection.get('allow_deletions', {}).get('enabled') is not False):
+            raise RuntimeError('Requested review/force-push/deletion protection not confirmed; no invitation follows')
+    observed_branch = checked_seed_branch(base) if resume_base or not protection_required else None
+    if protection_required and observed_branch is not None and not observed_branch['protected']:
         raise RuntimeError('Main protection is not active; no invitation follows')
     invite = api('repos/' + proposed['repository'] + '/collaborators/' + proposed['employee_contributor_and_receiver'],
                  'PUT', {'permission': 'push'})
-    return {'repository': proposed['repository'], 'source_url': created['clone_url'],
-            'base_commit': base, 'resumed_existing_seed': bool(resume_base), 'invitation_id': invite.get('id'),
-            'invitation_accepted': None, 'actual_employee_negative_attempts': 0,
-            'human_sessions_completed': 0, 'host_policy_received': protection}
+    result = {'repository': proposed['repository'], 'source_url': created['clone_url'],
+              'base_commit': base, 'resumed_existing_seed': bool(resume_base), 'invitation_id': invite.get('id'),
+              'invitation_accepted': None, 'actual_employee_negative_attempts': 0,
+              'human_sessions_completed': 0, 'host_policy_received': protection,
+              'main_protection_required': protection_required,
+              'hosted_main_protected': observed_branch['protected'] if observed_branch is not None else None,
+              'publisher_only_main_access_tested': False,
+              'collaborator_access_request_completed': True}
+    return result
 
 
 if __name__ == '__main__':
@@ -201,14 +219,16 @@ if __name__ == '__main__':
     parser.add_argument('--repository', default='MarvinAmador7/groundray-pilot-mosaic')
     parser.add_argument('--employee', default='KarolGarcia712')
     parser.add_argument('--publisher', help='Authenticated publisher handle; defaults to the owner for personal repositories')
-    parser.add_argument('--resume-base', help='Full hosted seed commit; verify the unchanged existing private seed and finish protection/invitation')
+    parser.add_argument('--resume-base', help='Full hosted seed commit; verify the unchanged existing private seed and finish access setup')
+    parser.add_argument('--without-main-protection', action='store_true',
+                        help='Explicit contributor pilot with write access including main; skip protection setup without removing existing rules')
     parser.add_argument('--packet', type=Path, required=True)
-    parser.add_argument('--apply', action='store_true', help='Apply the reviewed creation or exact-seed resume plan and send the employee invitation after protection checks')
+    parser.add_argument('--apply', action='store_true', help='Apply the reviewed creation or exact-seed resume plan and request employee access after selected-mode checks')
     parser.add_argument('--log', type=Path)
     args = parser.parse_args()
     try:
         proposed = plan(args.repository, args.employee, args.packet.resolve(), publisher=args.publisher,
-                        resume_base=args.resume_base)
+                        resume_base=args.resume_base, without_main_protection=args.without_main_protection)
         if args.apply:
             if args.log is None:
                 parser.error('--apply requires a new --log path')

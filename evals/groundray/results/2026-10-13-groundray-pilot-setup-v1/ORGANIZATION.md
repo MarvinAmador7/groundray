@@ -4,7 +4,55 @@ Repository owner: **fullkontrol**. Publisher: **MarvinAmador7**.
 Employee contributor/receiver: **KarolGarcia712**.
 Planned source: `https://github.com/fullkontrol/groundray-pilot-mosaic.git`.
 
-## Current blocker and exact-seed recovery
+## Current selection: private contributor pilot without main protection
+
+The user explicitly selected full contribution without main protection. Keep the
+repository private and grant Karol contributor write access, including main.
+Publisher review and publication remain workflow conventions; employee main
+denial and publisher-only host enforcement are outside this pilot. No eligible
+paid protection plan is required for this mode, and existing rules are preserved.
+
+From the same terminal directory used for packet extraction and the failed
+organization apply, fetch the updated tool and reuse the original hosted seed:
+
+```sh
+GROUNDRAY_SOURCE_DIR=$(git rev-parse --show-toplevel)
+git -C "$GROUNDRAY_SOURCE_DIR" pull --ff-only origin agent/groundray-skill
+GROUNDRAY_ORG_SEED=$(git -C "$PWD/fullkontrol-provisioning/pilot-seed-clone" rev-parse HEAD)
+python3 "$GROUNDRAY_SOURCE_DIR/scripts/provision_groundray_pilot.py" \
+  --repository fullkontrol/groundray-pilot-mosaic --publisher MarvinAmador7 \
+  --employee KarolGarcia712 --packet "$PWD/pilot-packet" \
+  --resume-base "$GROUNDRAY_ORG_SEED" --without-main-protection
+python3 "$GROUNDRAY_SOURCE_DIR/scripts/provision_groundray_pilot.py" \
+  --repository fullkontrol/groundray-pilot-mosaic --publisher MarvinAmador7 \
+  --employee KarolGarcia712 --packet "$PWD/pilot-packet" \
+  --resume-base "$GROUNDRAY_ORG_SEED" --without-main-protection \
+  --apply --log "$PWD/fullkontrol-contributor-resume/provisioning.jsonl"
+```
+
+The default command prints a reviewable plan. Apply verifies publisher identity,
+admin permission, repository privacy/owner, unchanged main and packet-matching
+selected seed files before requesting write access. Resume never recreates the
+repository or pushes main. This explicit mode skips protection setup/read/delete
+calls and paid-plan checks. Existing protection stays intact. A changed seed or
+moved main still stops before the access request.
+
+Retain the returned `base_commit`, `source_url`, `hosted_main_protected` and
+`main_protection_required` fields. If an invitation ID is returned, Karol must
+accept it with Karol's own account. An empty-success access update for an existing
+collaborator returns no invitation ID; it is not a failed invitation. Acceptance,
+actual employee permissions and native/human session results still need observation.
+Update the local role/session records with the actual source and selected mode;
+do not mark publisher-only enforcement or employee publication-denial as tested.
+
+Use this source consistently for installation and authoring attachment. Continue
+the actual proposal, exact-candidate/source review, explicit publisher acceptance,
+independent sync and human evidence inspection in the
+[employee runbook](https://github.com/MarvinAmador7/portable-kb/blob/agent/groundray-skill/docs/groundray-pilot.md).
+Fifty-two focused tests and Ruff pass; no real invitation or participant result
+is claimed in the [selected-mode receipt](unprotected-contributor-plan.json).
+
+## Earlier protected-mode blocker and recovery
 
 The publisher's local organization apply reached protection after creating and
 seeding the private repository, then returned HTTP 403: “Upgrade to GitHub Pro

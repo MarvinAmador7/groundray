@@ -54,6 +54,11 @@ Preparation of synthetic employee pilot packets, bounded native activation probe
 and plan-first provisioning of a dedicated new private Git test repository with
 existing host protections are authorized. Real identities and participant outcomes
 must be supplied/observed; no simulated credentials or fabricated human participation.
+An explicitly user-selected private contributor pilot without main protection is
+also authorized for the dedicated synthetic pilot repository. Contributor write
+access includes main; publisher/reviewer roles are workflow conventions. Do not
+claim publisher-only enforcement or successful employee-publication denial for
+that mode. Preserve existing rules; skipping protection setup does not remove them.
 Do not expand into automatic QMD installation, embeddings, semantic/hybrid
 querying, vector databases, other lifecycle CLI mutations, MCP servers, APIs,
 native/web UI, authentication/authorization, multitenancy, background agents,
