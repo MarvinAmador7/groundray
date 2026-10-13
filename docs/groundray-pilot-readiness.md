@@ -5,6 +5,41 @@ employee contributor and receiver**, as supplied by the user. No real employee
 session, accepted invitation or company-brain host enforcement has been observed.
 A distinct read-only account was not supplied and remains a separate gate.
 
+## Resumed setup: GitHub reachable, creation denied
+
+On the resumed worker, HTTPS requests to GitHub and its API succeed. Both the
+normal GitHub CLI and connector identify the authenticated account as
+MarvinAmador7. The product repository reports publisher admin access;
+KarolGarcia712's account resolves, and the proposed pilot repository returns a
+structured 404. These observations supersede the earlier worker's account-read
+blocker below; they do not establish employee authentication or host enforcement.
+
+The existing packet ZIP matches SHA-256
+`65f8bba6e156d51673742759be7b9e5a312bceeddd03c3b7c36b80a6b55fd790`.
+Extracting it into a new work directory yields all 53 manifest-matching brain
+files. Validation passes for all three draft concepts with no findings. The
+seven focused packet/provisioner tests pass in this checkout.
+
+The reviewed provisioner was applied once using the supplied publisher and
+employee. Its account and absence checks succeeded, but repository creation
+(`POST /user/repos`) returned HTTP 403, “Resource not accessible by integration.”
+It stopped before cloning, seeding, protection writes or invitation. A subsequent
+read still returned 404 for the pilot repository. No hosted base exists.
+
+The pilot-tooling [CI run](https://github.com/MarvinAmador7/portable-kb/actions/runs/38438717326)
+is successful at `75f58a4e8065a8251b4931c07a9d5f7d188ddaa6` and lists non-expired
+Linux x86_64 and macOS ARM plugin artifacts. This worker's artifact download was
+refused by the backing storage, so no new package installation or native probe
+was performed. The earlier activation failure remains the last observed attempt.
+
+[Safe setup receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/result.json)
+and [publisher handoff](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/README.md)
+record the actions, guards and remaining work. The handoff includes the verified
+portable packet and an explicit publisher command. It needs publisher credentials
+with repository-creation permission and a host plan supporting private protection;
+credentials remain on the publisher's machine. Karol's invitation acceptance,
+valid-candidate denial, independent sync and human observations remain pending.
+
 ## Delivered
 
 - Plugin `0.1.0-dev.2` adds a storage-specific evidence-link instruction. Use the
@@ -60,7 +95,7 @@ comparison or proof of general reliability. Astra's read-only textual review
 found no actionable new defect in the bridge; no model execution, network or
 result inspection formed part of that textual review.
 
-## Actual environment blockers
+## Earlier environment blockers
 
 A fresh native Codex attempt preserved its full prompt, argv, JSON events and
 stderr this time. It again encountered HTTP 403 in the cloud response endpoint,

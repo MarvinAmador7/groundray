@@ -83,8 +83,13 @@ review it without network calls or writes:
 python tools/provision_groundray_pilot.py --packet /absolute/pilot-packet
 ```
 
-The cloud worker cannot reach the GitHub API needed to create this repository.
-On the publisher's machine, the reviewed plan can be applied explicitly:
+The resumed cloud worker can reach GitHub and authenticates as MarvinAmador7,
+but `POST /user/repos` is refused with HTTP 403, “Resource not accessible by
+integration.” Successful account/repository reads do not establish permission to
+create a new repository. No pilot repository or invitation was created. See the
+[resumed setup receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/result.json).
+On the publisher's machine, using normal credentials that can create private
+repositories, the reviewed plan can be applied explicitly:
 
 ```sh
 python tools/provision_groundray_pilot.py --packet /absolute/pilot-packet \
@@ -108,6 +113,20 @@ recorded failure and choose a supported host policy explicitly. API policy recei
 is not enforcement proof; Karol's actual refused main-publication attempt is still
 required. A valid existing pilot repository needs a separate reviewed path; this
 creation script intentionally leaves it untouched.
+
+The packet ZIP is the portable input; the tracked checkout does not include its
+extracted `brain/` directory. Verify its recorded SHA-256 before extracting it,
+then run the provisioner against the extracted packet. Do not reconstruct the
+brain or change its manifest to bypass a fingerprint refusal. The resumed setup
+verified all 53 archived brain files against the manifest and validated all three
+draft concepts without findings.
+
+The successful [CI run for the pilot-tooling commit](https://github.com/MarvinAmador7/portable-kb/actions/runs/38438717326)
+offers `groundray-plugin-linux-x86_64` and `groundray-plugin-darwin-arm64` artifacts.
+Download the artifact for the participant's actual platform and verify the
+included `SHA256SUMS` before extracting the inner marketplace ZIP. The resumed
+cloud artifact download was also refused; these packages were not installed or
+used in a new native activation attempt here.
 
 ## Native activation and ordinary answer
 
