@@ -48,7 +48,12 @@ copied, state that dependency. Keep earlier evidence/reasoning recoverable; upda
 the current interpretation and relevant dependents with the reason. Preserve
 unknown metadata, check for concurrent edits, and use the supported change workflow.
 Check final links. Never fabricate human approval, verification or inspected sources.
-Before finishing, compare consequential wording with the actual inspected passages.
+Before finishing, check each consequential assertion, including incidental numbers,
+against the records actually inspected in this session. A source listed by a wiki
+page is not an inspected source. For details supported only by an inspected summary,
+say at the claim that the original was not inspected, or omit the detail. Limit
+inspection statements to records actually inspected. Compare wording with the
+inspected passages.
 
 Explain the evidence you have; do not certify source authenticity, completeness
 or real human approval from labels alone. Keep simple established answers short.
