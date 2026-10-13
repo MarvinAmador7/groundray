@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -24,6 +25,9 @@ def test_plan_limits_repository_scope_and_detects_changed_packet(tmp_path):
     p = plan('MarvinAmador7/groundray-pilot-mosaic', 'KarolGarcia712', root)
     assert p['private'] is True and p['human_pilot_completed'] is False
     assert p['distinct_read_only_account'] is None
+    with pytest.raises(ValueError, match='full lowercase'):
+        plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root,
+             publisher='MarvinAmador7', resume_base='main')
     with pytest.raises(ValueError, match='dedicated'):
         plan('MarvinAmador7/portable-kb', 'KarolGarcia712', root)
     (root / 'brain/extra-private-notes.txt').write_text('Never seed this by accident')
@@ -162,3 +166,91 @@ def test_organization_uses_named_publisher_and_invites_only_after_verified_polic
     invitations = [argv for argv in calls if any('/collaborators/' in v for v in argv)]
     assert len(invitations) == (0 if failure else 1)
     assert not any('user/repos' in argv for argv in calls)
+
+
+@pytest.mark.parametrize('scenario', [
+    'success', 'already_protected', 'public', 'owner', 'admin', 'main_changed',
+    'fetch_changed', 'content_changed', 'extra_file', 'symlink', 'race_before_policy',
+    'race_before_invite', 'policy_denied', 'existing_policy_wrong', 'inactive_policy',
+])
+def test_resume_preserves_seed_and_requires_matching_content_ref_and_protection(tmp_path, monkeypatch, scenario):
+    root = packet(tmp_path)
+    (root / 'brain/knowledge').mkdir()
+    base = 'a' * 40
+    p = plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root,
+             publisher='MarvinAmador7', resume_base=base)
+    assert p['create_only_new_repository'] is False
+    before = snapshot(root / 'brain')
+    calls = []
+    branch_reads = 0
+
+    def fake(argv, *, input, **kwargs):
+        nonlocal branch_reads
+        calls.append(argv)
+        if argv[0] == 'git':
+            if argv[1] == 'clone':
+                clone = Path(argv[-1])
+                shutil.copytree(root / 'brain', clone)
+                if scenario == 'content_changed':
+                    (clone / 'brain.yaml').write_text('Changed company content')
+                if scenario == 'extra_file':
+                    (clone / 'unrelated-private-file.txt').write_text('Unplanned')
+                if scenario == 'symlink':
+                    (clone / 'brain.yaml').unlink()
+                    (clone / 'brain.yaml').symlink_to(root / 'brain/brain.yaml')
+            output = ('b' * 40 if scenario == 'fetch_changed' else base) if 'rev-parse' in argv else ''
+            return subprocess.CompletedProcess(argv, 0, output, '')
+        endpoint = argv[2]
+        code = 0
+        if endpoint == 'user':
+            body = {'login': 'MarvinAmador7'}
+        elif endpoint == 'users/fullkontrol':
+            body = {'type': 'Organization'}
+        elif endpoint == 'repos/fullkontrol/groundray-pilot-mosaic':
+            body = {'private': scenario != 'public',
+                    'full_name': 'other/groundray-pilot-mosaic' if scenario == 'owner' else p['repository'],
+                    'clone_url': 'https://github.com/fullkontrol/groundray-pilot-mosaic.git',
+                    'permissions': {'admin': scenario != 'admin'}}
+        elif endpoint.endswith('/branches/main'):
+            branch_reads += 1
+            moved = (scenario == 'main_changed'
+                     or scenario == 'race_before_policy' and branch_reads >= 2
+                     or scenario == 'race_before_invite' and branch_reads >= 3)
+            protected = (scenario in {'already_protected', 'existing_policy_wrong'} or branch_reads >= 3)
+            body = {'commit': {'sha': 'b' * 40 if moved else base},
+                    'protected': False if scenario == 'inactive_policy' else protected}
+        elif endpoint.endswith('/protection'):
+            if scenario == 'policy_denied':
+                body, code = {'status': '403', 'message': 'Upgrade to GitHub Pro or make this repository public to enable this feature.'}, 1
+            else:
+                body = {'required_pull_request_reviews': {'required_approving_review_count': 1,
+                                                          'dismiss_stale_reviews': True},
+                        'enforce_admins': {'enabled': False},
+                        'allow_force_pushes': {'enabled': scenario == 'existing_policy_wrong'},
+                        'allow_deletions': {'enabled': False},
+                        'restrictions': {'users': [{'login': 'MarvinAmador7'}], 'teams': [], 'apps': []}}
+        elif '/collaborators/' in endpoint:
+            body = {'id': 42}
+        else:
+            body = {}
+        return subprocess.CompletedProcess(argv, code, json.dumps(body), '')
+
+    monkeypatch.setattr('scripts.provision_groundray_pilot.subprocess.run', fake)
+    succeeds = scenario in {'success', 'already_protected'}
+    if succeeds:
+        result = apply(p, root, tmp_path / 'resume.jsonl')
+        assert result['resumed_existing_seed'] is True and result['base_commit'] == base
+    else:
+        with pytest.raises(RuntimeError) as failure:
+            apply(p, root, tmp_path / 'resume.jsonl')
+        if scenario == 'policy_denied':
+            assert 'Team or Enterprise' in str(failure.value)
+    assert snapshot(root / 'brain') == before
+    assert not any(argv[0] == 'git' and any(v in argv for v in ['push', 'commit', 'add']) for argv in calls)
+    assert not any(v in argv for argv in calls for v in ['user/repos', 'orgs/fullkontrol/repos'])
+    invites = [argv for argv in calls if any('/collaborators/' in v for v in argv)]
+    assert len(invites) == (1 if succeeds else 0)
+    policy_writes = [argv for argv in calls if argv[0] == 'gh' and argv[2].endswith('/protection') and 'PUT' in argv]
+    if scenario in {'already_protected', 'existing_policy_wrong', 'public', 'owner', 'admin', 'main_changed',
+                    'fetch_changed', 'content_changed', 'extra_file', 'symlink', 'race_before_policy'}:
+        assert policy_writes == []

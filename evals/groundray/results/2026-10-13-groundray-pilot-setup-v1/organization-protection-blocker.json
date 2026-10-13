@@ -1,0 +1,30 @@
+{
+  "repository": "fullkontrol/groundray-pilot-mosaic",
+  "publisher": "MarvinAmador7",
+  "employee": "KarolGarcia712",
+  "publisher_reported": {
+    "failed_operation": "PUT /repos/fullkontrol/groundray-pilot-mosaic/branches/main/protection",
+    "http_status": 403,
+    "message": "Upgrade to GitHub Pro or make this repository public to enable this feature.",
+    "prior_tool_stages": [
+      "private organization repository created",
+      "publisher admin permission checked",
+      "synthetic seed pushed"
+    ],
+    "provisioner_invitation_step_reached": false,
+    "hosted_base_commit": null
+  },
+  "worker_observed": {
+    "repository_read_http_status": 404,
+    "git_read_http_status": 403,
+    "independent_seed_inspection": false
+  },
+  "required_private_organization_plan": "GitHub Team or Enterprise",
+  "plan_documentation": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+  "billing_changed": false,
+  "visibility_changed": false,
+  "resume_tool_ready": true,
+  "actual_resume_attempt": false,
+  "focused_tests_passed": 29,
+  "human_pilot_completed": false
+}

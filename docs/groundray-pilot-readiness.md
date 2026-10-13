@@ -9,6 +9,34 @@ A distinct read-only account was not supplied and remains a separate gate.
 
 ### Selected organization: fullkontrol
 
+The publisher's subsequent local attempt reached the protection write on
+`fullkontrol/groundray-pilot-mosaic`, then returned HTTP 403 with the same generic
+“Upgrade to GitHub Pro or make this repository public” message. By that stage,
+the tool had created the private organization repository, confirmed publisher
+admin access and pushed the synthetic seed. Its invitation step was not reached.
+These are publisher-reported outcomes; the worker's repository API read returns
+404 and Git fetch is denied, so it cannot independently inspect that private seed.
+
+For an organization, the required private protection and writer restrictions need
+[GitHub Team or Enterprise](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches).
+Moving to an organization did not establish an eligible plan. Keep the repository
+private while the user decides whether to enable that plan or pause hosted setup.
+No billing or visibility change has been performed.
+
+An explicit `--resume-base FULL_SEED_COMMIT` now prepares an existing-seed recovery
+plan. Applied with the publisher's local credentials, it verifies the private
+repository, owner, publisher admin access, exact main commit and every selected
+synthetic seed file. It checks main again before policy and invitation. It never
+recreates/reseeds/pushes main, and verifies an existing protected policy instead
+of overwriting it. A mismatched snapshot, moved ref or policy error stops before
+invitation. Twenty-nine focused tests cover creation and these recovery outcomes;
+Ruff passes. This is prepared recovery tooling, not an actual recovered host.
+
+[Organization follow-up receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/organization-protection-blocker.json)
+records the publisher error and separates it from the worker's access denial.
+
+Earlier organization-creation attempt:
+
 The user selected fullkontrol as the owner for a new private pilot repository.
 MarvinAmador7 remains the authenticated publisher; KarolGarcia712 remains employee
 contributor/receiver. The organization exists, but this worker cannot read publisher

@@ -4,6 +4,65 @@ Repository owner: **fullkontrol**. Publisher: **MarvinAmador7**.
 Employee contributor/receiver: **KarolGarcia712**.
 Planned source: `https://github.com/fullkontrol/groundray-pilot-mosaic.git`.
 
+## Current blocker and exact-seed recovery
+
+The publisher's local organization apply reached protection after creating and
+seeding the private repository, then returned HTTP 403: “Upgrade to GitHub Pro
+or make this repository public to enable this feature.” No provisioner invitation
+followed. The worker cannot independently inspect that private repository with
+its integration credential; its 404 is not proof the repository is absent.
+
+Private organization protection and the named-publisher writer restriction need
+[GitHub Team or Enterprise](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches).
+Keep the repository private. Account billing needs a user decision; no billing
+change is performed by this tool. Do not repeat create-only apply or change the
+packet's fingerprints. The earlier organization handoff archive documents the
+original creation attempt and predates resume support.
+
+The eligible plan is required for the contributor boundary, not for hosting the
+private brain. A receiver-only private pilot can use GitHub Free with read access
+and test native answering, evidence inspection and sync. Employee proposal writes
+to this same shared repository require write access, which also permits main
+updates without host protection. A read-only pilot must therefore defer employee
+contributions and the protected-main accept/deny tests. That scope choice is
+separate from choosing a private repository destination.
+
+After an eligible plan is available, use the current checkout from the same
+terminal directory. The local seed clone identifies the full commit that was
+pushed by the failed attempt; this command does not create a new commit:
+
+```sh
+GROUNDRAY_SOURCE_DIR=$(git rev-parse --show-toplevel)
+git -C "$GROUNDRAY_SOURCE_DIR" pull --ff-only origin agent/groundray-skill
+GROUNDRAY_ORG_SEED=$(git -C "$PWD/fullkontrol-provisioning/pilot-seed-clone" rev-parse HEAD)
+python3 "$GROUNDRAY_SOURCE_DIR/scripts/provision_groundray_pilot.py" \
+  --repository fullkontrol/groundray-pilot-mosaic --publisher MarvinAmador7 \
+  --employee KarolGarcia712 --packet "$PWD/pilot-packet" \
+  --resume-base "$GROUNDRAY_ORG_SEED"
+python3 "$GROUNDRAY_SOURCE_DIR/scripts/provision_groundray_pilot.py" \
+  --repository fullkontrol/groundray-pilot-mosaic --publisher MarvinAmador7 \
+  --employee KarolGarcia712 --packet "$PWD/pilot-packet" \
+  --resume-base "$GROUNDRAY_ORG_SEED" \
+  --apply --log "$PWD/fullkontrol-protection-resume/provisioning.jsonl"
+```
+
+The default remains a plan. Explicit resume apply requires publisher identity and
+admin permission, private repository and correct owner, the unchanged full main
+commit, and exact packet-matching selected seed files with no symlinks or extras.
+It uses a new local read-only clone, never recreates/reseeds/pushes main, and
+checks the pinned main before protection and invitation. An already protected
+policy is inspected rather than replaced. A changed base or content, incompatible
+policy, unavailable protection or inactive protection stops before invitation.
+Use a new log directory for a subsequent attempt and preserve the failed logs.
+
+The [follow-up receipt](organization-protection-blocker.json) distinguishes the
+publisher-reported host result from worker access errors. Twenty-nine focused
+tests pass, including stale base, changed/extra/symlinked seed files, concurrent
+main changes and existing-policy refusal. No actual host recovery or employee
+enforcement outcome is claimed.
+
+## Earlier creation procedure
+
 The cloud's actual organization-creation request was denied with HTTP 403,
 “You need admin access to the organization before adding a repository to it.”
 The new organization repository still returns 404. Use the publisher's existing

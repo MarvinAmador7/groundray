@@ -76,6 +76,22 @@ permission failure; do not continue or silently undo the evidence.
 
 ## Provisioning the proposed private remote
 
+The publisher's organization attempt has now reached a private-protection plan
+failure after creating/seeding `fullkontrol/groundray-pilot-mosaic`. **Do not run
+the create-only apply command again.** For the current blocker and exact-seed
+recovery commands, use the
+[organization handoff](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/ORGANIZATION.md).
+Private organization protection requires GitHub Team or Enterprise; the generic
+API error refers to Pro. The employee invitation remains blocked behind protection.
+
+That protection is required for the **contributor permission test**, not for
+private Git hosting, installed-brain retrieval or explicit sync. GitHub Free can
+support a private receiver-only pilot with read access. Giving Karol write access
+for proposals on an unprotected shared repository would also permit direct main
+updates, so it would not satisfy the planned contributor boundary. A separately
+chosen read-only pilot must defer contributions and their accept/deny tests;
+do not report those tests complete or silently grant write access.
+
 The user has selected **fullkontrol** as the new repository owner, with
 **MarvinAmador7** remaining the publisher. The new planned source is
 `https://github.com/fullkontrol/groundray-pilot-mosaic.git`. Use the current

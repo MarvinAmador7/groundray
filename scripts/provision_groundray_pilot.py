@@ -1,8 +1,9 @@
 """Plan an isolated private GitHub pilot; applying uses the operator's own login.
 
-Cloud execution is not a replacement for employee credentials. No existing
-repository is modified. A failed protection setup leaves a private, uninvited
-repository for explicit operator recovery; it is never deleted or made public.
+Cloud execution is not a replacement for employee credentials. Creation refuses
+existing repositories. Explicit --resume-base checks an exact unchanged synthetic
+seed before configuring protection; it never recreates, reseeds or publishes main.
+A failed protection setup is never deleted or made public.
 """
 from __future__ import annotations
 
@@ -20,7 +21,8 @@ def fingerprints(root: Path) -> dict:
             for p in sorted(root.rglob('*')) if p.is_file() and '.git' not in p.parts}
 
 
-def plan(repository: str, employee: str, packet: Path, *, publisher: str | None = None) -> dict:
+def plan(repository: str, employee: str, packet: Path, *, publisher: str | None = None,
+         resume_base: str | None = None) -> dict:
     if not re.fullmatch(r'[A-Za-z0-9-]+/[A-Za-z0-9_.-]+', repository):
         raise ValueError('Use owner/repository')
     owner, name = repository.split('/')
@@ -28,6 +30,8 @@ def plan(repository: str, employee: str, packet: Path, *, publisher: str | None 
     if not re.fullmatch(r'[A-Za-z0-9-]+', publisher):
         raise ValueError('Supply a publisher account handle')
     organization = owner.casefold() != publisher.casefold()
+    if resume_base is not None and not re.fullmatch(r'[0-9a-f]{40}', resume_base):
+        raise ValueError('Resume requires the full lowercase hosted seed commit')
     if not name.startswith('groundray-pilot-'):
         raise ValueError('Use a dedicated groundray-pilot-* repository')
     if not re.fullmatch(r'[A-Za-z0-9-]+', employee) or employee.casefold() in {owner.casefold(), publisher.casefold()}:
@@ -44,7 +48,9 @@ def plan(repository: str, employee: str, packet: Path, *, publisher: str | None 
             'repository_owner': owner, 'owner_type': 'Organization' if organization else 'User',
             'employee_contributor_and_receiver': employee,
             'distinct_read_only_account': None, 'packet': str(packet),
-            'create_only_new_repository': True, 'human_pilot_completed': False,
+            'create_only_new_repository': resume_base is None,
+            'resume_base': resume_base, 'resume_requires_exact_synthetic_seed': resume_base is not None,
+            'human_pilot_completed': False,
             'main_policy': {'required_status_checks': None, 'enforce_admins': False,
                             'required_pull_request_reviews': {'required_approving_review_count': 1,
                                                              'dismiss_stale_reviews': True},
@@ -83,6 +89,8 @@ def apply(proposed: dict, packet: Path, log: Path) -> dict:
                 detail = str(response['message'])
                 if response.get('status'):
                     detail += ' (HTTP ' + str(response['status']) + ')'
+                if proposed['owner_type'] == 'Organization' and 'Upgrade to GitHub Pro' in detail:
+                    detail += '; private organization protection requires an eligible GitHub Team or Enterprise plan'
             operation = ' '.join(argv[:3])
             raise RuntimeError(f'Operation refused: {operation}: {detail or "nonzero exit status"}. '
                                f'See {log}. No automatic recovery or invitation follows.')
@@ -100,45 +108,70 @@ def apply(proposed: dict, packet: Path, log: Path) -> dict:
     if organization and api('users/' + owner).get('type') != 'Organization':
         raise ValueError('A distinct repository owner must be an actual organization')
     api('users/' + proposed['employee_contributor_and_receiver'])
-    # Require a structured HTTP 404. An auth/network error is never absence.
-    existing = run(['gh', 'api', 'repos/' + proposed['repository']], allowed=(0, 1))
-    if not existing.returncode:
-        raise ValueError('Repository already exists; leave it unchanged')
-    try:
-        missing = json.loads(existing.stdout)
-    except ValueError:
-        raise ValueError('Repository absence not established; stop on the actual host error') from None
-    if str(missing.get('status')) != '404':
-        raise ValueError('Repository absence not established; stop on the actual host error')
-    endpoint = 'orgs/' + owner + '/repos' if organization else 'user/repos'
-    created = api(endpoint, 'POST', {'name': name, 'private': True,
-                                        'description': 'Fictional Groundray two-employee pilot; no real company records',
-                                        'auto_init': False})
+    resume_base = proposed.get('resume_base')
+    if resume_base:
+        created = api('repos/' + proposed['repository'])
+    else:
+        # Require a structured HTTP 404. An auth/network error is never absence.
+        existing = run(['gh', 'api', 'repos/' + proposed['repository']], allowed=(0, 1))
+        if not existing.returncode:
+            raise ValueError('Repository already exists; leave it unchanged')
+        try:
+            missing = json.loads(existing.stdout)
+        except ValueError:
+            raise ValueError('Repository absence not established; stop on the actual host error') from None
+        if str(missing.get('status')) != '404':
+            raise ValueError('Repository absence not established; stop on the actual host error')
+        endpoint = 'orgs/' + owner + '/repos' if organization else 'user/repos'
+        created = api(endpoint, 'POST', {'name': name, 'private': True,
+                                            'description': 'Fictional Groundray two-employee pilot; no real company records',
+                                            'auto_init': False})
     if created.get('private') is not True:
         raise RuntimeError('Host did not create a private repository; no seeding or invitation follows')
     if created.get('full_name', '').casefold() != proposed['repository'].casefold():
         raise RuntimeError('Host repository owner/name differs from the plan; no seeding or invitation follows')
-    if organization:
-        permissions = api('repos/' + proposed['repository']).get('permissions') or {}
+    if organization or resume_base:
+        permissions = (created if resume_base else api('repos/' + proposed['repository'])).get('permissions') or {}
         if permissions.get('admin') is not True:
             raise RuntimeError('Publisher repository admin permission not confirmed; no seeding or invitation follows')
-    clone = log.parent / 'pilot-seed-clone'
+    clone = log.parent / ('pilot-resume-clone' if resume_base else 'pilot-seed-clone')
     if clone.exists():
         raise ValueError('Seed clone already exists; repository remains private without invitation')
-    run(['git', 'clone', created['clone_url'], str(clone)])
-    for name in ['brain.yaml', 'knowledge']:
-        src, dst = packet / 'brain' / name, clone / name
-        if src.is_dir():
-            shutil.copytree(src, dst)
-        else:
-            shutil.copyfile(src, dst)
-    run(['git', '-C', str(clone), 'checkout', '-b', 'main'])
-    run(['git', '-C', str(clone), 'add', 'brain.yaml', 'knowledge'])
-    run(['git', '-C', str(clone), 'commit', '-m', 'Seed explicitly fictional Groundray pilot'])
-    run(['git', '-C', str(clone), 'push', 'origin', 'main'])
-    base = run(['git', '-C', str(clone), 'rev-parse', 'HEAD']).stdout.strip()
+    branch_endpoint = 'repos/' + proposed['repository'] + '/branches/main'
+    def checked_seed_branch():
+        branch = api(branch_endpoint)
+        if branch.get('commit', {}).get('sha') != resume_base or type(branch.get('protected')) is not bool:
+            raise RuntimeError('Hosted main no longer matches the supplied seed; no invitation follows')
+        return branch
+    if resume_base:
+        checked_seed_branch()
+        run(['git', 'clone', '--no-checkout', created['clone_url'], str(clone)])
+        run(['git', '-C', str(clone), 'checkout', '--detach', resume_base])
+        base = run(['git', '-C', str(clone), 'rev-parse', 'HEAD']).stdout.strip()
+        if base != resume_base:
+            raise RuntimeError('Fetched commit differs from the supplied seed; no policy or invitation follows')
+        expected = json.loads((packet / 'manifest.json').read_text())['brain_fingerprints']
+        expected = {p: h for p, h in expected.items() if p == 'brain.yaml' or p.startswith('knowledge/')}
+        if any(p.is_symlink() for p in clone.rglob('*') if '.git' not in p.parts) or fingerprints(clone) != expected:
+            raise RuntimeError('Hosted seed files differ from the synthetic packet; no policy or invitation follows')
+        already_protected = checked_seed_branch()['protected']
+    else:
+        run(['git', 'clone', created['clone_url'], str(clone)])
+        for name in ['brain.yaml', 'knowledge']:
+            src, dst = packet / 'brain' / name, clone / name
+            if src.is_dir():
+                shutil.copytree(src, dst)
+            else:
+                shutil.copyfile(src, dst)
+        run(['git', '-C', str(clone), 'checkout', '-b', 'main'])
+        run(['git', '-C', str(clone), 'add', 'brain.yaml', 'knowledge'])
+        run(['git', '-C', str(clone), 'commit', '-m', 'Seed explicitly fictional Groundray pilot'])
+        run(['git', '-C', str(clone), 'push', 'origin', 'main'])
+        base = run(['git', '-C', str(clone), 'rev-parse', 'HEAD']).stdout.strip()
+        already_protected = False
     protection_endpoint = 'repos/' + proposed['repository'] + '/branches/main/protection'
-    api(protection_endpoint, 'PUT', proposed['main_policy'])
+    if not already_protected:
+        api(protection_endpoint, 'PUT', proposed['main_policy'])
     protection = api(protection_endpoint)
     reviews = protection.get('required_pull_request_reviews') or {}
     if reviews.get('required_approving_review_count', 0) < 1 or protection.get('enforce_admins', {}).get('enabled') is not False:
@@ -153,10 +186,12 @@ def apply(proposed: dict, packet: Path, log: Path) -> dict:
             or protection.get('allow_force_pushes', {}).get('enabled') is not False
             or protection.get('allow_deletions', {}).get('enabled') is not False):
         raise RuntimeError('Requested review/force-push/deletion protection not confirmed; no invitation follows')
+    if resume_base and not checked_seed_branch()['protected']:
+        raise RuntimeError('Main protection is not active; no invitation follows')
     invite = api('repos/' + proposed['repository'] + '/collaborators/' + proposed['employee_contributor_and_receiver'],
                  'PUT', {'permission': 'push'})
     return {'repository': proposed['repository'], 'source_url': created['clone_url'],
-            'base_commit': base, 'invitation_id': invite.get('id'),
+            'base_commit': base, 'resumed_existing_seed': bool(resume_base), 'invitation_id': invite.get('id'),
             'invitation_accepted': None, 'actual_employee_negative_attempts': 0,
             'human_sessions_completed': 0, 'host_policy_received': protection}
 
@@ -166,12 +201,14 @@ if __name__ == '__main__':
     parser.add_argument('--repository', default='MarvinAmador7/groundray-pilot-mosaic')
     parser.add_argument('--employee', default='KarolGarcia712')
     parser.add_argument('--publisher', help='Authenticated publisher handle; defaults to the owner for personal repositories')
+    parser.add_argument('--resume-base', help='Full hosted seed commit; verify the unchanged existing private seed and finish protection/invitation')
     parser.add_argument('--packet', type=Path, required=True)
-    parser.add_argument('--apply', action='store_true', help='Create/seed/protect a new private repository and send the employee invitation')
+    parser.add_argument('--apply', action='store_true', help='Apply the reviewed creation or exact-seed resume plan and send the employee invitation after protection checks')
     parser.add_argument('--log', type=Path)
     args = parser.parse_args()
     try:
-        proposed = plan(args.repository, args.employee, args.packet.resolve(), publisher=args.publisher)
+        proposed = plan(args.repository, args.employee, args.packet.resolve(), publisher=args.publisher,
+                        resume_base=args.resume_base)
         if args.apply:
             if args.log is None:
                 parser.error('--apply requires a new --log path')
