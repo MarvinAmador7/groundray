@@ -4,8 +4,12 @@
 fresh agents used the new candidate-source getter and produced ten working
 reader evidence targets. Saved-state integrity held in both chains. The original
 chain's diff reconstruction and 13 broken reader links remain archived unchanged.
-The follow-up also exposed unsupported certainty in suggested client wording
-and incomplete attribution of a detail taken from a compiled draft.
+The follow-up also exposed unsupported certainty in suggested client wording.
+The [uncertainty follow-up](groundray-uncertainty-evaluation.md) refines Lite and
+observes conditional wording in new agents. It also corrects the earlier invoice
+grading: an inspected owner correction directly supplies the figures. The separate
+export was unread; summary-only attribution findings are withdrawn and preserved
+as original grading alongside the corrected assessments.
 
 ## Follow-up with the inspection fixes
 
@@ -48,16 +52,16 @@ and production fingerprints, protected inputs, prompts and responses matched the
 frozen/recorded versions. Reviewer/reader installations remained at the old pin
 before root publication; publication itself required separate reader sync.
 
-Two semantic qualifications remain. Both the author and reader suggested client
+A semantic qualification remains. Both the author and reader suggested client
 wording saying remediation would take **“up to three” days**. The original says
 it **“may take three more days”**, which does not establish an upper bound. The
 saved launch draft preserves conditional wording correctly, and neither answer
 promises a replacement launch date; that does not justify the stronger phrase.
-The reader also repeats invoice I-71's gross/tax numbers from the compiled margin
-draft without explicitly attributing that detail to it. It never retrieved the
-available invoice export. Its main 62.5% calculation is directly backed by the
-retrieved definition, correction and ledger; the invoice detail is not evidence
-of direct original inspection.
+The reader never retrieved the available invoice export, but the inspected owner
+correction explicitly supplies I-71 gross 4,500, tax 500 and recognized fees 4,000.
+The earlier summary-only finding is withdrawn. The main 62.5% calculation and
+invoice figures are backed by inspected records, without establishing independent
+invoice-export inspection or source authenticity.
 
 There were 36 shell commands and 111 CLI calls. Shell grouping differs from the
 first trial, and there is no randomized control or human effort measurement.
@@ -142,11 +146,11 @@ scope generally supported. The November22 arithmetic was correctly conditional;
 it did not include publication/client acceptance or create an approved date.
 This was agent review, not independent expert or human adjudication.
 
-The reader's specific invoice I71 gross/tax detail came from the compiled margin
-page; the invoice export was available but was not retrieved in that session.
-Its main profitability calculation did use the original definition, correction
-and reconciled CSV. Do not count that invoice detail as direct original inspection
-or use an available summary to claim the original was read.
+The invoice export was available but not retrieved. However, the reader inspected
+the original owner correction, which expressly supplies I71 gross/tax figures.
+Its main calculation also uses the original definition, correction and reconciled
+CSV. The original summary-only grading is preserved and corrected; do not infer
+that the invoice export itself was read or independently authenticated.
 
 ## Failures and subsequent changes
 
@@ -236,8 +240,9 @@ installed file-link targets, preserved trial prompts and honest source-exposure
 reporting. Latest-head PR CI supplies the final published-commit check.
 
 The follow-up above exercises these interface fixes without repairing either
-trial's outputs. The next semantic slice should preserve source uncertainty in
-client wording and explicitly attribute compiled evidence versus inspected originals.
+trial's outputs. The [semantic follow-up](groundray-uncertainty-evaluation.md)
+observes preserved uncertainty and records a source-coverage grading correction.
+Explicitly bounded estimates and honest compiled-only fallback still need testing.
 Real hosted roles, supported platform packages,
 automatic plugin activation, actual human inspection effort and an employee pilot
 remain open. One chain demonstrates feasibility; it proves no accuracy or

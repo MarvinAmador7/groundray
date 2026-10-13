@@ -28,8 +28,9 @@ Claude Code the same workflow for finding, citing, and updating that knowledge.
 The [employee handoff demonstration](docs/groundray-employee-handoff.md) preserves
 original evidence through publication and sync. [Fresh-agent trials](docs/groundray-agent-cli-handoff.md)
 exposed inspection gaps, then exercised pinned candidate-source retrieval and ten
-working reader evidence targets. Source wording and compiled-evidence attribution
-still need improvement. These additions are unreleased.
+working reader evidence targets. The [Lite refinement](docs/groundray-uncertainty-evaluation.md)
+observes preserved forecast uncertainty and corrects an invoice evidence-grading
+mistake with the actual supporting passage. These additions are unreleased.
 
 ## Install
 

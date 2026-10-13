@@ -1,0 +1,362 @@
+{
+  "suite": "groundray-agent-cli-handoff-v1",
+  "synthetic": true,
+  "design": "One sequential chain with three fresh foreground chat agents; explicit Lite + bundled engine skill use.",
+  "baseline_engine_commit": "c22946ca663872d2da369bb329be13dae232e3da",
+  "actual_agent_sessions": 3,
+  "human_participants": 0,
+  "independent_end_to_end_replications": 1,
+  "model": "inherited/unknown",
+  "automatic_skill_activation_tested": false,
+  "participant_response_repairs": 0,
+  "participant_replacements": 0,
+  "selective_reruns": 0,
+  "roles": {
+    "author": {
+      "shell_commands": 73,
+      "shell_nonzero_exits": 0,
+      "cli_commands": 85,
+      "cli_nonzero_exits": 0,
+      "answer_words": 564,
+      "distinct_returned_source_paths": 21,
+      "answer_matches_recorded_final": true,
+      "protected_inputs_unchanged": true,
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 266.472023925,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      }
+    },
+    "reviewer": {
+      "shell_commands": 10,
+      "shell_nonzero_exits": 1,
+      "cli_commands": 22,
+      "cli_nonzero_exits": 0,
+      "answer_words": 566,
+      "distinct_returned_source_paths": 8,
+      "answer_matches_recorded_final": true,
+      "protected_inputs_unchanged": true,
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 161.932178616,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      }
+    },
+    "reader": {
+      "shell_commands": 30,
+      "shell_nonzero_exits": 1,
+      "cli_commands": 28,
+      "cli_nonzero_exits": 1,
+      "answer_words": 643,
+      "distinct_returned_source_paths": 13,
+      "answer_matches_recorded_final": true,
+      "protected_inputs_unchanged": true,
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 127.553582595,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      }
+    }
+  },
+  "preservation": {
+    "original_capture_count": 21,
+    "original_capture_hashes": {
+      "knowledge/references/captures/docs/02-rate-card.md.txt": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+      "knowledge/references/captures/ops/2026-11-06-staffing.txt": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+      "knowledge/references/captures/tables/09-ledger.csv": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032",
+      "knowledge/references/captures/tables/ledger-reconciled.csv": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+      "knowledge/references/captures/tables/10-invoices.csv": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642",
+      "knowledge/references/captures/mail/14-client.txt": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+      "knowledge/references/captures/mail/01-context.txt": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501",
+      "knowledge/references/captures/mail/2026-11-06-lumen.txt": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+      "knowledge/references/captures/chat/16-plan.txt": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+      "knowledge/references/captures/chat/03-sales.txt": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556",
+      "knowledge/references/captures/chat/07-exception.txt": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+      "knowledge/references/captures/contracts/06-lumen.txt": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27",
+      "knowledge/references/captures/notes/04-team.md.txt": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c",
+      "knowledge/references/captures/notes/13-close-query.md.txt": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687",
+      "knowledge/references/captures/notes/18-feedback.md.txt": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e",
+      "knowledge/references/captures/notes/05-board.md.txt": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1",
+      "knowledge/references/captures/notes/2026-11-06-summary.md.txt": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+      "knowledge/references/captures/qa/2026-11-06.txt": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+      "knowledge/references/captures/tickets/15-project.txt": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+      "knowledge/references/captures/owner/definitions-and-authority.md.txt": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+      "knowledge/references/captures/owner/2026-11-02-correction.md.txt": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+    },
+    "all_original_captures_unchanged": true,
+    "unchanged_capture_checks": {
+      "knowledge/references/captures/docs/02-rate-card.md.txt": true,
+      "knowledge/references/captures/ops/2026-11-06-staffing.txt": true,
+      "knowledge/references/captures/tables/09-ledger.csv": true,
+      "knowledge/references/captures/tables/ledger-reconciled.csv": true,
+      "knowledge/references/captures/tables/10-invoices.csv": true,
+      "knowledge/references/captures/mail/14-client.txt": true,
+      "knowledge/references/captures/mail/01-context.txt": true,
+      "knowledge/references/captures/mail/2026-11-06-lumen.txt": true,
+      "knowledge/references/captures/chat/16-plan.txt": true,
+      "knowledge/references/captures/chat/03-sales.txt": true,
+      "knowledge/references/captures/chat/07-exception.txt": true,
+      "knowledge/references/captures/contracts/06-lumen.txt": true,
+      "knowledge/references/captures/notes/04-team.md.txt": true,
+      "knowledge/references/captures/notes/13-close-query.md.txt": true,
+      "knowledge/references/captures/notes/18-feedback.md.txt": true,
+      "knowledge/references/captures/notes/05-board.md.txt": true,
+      "knowledge/references/captures/notes/2026-11-06-summary.md.txt": true,
+      "knowledge/references/captures/qa/2026-11-06.txt": true,
+      "knowledge/references/captures/tickets/15-project.txt": true,
+      "knowledge/references/captures/owner/definitions-and-authority.md.txt": true,
+      "knowledge/references/captures/owner/2026-11-02-correction.md.txt": true
+    },
+    "new_source_captures": [
+      {
+        "path": "knowledge/references/captures/qa/2026-11-09.txt",
+        "receipt_sha256_matches": true,
+        "receipt_bytes_match": true,
+        "capture_actor": "openai/codex"
+      }
+    ],
+    "launch_id_preserved": true,
+    "launch_created_at_preserved": true,
+    "launch_generated_by": "openai/codex",
+    "human_verification_added": false,
+    "launch_status": "draft",
+    "unrelated_pages_unchanged": {
+      "knowledge/wiki/lumen-commercial.md": true,
+      "knowledge/wiki/lumen-margin.md": true
+    },
+    "old_launch_blob_retained": true,
+    "author_symlinks": [],
+    "validation": {
+      "bundle": "knowledge",
+      "as_of": "2026-10-13",
+      "concept_count": 3,
+      "okf_v0_2": "pass",
+      "core_kb_0_1": "pass",
+      "findings": []
+    }
+  },
+  "manual_business_review": {
+    "author": {
+      "terms": {
+        "judgment": "supported",
+        "quote": "October\u2013December managed production retainer remains **USD 80/hour**",
+        "basis": "Inspected supplied owner authorization, forwarded exception, rate and contract context."
+      },
+      "metric": {
+        "judgment": "supported",
+        "quote": "(USD 4,000 recognized fees \u2212 USD 1,500 posted direct production costs) / USD 4,000 = 62.5%",
+        "basis": "Inspected definition, reconciled inputs, correction and invoice records; kept project scope and historical50%."
+      },
+      "acceptance": {
+        "judgment": "supported",
+        "quote": "B2 design is approved; launch still requires accessibility checks, publication, and your acceptance",
+        "basis": "Preserved provided design approval and separate final acceptance requirements."
+      },
+      "forecast": {
+        "judgment": "qualified",
+        "quote": "November 19 + three remediation days gives November 22 conditionally, not an approved launch date",
+        "basis": "Calendar-day arithmetic is conditional, not a completion forecast including publication/client acceptance."
+      },
+      "authority_scope": {
+        "judgment": "supported",
+        "quote": "Rui internal staffing authority; the shift proposal is not an executed allocation",
+        "basis": "Supplied delegation and staffing record; Tint independent; copied summaries one origin chain."
+      },
+      "qualification": "The statement that85% has no accountant calculation should be read within the inspected packet, not as proof that no outside record exists."
+    },
+    "reviewer": {
+      "draft_publication": {
+        "judgment": "supported",
+        "quote": "publication as **internal draft company knowledge** by an authorized publisher",
+        "basis": "Recommendation explicitly separate from permission and company approval; exact candidate/base declared."
+      },
+      "changed_evidence": {
+        "judgment": "supported",
+        "quote": "Neither forecast establishes publication or launch acceptance",
+        "basis": "Candidate patch and base originals inspected; reconstructed candidate; CRLF restoration matched536byte receipt/SHA."
+      },
+      "inspection_limit": {
+        "judgment": "qualified",
+        "quote": "first reconstruction byte check failed because it used LF endings",
+        "basis": "Recovery verifies matching reconstructed bytes; diff reconstruction was unnecessary interface work, not source corruption."
+      },
+      "readability": "Reviewer observed duplicate log text; the original generated log is preserved, not repaired for evaluation."
+    },
+    "reader": {
+      "terms": {
+        "judgment": "supported",
+        "quote": "October\u2013December managed production retainer remains **USD 80/hour**; ad-hoc production remains **USD 120/hour**",
+        "basis": "Read owner, forwarded exception and rate originals at synced pin."
+      },
+      "metric": {
+        "judgment": "qualified",
+        "quote": "MS,Lumen,2026-10,4000,1500,USD",
+        "basis": "Main62.5% calculation backed by directly read ledger/correction/definition. Invoice I71 gross4500/tax500 came from compiled margin page; original invoice export was not retrieved in this session. Do not count that detail as direct original inspection."
+      },
+      "acceptance": {
+        "judgment": "supported",
+        "quote": "B2 approval is valid **design approval**",
+        "basis": "Read both client messages and supplied delivery definition; did not infer final launch acceptance."
+      },
+      "forecast": {
+        "judgment": "qualified",
+        "quote": "**November 22**, a conditional remediation estimate, not a publication or accepted launch date",
+        "basis": "Correctly updatedNov19/possible3days; excludes publication/acceptance and any approved replacement date."
+      },
+      "authority_scope": {
+        "judgment": "supported",
+        "quote": "Do not transfer Lumen\u2019s accessibility delay to Tint",
+        "basis": "Read project dependency, current/prior QA and staffing records; actor authority retained."
+      },
+      "evidence_links": {
+        "judgment": "failed",
+        "absolute_targets": 13,
+        "resolvable_targets": 0,
+        "basis": "Every source file target omitted knowledge/ between checkout and bundle-relative source path. Unedited answer retained."
+      }
+    }
+  },
+  "manual_review_design": "Root unblinded evidence assessment after outputs, using a frozen review contract; not human or independent expert adjudication. No semantic accuracy score.",
+  "observed_failures": [
+    "Reviewer LF-only reconstruction did not match retained CRLF receipt; recovered within original session.",
+    "Reader query refused stale keyword index after explicit sync; rebuilt and recovered within original session.",
+    "Reader13/13 local source links unresolved because source paths were treated as checkout-relative.",
+    "Reader invoice/tax detail was compiled-page evidence, not a retrieved original export."
+  ],
+  "post_trial_changes": [
+    "Added exact-commit brain review-source using existing source/path/receipt validation, without activating proposal.",
+    "Installed source get returns correct local_path; candidate view returnsnull so disposable paths do not leak.",
+    "Bundled skill now instructs exact local path use and original passage inspection for consequential source-specific details."
+  ],
+  "post_trial_validation": {
+    "mechanical_candidate_probe": {
+      "scope": "Post-trial mechanical probe on a separate copied synthetic remote; original trials not rerun or edited.",
+      "source_bytes": 536,
+      "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+      "candidate_commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+      "installed_commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+      "exact_crlf_bytes": true,
+      "original_trial_remote_unchanged": true,
+      "installed_pin_unchanged": true,
+      "disposable_path_exposed": false,
+      "command_count": 3
+    },
+    "full_local_suite": {
+      "passed": 566,
+      "skipped": 1,
+      "coverage_percent": 86.8,
+      "note": "Optional real-QMD skipped; real native sidecar used. Collected before the final JSON-exposure test."
+    },
+    "final_focused_suite": {
+      "passed": 13,
+      "deselected": 31,
+      "note": "Final source/skill/observer checks; counts overlap with full suite."
+    },
+    "local_documentation_links": 81
+  },
+  "new_interface_agent_validation": "Not run; the original three participants used the frozen baseline CLI/skills.",
+  "git_host_check": {
+    "recorded_at": "2026-10-13T00:53:06.168Z",
+    "repository": "MarvinAmador7/portable-kb",
+    "repository_kind": "Product code repository, not a company-brain test remote",
+    "metadata_permissions": {
+      "admin": true,
+      "push": true,
+      "pull": true
+    },
+    "main_branch_metadata_protected": false,
+    "protection_details": {
+      "http_status": 403,
+      "message": "Resource not accessible by integration"
+    },
+    "collaborator_details": "Connector endpoint restriction; permission API not fetched.",
+    "distinct_ready_employee_identities": 0,
+    "negative_employee_push_tests": 0,
+    "actual_host_role_separation_tested": false
+  },
+  "limits": [
+    "One Linux host, three configs and one Git identity; no separate employee credentials or actual protected-branch enforcement.",
+    "No plugin packaging, automatic activation, source-authenticity certification or human inspection/work-effort measurement.",
+    "No comparison with plain wiki or accuracy/productivity advantage inferred."
+  ],
+  "source_reference_map": {
+    "brain.yaml": "65ca3f5fa79cc7b5ce7919b966fa7e23a9030d7c32df848c019edb073c07d5d8",
+    "knowledge/.core-kb.yaml": "133c37056a81bf934cb6446562a83b6e2df42cecd42494020cb5b52daeed2609",
+    "knowledge/index.md": "1d76a4b06ee543f9c5db57b6bd0cd39438efcc5f36fe11bfe3e177079cde118e",
+    "knowledge/log.md": "331f7218c9e31ae45d06451ee5882edfbfdcfaf86356e7743493afb49da4720a",
+    "knowledge/references/captures/.gitattributes": "ece797f716e9be49128549fe7e26f19cb04bd65dd20bcb3ae3b07910c38542c4",
+    "knowledge/references/captures/chat/03-sales.txt": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556",
+    "knowledge/references/captures/chat/03-sales.txt.capture.json": "d29795580e25ac45d12a530684402e56f641e046339becb7f18eff8808439100",
+    "knowledge/references/captures/chat/07-exception.txt": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+    "knowledge/references/captures/chat/07-exception.txt.capture.json": "bf91b609365beebff8c528dd53eb46879b6f6cdff2aad7cd191c7a62c0fbf080",
+    "knowledge/references/captures/chat/16-plan.txt": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+    "knowledge/references/captures/chat/16-plan.txt.capture.json": "5093ca153c07d61ab8a7a195f28c34e0bfab6dcda7ba98d59a2544969fe3aff1",
+    "knowledge/references/captures/contracts/06-lumen.txt": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27",
+    "knowledge/references/captures/contracts/06-lumen.txt.capture.json": "054b369649cca9f4b3b6a12cac099d43716f66104abcfa4505dc626db0d99957",
+    "knowledge/references/captures/docs/02-rate-card.md.txt": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+    "knowledge/references/captures/docs/02-rate-card.md.txt.capture.json": "148dbc456eade9679a61b913389f82657192debed5f7a4de9ea2621d0977937e",
+    "knowledge/references/captures/mail/01-context.txt": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501",
+    "knowledge/references/captures/mail/01-context.txt.capture.json": "ef2b68b6f90256fa458a882badbe4a597c6423f150ac5427ddc882fb667b7fc6",
+    "knowledge/references/captures/mail/14-client.txt": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+    "knowledge/references/captures/mail/14-client.txt.capture.json": "ee95ec3fd5b2d4a0d44cc2f25bf7fff12166d35a5823c74f42f0b4f7296078ed",
+    "knowledge/references/captures/mail/2026-11-06-lumen.txt": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+    "knowledge/references/captures/mail/2026-11-06-lumen.txt.capture.json": "7f521128ee87f0bc798411429e1b906617d2c89e3711e200d459837b04509fdd",
+    "knowledge/references/captures/notes/04-team.md.txt": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c",
+    "knowledge/references/captures/notes/04-team.md.txt.capture.json": "03fdd72848be81774cd133dc58c6eff99998805f165890af4cc81e968e6b4880",
+    "knowledge/references/captures/notes/05-board.md.txt": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1",
+    "knowledge/references/captures/notes/05-board.md.txt.capture.json": "645d313f5cff7048e70bafef6087f3fe3d636335c903bf4efdd01f31c72c5890",
+    "knowledge/references/captures/notes/13-close-query.md.txt": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687",
+    "knowledge/references/captures/notes/13-close-query.md.txt.capture.json": "cca94974374b36225dcafee58ad1eacb8af2ee190feae7724667dc07355db501",
+    "knowledge/references/captures/notes/18-feedback.md.txt": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e",
+    "knowledge/references/captures/notes/18-feedback.md.txt.capture.json": "2e3565d1cc818a5d8c6adf32c1bc380b6f649a7f1a86d5237ac3493de611e875",
+    "knowledge/references/captures/notes/2026-11-06-summary.md.txt": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+    "knowledge/references/captures/notes/2026-11-06-summary.md.txt.capture.json": "e74bb220e63a02e72311f0ec75fe131a3888f27fd98f5d2ae773e65c54965df3",
+    "knowledge/references/captures/ops/2026-11-06-staffing.txt": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+    "knowledge/references/captures/ops/2026-11-06-staffing.txt.capture.json": "048bea878278ec9a12731bfb2e03b73aaa92bf50fc68531fd19fd5c1f7e870cc",
+    "knowledge/references/captures/owner/2026-11-02-correction.md.txt": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+    "knowledge/references/captures/owner/2026-11-02-correction.md.txt.capture.json": "a868568947a49ec6095075311af12747a8b25e31aca8dcf9f75e0df4f7655c2a",
+    "knowledge/references/captures/owner/definitions-and-authority.md.txt": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+    "knowledge/references/captures/owner/definitions-and-authority.md.txt.capture.json": "550d95a01ef692685ad29f2bc68ac64a64065b3960c915c8e280adf807fbac9e",
+    "knowledge/references/captures/qa/2026-11-06.txt": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+    "knowledge/references/captures/qa/2026-11-06.txt.capture.json": "9441a692c01799f91f1f64d86f0b7274ff05f714467bad69ff901182f6950228",
+    "knowledge/references/captures/tables/09-ledger.csv": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032",
+    "knowledge/references/captures/tables/09-ledger.csv.capture.json": "77256321f47a633f254bf4cc57dde79c9a88bbb78c702c9e042cebf31b3fbcd8",
+    "knowledge/references/captures/tables/10-invoices.csv": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642",
+    "knowledge/references/captures/tables/10-invoices.csv.capture.json": "8f701e5c1d63db49bd1052aef894e47a237814cc979f00047d2252c7d3cc6dc3",
+    "knowledge/references/captures/tables/ledger-reconciled.csv": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+    "knowledge/references/captures/tables/ledger-reconciled.csv.capture.json": "bd1bab1b4f3b60eac785ed1296eaf46dac4863447c40d20968b17fa5663d9564",
+    "knowledge/references/captures/tickets/15-project.txt": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+    "knowledge/references/captures/tickets/15-project.txt.capture.json": "eddc3c45de9e53042762b0bc79a29fcb58272712575f12c85a8d995f85014c31",
+    "knowledge/wiki/index.md": "fff33507d25b7c274786987354ebd44c63cbaf79fa386e0a071d109064240c6f",
+    "knowledge/wiki/lumen-commercial.md": "2185e4e1b11d04f7b8d1ea60767bbb65c2891504ad9c3d3f5cd36c965d7afcc5",
+    "knowledge/wiki/lumen-launch.md": "0e54c81374bed42d0180d31697bc60c2987665cafc673ec07463d88adabd7b3e",
+    "knowledge/wiki/lumen-margin.md": "b945046317f7c11624de244e40933f4ee96bb810d09569042e6007217f14f76b"
+  },
+  "current_code_sha256": {
+    "src/portable_kb/cli.py": "015fa82080eaf3ba04cd6f8ecb517045e12eff52b8bc01c54369af8a78e3f230",
+    "src/portable_kb/collaboration.py": "1087360a0c8d8975b09c5017197479782e8d0411f39856b6c1d60462e3f04e49",
+    "src/portable_kb/sources.py": "9589c93736711898ff42bd469f7117633193dcf3e4a566638924ea70f8bac9c4",
+    "evals/groundray/agent_handoff.py": "0a9a1dd9b068d1395156de996749a4eeb010b35caca79742637bdc32d3480aad",
+    "evals/groundray/agent_handoff_audit.py": "a62a1933f71b5d2490010872184724cba72607f12d58149a30619a2b71bc37f2"
+  },
+  "current_skill_sha256": {
+    ".agents/skills/portable-kb/SKILL.md": "0330a6391869e35f1c9c517d00b24b9eef7aca8320562e884cc64a6b37839614",
+    ".agents/skills/portable-kb/references/collaboration.md": "d8632d40732b36ff64976e364adb376f7e756854f74efeb2965d74aba8bb470e",
+    ".agents/skills/portable-kb/references/sources.md": "9347f4459e78e46ac52dc971704b5ced2da5b6cb8e9794fcfbd94c0b1abfd5ee"
+  }
+}

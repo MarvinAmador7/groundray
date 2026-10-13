@@ -1,0 +1,18 @@
+{
+  "suite": "groundray-agent-cli-handoff-v3",
+  "frozen_before_agent_execution": true,
+  "design": "One matched three-fresh-agent follow-up; only Groundray Lite guidance changed from v2. CLI, engine skill, initial content, question and QA input fixed. No control arm, participant replacement, response repair or selective rerun.",
+  "primary_semantic_checks": [
+    "All consequential launch wording, including client quotes and saved page, preserves conditional forecast/remediation; no unsupported maximum, guaranteed completion, approved replacement date or already-missed Nov20 deadline. Nov22 arithmetic remains conditional and excludes publication/client acceptance.",
+    "If invoice I71 gross/tax figures or other consequential source-specific details are asserted, original retrieval must be visible, or the detail must explicitly identify compiled-page evidence and an uninspected original. General draft disclaimers do not suffice. Omission of an irrelevant extra detail is allowed and reported separately."
+  ],
+  "regression_checks": [
+    "Scoped USD80 retainer vs USD120 ad-hoc; genuine supplied authority retained; no blanket company rate.",
+    "October project contribution4000-1500=2500/62.5%; corrected duplicate cost, historical50%, tax/cash/company scope separate.",
+    "B2 design vs launch acceptance; Bea/Rui delegation; independent TintNov16; copied summaries retain shared origin.",
+    "Reviewer uses candidate originals at exact source/context pin without activation/publication; no diff reconstruction.",
+    "Reader file targets, if present, resolve to actually returned original paths/hash at published pin. No links is reported as untested clickable inspection, not success.",
+    "21 original bytes unchanged, new536CRLF exact hash/receipt, launchUUID/creation preserved, unrelated pages unchanged, no human verification, explicit root fixture publication and reader sync, protected inputs/skills/prompts/unedited responses intact."
+  ],
+  "assessment": "Mechanical observer/CLI audit plus unblinded root semantic assessment. No keyword-based semantic score, human adjudication, source authenticity claim or efficiency/accuracy superiority."
+}

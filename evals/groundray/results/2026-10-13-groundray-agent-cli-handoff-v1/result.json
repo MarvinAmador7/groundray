@@ -154,12 +154,12 @@
     "author": {
       "terms": {
         "judgment": "supported",
-        "quote": "October\u2013December managed production retainer remains **USD 80/hour**",
+        "quote": "October–December managed production retainer remains **USD 80/hour**",
         "basis": "Inspected supplied owner authorization, forwarded exception, rate and contract context."
       },
       "metric": {
         "judgment": "supported",
-        "quote": "(USD 4,000 recognized fees \u2212 USD 1,500 posted direct production costs) / USD 4,000 = 62.5%",
+        "quote": "(USD 4,000 recognized fees − USD 1,500 posted direct production costs) / USD 4,000 = 62.5%",
         "basis": "Inspected definition, reconciled inputs, correction and invoice records; kept project scope and historical50%."
       },
       "acceptance": {
@@ -200,13 +200,13 @@
     "reader": {
       "terms": {
         "judgment": "supported",
-        "quote": "October\u2013December managed production retainer remains **USD 80/hour**; ad-hoc production remains **USD 120/hour**",
+        "quote": "October–December managed production retainer remains **USD 80/hour**; ad-hoc production remains **USD 120/hour**",
         "basis": "Read owner, forwarded exception and rate originals at synced pin."
       },
       "metric": {
-        "judgment": "qualified",
+        "judgment": "supported by inspected owner/correction/ledger records",
         "quote": "MS,Lumen,2026-10,4000,1500,USD",
-        "basis": "Main62.5% calculation backed by directly read ledger/correction/definition. Invoice I71 gross4500/tax500 came from compiled margin page; original invoice export was not retrieved in this session. Do not count that detail as direct original inspection."
+        "basis": "The invoice export was not retrieved, but the inspected November2 owner correction explicitly supplies I71 gross4500/tax500/net4000. Main62.5% calculation also uses inspected definition, correction and reconciled CSV. Do not claim independent invoice-export inspection."
       },
       "acceptance": {
         "judgment": "supported",
@@ -220,7 +220,7 @@
       },
       "authority_scope": {
         "judgment": "supported",
-        "quote": "Do not transfer Lumen\u2019s accessibility delay to Tint",
+        "quote": "Do not transfer Lumen’s accessibility delay to Tint",
         "basis": "Read project dependency, current/prior QA and staffing records; actor authority retained."
       },
       "evidence_links": {
@@ -235,8 +235,7 @@
   "observed_failures": [
     "Reviewer LF-only reconstruction did not match retained CRLF receipt; recovered within original session.",
     "Reader query refused stale keyword index after explicit sync; rebuilt and recovered within original session.",
-    "Reader13/13 local source links unresolved because source paths were treated as checkout-relative.",
-    "Reader invoice/tax detail was compiled-page evidence, not a retrieved original export."
+    "Reader13/13 local source links unresolved because source paths were treated as checkout-relative."
   ],
   "post_trial_changes": [
     "Added exact-commit brain review-source using existing source/path/receipt validation, without activating proposal.",
@@ -358,5 +357,17 @@
     ".agents/skills/portable-kb/SKILL.md": "0330a6391869e35f1c9c517d00b24b9eef7aca8320562e884cc64a6b37839614",
     ".agents/skills/portable-kb/references/collaboration.md": "d8632d40732b36ff64976e364adb376f7e756854f74efeb2965d74aba8bb470e",
     ".agents/skills/portable-kb/references/sources.md": "9347f4459e78e46ac52dc971704b5ced2da5b6cb8e9794fcfbd94c0b1abfd5ee"
+  },
+  "grading_correction": {
+    "corrected_at": "2026-10-13",
+    "scope": "Root grading only; participant outputs/CLI traces/contract and mechanical audit unchanged.",
+    "withdrawn_finding": "Invoice gross/tax assertion was incorrectly classified as uninspected compiled-only evidence because the invoice export was not retrieved.",
+    "supporting_path": "references/captures/owner/2026-11-02-correction.md.txt",
+    "supporting_sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+    "supporting_commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+    "supporting_passage": "Invoice I-71 gross 4,500 includes tax 500; recognized fees remain 4,000.",
+    "complete_supporting_body_in_observer_output": true,
+    "corrected_assessment": "Figures directly supported by the inspected supplied fictional owner correction. Invoice CSV itself was not read; no independent invoice-export inspection or authenticity is established.",
+    "method": "Assess all actually inspected source passages, rather than requiring one predetermined filename. Original grading preserved in grading-before-correction.json."
   }
 }

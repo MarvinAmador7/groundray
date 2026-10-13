@@ -1,0 +1,7 @@
+{
+  "base": "20f5664ea668f2cf34531c2ba5ecd399cdcd6b0d",
+  "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+  "proposal": "lumen-qa-2026-11-09",
+  "proposal_ref": "refs/heads/groundray/lumen-qa-2026-11-09",
+  "recommendation": "Review the evidence-preserving draft and obtain Bea's scoped business decisions; do not publish main automatically."
+}

@@ -11,11 +11,14 @@ That mode captures originals through CLI plans/applies, checks direct receipt-ba
 reads and follows item source IDs with `pkb source get`. The earlier development
 mode and recorded traces remain available; neither mode runs a fresh model.
 
-The [fresh-agent CLI handoff](../../docs/groundray-agent-cli-handoff.md) records two
+The [fresh-agent CLI handoff](../../docs/groundray-agent-cli-handoff.md) records
 three-role chains using the real CLI, isolated bare remotes and frozen Lite/engine
 skills. Original errors/broken links remain unchanged; the matched follow-up used
 candidate-source retrieval and ten working reader targets while exposing source
-wording and compiled-evidence attribution qualifications. `agent_handoff prepare` stages cases without
+wording qualifications. The [semantic follow-up](../../docs/groundray-uncertainty-evaluation.md)
+adds a three-role chain and separate reader case; it also preserves/corrects an
+erroneous invoice grading after inspecting the actual supporting owner passage.
+`agent_handoff prepare` stages cases without
 launching models; `agent_handoff_audit` reports mechanical integrity and exposure,
 not semantic accuracy or host permission enforcement.
 

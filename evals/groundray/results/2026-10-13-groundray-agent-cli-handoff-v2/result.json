@@ -212,15 +212,14 @@
       "basis": "Same unsupported upper bound. ConditionalNov22 arithmetic elsewhere does not repair the suggested wording."
     },
     "reader_invoice_qualification": {
-      "judgment": "compiled evidence; direct-original attribution remains insufficient",
+      "judgment": "supported by inspected owner correction; original invoice export not inspected",
       "quote": "Invoice I-71’s USD 4,500 gross includes USD 500 tax",
-      "basis": "Compiled margin page retrieved; original references/captures/tables/10-invoices.csv available but not retrieved. Answer does not explicitly attribute this detail to compiled draft."
+      "basis": "Actual owner correction contains the invoice gross/tax figures and complete body was in recorded output. The earlier summary-only classification is withdrawn; invoice CSV remains unread."
     },
     "reviewer_draft_recommendation": "Inspected saved candidate and all seven launch originals; recommended internal draft publication with explicit publisher authorization, separately from human/business approval."
   },
   "observed_failures": [
     "Author and reader strengthened may take three days into up to three days in client wording.",
-    "Reader invoice gross/tax detail relies on compiled draft without explicit attribution.",
     "Reader query refused stale index after sync; indexed and recovered in the same session."
   ],
   "limitations": [
@@ -231,10 +230,22 @@
     "Paths match at audit time; mutable local conveniences are not portable archive links on other machines.",
     "Original manifest suite retains reusable harness v1 label; separate frozen contract/result identify this follow-up as v2."
   ],
-  "next_slice": "Preserve uncertainty in client guidance and explicitly attribute compiled-page details vs directly inspected originals; validate with a new frozen experiment. Hosted roles, packaging/platforms and human pilot remain open.",
+  "next_slice": "Preserve uncertainty in suggested client wording; test source-inspection and compiled-attribution guidance without treating an unread particular export as proof that no supporting original was inspected.",
   "final_installed_pins": {
     "author": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
     "reviewer": "f10fb64d93a687896db2588eae80431536154294",
     "reader": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+  },
+  "grading_correction": {
+    "corrected_at": "2026-10-13",
+    "scope": "Root grading only; participant outputs/CLI traces/contract and mechanical audit unchanged.",
+    "withdrawn_finding": "Invoice gross/tax assertion was incorrectly classified as uninspected compiled-only evidence because the invoice export was not retrieved.",
+    "supporting_path": "references/captures/owner/2026-11-02-correction.md.txt",
+    "supporting_sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+    "supporting_commit": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+    "supporting_passage": "Invoice I-71 gross 4,500 includes tax 500; recognized fees remain 4,000.",
+    "complete_supporting_body_in_observer_output": true,
+    "corrected_assessment": "Figures directly supported by the inspected supplied fictional owner correction. Invoice CSV itself was not read; no independent invoice-export inspection or authenticity is established.",
+    "method": "Assess all actually inspected source passages, rather than requiring one predetermined filename. Original grading preserved in grading-before-correction.json."
   }
 }

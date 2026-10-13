@@ -1,0 +1,10 @@
+{
+  "adapter": "recorded-shell-observer",
+  "elapsed_seconds": 311.354559912,
+  "exit_code": 0,
+  "model": "inherited/unknown",
+  "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+  "provider": "chat-host",
+  "runner": "codex-chat-subagent",
+  "timed_out": false
+}

@@ -1,0 +1,9 @@
+{
+  "src/portable_kb/cli.py": "015fa82080eaf3ba04cd6f8ecb517045e12eff52b8bc01c54369af8a78e3f230",
+  "src/portable_kb/collaboration.py": "1087360a0c8d8975b09c5017197479782e8d0411f39856b6c1d60462e3f04e49",
+  "src/portable_kb/sources.py": "9589c93736711898ff42bd469f7117633193dcf3e4a566638924ea70f8bac9c4",
+  ".agents/skills/portable-kb/SKILL.md": "0330a6391869e35f1c9c517d00b24b9eef7aca8320562e884cc64a6b37839614",
+  ".agents/skills/portable-kb/references/collaboration.md": "d8632d40732b36ff64976e364adb376f7e756854f74efeb2965d74aba8bb470e",
+  ".agents/skills/portable-kb/references/sources.md": "9347f4459e78e46ac52dc971704b5ced2da5b6cb8e9794fcfbd94c0b1abfd5ee",
+  ".agents/skills/groundray-lite/SKILL.md": "b190bbcdc32a7d4ec7580cd71c1ecf64857020612110e36b8842b5e7e7c0a3a0"
+}

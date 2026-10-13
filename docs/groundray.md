@@ -16,8 +16,11 @@ Lite agent trial or released plugin integration.
 The [CLI source follow-up](groundray-cli-sources.md) replaces manual fixture copying
 and the development reader with implemented `source capture/get` commands, source
 receipts and byte-preserving Git rules on the draft branch. The bundled Portable KB
-workflow documents these commands; Lite remains unchanged and has not yet been
-evaluated through this integration.
+workflow documents these commands. The [fresh-agent CLI handoffs](groundray-agent-cli-handoff.md)
+exercise Lite through contribution, review and reader sync. The
+[uncertainty and inspection follow-up](groundray-uncertainty-evaluation.md) refines
+client wording and distinguishes directly inspected originals from compiled details,
+preserving failed observations as well as successful ones.
 
 Groundray is a first agent-skill prototype for building and querying a company's
 understanding of its business in an interlinked Markdown wiki. Its working

@@ -28,7 +28,7 @@ reliable sharing and actual employee use, alongside answer quality.
 | Part | Responsibility | Current foundation / remaining work |
 | --- | --- | --- |
 | Plugin | Make the selected company, skill and CLI available to the agent. | Codex/Claude skill installation exists for Portable KB. Groundray plugin packaging and installation lifecycle need implementation. |
-| Skill | Produce answers, evidence and guidance; preserve scoped claims and reasoning during authorized edits. | Full Groundray and the compact candidate exist. Lite has one explicit answer-from-records run. Integration with engine-backed creation and maintenance remains to be tested. |
+| Skill | Produce answers, evidence and guidance; preserve scoped claims and reasoning during authorized edits. | Full Groundray and Lite exist. Three local fresh-agent chains and a separate reader case exercise the CLI; uncertainty refinement is scoped, with generalization and human inspection unmeasured. |
 | CLI | Create/install/select brains, retrieve evidence, inspect state, publish and sync. | Existing `pkb` operations provide a base. A coherent Groundray entry point and compatibility/upgrade behavior need design and implementation. |
 | Infrastructure | Store published company versions, enforce access and support reviewed collaboration. | Git repositories and host permissions provide the first shared layer. Employee contribution/review/distribution flows need end-to-end validation. |
 
@@ -68,7 +68,7 @@ include it. No universal platform support is assumed.
 | Milestone | Deliverable and exit condition | Status |
 | --- | --- | --- |
 | G0 — Storage and interface fit | Specify how company wiki prose, source bytes, definitions and authority records use the current validated bundle and retrieval/mutation interfaces. Demonstrate one usable company brain with portable evidence links. Resolve any needed adapter explicitly. | CLI source/proposal and fresh Lite chains exercised; candidate inspection and reader paths observed in one follow-up |
-| G1 — Two-employee workflow | Run the acceptance scenario below using isolated employee installations and a shared test remote. Record versions, saved-state integrity, proposal/review flow and refusal states. | Two local fresh-agent chains; uncertainty/attribution qualifications and host/platform/human gates remain |
+| G1 — Two-employee workflow | Run the acceptance scenario below using isolated employee installations and a shared test remote. Record versions, saved-state integrity, proposal/review flow and refusal states. | Three local fresh-agent chains and a separate reader; uncertainty refinement observed, with host/platform/human and generalization gates open |
 | G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Planned |
 | G3 — Employee pilot | Validate packaged behavior on supported platforms and have people inspect answers and contribute a reviewed change. Record decisions, source inspections, effort and failures separately. | Planned |
 
@@ -92,11 +92,13 @@ profile change. The chosen opaque `.md.txt` convention separates raw Markdown fr
 concept discovery. The [employee handoff follow-up](groundray-employee-handoff.md) now exercises
 remote-installed authoring attachment, commit-pinned proposals/review/publication
 and explicit reader sync through a local bare Git remote. The [fresh-agent follow-up](groundray-agent-cli-handoff.md) now exercises Lite
-through two CLI contribution/review/sync chains. The first exposed candidate-source
+through CLI contribution/review/sync chains. The first exposed candidate-source
 inspection overhead and broken reader file links. The follow-up used exact candidate
 retrieval and ten working original-source targets, while retaining unsupported
-“up to three days” client wording and a compiled invoice detail without sufficient
-attribution. This is scoped agent validation, not proof of accuracy superiority.
+“up to three days” client wording. The [semantic follow-up](groundray-uncertainty-evaluation.md)
+refines Lite and observes conditional wording in new agents. An invoice attribution
+finding was withdrawn: the readers inspected an owner record containing the figures;
+the initial grading remains preserved. This is scoped validation, not accuracy superiority.
 Real host permissions
 and separate-computer packaging remain to be tested;
 no release or full G1 completion is claimed.

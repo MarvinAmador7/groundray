@@ -53,3 +53,9 @@ unchanged skill directly on the source packet, with no prepared answer. Its
 unedited response, source reads/citations and input-integrity checks are available
 for inspection. This is one explicit answer-workflow execution, not a comparative
 accuracy result or measured owner benefit.
+
+The [CLI handoff](../groundray-agent-cli-handoff.md) later exercised contribution,
+review and reader sync. The [uncertainty/inspection refinement](../groundray-uncertainty-evaluation.md)
+adds general guidance for conditional wording and a final check of actually
+inspected records. The original 458-word runs and their outputs remain unchanged;
+the revised skill is a separate candidate, without a measured human benefit.

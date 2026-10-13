@@ -1,0 +1,96 @@
+{
+  "suite": "groundray-lite-inspection-check-v1",
+  "synthetic": true,
+  "candidate_commit": "30f066cd2401643a02210e2610823a7ac60ca400",
+  "lite_words": 585,
+  "design": "One separate adaptive fresh-reader follow-up; same exact published brain/old installed base/question as v3, only Lite final claim check changed. Motivating invoice grading finding was later withdrawn after inspecting all actual source passages.",
+  "actual_agent_sessions": 1,
+  "separate_astra_textual_review_sessions": 1,
+  "human_participants": 0,
+  "participant_response_repairs": 0,
+  "participant_replacements": 0,
+  "unchanged_candidate_retries": 0,
+  "model": "inherited/unknown; separate textual review explicitly gpt-6-astra",
+  "role": {
+    "shell_commands": 10,
+    "shell_nonzero_exits": 1,
+    "cli_commands": 26,
+    "cli_nonzero_exits": 1,
+    "answer_words": 716,
+    "distinct_returned_source_paths": 11,
+    "runner": {
+      "adapter": "recorded-shell-observer",
+      "elapsed_seconds": 168.851875367,
+      "exit_code": 0,
+      "model": "inherited/unknown",
+      "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+      "provider": "chat-host",
+      "runner": "codex-chat-subagent",
+      "timed_out": false
+    },
+    "answer_matches_recorded_final": true,
+    "protected_inputs_unchanged": true
+  },
+  "archive_sha256": {
+    "reader/answer.md": "2d20f3c84b67468975c6d46294bc517e624744d7e72dcf02d83cd57a7e4e7872",
+    "reader/prompt.txt": "74046f47ed3b54df2923c67241de94a3ef9853dc8fc3e713c78fa53f52aae322",
+    "reader/events.jsonl": "c9de87eb5a0643fff7c0927c08226a8c78e34b1ba4a665a7e5fa3d40f29b60a9",
+    "reader/runner.json": "15913427db7ef16a2aabc7d0ed0ccaad9b89271b3a564e839db0e20a4134a89c",
+    "reader/final.json": "3405dddad21779db3d0dd11c1164dbb166be6b815bce126972e55cdb5ff54889",
+    "reader/cli-trace.jsonl": "e57ddae7b29938028ceac2ee8f556ec8bea5da0d70c91560a4f6c9d2ebb983ab"
+  },
+  "inspection_results": {
+    "local_file_targets": 14,
+    "resolvable_targets": 14,
+    "original_targets_matching_returned_path_and_hash": 11,
+    "other_targets": "Three retrieved compiled wiki pages, not originals.",
+    "original_invoice_export_retrieved": false,
+    "supporting_owner_correction_retrieved": {
+      "path": "references/captures/owner/2026-11-02-correction.md.txt",
+      "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+      "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+      "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+      "command": [
+        "source",
+        "get"
+      ],
+      "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+      "inspection": null,
+      "complete_body_in_observer_output": true
+    }
+  },
+  "manual_assessment": {
+    "uncertainty": "Supported: client quote/analysis preserve may take three more days; Nov22 illustrative, no maximum/promise/missed deadline.",
+    "invoice_numbers": "Supported by an inspected original owner correction, which expressly states gross4500/tax500/net4000. Original invoice export not read; do not claim independent invoice-export inspection.",
+    "scoped_business_facets": "80/120 retainer/ad-hoc,62.5%/2500October contribution/exclusions, B2 vs acceptance, Bea/Rui and Tint scope supported.",
+    "inspection_statement": "Inspected sources enumerated below the answer match observed originals; no original invoice-export read is claimed."
+  },
+  "grading_correction": {
+    "root_error": "Initially treated missing invoice-export retrieval as evidence of uninspected summary-only numbers.",
+    "supporting_passage": "Invoice I-71 gross 4,500 includes tax 500; recognized fees remain 4,000.",
+    "supporting_path": "references/captures/owner/2026-11-02-correction.md.txt",
+    "supporting_sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+    "basis": "Assess every actually inspected supporting passage before declaring a coverage gap; multiple records can support one assertion. This is a supplied fictional owner report, not proof of source authenticity."
+  },
+  "preservation": {
+    "installed_knowledge_matches_exact_published_v3_brain": true,
+    "published_pin": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+    "original_v3_remote_unchanged": true,
+    "no_knowledge_mutation_commands": true
+  },
+  "frozen_checks": {
+    "production_skills_unchanged": true,
+    "prompt_unchanged": true,
+    "reader_prompt_identical_to_v3": true
+  },
+  "observed_errors": [
+    "Expected stale-index refusal after explicit sync; rebuilt and recovered in this original session."
+  ],
+  "limitations": [
+    "One adaptive reader case, not a causal comparison, general accuracy result or human inspection benefit.",
+    "The original-only evidence path was used; honest compiled-only fallback was not exercised.",
+    "One Linux host/Git identity; explicit skills and protocol isolation, no package/host role/automatic activation proof.",
+    "The 585-word candidate was tested read-only, not in a new full authoring chain.",
+    "Local paths/hash checks apply at audit time; source exposure does not prove comprehension/authenticity/approval."
+  ]
+}

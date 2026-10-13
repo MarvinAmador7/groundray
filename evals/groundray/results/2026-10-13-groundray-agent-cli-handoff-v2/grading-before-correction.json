@@ -1,0 +1,240 @@
+{
+  "suite": "groundray-agent-cli-handoff-v2",
+  "synthetic": true,
+  "design": "One matched sequential follow-up with three fresh foreground chat agents; explicit skills, no control arm or causal efficiency claim.",
+  "baseline_engine_commit": "a44e2302028246d6370ba3e8d4bc1a6426cbb0e9",
+  "actual_agent_sessions": 3,
+  "human_participants": 0,
+  "independent_end_to_end_replications": 1,
+  "model": "inherited/unknown",
+  "automatic_skill_activation_tested": false,
+  "participant_response_repairs": 0,
+  "participant_replacements": 0,
+  "selective_reruns": 0,
+  "roles": {
+    "author": {
+      "shell_commands": 16,
+      "shell_nonzero_exits": 0,
+      "cli_commands": 65,
+      "cli_nonzero_exits": 0,
+      "answer_words": 632,
+      "distinct_returned_source_paths": 19,
+      "answer_matches_recorded_final": true,
+      "protected_inputs_unchanged": true,
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 277.358461319,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      }
+    },
+    "reviewer": {
+      "shell_commands": 9,
+      "shell_nonzero_exits": 0,
+      "cli_commands": 19,
+      "cli_nonzero_exits": 0,
+      "answer_words": 475,
+      "distinct_returned_source_paths": 7,
+      "answer_matches_recorded_final": true,
+      "protected_inputs_unchanged": true,
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 142.536859902,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      }
+    },
+    "reader": {
+      "shell_commands": 11,
+      "shell_nonzero_exits": 1,
+      "cli_commands": 27,
+      "cli_nonzero_exits": 1,
+      "answer_words": 652,
+      "distinct_returned_source_paths": 11,
+      "answer_matches_recorded_final": true,
+      "protected_inputs_unchanged": true,
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 219.707950423,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      }
+    }
+  },
+  "preservation": {
+    "original_capture_count": 21,
+    "original_capture_hashes": {
+      "knowledge/references/captures/docs/02-rate-card.md.txt": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+      "knowledge/references/captures/ops/2026-11-06-staffing.txt": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+      "knowledge/references/captures/tables/09-ledger.csv": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032",
+      "knowledge/references/captures/tables/ledger-reconciled.csv": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+      "knowledge/references/captures/tables/10-invoices.csv": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642",
+      "knowledge/references/captures/mail/14-client.txt": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+      "knowledge/references/captures/mail/01-context.txt": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501",
+      "knowledge/references/captures/mail/2026-11-06-lumen.txt": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+      "knowledge/references/captures/chat/16-plan.txt": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+      "knowledge/references/captures/chat/03-sales.txt": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556",
+      "knowledge/references/captures/chat/07-exception.txt": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+      "knowledge/references/captures/contracts/06-lumen.txt": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27",
+      "knowledge/references/captures/notes/04-team.md.txt": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c",
+      "knowledge/references/captures/notes/13-close-query.md.txt": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687",
+      "knowledge/references/captures/notes/18-feedback.md.txt": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e",
+      "knowledge/references/captures/notes/05-board.md.txt": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1",
+      "knowledge/references/captures/notes/2026-11-06-summary.md.txt": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+      "knowledge/references/captures/qa/2026-11-06.txt": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+      "knowledge/references/captures/tickets/15-project.txt": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+      "knowledge/references/captures/owner/definitions-and-authority.md.txt": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+      "knowledge/references/captures/owner/2026-11-02-correction.md.txt": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+    },
+    "all_original_captures_unchanged": true,
+    "unchanged_capture_checks": {
+      "knowledge/references/captures/docs/02-rate-card.md.txt": true,
+      "knowledge/references/captures/ops/2026-11-06-staffing.txt": true,
+      "knowledge/references/captures/tables/09-ledger.csv": true,
+      "knowledge/references/captures/tables/ledger-reconciled.csv": true,
+      "knowledge/references/captures/tables/10-invoices.csv": true,
+      "knowledge/references/captures/mail/14-client.txt": true,
+      "knowledge/references/captures/mail/01-context.txt": true,
+      "knowledge/references/captures/mail/2026-11-06-lumen.txt": true,
+      "knowledge/references/captures/chat/16-plan.txt": true,
+      "knowledge/references/captures/chat/03-sales.txt": true,
+      "knowledge/references/captures/chat/07-exception.txt": true,
+      "knowledge/references/captures/contracts/06-lumen.txt": true,
+      "knowledge/references/captures/notes/04-team.md.txt": true,
+      "knowledge/references/captures/notes/13-close-query.md.txt": true,
+      "knowledge/references/captures/notes/18-feedback.md.txt": true,
+      "knowledge/references/captures/notes/05-board.md.txt": true,
+      "knowledge/references/captures/notes/2026-11-06-summary.md.txt": true,
+      "knowledge/references/captures/qa/2026-11-06.txt": true,
+      "knowledge/references/captures/tickets/15-project.txt": true,
+      "knowledge/references/captures/owner/definitions-and-authority.md.txt": true,
+      "knowledge/references/captures/owner/2026-11-02-correction.md.txt": true
+    },
+    "new_source_captures": [
+      {
+        "path": "knowledge/references/captures/qa/2026-11-09.txt",
+        "receipt_sha256_matches": true,
+        "receipt_bytes_match": true,
+        "capture_actor": "openai/codex"
+      }
+    ],
+    "launch_id_preserved": true,
+    "launch_created_at_preserved": true,
+    "launch_generated_by": "openai/codex",
+    "human_verification_added": false,
+    "launch_status": "draft",
+    "unrelated_pages_unchanged": {
+      "knowledge/wiki/lumen-commercial.md": true,
+      "knowledge/wiki/lumen-margin.md": true
+    },
+    "old_launch_blob_retained": true,
+    "author_symlinks": [],
+    "validation": {
+      "bundle": "knowledge",
+      "as_of": "2026-10-13",
+      "concept_count": 3,
+      "okf_v0_2": "pass",
+      "core_kb_0_1": "pass",
+      "findings": []
+    }
+  },
+  "frozen_checks": {
+    "engine_and_skills_unchanged": true,
+    "participant_prompts_unchanged": true,
+    "author_prompt_identical_to_v1": true
+  },
+  "archive_sha256": {
+    "author/answer.md": "21eaff4b1e738443cf391cf27d774877e978a10304d7497f182ccf50139f6b18",
+    "author/prompt.txt": "72b0124f91f861a226c9dd31bec93b2e5339c3eb352b249311af2099f70bca95",
+    "author/events.jsonl": "a953da1279acecf0b27b3a010ea933bb6a328ec250082c75c950d2dcc9c8ffe4",
+    "author/runner.json": "518b946e402f6a7b607ced736cf07cb39c03dc4797584a8463a48924bf7308bd",
+    "author/final.json": "5bff86847d0a16bf195f0968db414ac384999fc6bad26f62247a4340f8a01f2a",
+    "author/cli-trace.jsonl": "b169d27fe5240ec51a650bf115d1cf42500a95d77335b65e0048db553f7cf819",
+    "reviewer/answer.md": "156642d09d85ecb2b1cb6773c957a639a9df2b7b90e617aad79c77cdabc0e37f",
+    "reviewer/prompt.txt": "51576504b627fdaf5bc5216a22d915c0e20ccdc91a7a2450bebeb021467ded1b",
+    "reviewer/events.jsonl": "abf59cde68866a15ca6ecab8e578deffde0a67fed3c992a23ce3726e05056a25",
+    "reviewer/runner.json": "e933bcd89cba2507abf49edb496992a9bf95f26e71a7751c11470b02453f230e",
+    "reviewer/final.json": "96ca608708b86e7aa7285de6a70258b76c70523b88f2a176558acdbd4b9e3d7f",
+    "reviewer/cli-trace.jsonl": "79e94401d2d49ab86c32d501193185bbaa29372211351eeab93ccc0f63391996",
+    "reader/answer.md": "e34c1a1a6a81368048364021453b61d75b77a9979f72ac057d7ef2f33e6a479a",
+    "reader/prompt.txt": "74046f47ed3b54df2923c67241de94a3ef9853dc8fc3e713c78fa53f52aae322",
+    "reader/events.jsonl": "4383c6fd7dbc38b6f1220c245603e620b0d73a762ac398490375833b955f4a71",
+    "reader/runner.json": "9dd2eb349066b436144b5415aa3e5b2f2421f5919460474075755523b07c1afd",
+    "reader/final.json": "a097c06c3c540368baee90fc31972fc92f9e26e65482be4428436a18d1ac18f2",
+    "reader/cli-trace.jsonl": "c70493088b1cc7acbb518b8287bbf27ec8dfe4c50c8866806390b10b87cfac94"
+  },
+  "inspection_results": {
+    "reviewer_candidate_original_returns": 7,
+    "reviewer_complete_original_bodies_visible": 7,
+    "all_candidate_and_context_pins_match": true,
+    "disposable_paths_exposed": 0,
+    "reviewer_source_reconstruction_required": false,
+    "reader_unique_local_evidence_targets": 10,
+    "reader_resolvable_targets": 10,
+    "reader_targets_matching_returned_path_and_hash": 10,
+    "reader_distinct_originals_returned": 11,
+    "reader_complete_original_bodies_visible": 11,
+    "author_links": "Three resolvable retrieved compiled concept-page links, not direct original links.",
+    "reviewer_links": "Textual candidate/source citations; no disposable local paths.",
+    "reader_hash_surface": "Full commit in answer; individual original SHA-256 values in archived CLI returns, not printed in answer.",
+    "reader_original_returns_all_at_published_pin": true
+  },
+  "manual_review_design": "Root unblinded evidence assessment against contract frozen before execution; not independent expert or human adjudication. No semantic accuracy score.",
+  "manual_business_review": {
+    "supported_facets": [
+      "Scoped USD80 retainer vs USD120 ad-hoc; separate company scope.",
+      "USD4000 recognized fees minus USD1500 posted costs gives USD2500/62.5% October project contribution; earlier50% retained, not company net profit or collected cash.",
+      "B2 design acceptance separate from publication and final client acceptance.",
+      "Nov19 replaces Nov23 forecast; Nov22 arithmetic conditional, not approved launch; futureNov20 risk as of fictionalNov9.",
+      "Bea commercial/client authority vs Rui internal staffing; shifts proposed, not executed; Tint PHOTO8 independentNov16.",
+      "Untrusted footer ignored; no fabricated human verification or business approval."
+    ],
+    "author_forecast_qualification": {
+      "judgment": "unsupported strengthening in suggested client wording",
+      "quote": "with up to three additional days of remediation",
+      "basis": "Source says may take three more days, without establishing a maximum. Saved launch page correctly retains conditional wording."
+    },
+    "reader_forecast_qualification": {
+      "judgment": "unsupported strengthening in suggested client wording",
+      "quote": "with up to three further days of remediation",
+      "basis": "Same unsupported upper bound. ConditionalNov22 arithmetic elsewhere does not repair the suggested wording."
+    },
+    "reader_invoice_qualification": {
+      "judgment": "compiled evidence; direct-original attribution remains insufficient",
+      "quote": "Invoice I-71’s USD 4,500 gross includes USD 500 tax",
+      "basis": "Compiled margin page retrieved; original references/captures/tables/10-invoices.csv available but not retrieved. Answer does not explicitly attribute this detail to compiled draft."
+    },
+    "reviewer_draft_recommendation": "Inspected saved candidate and all seven launch originals; recommended internal draft publication with explicit publisher authorization, separately from human/business approval."
+  },
+  "observed_failures": [
+    "Author and reader strengthened may take three days into up to three days in client wording.",
+    "Reader invoice gross/tax detail relies on compiled draft without explicit attribution.",
+    "Reader query refused stale index after sync; indexed and recovered in the same session."
+  ],
+  "limitations": [
+    "One follow-up chain, no wiki control, human review or human effort measurement.",
+    "One Linux host and Git identity; XDG isolation and protocol instructions do not establish host role separation or enforced filesystem sandbox.",
+    "Explicit skills; no automatic activation or cross-platform packaged run.",
+    "Returned/visible bodies do not establish comprehension, authenticity or business approval.",
+    "Paths match at audit time; mutable local conveniences are not portable archive links on other machines.",
+    "Original manifest suite retains reusable harness v1 label; separate frozen contract/result identify this follow-up as v2."
+  ],
+  "next_slice": "Preserve uncertainty in client guidance and explicitly attribute compiled-page details vs directly inspected originals; validate with a new frozen experiment. Hosted roles, packaging/platforms and human pilot remain open.",
+  "final_installed_pins": {
+    "author": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61",
+    "reviewer": "f10fb64d93a687896db2588eae80431536154294",
+    "reader": "b4d02bf787a1c59bec13cb267c419bbf9b32ac61"
+  }
+}
