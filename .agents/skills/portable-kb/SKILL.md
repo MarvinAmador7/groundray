@@ -112,6 +112,13 @@ complete items, create honest drafts, and keep authority separate from relevance
    including TXT/CSV captures; it needs no keyword index and fetches no external
    URL. Fragments are reported, not validated. A capture receipt shows copying
    and matching bytes, not original authorship, approval or source authenticity.
+   For local file links use `source.local_path` exactly and check that the target
+   exists; citation paths are bundle-relative, not checkout-relative. Local copies
+   are mutable, so retain the full commit/hash and inspected passage. For a
+   proposal use `brain review-source` from the collaboration workflow; its
+   disposable view returns `local_path: null`. When an original is available,
+   inspect it before implying that source-specific details came from an original
+   read rather than a compiled page. Keep machine paths out of company knowledge.
    See [source capture](references/sources.md) when authorized to retain a supplied
    original. If the original is unavailable, describe that limitation rather
    than claiming to have inspected it.

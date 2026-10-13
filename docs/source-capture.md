@@ -117,3 +117,8 @@ The [CLI-only Mosaic demonstration](groundray-cli-sources.md) exercises capture,
 installation, source inspection, native discovery and explicit sync. See also
 [the CLI reference](cli.md), [Groundray's goal](groundray-product-goal.md) and
 [the original engine-fit study](groundray-engine-fit.md).
+
+For local source links use `source.local_path` from installed retrieval, rather
+than reconstructing a path from the bundle-relative citation. The local copy is
+mutable; retain commit/hash/context. [Proposal-source inspection](brain-collaboration.md)
+reads a candidate without installing it and exposes no disposable file path.

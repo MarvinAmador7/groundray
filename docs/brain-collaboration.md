@@ -67,7 +67,24 @@ patch is a structural inspection surface, not a guarantee that someone reviewed
 it or that the claims are true. Unchanged evidence must be inspected at the
 appropriate version; installed-source retrieval still uses `installed_commit`,
 which review reports separately from the remote base and candidate. Do not mix
-these snapshots in a business conclusion.
+these snapshots in a business conclusion. Read an original at the exact candidate:
+
+```console
+pkb brain review-source delivery-evidence references/captures/operations/delivery-note.txt \
+  --brain mosaic-studio --commit <full-proposal-commit> --json
+pkb brain review-source delivery-evidence wiki/lumen-launch.md operations \
+  --brain mosaic-studio --commit <full-proposal-commit> --json
+```
+
+This uses the same candidate identity/history guards and source receipt/path/size
+checks as installed retrieval. Its source and context citations use the candidate
+commit. UTF-8 content preserves original newline bytes; a text diff is only a
+presentation surface and may normalize line endings. The inspection adds no
+installed version, index or approval. `source.local_path` is null for this
+disposable view. Installed `source get` instead returns the exact current-machine
+file path for a clickable link, including the `knowledge/` prefix. That local
+copy can change after sync; keep the full commit, hash and inspected passage in
+a versioned citation. Machine paths do not belong in shared company pages.
 
 Only an explicitly authorized publisher should run:
 

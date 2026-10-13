@@ -1,0 +1,23 @@
+{
+  "operation": "Explicit root fixture publication after reviewer recommendation; no human approval",
+  "argv": [
+    "/workspace/groundray-agent-handoff/run-1/reviewer/bin/pkb",
+    "brain",
+    "accept",
+    "lumen-qa-2026-11-09",
+    "--brain",
+    "mosaic-studio",
+    "--commit",
+    "58fb1ec21ef80ed5d744829c223083258459fce1",
+    "--base",
+    "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+    "--json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"base_commit\": \"9f5b04e920a1006af842acd20d74afe1ee7f300a\",\n  \"business_approval_recorded\": false,\n  \"changed_paths\": [\n    \"knowledge/log.md\",\n    \"knowledge/references/captures/qa/2026-11-09.txt\",\n    \"knowledge/references/captures/qa/2026-11-09.txt.capture.json\",\n    \"knowledge/wiki/lumen-launch.md\"\n  ],\n  \"installed_brain_changed\": false,\n  \"installed_commit\": \"9f5b04e920a1006af842acd20d74afe1ee7f300a\",\n  \"needs_sync\": true,\n  \"ok\": true,\n  \"proposal\": \"lumen-qa-2026-11-09\",\n  \"proposal_commit\": \"58fb1ec21ef80ed5d744829c223083258459fce1\",\n  \"proposal_ref\": \"refs/heads/groundray/lumen-qa-2026-11-09\",\n  \"published_main\": true,\n  \"slug\": \"mosaic-studio\",\n  \"source\": \"file:///workspace/groundray-agent-handoff/run-1/company.git\",\n  \"validation_warnings\": []\n}\n",
+  "stderr": "",
+  "prepublication_pins": {
+    "reviewer": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+    "reader": "9f5b04e920a1006af842acd20d74afe1ee7f300a"
+  }
+}

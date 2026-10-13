@@ -41,7 +41,13 @@ from .brains import (
     use_brain,
 )
 from .changes import ConcurrentChangeError
-from .collaboration import attach_authoring, propose_brain, publish_proposal, review_proposal
+from .collaboration import (
+    attach_authoring,
+    get_proposal_source,
+    propose_brain,
+    publish_proposal,
+    review_proposal,
+)
 from .knowledge_prompt import confirm_knowledge_apply, run_knowledge_create_prompts
 from .locks import LockError, inspect_operation_lock, operation_lock
 from .operations import OperationError
@@ -799,6 +805,35 @@ def brain_review(
     else:
         for key, value in result.items():
             typer.echo(f"{key}: {value}")
+
+
+@brain_app.command("review-source")
+def brain_review_source(
+    name: Annotated[str, typer.Argument(help="Proposal name.")],
+    reference: Annotated[str, typer.Argument(help="Capture path or candidate item ID/path.")],
+    commit: Annotated[str, typer.Option("--commit", help="Full proposal commit to inspect.")],
+    source_id: Annotated[str | None, typer.Argument(help="Declared item source ID, if using an item.")] = None,
+    slug: Annotated[str | None, typer.Option("--brain", help="Brain slug; defaults to active.")] = None,
+    config_path: Annotated[Path | None, typer.Option("--config", help="User configuration path.")] = None,
+    as_of: Annotated[str | None, typer.Option("--as-of", help="ISO validation date.")] = None,
+    json_output: Annotated[bool, typer.Option("--json", help="Emit original content and pinned citations.")] = False,
+) -> None:
+    """Read an exact proposed original without publishing or activating the proposal."""
+    settings = _load_cli_settings(config_path)
+    try:
+        with operation_lock(settings.data_dir, "brain review-source"):
+            result = get_proposal_source(settings, name, commit, reference, source_id, slug, as_of=as_of)
+    except (BrainError, LockError, OSError, SourceError, ValueError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from None
+    if json_output:
+        typer.echo(json.dumps(result, indent=2, sort_keys=True))
+    else:
+        typer.echo(f"Source: {result['source']['path']}")
+        typer.echo(f"Candidate: {result['citation']['commit']}")
+        typer.echo(f"SHA-256: {result['source']['sha256']}")
+        typer.echo(result["source"]["content"], nl=False)
+        typer.echo("\nInspection only; installed knowledge and approvals are unchanged.")
 
 
 @brain_app.command("accept")

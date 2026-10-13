@@ -1,0 +1,28 @@
+As of fictional **November 9, 2026**, tell Lumen: “Your October–December managed production retainer remains **USD 80/hour**. Ad-hoc production remains listed at **USD 120/hour** and is separately quoted. B2 design is approved; launch still requires accessibility checks, publication, and your acceptance.” The supplied owner rule confirms Bea’s scoped pricing exception; it does not establish a company-wide USD 80 rate.[^commercial][^client]
+
+**November 20 remains at risk.** QA now forecasts AX-7 review on **November 19**, with possible **three more days** of remediation. PUB-2 still depends on passing AX-7. **Why:** Bea’s November 20 reservation required review by November 17; the new forecast is two days later. November 19 + three remediation days gives November 22 conditionally, not an approved launch date. As of November 9 this is a forecast risk, not evidence of a missed deadline, publication, or launch acceptance. No client-approved replacement date is attached.[^qa][^plan]
+
+Use **62.5% October contribution margin for Mosaic Studio’s Lumen project**: (USD 4,000 recognized fees − USD 1,500 posted direct production costs) / USD 4,000 = 62.5%, or USD 2,500 contribution. **Why:** the November 2 correction records a posted USD 500 duplicate reversal; the earlier USD 2,000 cost snapshot supported 50%. Exclude sales tax and unposted owner-time estimates. Invoice gross USD 4,500 includes USD 500 tax and is not collected cash. This project calculation does not establish complete company profitability. The repeated 85% claim has no accountant’s calculation or measured redesign effect behind it.[^margin][^feedback]
+
+**Decide now:** Bea should review the November 20 commitment risk, decide client communication, and seek client agreement if a replacement date is needed. Rui should reassess the proposed transfer of two production shifts against both projects. The supplied delegation gives Bea commercial/client-commitment authority and Rui internal staffing authority; the shift proposal is not an executed allocation, cancellation, or retainer amendment.[^commercial][^staffing]
+
+**Tint has no AX-7 dependency:** PHOTO-8 remains independently forecast for November 16. Check actual staffing effects before moving shifts; the QA change does not itself change Tint’s forecast or October ledger row.[^qa][^margin]
+
+I inspected all three current wiki items, their links/backlinks, the underlying authority, commercial, client, dependency, QA, staffing and finance records, and the sales → team → board → November 6 summary chain. Those copied summaries are one inherited claim chain, not independent confirmation.
+
+I retained the incoming QA original byte-for-byte, updated the existing launch item without changing its identity, and added the current interpretation of the dependent launch summaries. The earlier November 6 forecast and prior reasoning remain recoverable. Commercial and margin notes needed no QA-driven change. The revised item remains an agent-generated **draft**, with no new human verification. Source links resolve, and the exact proposal diff validates without warnings. The untrusted automation footer was retained as evidence and ignored as an instruction.
+
+Review proposal **`lumen-qa-2026-11-09`**, ref **`refs/heads/groundray/lumen-qa-2026-11-09`**:
+
+- Commit: `58fb1ec21ef80ed5d744829c223083258459fce1`
+- Published base: `9f5b04e920a1006af842acd20d74afe1ee7f300a`
+
+The proposal is submitted for review; **company main is unchanged**, and no business approval was recorded.
+
+[^commercial]: [Lumen commercial scope — mosaic-studio@58fb1ec21ef8:wiki/lumen-commercial.md (urn:uuid:ce6368cd-3367-4ca6-9c81-1934f58b4686)](/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/wiki/lumen-commercial.md). Inspected owner rule, October 1 excerpt, rate sheet, and retainer copy.
+[^client]: [November 6 client request — mosaic-studio@58fb1ec21ef8:references/captures/mail/2026-11-06-lumen.txt](/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/mail/2026-11-06-lumen.txt), alongside October 26 B2 approval and the owner’s delivery definition.
+[^qa]: [November 9 QA original — mosaic-studio@58fb1ec21ef8:references/captures/qa/2026-11-09.txt](/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/qa/2026-11-09.txt).
+[^plan]: [Conditional launch reservation — mosaic-studio@58fb1ec21ef8:references/captures/chat/16-plan.txt](/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/chat/16-plan.txt), corroborated by the AX-7/PUB-2 project board.
+[^margin]: [Lumen October contribution margin — mosaic-studio@58fb1ec21ef8:wiki/lumen-margin.md (urn:uuid:fa291928-30c1-4414-a4ed-fce8f4fe38c2)](/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/wiki/lumen-margin.md). Inspected metric rule, reconciled and original ledgers, November 2 correction, close-query note, and invoice export.
+[^feedback]: [Feedback — mosaic-studio@db7d06d521a3:references/captures/notes/18-feedback.md.txt](/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/notes/18-feedback.md.txt).
+[^staffing]: [Rui’s staffing proposal — mosaic-studio@58fb1ec21ef8:references/captures/ops/2026-11-06-staffing.txt](/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/ops/2026-11-06-staffing.txt).

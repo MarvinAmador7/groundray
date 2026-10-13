@@ -1,0 +1,632 @@
+{
+  "suite": "groundray-agent-cli-handoff-v1",
+  "scope": "Mechanical audit; no automated semantic accuracy score.",
+  "base_commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+  "author_commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+  "published_commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+  "roles": {
+    "author": {
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 266.472023925,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      },
+      "shell_commands": 73,
+      "shell_nonzero_exits": 0,
+      "cli_commands": 85,
+      "cli_nonzero_exits": 0,
+      "cli_errors": [],
+      "cli_returned_sources": [
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/docs/02-rate-card.md.txt",
+          "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/ledger-reconciled.csv",
+          "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/14-client.txt",
+          "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/2026-11-02-correction.md.txt",
+          "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/07-exception.txt",
+          "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tickets/15-project.txt",
+          "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/ops/2026-11-06-staffing.txt",
+          "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-06.txt",
+          "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/2026-11-06-lumen.txt",
+          "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "b9edf70f5b7c0ae2d01bd967898ca80e2f36ab95",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/contracts/06-lumen.txt",
+          "sha256": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/03-sales.txt",
+          "sha256": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/16-plan.txt",
+          "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/05-board.md.txt",
+          "sha256": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/2026-11-06-summary.md.txt",
+          "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/04-team.md.txt",
+          "sha256": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/10-invoices.csv",
+          "sha256": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/13-close-query.md.txt",
+          "sha256": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/18-feedback.md.txt",
+          "sha256": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/09-ledger.csv",
+          "sha256": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032",
+          "commit": "db7d06d521a3f2bb2b363cac8bf3f4ca5009edeb",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/14-client.txt",
+          "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tickets/15-project.txt",
+          "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-06.txt",
+          "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/2026-11-06-lumen.txt",
+          "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/ops/2026-11-06-staffing.txt",
+          "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/16-plan.txt",
+          "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/2026-11-06-summary.md.txt",
+          "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/07-exception.txt",
+          "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/docs/02-rate-card.md.txt",
+          "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/ledger-reconciled.csv",
+          "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/2026-11-02-correction.md.txt",
+          "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        }
+      ],
+      "distinct_returned_source_paths": 21,
+      "skill_text_in_observer_output": {
+        "groundray-lite": true,
+        "portable-kb": true
+      },
+      "answer_matches_recorded_final": true,
+      "answer_words": 564,
+      "absolute_file_links": [
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/wiki/lumen-commercial.md",
+          "exists_at_audit": true
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+          "exists_at_audit": true
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/qa/2026-11-09.txt",
+          "exists_at_audit": true
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/chat/16-plan.txt",
+          "exists_at_audit": true
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/wiki/lumen-margin.md",
+          "exists_at_audit": true
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/notes/18-feedback.md.txt",
+          "exists_at_audit": true
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/author/work/authoring/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+          "exists_at_audit": true
+        }
+      ],
+      "artifacts": {
+        "base": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+        "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+        "proposal": "lumen-qa-2026-11-09",
+        "ref": "refs/heads/groundray/lumen-qa-2026-11-09"
+      },
+      "protected_inputs_unchanged": true,
+      "protocol_boundary": "Recorded instructions only; not an enforced filesystem sandbox."
+    },
+    "reviewer": {
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 161.932178616,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      },
+      "shell_commands": 10,
+      "shell_nonzero_exits": 1,
+      "cli_commands": 22,
+      "cli_nonzero_exits": 0,
+      "cli_errors": [],
+      "cli_returned_sources": [
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/14-client.txt",
+          "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tickets/15-project.txt",
+          "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-06.txt",
+          "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/2026-11-06-lumen.txt",
+          "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/ops/2026-11-06-staffing.txt",
+          "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/16-plan.txt",
+          "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/2026-11-06-summary.md.txt",
+          "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+          "commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+          "complete_body_in_observer_output": true
+        }
+      ],
+      "distinct_returned_source_paths": 8,
+      "skill_text_in_observer_output": {
+        "groundray-lite": true,
+        "portable-kb": true
+      },
+      "answer_matches_recorded_final": true,
+      "answer_words": 566,
+      "absolute_file_links": [],
+      "artifacts": {
+        "base": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+        "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+        "error_recovery": "LF reconstruction check failed; CRLF reconstruction matched retained capture receipt",
+        "proposal": "lumen-qa-2026-11-09",
+        "recommendation": "Suitable for authorized publication as internal draft; no publication or approval performed"
+      },
+      "protected_inputs_unchanged": true,
+      "protocol_boundary": "Recorded instructions only; not an enforced filesystem sandbox."
+    },
+    "reader": {
+      "runner": {
+        "adapter": "recorded-shell-observer",
+        "elapsed_seconds": 127.553582595,
+        "exit_code": 0,
+        "model": "inherited/unknown",
+        "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+        "provider": "chat-host",
+        "runner": "codex-chat-subagent",
+        "timed_out": false
+      },
+      "shell_commands": 30,
+      "shell_nonzero_exits": 1,
+      "cli_commands": 28,
+      "cli_nonzero_exits": 1,
+      "cli_errors": [
+        {
+          "argv": [
+            "search",
+            "query",
+            "Mosaic Lumen October",
+            "--brain",
+            "mosaic-studio",
+            "--limit",
+            "8",
+            "--json"
+          ],
+          "exit_code": 1,
+          "stderr": "Keyword index is stale after a brain change; run `pkb search index mosaic-studio`.\n"
+        }
+      ],
+      "cli_returned_sources": [
+        {
+          "path": "references/captures/owner/definitions-and-authority.md.txt",
+          "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/07-exception.txt",
+          "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tables/ledger-reconciled.csv",
+          "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/docs/02-rate-card.md.txt",
+          "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/owner/2026-11-02-correction.md.txt",
+          "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/2026-11-06-lumen.txt",
+          "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/mail/14-client.txt",
+          "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/tickets/15-project.txt",
+          "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/ops/2026-11-06-staffing.txt",
+          "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-06.txt",
+          "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/qa/2026-11-09.txt",
+          "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/chat/16-plan.txt",
+          "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        },
+        {
+          "path": "references/captures/notes/2026-11-06-summary.md.txt",
+          "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+          "commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+          "complete_body_in_observer_output": true
+        }
+      ],
+      "distinct_returned_source_paths": 13,
+      "skill_text_in_observer_output": {
+        "groundray-lite": true,
+        "portable-kb": true
+      },
+      "answer_matches_recorded_final": true,
+      "answer_words": 643,
+      "absolute_file_links": [
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/owner/definitions-and-authority.md.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/chat/07-exception.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/docs/02-rate-card.md.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/qa/2026-11-09.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/chat/16-plan.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/tickets/15-project.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/qa/2026-11-06.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/mail/14-client.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/mail/2026-11-06-lumen.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/notes/2026-11-06-summary.md.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/owner/2026-11-02-correction.md.txt",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/tables/ledger-reconciled.csv",
+          "exists_at_audit": false
+        },
+        {
+          "target": "/workspace/groundray-agent-handoff/run-1/reader/data/portable-kb/brains/mosaic-studio/references/captures/ops/2026-11-06-staffing.txt",
+          "exists_at_audit": false
+        }
+      ],
+      "artifacts": {},
+      "protected_inputs_unchanged": true,
+      "protocol_boundary": "Recorded instructions only; not an enforced filesystem sandbox."
+    }
+  },
+  "preservation": {
+    "original_capture_count": 21,
+    "original_capture_hashes": {
+      "knowledge/references/captures/docs/02-rate-card.md.txt": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+      "knowledge/references/captures/ops/2026-11-06-staffing.txt": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+      "knowledge/references/captures/tables/09-ledger.csv": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032",
+      "knowledge/references/captures/tables/ledger-reconciled.csv": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+      "knowledge/references/captures/tables/10-invoices.csv": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642",
+      "knowledge/references/captures/mail/14-client.txt": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+      "knowledge/references/captures/mail/01-context.txt": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501",
+      "knowledge/references/captures/mail/2026-11-06-lumen.txt": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+      "knowledge/references/captures/chat/16-plan.txt": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+      "knowledge/references/captures/chat/03-sales.txt": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556",
+      "knowledge/references/captures/chat/07-exception.txt": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+      "knowledge/references/captures/contracts/06-lumen.txt": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27",
+      "knowledge/references/captures/notes/04-team.md.txt": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c",
+      "knowledge/references/captures/notes/13-close-query.md.txt": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687",
+      "knowledge/references/captures/notes/18-feedback.md.txt": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e",
+      "knowledge/references/captures/notes/05-board.md.txt": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1",
+      "knowledge/references/captures/notes/2026-11-06-summary.md.txt": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+      "knowledge/references/captures/qa/2026-11-06.txt": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+      "knowledge/references/captures/tickets/15-project.txt": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+      "knowledge/references/captures/owner/definitions-and-authority.md.txt": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+      "knowledge/references/captures/owner/2026-11-02-correction.md.txt": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+    },
+    "all_original_captures_unchanged": true,
+    "unchanged_capture_checks": {
+      "knowledge/references/captures/docs/02-rate-card.md.txt": true,
+      "knowledge/references/captures/ops/2026-11-06-staffing.txt": true,
+      "knowledge/references/captures/tables/09-ledger.csv": true,
+      "knowledge/references/captures/tables/ledger-reconciled.csv": true,
+      "knowledge/references/captures/tables/10-invoices.csv": true,
+      "knowledge/references/captures/mail/14-client.txt": true,
+      "knowledge/references/captures/mail/01-context.txt": true,
+      "knowledge/references/captures/mail/2026-11-06-lumen.txt": true,
+      "knowledge/references/captures/chat/16-plan.txt": true,
+      "knowledge/references/captures/chat/03-sales.txt": true,
+      "knowledge/references/captures/chat/07-exception.txt": true,
+      "knowledge/references/captures/contracts/06-lumen.txt": true,
+      "knowledge/references/captures/notes/04-team.md.txt": true,
+      "knowledge/references/captures/notes/13-close-query.md.txt": true,
+      "knowledge/references/captures/notes/18-feedback.md.txt": true,
+      "knowledge/references/captures/notes/05-board.md.txt": true,
+      "knowledge/references/captures/notes/2026-11-06-summary.md.txt": true,
+      "knowledge/references/captures/qa/2026-11-06.txt": true,
+      "knowledge/references/captures/tickets/15-project.txt": true,
+      "knowledge/references/captures/owner/definitions-and-authority.md.txt": true,
+      "knowledge/references/captures/owner/2026-11-02-correction.md.txt": true
+    },
+    "new_source_captures": [
+      {
+        "path": "knowledge/references/captures/qa/2026-11-09.txt",
+        "receipt_sha256_matches": true,
+        "receipt_bytes_match": true,
+        "capture_actor": "openai/codex"
+      }
+    ],
+    "launch_id_preserved": true,
+    "launch_created_at_preserved": true,
+    "launch_generated_by": "openai/codex",
+    "human_verification_added": false,
+    "launch_status": "draft",
+    "unrelated_pages_unchanged": {
+      "knowledge/wiki/lumen-commercial.md": true,
+      "knowledge/wiki/lumen-margin.md": true
+    },
+    "old_launch_blob_retained": true,
+    "author_symlinks": [],
+    "validation": {
+      "bundle": "knowledge",
+      "as_of": "2026-10-13",
+      "concept_count": 3,
+      "okf_v0_2": "pass",
+      "core_kb_0_1": "pass",
+      "findings": []
+    }
+  }
+}

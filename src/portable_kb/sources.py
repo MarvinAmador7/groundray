@@ -488,6 +488,7 @@ def get_source(
             "id": source_id,
             "resource": resource,
             "path": path,
+            "local_path": str(target.absolute()),
             "bytes": len(material),
             "sha256": sha256,
             "content": content,

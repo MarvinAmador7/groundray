@@ -11,6 +11,7 @@ from typing import Any
 
 from .brains import (
     COMMIT,
+    BrainCatalog,
     BrainError,
     InstalledBrain,
     _git_is_ancestor,
@@ -24,6 +25,7 @@ from .brains import (
     save_catalog,
 )
 from .settings import Settings
+from .sources import get_source
 from .validation import validate_bundle
 
 PROPOSAL_NAME = re.compile(r"^[a-z0-9][a-z0-9-]{0,63}$")
@@ -224,6 +226,7 @@ def review_proposal(
     slug: str | None = None,
     *,
     as_of: str | None = None,
+    _source: tuple[str, str | None] | None = None,
 ) -> dict[str, Any]:
     """Inspect a fetched exact proposal without activating it or recording approval."""
     ref = _ref(name)
@@ -243,7 +246,8 @@ def review_proposal(
         raise BrainError("Proposal is already published, outdated or diverged from main.")
     settings.cache_dir.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix=".proposal-", dir=settings.cache_dir) as directory:
-        worktree = Path(directory) / "review"
+        worktree = Path(directory) / "brains" / brain.slug
+        worktree.parent.mkdir()
         _run_git(
             git,
             "-c",
@@ -279,6 +283,21 @@ def review_proposal(
                 "brain.yaml",
                 manifest.bundle,
             )
+            source_snapshot = None
+            if _source is not None:
+                inspection_settings = replace(
+                    settings, data_dir=Path(directory), cache_dir=Path(directory) / "cache"
+                )
+                inspection_brain = replace(brain, name=manifest.name, commit=commit, authoring=None)
+                save_catalog(
+                    BrainCatalog(brains=(inspection_brain,), active=brain.slug),
+                    inspection_settings,
+                )
+                source_snapshot = get_source(
+                    inspection_settings, _source[0], _source[1], brain.slug, as_of=as_of
+                )
+                # This checkout is disposable; never expose a path that vanishes on return.
+                source_snapshot["source"]["local_path"] = None
         finally:
             _run_git(
                 git,
@@ -291,7 +310,7 @@ def review_proposal(
                 "--force",
                 str(worktree),
             )
-    return {
+    result = {
         "ok": True,
         "slug": brain.slug,
         "source": brain.source,
@@ -305,6 +324,38 @@ def review_proposal(
         "business_approval_recorded": False,
         "validation_warnings": [f.as_dict() for f in report.warnings],
     }
+    if source_snapshot is not None:
+        result["source_snapshot"] = source_snapshot
+    return result
+
+
+def get_proposal_source(
+    settings: Settings,
+    name: str,
+    commit: str,
+    reference: str,
+    source_id: str | None = None,
+    slug: str | None = None,
+    *,
+    as_of: str | None = None,
+) -> dict[str, Any]:
+    """Read exact original bytes from a checked proposal without installing it."""
+    review = review_proposal(
+        settings, name, commit, slug, as_of=as_of, _source=(reference, source_id)
+    )
+    snapshot = review.pop("source_snapshot")
+    snapshot["inspection"] = {
+        key: review[key]
+        for key in (
+            "proposal",
+            "proposal_ref",
+            "proposal_commit",
+            "base_commit",
+            "installed_commit",
+        )
+    }
+    snapshot["business_approval_recorded"] = False
+    return snapshot
 
 
 def publish_proposal(

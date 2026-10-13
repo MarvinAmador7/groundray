@@ -1,0 +1,12 @@
+{
+  "scope": "Post-trial mechanical probe on a separate copied synthetic remote; original trials not rerun or edited.",
+  "source_bytes": 536,
+  "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+  "candidate_commit": "58fb1ec21ef80ed5d744829c223083258459fce1",
+  "installed_commit": "9f5b04e920a1006af842acd20d74afe1ee7f300a",
+  "exact_crlf_bytes": true,
+  "original_trial_remote_unchanged": true,
+  "installed_pin_unchanged": true,
+  "disposable_path_exposed": false,
+  "command_count": 3
+}

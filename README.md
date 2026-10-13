@@ -26,7 +26,9 @@ Claude Code the same workflow for finding, citing, and updating that knowledge.
 **Groundray development:** the draft branch now supports
 [authoring attachment and reviewed Git proposals](docs/brain-collaboration.md).
 The [employee handoff demonstration](docs/groundray-employee-handoff.md) preserves
-original evidence through publication and sync. These additions are unreleased.
+original evidence through publication and sync. A [fresh-agent trial](docs/groundray-agent-cli-handoff.md)
+exposed evidence-inspection gaps and led to pinned candidate-source retrieval and
+exact local source paths. These additions are unreleased.
 
 ## Install
 

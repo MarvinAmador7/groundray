@@ -94,3 +94,7 @@ review and employee permissions, supported platform packages, company-isolation
 access controls and human inspection effort also remain untested. No accuracy,
 human-effort or universal portability advantage is inferred from this mechanical
 success. The [product goal](groundray-product-goal.md) retains those gates.
+
+A subsequent [fresh-agent CLI handoff](groundray-agent-cli-handoff.md) exercises
+Lite through one contribution/review/sync chain. It preserves the original
+inspection/link failures and documents separately tested interface fixes.

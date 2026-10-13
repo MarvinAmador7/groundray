@@ -388,3 +388,152 @@ def test_separate_push_url_cannot_publish_to_another_company(team, tmp_path):
     )
     with pytest.raises(BrainError, match="fetch/push origin"):
         review_proposal(b, "wrong-destination", load_catalog(a).get("team").commit, as_of=AS_OF)
+
+
+def test_candidate_original_read_preserves_crlf_without_activating_or_leaking_paths(team, tmp_path):
+    from portable_kb.collaboration import get_proposal_source
+
+    a, b, _author, _remote = team
+    commit = capture(team, tmp_path)
+    propose_brain(a, "source-review", apply=True, as_of=AS_OF)
+    before = load_catalog(b)
+    result = get_proposal_source(
+        b, "source-review", commit, "references/captures/record.txt", as_of=AS_OF
+    )
+    assert result["source"]["content"].encode() == (tmp_path / "record.txt").read_bytes()
+    assert result["source"]["sha256"] == result["capture_receipt"]["sha256"]
+    assert result["citation"]["commit"] == commit
+    assert result["inspection"]["installed_commit"] == before.get("team").commit
+    assert result["source"]["local_path"] is None
+    assert ".proposal-" not in json.dumps(result)
+    assert result["business_approval_recorded"] is False
+    assert load_catalog(b) == before
+    assert (
+        git(before.get("team").checkout_path(b), "worktree", "list", "--porcelain").count(
+            "worktree "
+        )
+        == 1
+    )
+
+
+def test_candidate_declared_source_uses_candidate_item_context(team, tmp_path):
+    from portable_kb.authoring import (
+        ConfidenceLevel,
+        GenerationMethod,
+        KnowledgeType,
+        plan_knowledge_create,
+        save_knowledge_create,
+    )
+    from portable_kb.collaboration import get_proposal_source
+
+    a, b, _author, _remote = team
+    capture(team, tmp_path)
+    plan = plan_knowledge_create(
+        a,
+        item_type=KnowledgeType.CONCEPT,
+        title="Proposed evidence",
+        description="Synthetic source context in the proposed snapshot.",
+        actor="openai/codex",
+        method=GenerationMethod.AGENT_GENERATED,
+        body="# Proposed evidence\n\n## Definition\n\nConditional record.[^raw]\n\n## Context\n\nSynthetic only.\n\n[^raw]: [Original](../references/captures/record.txt).\n",
+        relative_path="wiki/proposed-evidence.md",
+        sources=[{"id": "raw", "resource": "/references/captures/record.txt"}],
+        confidence_level=ConfidenceLevel.MEDIUM,
+        confidence_basis="Inspected synthetic record, not approval.",
+        as_of=AS_OF,
+    )
+    saved = save_knowledge_create(a, plan, as_of=AS_OF)
+    propose_brain(a, "declared-review", apply=True, as_of=AS_OF)
+    before = load_catalog(b)
+    result = get_proposal_source(
+        b, "declared-review", saved.commit, "wiki/proposed-evidence.md", "raw", as_of=AS_OF
+    )
+    assert result["context_citation"]["commit"] == saved.commit == result["citation"]["commit"]
+    assert result["context_citation"]["item_id"] == saved.as_dict()["item_id"]
+    assert load_catalog(b) == before
+
+
+@pytest.mark.parametrize("reference", ["references/captures/missing.txt", "../outside.txt"])
+def test_candidate_source_refusal_cleans_worktree_and_preserves_pin(team, tmp_path, reference):
+    from portable_kb.collaboration import get_proposal_source
+    from portable_kb.sources import SourceError
+
+    a, b, _author, _remote = team
+    commit = capture(team, tmp_path)
+    propose_brain(a, "failed-read", apply=True, as_of=AS_OF)
+    before = load_catalog(b)
+    with pytest.raises(SourceError):
+        get_proposal_source(b, "failed-read", commit, reference, as_of=AS_OF)
+    assert load_catalog(b) == before
+    assert (
+        git(before.get("team").checkout_path(b), "worktree", "list", "--porcelain").count(
+            "worktree "
+        )
+        == 1
+    )
+
+
+def test_candidate_receipt_mismatch_refuses_read_without_activation(team, tmp_path):
+    from portable_kb.collaboration import get_proposal_source
+    from portable_kb.sources import SourceError
+
+    a, b, author, _remote = team
+    capture(team, tmp_path)
+    receipt = author / "knowledge/references/captures/record.txt.capture.json"
+    payload = json.loads(receipt.read_text())
+    payload["sha256"] = "0" * 64
+    receipt.write_text(json.dumps(payload))
+    git(author, "add", "knowledge")
+    git(author, "commit", "-m", "Seed an incorrect opaque receipt")
+    commit = git(author, "rev-parse", "HEAD")
+    git(author, "push", "origin", f"{commit}:refs/heads/groundray/bad-receipt")
+    before = load_catalog(b)
+    with pytest.raises(SourceError, match="does not match"):
+        get_proposal_source(b, "bad-receipt", commit, "references/captures/record.txt", as_of=AS_OF)
+    assert load_catalog(b) == before
+    assert (
+        git(before.get("team").checkout_path(b), "worktree", "list", "--porcelain").count(
+            "worktree "
+        )
+        == 1
+    )
+
+
+def test_cli_candidate_read_and_installed_link_target(team, tmp_path):
+    a, b, _author, _remote = team
+    commit = capture(team, tmp_path)
+    propose_brain(a, "cli-source", apply=True, as_of=AS_OF)
+    config = tmp_path / "reader-source-config.yaml"
+    save_settings(b, config)
+    result = CliRunner().invoke(
+        app,
+        [
+            "brain",
+            "review-source",
+            "cli-source",
+            "references/captures/record.txt",
+            "--commit",
+            commit,
+            "--brain",
+            "team",
+            "--config",
+            str(config),
+            "--as-of",
+            AS_OF,
+            "--json",
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    payload = json.loads(result.output)
+    assert payload["source"]["content"].encode() == (tmp_path / "record.txt").read_bytes()
+    assert payload["source"]["local_path"] is None
+    assert payload["inspection"]["proposal_commit"] == commit
+    # The installed view exposes the real file, including the knowledge/ bundle prefix.
+    installed = get_source(a, "references/captures/record.txt", as_of=AS_OF)
+    local = Path(installed["source"]["local_path"])
+    assert local.is_absolute() and local.is_file()
+    assert local.read_bytes() == (tmp_path / "record.txt").read_bytes()
+    assert (
+        local.relative_to(load_catalog(a).get("team").checkout_path(a)).as_posix()
+        == "knowledge/references/captures/record.txt"
+    )

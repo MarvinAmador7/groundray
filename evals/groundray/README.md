@@ -11,6 +11,13 @@ That mode captures originals through CLI plans/applies, checks direct receipt-ba
 reads and follows item source IDs with `pkb source get`. The earlier development
 mode and recorded traces remain available; neither mode runs a fresh model.
 
+The [fresh-agent CLI handoff](../../docs/groundray-agent-cli-handoff.md) is one
+three-role chain using the real CLI, an isolated bare remote and frozen Lite/engine
+skills. Its original answers, errors, broken reader links and subsequent mechanical
+interface fixes remain distinct. `agent_handoff prepare` stages cases without
+launching models; `agent_handoff_audit` reports mechanical integrity and exposure,
+not semantic accuracy or host permission enforcement.
+
 The later [natural-question suite](NATURAL.md) exercises five ordinary business
 questions without evidence instructions in the user prompts.
 

@@ -42,6 +42,7 @@ Markdown originals use `.md.txt` names without content changes. Binary extractio
 remote source fetching and production whole-wiki import remain deferred.
 Explicit attachment of a checked authoring clone to a URL-installed brain,
 plan-first creation of new Git proposal refs, exact-commit read-only review, and
+read-only exact candidate-source retrieval, and
 explicit commit/base-pinned fast-forward acceptance through existing Git host
 permissions are now authorized. These operations do not record company approval
 or human verification; custom authorization and hosted collaboration remain deferred.
