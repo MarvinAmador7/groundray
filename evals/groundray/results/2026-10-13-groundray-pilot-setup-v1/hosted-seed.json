@@ -1,0 +1,28 @@
+{
+  "repository": "MarvinAmador7/groundray-pilot-mosaic",
+  "source_url": "https://github.com/MarvinAmador7/groundray-pilot-mosaic.git",
+  "remote_observed": {
+    "private": true,
+    "default_branch": "main",
+    "main_commit": "6ed712b78218b5c2809ffceb6243a0c39df62acb",
+    "protected": false,
+    "matching_selected_seed_files": 51,
+    "concepts_validated": 3,
+    "validation_findings": []
+  },
+  "publisher_reported": {
+    "provisioner_stage": "PUT /repos/MarvinAmador7/groundray-pilot-mosaic/branches/main/protection",
+    "http_status": 403,
+    "message": "Upgrade to GitHub Pro or make this repository public to enable this feature.",
+    "evidence_source": "Publisher supplied local provisioner log excerpt in chat",
+    "provisioner_invitation_step_reached": false
+  },
+  "cloud_protection_read": {
+    "http_status": 403,
+    "message": "Resource not accessible by integration"
+  },
+  "employee_authentication_observed": false,
+  "host_permission_attempts": 0,
+  "human_pilot_completed": false,
+  "recovery_status": "Requires a user host-plan decision and reviewed recovery; create-only apply refuses the existing repository."
+}

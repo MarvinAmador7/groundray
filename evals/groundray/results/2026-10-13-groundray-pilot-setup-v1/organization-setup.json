@@ -1,0 +1,115 @@
+{
+  "user_selected_organization": "fullkontrol",
+  "publisher": "MarvinAmador7",
+  "employee_contributor_and_receiver": "KarolGarcia712",
+  "reviewed_plan": {
+    "repository": "fullkontrol/groundray-pilot-mosaic",
+    "private": true,
+    "publisher": "MarvinAmador7",
+    "repository_owner": "fullkontrol",
+    "owner_type": "Organization",
+    "employee_contributor_and_receiver": "KarolGarcia712",
+    "distinct_read_only_account": null,
+    "packet": "EXTRACTED_PACKET_ABSOLUTE_PATH",
+    "create_only_new_repository": true,
+    "human_pilot_completed": false,
+    "main_policy": {
+      "required_status_checks": null,
+      "enforce_admins": false,
+      "required_pull_request_reviews": {
+        "required_approving_review_count": 1,
+        "dismiss_stale_reviews": true
+      },
+      "restrictions": {
+        "users": [
+          "MarvinAmador7"
+        ],
+        "teams": [],
+        "apps": []
+      },
+      "allow_force_pushes": false,
+      "allow_deletions": false
+    },
+    "role_constraint": "Employee writes proposal refs; protected main requires review. Organization main writes are restricted to the named publisher; repository admins retain explicit bypass. Publisher admin may explicitly publish the reviewed exact draft. Host enforcement still needs actual negative attempts.",
+    "notification": "Employee collaborator invitation is sent only by explicit --apply.",
+    "host_plan_gate": "Private branch protection may require a paid GitHub plan; stop before inviting on a policy error."
+  },
+  "actual_worker_operations": [
+    {
+      "command": [
+        "gh",
+        "api",
+        "user",
+        "--method",
+        "GET"
+      ],
+      "exit_code": 0,
+      "login": "MarvinAmador7",
+      "type": "User"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "users/fullkontrol",
+        "--method",
+        "GET"
+      ],
+      "exit_code": 0,
+      "login": "fullkontrol",
+      "type": "Organization"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "users/KarolGarcia712",
+        "--method",
+        "GET"
+      ],
+      "exit_code": 0,
+      "login": "KarolGarcia712",
+      "type": "User"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "repos/fullkontrol/groundray-pilot-mosaic"
+      ],
+      "exit_code": 1,
+      "status": "404",
+      "message": "Not Found"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "orgs/fullkontrol/repos",
+        "--method",
+        "POST",
+        "--input",
+        "-"
+      ],
+      "exit_code": 1,
+      "status": "403",
+      "message": "You need admin access to the organization before adding a repository to it.",
+      "request": {
+        "name": "groundray-pilot-mosaic",
+        "private": true,
+        "description": "Fictional Groundray two-employee pilot; no real company records",
+        "auto_init": false
+      }
+    }
+  ],
+  "repository_read_after": 404,
+  "created": false,
+  "seeded": false,
+  "protection_written": false,
+  "invitation_sent": false,
+  "organization_plan_eligibility_observed": false,
+  "worker_membership_read_status": 403,
+  "earlier_personal_seed": "6ed712b78218b5c2809ffceb6243a0c39df62acb",
+  "focused_tests_passed": 14,
+  "human_pilot_completed": false
+}

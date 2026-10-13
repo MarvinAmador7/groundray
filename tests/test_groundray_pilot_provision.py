@@ -62,7 +62,11 @@ def test_wrong_operator_account_stops_before_creating_repo_or_inviting(tmp_path,
     assert len(calls) == 1
 
 
-def test_failed_private_branch_protection_never_sends_invitation(tmp_path, monkeypatch):
+@pytest.mark.parametrize('host_message', [
+    'Upgrade to GitHub Pro or make this repository public to enable this feature.',
+    'Resource not accessible by integration',
+])
+def test_failed_private_branch_protection_never_sends_invitation(tmp_path, monkeypatch, host_message):
     root = packet(tmp_path)
     p = plan('MarvinAmador7/groundray-pilot-mosaic', 'KarolGarcia712', root)
     calls = []
@@ -77,9 +81,9 @@ def test_failed_private_branch_protection_never_sends_invitation(tmp_path, monke
         if endpoint == 'user':
             body, code = '{"login":"MarvinAmador7"}', 0
         elif endpoint == 'user/repos':
-            body, code = '{"private":true,"clone_url":"https://github.com/MarvinAmador7/groundray-pilot-mosaic.git"}', 0
+            body, code = '{"private":true,"full_name":"MarvinAmador7/groundray-pilot-mosaic","clone_url":"https://github.com/MarvinAmador7/groundray-pilot-mosaic.git"}', 0
         elif '/protection' in endpoint:
-            body, code = '{"status":"403"}', 1
+            body, code = json.dumps({'status': '403', 'message': host_message}), 1
         elif endpoint.startswith('repos/') and method == 'GET':
             body, code = '{"status":"404"}', 1
         else:
@@ -87,6 +91,74 @@ def test_failed_private_branch_protection_never_sends_invitation(tmp_path, monke
         return subprocess.CompletedProcess(argv, code, body, '')
     (root / 'brain/knowledge').mkdir()
     monkeypatch.setattr('scripts.provision_groundray_pilot.subprocess.run', fake)
-    with pytest.raises(RuntimeError, match='refused'):
+    with pytest.raises(RuntimeError, match='refused') as failure:
         apply(p, root, tmp_path / 'no-private-protection.jsonl')
+    assert host_message in str(failure.value)
+    assert 'HTTP 403' in str(failure.value)
+    assert '/branches/main/protection' in str(failure.value)
     assert not any(any('/collaborators/' in value for value in argv) for argv in calls)
+
+
+@pytest.mark.parametrize('failure', [None, 'owner_type', 'returned_owner', 'admin', 'restriction', 'policy'])
+def test_organization_uses_named_publisher_and_invites_only_after_verified_policy(tmp_path, monkeypatch, failure):
+    root = packet(tmp_path)
+    (root / 'brain/knowledge').mkdir()
+    p = plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root, publisher='MarvinAmador7')
+    assert p['publisher'] == 'MarvinAmador7' and p['repository_owner'] == 'fullkontrol'
+    assert p['main_policy']['restrictions']['users'] == ['MarvinAmador7']
+    with pytest.raises(ValueError, match='distinct'):
+        plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root, publisher='KarolGarcia712')
+    calls = []
+    created = False
+
+    def fake(argv, *, input, **kwargs):
+        nonlocal created
+        calls.append(argv)
+        if argv[0] == 'git':
+            if argv[1] == 'clone':
+                Path(argv[-1]).mkdir()
+            return subprocess.CompletedProcess(argv, 0, 'a' * 40 if 'rev-parse' in argv else '', '')
+        endpoint = argv[2]
+        method = argv[argv.index('--method') + 1] if '--method' in argv else 'GET'
+        code = 0
+        if endpoint == 'user':
+            body = {'login': 'MarvinAmador7'}
+        elif endpoint == 'users/fullkontrol':
+            body = {'type': 'User' if failure == 'owner_type' else 'Organization'}
+        elif endpoint == 'orgs/fullkontrol/repos':
+            created = True
+            body = {'private': True, 'full_name': ('other/groundray-pilot-mosaic' if failure == 'returned_owner'
+                                                  else 'fullkontrol/groundray-pilot-mosaic'),
+                    'clone_url': 'https://github.com/fullkontrol/groundray-pilot-mosaic.git'}
+        elif endpoint == 'repos/fullkontrol/groundray-pilot-mosaic':
+            if not created:
+                body, code = {'status': '404'}, 1
+            else:
+                body = {'permissions': {'admin': failure != 'admin'}}
+        elif '/protection' in endpoint:
+            body = {'required_pull_request_reviews': {'required_approving_review_count': 1,
+                                                      'dismiss_stale_reviews': True},
+                    'enforce_admins': {'enabled': False},
+                    'allow_force_pushes': {'enabled': failure == 'policy'},
+                    'allow_deletions': {'enabled': False},
+                    'restrictions': {'users': [{'login': 'KarolGarcia712' if failure == 'restriction' else 'MarvinAmador7'}],
+                                     'teams': [], 'apps': []}}
+            if method == 'PUT':
+                assert json.loads(input) == p['main_policy']
+        elif '/collaborators/' in endpoint:
+            body = {'id': 42}
+        else:
+            body = {}
+        return subprocess.CompletedProcess(argv, code, json.dumps(body), '')
+
+    monkeypatch.setattr('scripts.provision_groundray_pilot.subprocess.run', fake)
+    if failure:
+        with pytest.raises((ValueError, RuntimeError)):
+            apply(p, root, tmp_path / 'organization.jsonl')
+    else:
+        result = apply(p, root, tmp_path / 'organization.jsonl')
+        assert result['invitation_id'] == 42
+        assert result['base_commit'] == 'a' * 40
+    invitations = [argv for argv in calls if any('/collaborators/' in v for v in argv)]
+    assert len(invitations) == (0 if failure else 1)
+    assert not any('user/repos' in argv for argv in calls)

@@ -7,6 +7,65 @@ A distinct read-only account was not supplied and remains a separate gate.
 
 ## Resumed setup: GitHub reachable, creation denied
 
+### Selected organization: fullkontrol
+
+The user selected fullkontrol as the owner for a new private pilot repository.
+MarvinAmador7 remains the authenticated publisher; KarolGarcia712 remains employee
+contributor/receiver. The organization exists, but this worker cannot read publisher
+membership and its actual `POST /orgs/fullkontrol/repos` attempt returns HTTP 403,
+“You need admin access to the organization before adding a repository to it.”
+The planned organization repository still returns 404; no organization seed,
+protection or invitation was created. Its eligible plan is not independently
+established from the worker's responses.
+
+The provisioner now separates the repository owner from the publisher using
+`--publisher`, validates the organization type, uses the organization creation
+endpoint and requires publisher admin access before seeding. Organization main
+writes are restricted to the named publisher, with repository admins retaining
+the explicit bypass. Its policy receipt must confirm that writer restriction,
+review requirement, stale-review dismissal and force-push/deletion prohibitions
+before inviting. No new human verification or host enforcement result is claimed.
+
+Fourteen focused tests pass, including organization success and refusal for
+incorrect owner type, returned owner, missing admin access, incorrect writer
+restriction and weakened policy. Both plan-limit and integration-permission
+failures retain their actual host message/status. Ruff and whitespace checks pass.
+
+[Organization receipt and reviewed plan](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/organization-setup.json)
+and the [organization handoff](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/ORGANIZATION.md)
+preserve the current destination and publisher-machine commands. The previously
+seeded personal repository stays private at its observed seed, without a provisioner
+invitation. The original packet and earlier handoff archives remain intact.
+
+### Publisher-machine follow-up: private seed exists, protection unavailable
+
+The publisher ran the verified packet on the publisher's Mac. The dedicated
+private [pilot repository](https://github.com/MarvinAmador7/groundray-pilot-mosaic)
+now exists with main at `6ed712b78218b5c2809ffceb6243a0c39df62acb`.
+An independent cloud clone matches all 51 files selected for seeding (`brain.yaml`
+and `knowledge/`) against the packet manifest; three concepts validate without
+findings. The packet's README and capture mapping are preparation files and were
+not selected for the hosted seed.
+
+The publisher's protection-write log reports HTTP 403: “Upgrade to GitHub Pro
+or make this repository public to enable this feature.” This is the actual
+publisher-machine failure, distinct from the cloud integration's permission
+error. Main is observed unprotected. The provisioner stopped before its invitation
+step. No employee permissions or human pilot result are established.
+
+Keep the repository private. Continuing the hosted permission pilot requires
+GitHub Pro on this personal account or an explicitly selected organization with
+an eligible plan. Account billing or a different owner needs a user decision.
+Do not rerun the create-only provisioner against this existing repository; a
+reviewed recovery must preserve the exact seed and configure/verify protection
+before any employee invitation. The provisioner now reports the failed operation,
+host message, HTTP status and log path directly instead of a generic traceback.
+
+[Hosted seed receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/hosted-seed.json)
+distinguishes observed remote state from the publisher-reported host error.
+
+### Earlier cloud creation attempt
+
 On the resumed worker, HTTPS requests to GitHub and its API succeed. Both the
 normal GitHub CLI and connector identify the authenticated account as
 MarvinAmador7. The product repository reports publisher admin access;

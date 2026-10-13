@@ -1,5 +1,19 @@
 # Publisher handoff after resumed pilot setup
 
+The user now selected fullkontrol as the owner for a new private pilot repository,
+with MarvinAmador7 as publisher. Use the [current organization instructions](ORGANIZATION.md)
+and current provisioner. The creation procedure below describes the earlier
+personal-repository attempt; its original packet tool lacks organization support.
+
+The publisher-machine follow-up has now created the private pilot repository,
+with main at `6ed712b78218b5c2809ffceb6243a0c39df62acb`. Its files match the
+intended synthetic seed. GitHub refused private branch protection because the
+account needs an eligible plan; the script stopped before inviting Karol. See
+[hosted state](hosted-seed.json). **Do not rerun the create-only apply command
+below against this existing repository.** It remains useful for inspecting the
+packet and documenting the original procedure. Continuing on this same remote
+needs a reviewed protection-recovery path after the host-plan decision.
+
 Publisher: **MarvinAmador7**. Contributor and receiver: **KarolGarcia712**.
 The proposed private repository remains `MarvinAmador7/groundray-pilot-mosaic`.
 The cloud's publisher login works, but GitHub refused repository creation with

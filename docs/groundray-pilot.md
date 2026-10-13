@@ -76,6 +76,50 @@ permission failure; do not continue or silently undo the evidence.
 
 ## Provisioning the proposed private remote
 
+The user has selected **fullkontrol** as the new repository owner, with
+**MarvinAmador7** remaining the publisher. The new planned source is
+`https://github.com/fullkontrol/groundray-pilot-mosaic.git`. Use the current
+checkout's provisioner; the original packet's embedded tool predates organization
+support. From the extracted packet's parent directory:
+
+```sh
+GROUNDRAY_SOURCE_DIR=$(git rev-parse --show-toplevel)
+git -C "$GROUNDRAY_SOURCE_DIR" pull --ff-only origin agent/groundray-skill
+python3 "$GROUNDRAY_SOURCE_DIR/scripts/provision_groundray_pilot.py" \
+  --repository fullkontrol/groundray-pilot-mosaic --publisher MarvinAmador7 \
+  --employee KarolGarcia712 --packet "$PWD/pilot-packet"
+python3 "$GROUNDRAY_SOURCE_DIR/scripts/provision_groundray_pilot.py" \
+  --repository fullkontrol/groundray-pilot-mosaic --publisher MarvinAmador7 \
+  --employee KarolGarcia712 --packet "$PWD/pilot-packet" \
+  --apply --log "$PWD/fullkontrol-provisioning/provisioning.jsonl"
+```
+
+The tool verifies the actual organization type and publisher identity, creates
+through the organization API, requires publisher repository admin permission,
+then seeds the unchanged synthetic brain. Organization main writes are restricted
+to MarvinAmador7, with one review, stale-review dismissal, no force pushes/deletions
+and repository admin bypass for explicit exact-commit publication. Other repository
+admins retain that bypass. The tool checks the policy response before inviting
+Karol; actual employee denial and publisher acceptance remain required tests.
+
+This worker's organization creation attempt returned HTTP 403, “You need admin
+access to the organization before adding a repository to it.” The proposed
+organization repository still returns 404. The organization's private-protection
+availability is not established by these reads; the publisher's normal local
+credentials and the protection apply/check must establish it. A host error stops
+before invitation and now prints the actual operation/message with its log path.
+
+### Earlier personal-repository attempt
+
+Publisher-machine follow-up: the dedicated private repository now exists at
+main `6ed712b78218b5c2809ffceb6243a0c39df62acb`, and its 51 selected seed files
+match the packet. Private protection was refused with an explicit GitHub plan
+restriction, leaving main unprotected and stopping before the invitation step.
+See the [current readiness report](groundray-pilot-readiness.md). The commands
+below document the original create-only procedure; do not reapply it to the
+existing remote. Resolve the host-plan requirement and use a reviewed recovery
+that preserves the seed before inviting the employee.
+
 The prepared plan uses `MarvinAmador7/groundray-pilot-mosaic`. From the extracted packet,
 review it without network calls or writes:
 
