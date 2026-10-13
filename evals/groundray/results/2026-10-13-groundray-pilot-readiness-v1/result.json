@@ -1,0 +1,32 @@
+{
+  "plugin_version": "0.1.0-dev.2",
+  "synthetic": true,
+  "human_participants": 0,
+  "host_role_attempts": 0,
+  "invitations_sent": 0,
+  "host_repository_created": false,
+  "publisher_supplied": "MarvinAmador7",
+  "employee_supplied": "KarolGarcia712",
+  "distinct_read_only_account_supplied": false,
+  "native_http_403": true,
+  "native_model_messages": 0,
+  "native_agent_commands": 0,
+  "native_timeout_seconds": 45,
+  "native_activation_confirmed": false,
+  "github_creation_api_blocked": true,
+  "frozen_plugin_unchanged_during_trial": true,
+  "six_employee_states_preserved_on_upgrade": true,
+  "new_foreground_trials": 1,
+  "agent_retries_or_output_repairs": 0,
+  "compiled_answer_original_link": true,
+  "compiled_answer_summary_link": true,
+  "missing_register_still_explicitly_uninspected": true,
+  "same_prior_brain_commit": "7f19b160ea0c7b5db7b3bf242bca56570f866765",
+  "assessment": "unblinded root; one adaptive bridge refinement, no accuracy/productivity comparison",
+  "local_tests": {
+    "passed": 583,
+    "skipped": 1,
+    "coverage": 86.8
+  },
+  "mechanical_operations": 25
+}

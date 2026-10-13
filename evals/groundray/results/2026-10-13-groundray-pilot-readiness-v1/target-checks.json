@@ -1,0 +1,9 @@
+{
+  "original_target_matches_actual_returned_source": true,
+  "compiled_target_matches_successful_get": true,
+  "compiled_target_current_sha256": "68977d8eebd1029ebb0ca83ecb32030ea12d86f5131cd1ba9599c0d5c54327d5",
+  "compiled_target_is_original": false,
+  "same_business_question": true,
+  "brain_files_unchanged": true,
+  "agent_retries": 0
+}

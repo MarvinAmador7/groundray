@@ -1,0 +1,13 @@
+{
+  "model_runs": 0,
+  "host_role_separation_tested": false,
+  "business_approval_recorded": false,
+  "base_commit": "c084fc6767c1d85e0fa1b070c6dd1c8df70af563",
+  "candidate_commit": "9f49713ff10a884e2342a32d07356d44e1c6bbd1",
+  "operations": 25,
+  "original_and_update_bytes_preserved": true,
+  "native_keyword_query": true,
+  "source_file_target_resolves": true,
+  "review_base": "c084fc6767c1d85e0fa1b070c6dd1c8df70af563",
+  "original_sha256": "83951d2c9317de1ae4b7dec0c07fdf6e183a8b28d385951e8aa289df70cb3e6a"
+}

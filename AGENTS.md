@@ -50,6 +50,10 @@ Groundray development plugin packaging, local Codex marketplace installation,
 checksum-bound native runtime distribution, explicit setup and opt-in foreground
 agent package trials are authorized. Preserve existing host credentials, plugins
 and company state; plugin installation/update does not authorize company publication.
+Preparation of synthetic employee pilot packets, bounded native activation probes,
+and plan-first provisioning of a dedicated new private Git test repository with
+existing host protections are authorized. Real identities and participant outcomes
+must be supplied/observed; no simulated credentials or fabricated human participation.
 Do not expand into automatic QMD installation, embeddings, semantic/hybrid
 querying, vector databases, other lifecycle CLI mutations, MCP servers, APIs,
 native/web UI, authentication/authorization, multitenancy, background agents,

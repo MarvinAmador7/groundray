@@ -1,0 +1,39 @@
+{
+  "case": {
+    "role": "reader",
+    "case": "/workspace/groundray-pilot/link-check/reader",
+    "work": "/workspace/groundray-pilot/link-check/reader/work",
+    "slug": "cedar",
+    "input_snapshot": {},
+    "installed_snapshot": {
+      "brain.yaml": "ad5d48a6a77c6f3f4b1e74f24ec574dc0d8d5cb4962546211bdaad0ca48fdd40",
+      "knowledge/.core-kb.yaml": "133c37056a81bf934cb6446562a83b6e2df42cecd42494020cb5b52daeed2609",
+      "knowledge/inbox/cedar-services-decision.md": "68977d8eebd1029ebb0ca83ecb32030ea12d86f5131cd1ba9599c0d5c54327d5",
+      "knowledge/inbox/index.md": "8ecceb4a870d2ba94d99b241b2267462a02a7d1b8b5eea26415c272556486d68",
+      "knowledge/index.md": "5f1d4871b3efbaf81ed2d53df0b0ce674ce83aa9a63ad7de1b9dd011bb86f4a4",
+      "knowledge/log.md": "fbd8712e888d0bdca7abd631ca34aaaf446dcf6170c6c30af5986756dcd11dcd",
+      "knowledge/references/captures/.gitattributes": "ece797f716e9be49128549fe7e26f19cb04bd65dd20bcb3ae3b07910c38542c4",
+      "knowledge/references/captures/authority.txt": "2159b4dfa526deb836bb153f8058f6e659d2e9abc645e71d93718c32a45e1336",
+      "knowledge/references/captures/authority.txt.capture.json": "a1d01341e2f17c42f0381aa750e8e8aff637e9429bda4a1aca045ced2b2a4e7d"
+    }
+  },
+  "plugin": "/run/codex-environment/codex-home/plugins/cache/groundray-dev/groundray/0.1.0-dev.2",
+  "brain_commit": "7f19b160ea0c7b5db7b3bf242bca56570f866765",
+  "plugin_snapshot": {
+    ".bundled-runtime": "93486a687316de643f10724bdf83934985d41ee02b2d002f46ec472e05525242",
+    "LICENSE": "0505a8284dfae133736a724d196c23a36a7f6c6f731c7c7f37c5f43d88399103",
+    "plugin.json": "249d93b3b361f5fa733c687c60a390fdb93db0df0d88b2aa4d0af5c6827a038f",
+    "runtime/SHA256SUMS": "efe1d37aa8731dcf95c2a7cf6dd8ffbd4a4e90447b657da979e141d8c6bc8e54",
+    "runtime/build.json": "ba5ea81cb884c290bc3b7a9cce3da11a73f3d0ef78de105e522e771a51c60015",
+    "runtime/pkb": "1bf8aaa4074f5902c0fa7c918015799f86dd495430117c09c75eeb8e0c8caf09",
+    "scripts/groundray": "609a142b23d9b100b42fce9a7c93257a2f01cfc569ec572607c4ecb2d1811d08",
+    "skills/groundray/SKILL.md": "7fff0861d586f349fbbc0e632e4636fd96406e6d81ac6f74d4ce69706b135cd1",
+    "skills/groundray/references/portable-kb/SKILL.md": "0330a6391869e35f1c9c517d00b24b9eef7aca8320562e884cc64a6b37839614",
+    "skills/groundray/references/portable-kb/references/collaboration.md": "d8632d40732b36ff64976e364adb376f7e756854f74efeb2965d74aba8bb470e",
+    "skills/groundray/references/portable-kb/references/sources.md": "9347f4459e78e46ac52dc971704b5ced2da5b6cb8e9794fcfbd94c0b1abfd5ee",
+    "skills/groundray-setup/SKILL.md": "20e61e96cfb2e1810d1340ce197bfb10ad1d49474bbc5a676d156c203a0e87e6"
+  },
+  "matched_prior_brain_commit": "7f19b160ea0c",
+  "unchanged_business_question": true,
+  "comparison": "adaptive package bridge refinement; one fresh participant, not a controlled accuracy estimate"
+}

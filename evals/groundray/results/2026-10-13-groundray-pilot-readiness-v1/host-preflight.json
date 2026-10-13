@@ -1,0 +1,24 @@
+{
+  "repository_kind": "Product repository permission metadata only, not company-brain host proof",
+  "product_repository": "MarvinAmador7/portable-kb",
+  "publisher_account": "MarvinAmador7",
+  "publisher_product_repo_permission": "admin",
+  "employee_account_supplied_by_user": "KarolGarcia712",
+  "employee_authenticated_here": false,
+  "proposed_company_repository": "MarvinAmador7/groundray-pilot-mosaic",
+  "company_repository_existence_verified": false,
+  "gh_request": {
+    "argv": [
+      "gh",
+      "api",
+      "user"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Get \"https://api.github.com/user\": Forbidden\n"
+  },
+  "host_mutations_performed": 0,
+  "collaborator_invitations_sent": 0,
+  "real_employee_permission_attempts": 0,
+  "actual_human_sessions": 0
+}

@@ -35,7 +35,9 @@ now packages the skills and a compatible native CLI for Codex, with local
 marketplace installation and an explicit company workflow. The
 [package trials](docs/groundray-plugin-evaluation.md) exercise a fresh employee
 handoff and three additional company cases; native chat activation and a human
-pilot remain open.
+pilot remain open. [Pilot preparation](docs/groundray-pilot-readiness.md) provides
+a runnable two-person packet and private-host plan; its first dev.2 follow-up
+returns clickable evidence for the previously compiled-only case.
 
 ## Install
 

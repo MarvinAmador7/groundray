@@ -1,12 +1,18 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "groundray",
-  "version": "0.1.0-dev.1",
+  "version": "0.1.0-dev.2",
   "description": "Portable company brains: direct answers, inspectable evidence and reviewed updates.",
-  "author": {"name": "Marvin Amador"},
+  "author": {
+    "name": "Marvin Amador"
+  },
   "repository": "https://github.com/MarvinAmador7/portable-kb",
   "license": "Apache-2.0",
-  "keywords": ["company-knowledge", "evidence", "portable-brains"],
+  "keywords": [
+    "company-knowledge",
+    "evidence",
+    "portable-brains"
+  ],
   "extensions": {
     "com.openai": {
       "onboardingSkill": "./skills/groundray-setup/SKILL.md",
@@ -15,8 +21,14 @@
         "shortDescription": "Portable company brains with inspectable evidence",
         "developerName": "Marvin Amador",
         "category": "Productivity",
-        "capabilities": ["Read", "Write"],
-        "defaultPrompt": ["Use Groundray to answer from my company brain.", "Set up Groundray for my company."]
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Use Groundray to answer from my company brain.",
+          "Set up Groundray for my company."
+        ]
       }
     }
   }

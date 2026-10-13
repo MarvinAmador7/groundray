@@ -1,0 +1,65 @@
+{
+  "from_version": "0.1.0-dev.1",
+  "to_version": "0.1.0-dev.2",
+  "six_employee_config_data_cache_preserved": true,
+  "operations": [
+    {
+      "argv": [
+        "plugin",
+        "remove",
+        "groundray@groundray-dev",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"pluginId\": \"groundray@groundray-dev\",\n  \"name\": \"groundray\",\n  \"marketplaceName\": \"groundray-dev\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "plugin",
+        "marketplace",
+        "remove",
+        "groundray-dev",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"marketplaceName\": \"groundray-dev\",\n  \"installedRoot\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "plugin",
+        "marketplace",
+        "add",
+        "/workspace/groundray-build/package-dev2",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"marketplaceName\": \"groundray-dev\",\n  \"installedRoot\": \"/workspace/groundray-build/package-dev2\",\n  \"alreadyAdded\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "plugin",
+        "add",
+        "groundray@groundray-dev",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"pluginId\": \"groundray@groundray-dev\",\n  \"name\": \"groundray\",\n  \"marketplaceName\": \"groundray-dev\",\n  \"version\": \"0.1.0-dev.2\",\n  \"installedPath\": \"/run/codex-environment/codex-home/plugins/cache/groundray-dev/groundray/0.1.0-dev.2\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "plugin",
+        "list",
+        "--marketplace",
+        "groundray-dev",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"groundray@groundray-dev\",\n      \"name\": \"groundray\",\n      \"marketplaceName\": \"groundray-dev\",\n      \"version\": \"0.1.0-dev.2\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"/workspace/groundray-build/package-dev2/plugins/groundray\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"/workspace/groundray-build/package-dev2\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+      "stderr": ""
+    }
+  ]
+}

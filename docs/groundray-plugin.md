@@ -5,7 +5,7 @@ and the compatible Portable KB storage workflow. A self-contained development
 bundle also carries `pkb` and its native Tantivy engine. Company brains stay in
 separate Git repositories and local employee storage.
 
-This is an unreleased Codex-first package, version `0.1.0-dev.1`. The portable
+This is an unreleased Codex-first package, version `0.1.0-dev.2`. The portable
 [root manifest](../plugins/groundray/plugin.json) follows the
 [official plugin layout](https://developers.openai.com/plugins/build/plugins).
 No connector, MCP server, hook, authentication service or background sync is included.
@@ -116,3 +116,6 @@ paths through the packaged helper. These are mechanical tests with zero models,
 one Git identity and no business approval. Additional platform targets and real
 host roles require separate validation. The [installed-package trial report](groundray-plugin-evaluation.md)
 records six fresh agent runs, preserved errors and plugin lifecycle checks.
+The [pilot readiness follow-up](groundray-pilot-readiness.md) adds dev.2 clickable
+evidence guidance, one fresh matched compiled-only case, actual version upgrade
+preservation and a ready two-person [employee pilot](groundray-pilot.md).

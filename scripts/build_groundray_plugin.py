@@ -31,6 +31,14 @@ than guessing a replacement. For first installation use the bundled
 [setup skill](../groundray-setup/SKILL.md). Plugin installation does not authorize
 company publication, business approval or human verification.
 
+Make answer evidence clickable when the CLI returns an existing local target.
+For originals use `source.local_path` exactly; include the source commit alongside
+the link and check the target. For a compiled-only claim, link the retrieved wiki
+page as a summary and say the original was not inspected. Do not invent an
+original link. Candidate originals have no persistent local path: cite their
+exact commit and capture path without manufacturing a file target. Machine paths
+belong in the answer, not the shared company files.
+
 """
 
 

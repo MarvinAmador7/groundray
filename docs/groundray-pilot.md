@@ -1,0 +1,184 @@
+# Groundray employee pilot
+
+Run one real employee handoff against the supplied **fictional Mosaic Studio**
+brain, using a dedicated test repository and separate contributor, publisher and
+receiver accounts. For this first pilot, MarvinAmador7 is the publisher and
+KarolGarcia712 contributes and receives updates. A distinct read-only account is
+not supplied and its permission tests remain pending. The pilot measures whether people can inspect an answer and
+exchange a reviewed update across computers. The supplied business approvals are
+fictional records; a Git publication is not a newly obtained real business approval.
+
+This packet is prepared, not a completed pilot. Native Codex activation and the
+participants' actual host permissions must be observed on their own machines.
+Agents do not stand in for human feedback. Credentials stay on each participant's
+computer; never put them in the packet, brain or observations.
+
+## Prepare the packet
+
+Use the installed development plugin, version `0.1.0-dev.2` or later after checking
+its actual required CLI capabilities. From the development checkout:
+
+```sh
+python -m evals.groundray.pilot prepare --plugin /absolute/installed/plugin \
+  --output /absolute/new/pilot-packet
+```
+
+The packet includes unchanged source captures, an incoming QA update, prompts,
+blank role/session/observation templates and a ZIP. The ZIP excludes `.git` and
+contains no employee credentials or runtime binary. Transfer the separately built
+plugin package appropriate to each machine, verify its checksum, and install it
+with the native Codex marketplace commands in the plugin installation guide.
+
+The packet's local seed commit is preparation evidence only. After extracting
+on another machine and initializing/pushing the dedicated repository, record the
+**actual hosted base commit** rather than expecting the preparation hash to match.
+
+## Roles and host checks
+
+Fill `roles.json` with the chosen repository, source URL and actual account handles.
+Keep publisher and employee identities distinct; do not count the employee
+contributor as a separate read-only account. Each person uses their own normal credentials;
+changing Git commit author names does not establish a different authenticated user.
+The publisher can also review; the reader must not be granted publication rights.
+
+| Actor | Intended host behavior | Required observed attempt |
+| --- | --- | --- |
+| Contributor | Read company main; submit a new proposal; cannot advance main. | Proposal succeeds. Exact candidate/base acceptance is refused by the host; main stays unchanged. |
+| Publisher | Read/review exact proposal; explicitly advance the published ref. | Candidate sources inspect correctly; acceptance advances precisely the reviewed commit. |
+| Reader | Read company main; cannot publish or create proposal refs. | Install/sync succeeds. Publication and proposal submission are refused; main stays unchanged. |
+| Unrelated identity | No access to this private test company repository. | Read is refused under that actual identity, independently of any client setting. |
+
+Use a dedicated **private, empty** test repository, with an available host policy
+that enforces these ref permissions. GitHub policy availability depends on account,
+organization and plan; a personal repository's collaborator roles alone may not
+supply the intended boundary. Record the actual rules and their availability;
+do not assume read/write labels or a protected flag establish enforcement.
+Do not alter the product repository's protections or use it as the company brain.
+If the selected host cannot supply these roles, report that deployment blocker.
+This pilot implements no new authentication or authorization service.
+
+The publisher/operator initializes the extracted `brain/` folder as a Git
+repository if `.git` is absent, commits the synthetic files, sets the supplied
+empty test repository as origin, and seeds its published main. Record the hosted
+base. Do not replace files or history in an existing company repository.
+Then participants clone/install that **same source URL**; attachment checks its
+fetch and push origins, so an equivalent-looking path with another origin is
+not interchangeable.
+
+Run permission attempts only on this disposable synthetic repository. For a
+negative acceptance attempt, supply a genuine structurally valid reviewed
+candidate/base; failure from invalid input is not a host-denial test. A proposal
+attempt needs a real valid local update. Read errors, CLI validation errors and
+actual host refusals must be recorded separately. After every attempt inspect
+main from a permitted independent account and verify the expected full commit.
+If an actor expected to be denied unexpectedly succeeds, stop and report the
+permission failure; do not continue or silently undo the evidence.
+
+## Provisioning the proposed private remote
+
+The prepared plan uses `MarvinAmador7/groundray-pilot-mosaic`. From the extracted packet,
+review it without network calls or writes:
+
+```sh
+python tools/provision_groundray_pilot.py --packet /absolute/pilot-packet
+```
+
+The cloud worker cannot reach the GitHub API needed to create this repository.
+On the publisher's machine, the reviewed plan can be applied explicitly:
+
+```sh
+python tools/provision_groundray_pilot.py --packet /absolute/pilot-packet \
+  --apply --log /absolute/new/provisioning.jsonl
+```
+
+The included provisioner needs only Python standard library, Git and GitHub CLI.
+This uses the publisher's existing `gh`/Git login, confirms the account, refuses
+an existing repository, validates unchanged synthetic packet bytes, creates a
+private empty repository, seeds main, configures/verifies its review requirement,
+and **only then sends KarolGarcia712 a collaborator invitation**. The script
+requires owner admin bypass for exact-commit CLI publication; that bypass is an
+explicit pilot policy, not a business approval. Karol must accept the invitation
+and use their own account on their machine. No credentials should be provided to
+this chat or copied into the packet.
+
+A host/protection failure stops before inviting. Private branch protection may
+require a GitHub plan upgrade; this tool does not upgrade accounts, make the repo
+public, weaken protection or delete a partially created private repo. Follow the
+recorded failure and choose a supported host policy explicitly. API policy receipt
+is not enforcement proof; Karol's actual refused main-publication attempt is still
+required. A valid existing pilot repository needs a separate reviewed path; this
+creation script intentionally leaves it untouched.
+
+## Native activation and ordinary answer
+
+On each participant machine, run `codex plugin list --marketplace groundray-dev --json`
+and the installed helper's `check`. Preserve existing HOME/CODEX_HOME, credentials,
+providers, other plugins and brains. Use a dedicated pilot work directory and,
+if isolating product state, task-specific XDG config/data/cache directories.
+Do not repurpose HOME or invent model credentials.
+
+Install/select the supplied company source through the helper. Record `brain list`,
+`brain status mosaic-studio`, installed commit, index state and provider. In a
+**new native Codex chat**, use the packet's `prompts/owner.txt` to invoke Groundray.
+Keep the original answer and native events/commands if available. Observe actual
+skill discovery and packaged helper use. Manually reading a skill in a foreground
+subagent is a different test and cannot close this activation gate.
+
+The person should open evidence links behind price, launch and contribution
+claims and record which passages they actually inspected. Record whether the
+answer gives the company/period, applicable approval, definition and arithmetic,
+conditional forecast, a real missing record and a useful next action. Record
+what was unclear or took extra work; do not automatically label an answer correct
+because it contains citations or confidence metadata.
+
+A bounded native CLI probe is available after preparing an isolated recorded case:
+
+```sh
+python -m evals.groundray.pilot probe-native --case /absolute/prepared-case \
+  --codex /absolute/codex --timeout 45
+```
+
+It needs `bin/shim.json` and `work/native-prompt.txt`, preserves the full prompt and
+stdout/stderr, and terminates only its own process group at the deadline. It never
+changes authentication or network routes. Its result does **not** automatically
+certify activation; inspect the actual native discovery, commands and response.
+HTTP 403 in the cloud response endpoint is an environment blocker, not proof that
+the plugin failed its company workflow. Do not bypass a blocked endpoint.
+
+## Contribution, review and second employee
+
+1. The contributor explicitly receives `incoming/qa-update.txt` and uses
+   `prompts/contributor.txt` in a fresh chat. Capture the original, update only
+   actual dependent prose through CLI plans, retain older evidence and submit a
+   new proposal. Record its name, full candidate and published base.
+2. The publisher replaces the reviewer prompt's placeholders with those exact
+   values. Inspect the diff and candidate originals with `brain review` and
+   `brain review-source`. Record the recommendation and outstanding company
+   decisions without manufacturing human verification in the synthetic brain.
+3. Once the publisher explicitly chooses to publish this reviewed **draft
+   knowledge**, run `brain accept --commit CANDIDATE --base BASE`. A moved ref or
+   denial requires new inspection; do not bypass it with raw Git publication.
+4. The reader independently receives the update through explicit sync and index
+   recovery, then uses `prompts/reader.txt` in a fresh chat. Open the locally
+   returned evidence paths and compare the full installed/cited version.
+5. Verify original CRLF bytes, launch identity/creation/history, unchanged unrelated
+   scopes and honest draft/agent authorship. Keep the older answer/version explainable.
+
+Company publication and plugin updates are separate. Record plugin/CLI version
+and architecture for each machine. Do not remove brain data as plugin cleanup.
+Do not treat restoring the same package as testing migration to a different version.
+
+## Record the human result
+
+Each participant fills a copy of `session-template.json`: exact original answer,
+actual machine/version, evidence links opened and passages inspected, errors,
+active minutes, feedback, and actual Git versions/outcomes. Leave unobserved fields
+null. Store records locally until people choose an authorized sharing destination.
+Redact secrets/private paths before sharing logs; this synthetic packet is not a
+request to publish real company or employee information.
+
+A completed pilot needs native activation evidence, actual host accept/deny
+attempts, independently synced versions and real human source inspection/feedback.
+Report each separately. These are feasibility observations from one pilot, not
+an accuracy benchmark, authenticity certification, human business approval,
+productivity advantage or general employee deployment guarantee.

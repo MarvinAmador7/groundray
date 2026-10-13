@@ -1,0 +1,10 @@
+{
+  "reader/answer.md": "0e7df4c774f43b9894842504586745906a3e968dab3f867462f6cb287f5febe8",
+  "reader/prompt.txt": "1aaee1cdc9cc486fcb1f6f1f4680e451bd662e0b672f722734d55ca60c532c3c",
+  "reader/final.json": "898fb59e99fcdf4859615b9810f1d3bb927b749d3371bdc90cd1a372b31ab92a",
+  "reader/chat-start.json": "92b2c656462e8466588ac06e489340197e4d13817908daa82ffaaa834017969f",
+  "reader/events.jsonl": "e565e7c03d061edbe2e5c0800cf02cf85689c47a3d5778fd94994613144eaa68",
+  "reader/runner.json": "1e3dd4ce54fcfd30ad28d6c3182eb76b5d727ab4f033c3473d750b47922b4e8c",
+  "reader/cli-trace.jsonl": "1cc3a745760850140cb72e50c6c341fa7df68300977e570ed86cc5f7fa750df8",
+  "reader/agent-final.json": "d227d33a2bc8384fd67c2d022f46c2f76e873c161796ee15c5738a0a25ddde22"
+}

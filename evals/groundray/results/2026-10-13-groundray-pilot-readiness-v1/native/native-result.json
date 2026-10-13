@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "/opt/codex/bin/codex",
+    "exec",
+    "--ephemeral",
+    "--json",
+    "--sandbox",
+    "workspace-write",
+    "--add-dir",
+    "/workspace/groundray-pilot/native",
+    "--skip-git-repo-check",
+    "-C",
+    "/workspace/groundray-pilot/native/work",
+    "--output-last-message",
+    "/workspace/groundray-pilot/native/native-answer.md",
+    "-"
+  ],
+  "exit_code": -15,
+  "timed_out": true,
+  "elapsed_seconds": 45.01,
+  "model_messages": 0,
+  "native_commands": 0,
+  "agent_cli_commands": 0,
+  "blocked_by_http_403": true,
+  "activation_confirmed": false,
+  "activation_notes": "Automatic activation requires manual inspection of native skill discovery, command and answer evidence; a response alone is insufficient.",
+  "prompt_sha256": "41a8cce48269cf4de15c5780bda498357348100dc8eb9ef10add84ba0838a0dd",
+  "auth_home_proxy_preserved": true
+}

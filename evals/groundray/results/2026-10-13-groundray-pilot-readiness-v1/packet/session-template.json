@@ -1,0 +1,18 @@
+{
+  "participant": null,
+  "os": null,
+  "codex_version": null,
+  "plugin_version": null,
+  "installed_commit": null,
+  "question": null,
+  "answer": null,
+  "opened_evidence_links": [],
+  "source_passages_inspected": [],
+  "human_reaction": null,
+  "active_minutes": null,
+  "errors": [],
+  "proposal": null,
+  "candidate_commit": null,
+  "base_commit": null,
+  "publication_outcome": null
+}
