@@ -6,7 +6,8 @@ without losing company scope, original records or decision history.**
 
 Groundray is the intended product: plugin, skill, CLI and shared infrastructure.
 Portable KB supplies the existing engine foundation. This goal is adopted;
-integration and rollout remain planned. The released interface is currently `pkb`,
+development packaging and local workflows are implemented; employee rollout
+remains gated. The released interface is currently `pkb`,
 and the Groundray skills are prototypes. No Groundray plugin, renamed executable
 or hosted service is claimed to be released by this document.
 
@@ -27,10 +28,10 @@ reliable sharing and actual employee use, alongside answer quality.
 
 | Part | Responsibility | Current foundation / remaining work |
 | --- | --- | --- |
-| Plugin | Make the selected company, skill and CLI available to the agent. | Codex/Claude skill installation exists for Portable KB. Groundray plugin packaging and installation lifecycle need implementation. |
-| Skill | Produce answers, evidence and guidance; preserve scoped claims and reasoning during authorized edits. | Full Groundray and Lite exist. Three local fresh-agent chains and a separate reader case exercise the CLI; uncertainty refinement is scoped, with generalization and human inspection unmeasured. |
+| Plugin | Make the selected company, skill and CLI available to the agent. | Codex development package installed/enabled with bundled compatible CLI; removal/reinstall preserve employee state. Native model-backed activation remains blocked here by cloud HTTP 403. |
+| Skill | Produce answers, evidence and guidance; preserve scoped claims and reasoning during authorized edits. | Full Groundray and Lite exist. Earlier CLI chains and six installed-package participants exercise evidence/updates. Three new-company cases cover bounded forecasts, compiled-only attribution and company definitions; broad reliability and human inspection remain unmeasured. |
 | CLI | Create/install/select brains, retrieve evidence, inspect state, publish and sync. | Existing `pkb` operations provide a base. The development plugin provides a quoted helper, capability checks and preservation rules; employee deployment remains gated. |
-| Infrastructure | Store published company versions, enforce access and support reviewed collaboration. | Git repositories and host permissions provide the first shared layer. Employee contribution/review/distribution flows need end-to-end validation. |
+| Infrastructure | Store published company versions, enforce access and support reviewed collaboration. | Git repositories and host permissions provide the first shared layer. Local packaged proposal/review/publication/sync is exercised. Real hosted employee roles and a separate-computer shared-remote handoff remain gates. |
 
 ## First MVP
 
