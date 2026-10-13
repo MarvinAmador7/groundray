@@ -13,7 +13,8 @@ decisions, proposing reviewed changes and syncing without losing history or scop
 
 The next delivery sequence is **storage/interface fit → two-employee workflow →
 Groundray packaging → employee pilot**. These milestones are defined in the goal;
-plugin packaging and integrated collaboration are planned, not released. Existing
+[development plugin packaging](groundray-plugin.md) and local collaboration tests
+are implemented; employee deployment remains gated and unreleased. Existing
 `pkb` commands and profile behavior remain the implementation baseline. Broader
 hosted infrastructure, custom authorization and external integrations keep their
 separate scope gates.

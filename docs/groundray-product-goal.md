@@ -29,7 +29,7 @@ reliable sharing and actual employee use, alongside answer quality.
 | --- | --- | --- |
 | Plugin | Make the selected company, skill and CLI available to the agent. | Codex/Claude skill installation exists for Portable KB. Groundray plugin packaging and installation lifecycle need implementation. |
 | Skill | Produce answers, evidence and guidance; preserve scoped claims and reasoning during authorized edits. | Full Groundray and Lite exist. Three local fresh-agent chains and a separate reader case exercise the CLI; uncertainty refinement is scoped, with generalization and human inspection unmeasured. |
-| CLI | Create/install/select brains, retrieve evidence, inspect state, publish and sync. | Existing `pkb` operations provide a base. A coherent Groundray entry point and compatibility/upgrade behavior need design and implementation. |
+| CLI | Create/install/select brains, retrieve evidence, inspect state, publish and sync. | Existing `pkb` operations provide a base. The development plugin provides a quoted helper, capability checks and preservation rules; employee deployment remains gated. |
 | Infrastructure | Store published company versions, enforce access and support reviewed collaboration. | Git repositories and host permissions provide the first shared layer. Employee contribution/review/distribution flows need end-to-end validation. |
 
 ## First MVP
@@ -69,7 +69,7 @@ include it. No universal platform support is assumed.
 | --- | --- | --- |
 | G0 — Storage and interface fit | Specify how company wiki prose, source bytes, definitions and authority records use the current validated bundle and retrieval/mutation interfaces. Demonstrate one usable company brain with portable evidence links. Resolve any needed adapter explicitly. | CLI source/proposal and fresh Lite chains exercised; candidate inspection and reader paths observed in one follow-up |
 | G1 — Two-employee workflow | Run the acceptance scenario below using isolated employee installations and a shared test remote. Record versions, saved-state integrity, proposal/review flow and refusal states. | Three local fresh-agent chains and a separate reader; uncertainty refinement observed, with host/platform/human and generalization gates open |
-| G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Planned |
+| G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Development package implemented; native installation and packaged-CLI smoke observed. Fresh package trials underway; automatic native skill activation, host-role and human-pilot gates remain open. |
 | G3 — Employee pilot | Validate packaged behavior on supported platforms and have people inspect answers and contribute a reviewed change. Record decisions, source inspections, effort and failures separately. | Planned |
 
 G0 is important because current CLI installation validates an OKF-compatible

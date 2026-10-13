@@ -30,7 +30,9 @@ original evidence through publication and sync. [Fresh-agent trials](docs/ground
 exposed inspection gaps, then exercised pinned candidate-source retrieval and ten
 working reader evidence targets. The [Lite refinement](docs/groundray-uncertainty-evaluation.md)
 observes preserved forecast uncertainty and corrects an invoice evidence-grading
-mistake with the actual supporting passage. These additions are unreleased.
+mistake with the actual supporting passage. These additions are unreleased. The [Groundray development plugin](docs/groundray-plugin.md)
+now packages the skills and a compatible native CLI for Codex, with local
+marketplace installation and an explicit company workflow.
 
 ## Install
 

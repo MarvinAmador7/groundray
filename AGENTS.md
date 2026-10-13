@@ -46,6 +46,10 @@ read-only exact candidate-source retrieval, and
 explicit commit/base-pinned fast-forward acceptance through existing Git host
 permissions are now authorized. These operations do not record company approval
 or human verification; custom authorization and hosted collaboration remain deferred.
+Groundray development plugin packaging, local Codex marketplace installation,
+checksum-bound native runtime distribution, explicit setup and opt-in foreground
+agent package trials are authorized. Preserve existing host credentials, plugins
+and company state; plugin installation/update does not authorize company publication.
 Do not expand into automatic QMD installation, embeddings, semantic/hybrid
 querying, vector databases, other lifecycle CLI mutations, MCP servers, APIs,
 native/web UI, authentication/authorization, multitenancy, background agents,

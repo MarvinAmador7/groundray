@@ -165,3 +165,50 @@ jobs:
           name: qmd-evaluation
           path: ${{ runner.temp }}/qmd-evaluation.json
           if-no-files-found: error
+
+  groundray-plugin:
+    name: Groundray native plugin (${{ matrix.target }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: linux-x86_64
+            runner: ubuntu-22.04
+          - target: darwin-arm64
+            runner: macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Build and install current wheel and native engine
+        env:
+          RUSTUP_HOME: ${{ runner.temp }}/groundray-rustup
+        run: |
+          rustup toolchain install 1.90.0 --profile minimal
+          printf 'RUSTUP_HOME=%s\n' "$RUSTUP_HOME" >> "$GITHUB_ENV"
+          cargo build --release --locked
+          python -m pip install "build>=1.2,<2" "pyinstaller>=6.19,<7"
+          python -m build --wheel
+          python -m pip install dist/*.whl
+      - name: Freeze and package Groundray
+        run: |
+          python scripts/freeze_groundray_cli.py --native target/release/pkb-search --output "${RUNNER_TEMP}/groundray-freeze"
+          python scripts/build_groundray_plugin.py --cli "${RUNNER_TEMP}/groundray-freeze/dist/pkb" --output "${RUNNER_TEMP}/groundray-marketplace"
+      - name: Exercise installed native CLI through packaged helper
+        run: python scripts/smoke_groundray_plugin.py --package "${RUNNER_TEMP}/groundray-marketplace" --output "${RUNNER_TEMP}/groundray-smoke"
+      - name: Retain development package and smoke traces
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: groundray-plugin-${{ matrix.target }}
+          path: |
+            ${{ runner.temp }}/groundray-marketplace/*.zip
+            ${{ runner.temp }}/groundray-marketplace/SHA256SUMS
+            ${{ runner.temp }}/groundray-smoke/operations.jsonl
+            ${{ runner.temp }}/groundray-smoke/result.json
+          if-no-files-found: warn
