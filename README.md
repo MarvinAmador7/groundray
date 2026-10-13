@@ -32,7 +32,10 @@ working reader evidence targets. The [Lite refinement](docs/groundray-uncertaint
 observes preserved forecast uncertainty and corrects an invoice evidence-grading
 mistake with the actual supporting passage. These additions are unreleased. The [Groundray development plugin](docs/groundray-plugin.md)
 now packages the skills and a compatible native CLI for Codex, with local
-marketplace installation and an explicit company workflow.
+marketplace installation and an explicit company workflow. The
+[package trials](docs/groundray-plugin-evaluation.md) exercise a fresh employee
+handoff and three additional company cases; native chat activation and a human
+pilot remain open.
 
 ## Install
 

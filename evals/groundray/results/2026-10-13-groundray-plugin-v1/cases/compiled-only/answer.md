@@ -1,0 +1,11 @@
+**Not on the evidence in the Cedar brain.** It does not establish that you can tell Alder the refund is approved or instruct the team to issue it.
+
+**Why:** The inspected, agent-generated **draft summary** reports that controller Ivo approved a **14,800 credit to Alder on November 7**. That amount, date and alleged approval come only from the compiled summary; **I did not inspect the original finance register**, which the note says was not retained. The helper could not retrieve that external source. A reported credit also needs confirmation as authorization for the requested refund. [Cedar Services decision — cedar@7f19b160ea0c:inbox/cedar-services-decision.md (urn:uuid:2973f69c-da3f-4e6a-8a37-7964796d7875)]
+
+The inspected finance-owner record states: **“Only controller Ivo can approve customer refunds”** and **“A meeting summary or a draft brain note is not approval.”** It also says the current approved refund register is not supplied in this brain. Owning Cedar does not substitute for the designated approval under that rule. [authority.txt — cedar@7f19b160ea0c:references/captures/authority.txt]
+
+This establishes a report of approval and the applicable authority rule, **not an actionable approval or evidence of payment**. The missing register does not prove that Ivo never approved it.
+
+**Next:** Ask Ivo to confirm the current approved-register entry or provide explicit, recorded approval covering Alder’s refund. Confirm the amount and currency, whether the credit authorizes a cash refund, any conditions, and whether it has already been issued. Once the applicable approval and execution details are confirmed, give the team the instruction supported by that record.
+
+For now, tell Alder: “We’re confirming finance approval for your requested refund and will update you once that is confirmed.”

@@ -1,0 +1,56 @@
+{
+  "grader": "unblinded root manual assessment",
+  "accuracy_score": null,
+  "assessments": {
+    "bounded": {
+      "assessment": "Scoped commitment and explicit conditional bound preserved",
+      "quotes": [
+        "Harbor will dispatch batch H-4 by November 30, 2026.",
+        "between six and nine calendar days",
+        "Nine days is the upper bound of this conditional estimate, not a service guarantee."
+      ],
+      "clickable_original_targets": 3
+    },
+    "compiled-only": {
+      "assessment": "Attributed amount and alleged approval to compiled summary; original explicitly uninspected; no actionable approval inferred",
+      "summary_only_details": [
+        "14,800",
+        "November 7",
+        "alleged controller approval"
+      ],
+      "source_quote": "A meeting summary or a draft brain note is not approval.",
+      "source_originals_received": [
+        "references/captures/authority.txt"
+      ],
+      "external_source_refusal_expected": true,
+      "clickable_original_targets": 0,
+      "usability_gap": "Available owner original cited by pin but no clickable file link"
+    },
+    "second-company": {
+      "assessment": "Applied Boreal scope, price delegation and contribution definition; no imported cross-company numbers",
+      "quotes": [
+        "approved 7,100 for Lumen batch B-9 only.",
+        "Recognized assay fees 100,000, technician labor 41,000, reagent costs 32,000.",
+        "This is my suggestion, not a Boreal approval."
+      ],
+      "calculation": "(100000-41000-32000)/100000=0.27",
+      "clickable_original_targets": 4
+    },
+    "handoff": {
+      "assessment": "Conditional QA wording, scoped approvals, correct contribution inputs and independent Tint scope retained in saved note and three answers",
+      "uncertainty_quote": "If issues are found, remediation may take three more days.",
+      "invoice_support": "Invoice I-71 gross 4,500 includes tax 500; recognized fees remain 4,000.",
+      "invoice_support_path": "references/captures/owner/2026-11-02-correction.md.txt",
+      "invoice_export_independently_inspected": false,
+      "reader_stale_index_refusal_recovered": true,
+      "reader_clickable_original_targets": 9
+    }
+  },
+  "limitations": [
+    "synthetic",
+    "one host/Git identity",
+    "protocol-only isolation",
+    "no human approval/authentication/effort measurement",
+    "complete bodies recorded by observer do not prove understanding or completeness of model-context exposure"
+  ]
+}

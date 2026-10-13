@@ -1,0 +1,20 @@
+{
+  "actor": "root-fixture-publisher",
+  "argv": [
+    "/run/codex-environment/codex-home/plugins/cache/groundray-dev/groundray/0.1.0-dev.1/scripts/groundray",
+    "brain",
+    "accept",
+    "lumen-qa-nov9-review",
+    "--brain",
+    "mosaic-studio",
+    "--commit",
+    "d7d29ba1b496656115f6a63680f844938f3753e1",
+    "--base",
+    "12dc8d61e9b42083cb8b2148b54e6f277641290b",
+    "--json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"base_commit\": \"12dc8d61e9b42083cb8b2148b54e6f277641290b\",\n  \"business_approval_recorded\": false,\n  \"changed_paths\": [\n    \"knowledge/log.md\",\n    \"knowledge/references/captures/qa/2026-11-09.txt\",\n    \"knowledge/references/captures/qa/2026-11-09.txt.capture.json\",\n    \"knowledge/wiki/lumen-launch.md\"\n  ],\n  \"installed_brain_changed\": false,\n  \"installed_commit\": \"d7d29ba1b496656115f6a63680f844938f3753e1\",\n  \"needs_sync\": true,\n  \"ok\": true,\n  \"proposal\": \"lumen-qa-nov9-review\",\n  \"proposal_commit\": \"d7d29ba1b496656115f6a63680f844938f3753e1\",\n  \"proposal_ref\": \"refs/heads/groundray/lumen-qa-nov9-review\",\n  \"published_main\": true,\n  \"slug\": \"mosaic-studio\",\n  \"source\": \"file:///workspace/groundray-plugin-eval/handoff-v1/company.git\",\n  \"validation_warnings\": []\n}\n",
+  "stderr": "",
+  "host_role_separation": false
+}

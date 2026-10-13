@@ -1,0 +1,20 @@
+{
+  "base": "12dc8d61e9b42083cb8b2148b54e6f277641290b",
+  "candidate": "d7d29ba1b496656115f6a63680f844938f3753e1",
+  "changed_files": [
+    "knowledge/log.md",
+    "knowledge/references/captures/qa/2026-11-09.txt",
+    "knowledge/references/captures/qa/2026-11-09.txt.capture.json",
+    "knowledge/wiki/lumen-launch.md"
+  ],
+  "all_prior_capture_artifacts_unchanged": 43,
+  "prior_originals": 21,
+  "plugin_inputs_unchanged": true,
+  "publication": "explicit root fixture, same Git identity; no business approval",
+  "old_snapshot_recoverable": true,
+  "retained_git_attributes": 1,
+  "item_identity_and_creation_preserved": true,
+  "new_human_verification_recorded": false,
+  "status": "draft",
+  "unrelated_wiki_pages_unchanged": true
+}

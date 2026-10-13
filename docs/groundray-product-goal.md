@@ -69,7 +69,7 @@ include it. No universal platform support is assumed.
 | --- | --- | --- |
 | G0 — Storage and interface fit | Specify how company wiki prose, source bytes, definitions and authority records use the current validated bundle and retrieval/mutation interfaces. Demonstrate one usable company brain with portable evidence links. Resolve any needed adapter explicitly. | CLI source/proposal and fresh Lite chains exercised; candidate inspection and reader paths observed in one follow-up |
 | G1 — Two-employee workflow | Run the acceptance scenario below using isolated employee installations and a shared test remote. Record versions, saved-state integrity, proposal/review flow and refusal states. | Three local fresh-agent chains and a separate reader; uncertainty refinement observed, with host/platform/human and generalization gates open |
-| G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Development package implemented; native installation and packaged-CLI smoke observed. Fresh package trials underway; automatic native skill activation, host-role and human-pilot gates remain open. |
+| G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Development package installed/enabled; six fresh explicit package trials and 25-operation native smoke complete. Removal/reinstall preserve employee state. Automatic native activation (cloud 403), real host-role and human-pilot gates remain open. |
 | G3 — Employee pilot | Validate packaged behavior on supported platforms and have people inspect answers and contribute a reviewed change. Record decisions, source inspections, effort and failures separately. | Planned |
 
 G0 is important because current CLI installation validates an OKF-compatible
@@ -99,8 +99,11 @@ retrieval and ten working original-source targets, while retaining unsupported
 refines Lite and observes conditional wording in new agents. An invoice attribution
 finding was withdrawn: the readers inspected an owner record containing the figures;
 the initial grading remains preserved. This is scoped validation, not accuracy superiority.
-Real host permissions
-and separate-computer packaging remain to be tested;
+The [package follow-up](groundray-plugin-evaluation.md) exercises six fresh agents
+through the native installed plugin files and frozen runtime, plus local lifecycle
+preservation. Explicit bounds, compiled-only attribution and a new company are
+observed in one targeted case each; one answer lacks clickable evidence links.
+Real host permissions and a separate-computer shared-remote handoff remain to be tested;
 no release or full G1 completion is claimed.
 
 G1 can first use two isolated employee homes on one Linux host to prove the

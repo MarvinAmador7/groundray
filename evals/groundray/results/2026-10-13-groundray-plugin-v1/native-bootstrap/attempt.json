@@ -1,0 +1,9 @@
+{
+  "codex_version": "0.159.0-alpha.3",
+  "ephemeral": true,
+  "model_response_received": false,
+  "native_activation_tested": false,
+  "outcome": "cloud proxy denied Codex responses endpoint with HTTP 403; own client interrupted via SIGINT",
+  "prompt_preservation": "full native prompt was not preserved; no model response or company actions occurred",
+  "retry": false
+}

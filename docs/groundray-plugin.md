@@ -114,4 +114,5 @@ ARM, then exercises setup, installation/selection, captured CRLF originals,
 proposal review/publication, independent sync, native search and resolved source
 paths through the packaged helper. These are mechanical tests with zero models,
 one Git identity and no business approval. Additional platform targets and real
-host roles require separate validation.
+host roles require separate validation. The [installed-package trial report](groundray-plugin-evaluation.md)
+records six fresh agent runs, preserved errors and plugin lifecycle checks.

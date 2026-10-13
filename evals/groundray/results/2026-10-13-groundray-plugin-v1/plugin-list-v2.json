@@ -1,0 +1,23 @@
+{
+  "installed": [
+    {
+      "pluginId": "groundray@groundray-dev",
+      "name": "groundray",
+      "marketplaceName": "groundray-dev",
+      "version": "0.1.0-dev.1",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "/workspace/groundray-build/package-v2/plugins/groundray"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "/workspace/groundray-build/package-v2"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    }
+  ],
+  "available": []
+}

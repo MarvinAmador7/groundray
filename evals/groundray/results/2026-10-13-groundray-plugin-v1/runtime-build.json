@@ -1,0 +1,7 @@
+{
+  "plugin_version": "0.1.0-dev.1",
+  "cli_version": "pkb 0.2.0",
+  "target": "linux-x86_64",
+  "cli_sha256": "1bf8aaa4074f5902c0fa7c918015799f86dd495430117c09c75eeb8e0c8caf09",
+  "cli_compatibility": "0.2.x plus explicit command-capability probes"
+}
