@@ -9,6 +9,23 @@ A distinct read-only account was not supplied and remains a separate gate.
 
 ### Selected organization: fullkontrol
 
+The publisher supplied the successful selected-mode provisioner result: source
+`https://github.com/fullkontrol/groundray-pilot-mosaic.git`, hosted base
+`259fea0d4a3006f5450d0705f07bc868b688ae39`, contributor access request complete,
+and main observed unprotected by the local tool. Resume retained the existing
+seed. No invitation ID was returned; invitation acceptance and actual employee
+authentication/effective permissions remain unobserved. This is a publisher-machine
+receipt: this worker still receives 404 for private repository/branch reads and
+cannot independently inspect that seed.
+
+[Successful provisioner receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/provisioning-success.json)
+and [current participant roles](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/participant-roles.json)
+record the hosted pin and separate access setup from participant outcomes.
+[Participant installation steps](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/PARTICIPANTS.md)
+cover matching CI packages, actual employee access checks, installation and native
+sessions. Contributor proposal, publisher exact review/acceptance, independent
+sync and human source inspection remain pending. Do not rerun initial provisioning.
+
 The user explicitly chose the **full contributor pilot without main protection**,
 while retaining the private repository. The provisioner now accepts
 `--without-main-protection` with the exact-seed resume plan. It retains identity,

@@ -1,0 +1,28 @@
+{
+  "evidence_source": "Publisher supplied actual provisioner success result in chat",
+  "publisher": "MarvinAmador7",
+  "employee": "KarolGarcia712",
+  "reported_result": {
+    "repository": "fullkontrol/groundray-pilot-mosaic",
+    "source_url": "https://github.com/fullkontrol/groundray-pilot-mosaic.git",
+    "base_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "resumed_existing_seed": true,
+    "invitation_id": null,
+    "invitation_accepted": null,
+    "actual_employee_negative_attempts": 0,
+    "human_sessions_completed": 0,
+    "host_policy_received": null,
+    "main_protection_required": false,
+    "hosted_main_protected": false,
+    "publisher_only_main_access_tested": false,
+    "collaborator_access_request_completed": true
+  },
+  "worker_independent_read": {
+    "repository_http_status": 404,
+    "branch_http_status": 404,
+    "private_seed_verified_by_worker": false
+  },
+  "actual_employee_authentication_observed": false,
+  "native_activation_observed": false,
+  "human_evidence_inspection_observed": false
+}

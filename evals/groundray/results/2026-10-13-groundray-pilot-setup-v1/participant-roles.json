@@ -1,0 +1,26 @@
+{
+  "repository": "fullkontrol/groundray-pilot-mosaic",
+  "source_url": "https://github.com/fullkontrol/groundray-pilot-mosaic.git",
+  "base_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+  "publisher_account": "MarvinAmador7",
+  "contributor_account": "KarolGarcia712",
+  "receiver_account": "KarolGarcia712",
+  "read_only_account": null,
+  "host_main_ref": "refs/heads/main",
+  "pilot_mode": "private contributor without main protection",
+  "employee_access_requested": "push",
+  "employee_effective_permission_observed": null,
+  "collaborator_access_request_completed": true,
+  "main_protection_required": false,
+  "hosted_main_protected_reported": false,
+  "publisher_role_is_workflow_convention": true,
+  "publisher_only_main_access_tested": false,
+  "employee_publication_denial_in_scope": false,
+  "native_sessions_completed": false,
+  "human_source_inspection_completed": false,
+  "publisher_machine_reported": {
+    "os": "Darwin",
+    "architecture": "arm64"
+  },
+  "employee_machine_reported": null
+}

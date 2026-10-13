@@ -6,6 +6,14 @@ Planned source: `https://github.com/fullkontrol/groundray-pilot-mosaic.git`.
 
 ## Current selection: private contributor pilot without main protection
 
+**Access setup completed on the publisher's machine.** The reported hosted base
+is `259fea0d4a3006f5450d0705f07bc868b688ae39`; the collaborator access request
+completed, main is unprotected, and no invitation ID was returned. See the
+[success receipt](provisioning-success.json) and
+[participant installation steps](PARTICIPANTS.md). Do not rerun the resume apply
+below after this success. Actual employee login/read/write, native activation and
+human sessions still require observation.
+
 The user explicitly selected full contribution without main protection. Keep the
 repository private and grant Karol contributor write access, including main.
 Publisher review and publication remain workflow conventions; employee main

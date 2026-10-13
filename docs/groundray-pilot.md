@@ -18,6 +18,13 @@ outside this selected mode, while the latter still needs an actual unrelated
 identity. Use the current
 [unprotected contributor setup commands](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/ORGANIZATION.md).
 
+The publisher's selected-mode setup succeeded at hosted base
+`259fea0d4a3006f5450d0705f07bc868b688ae39`, with contributor access request
+complete and main unprotected. No invitation ID was returned; employee access
+and acceptance need their own observations. Continue with the
+[participant installation steps](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/PARTICIPANTS.md),
+rather than rerunning provisioning. Keep this full hosted base in session records.
+
 This packet is prepared, not a completed pilot. Native Codex activation and the
 participants' actual host permissions must be observed on their own machines.
 Agents do not stand in for human feedback. Credentials stay on each participant's
