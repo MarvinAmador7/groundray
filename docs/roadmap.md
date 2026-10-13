@@ -20,8 +20,9 @@ separate scope gates.
 
 G0 now has a [reproducible development fit](groundray-engine-fit.md): three wiki
 pages, 21 unchanged sources, native retrieval and explicit local sync. The
-production source interface and remote-installed authoring flow remain open
-before the integrated G1 workflow; no profile change was needed for this fixture.
+source capture/read interface is now [implemented and exercised through the CLI](groundray-cli-sources.md).
+Remote-installed authoring/proposals and actual Lite behavior through the interface
+remain open before the integrated G1 workflow. No profile change was needed.
 
 ## Implementation status
 

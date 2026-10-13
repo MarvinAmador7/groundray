@@ -107,7 +107,7 @@ class Run:
         )
 
 
-def demonstrate(output: Path, native: Path) -> dict:
+def demonstrate(output: Path, native: Path, *, cli_sources: bool = False) -> dict:
     output = output.absolute()
     native = native.absolute()
     if output.exists():
@@ -135,9 +135,32 @@ def demonstrate(output: Path, native: Path) -> dict:
         if not source.is_file():
             continue
         relative = source.relative_to(SOURCES).as_posix()
-        target = repository / "knowledge/references" / capture_path(relative)
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, target)
+        prefix = "references/captures" if cli_sources else "references"
+        target = repository / "knowledge" / prefix / capture_path(relative)
+        if cli_sources:
+            args = [
+                "source",
+                "capture",
+                str(source),
+                "--path",
+                f"{prefix}/{relative}",
+                "--actor",
+                "openai/codex",
+                "--origin",
+                f"Synthetic fixture: {relative}",
+                "--brain",
+                SLUG,
+            ]
+            before = run.git(repository, ["rev-parse", "HEAD"]).strip()
+            preview = run.cli("author", args)
+            assert not preview["applied"]
+            assert run.git(repository, ["rev-parse", "HEAD"]).strip() == before
+            assert not run.git(repository, ["status", "--porcelain"]).strip()
+            saved = run.cli("author", [*args, "--apply"])
+            assert saved["capture"]["sha256"] == digest(source)
+        else:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, target)
         records.append(
             {
                 "original": f"docs/groundray-simple/sources/{relative}",
@@ -147,16 +170,24 @@ def demonstrate(output: Path, native: Path) -> dict:
             }
         )
         assert target.read_bytes() == source.read_bytes()
-    (repository / "source-captures.json").write_text(json.dumps(records, indent=2) + "\n")
-    run.git(repository, ["add", "knowledge/references", "source-captures.json"])
-    run.git(repository, ["commit", "-m", "Seed authorized synthetic source copies for G0"])
-    run.cli("author", ["brain", "sync", SLUG])
+    if cli_sources:
+        (output / "source-captures.json").write_text(json.dumps(records, indent=2) + "\n")
+    else:
+        (repository / "source-captures.json").write_text(json.dumps(records, indent=2) + "\n")
+        run.git(repository, ["add", "knowledge/references", "source-captures.json"])
+        run.git(repository, ["commit", "-m", "Seed authorized synthetic source copies for G0"])
+        run.cli("author", ["brain", "sync", SLUG])
 
     pages = []
     inputs = output / "inputs"
     inputs.mkdir()
     for body_path in sorted(FIXTURES.glob("*.md")):
         body = body_path.read_text()
+        input_body = body_path
+        if cli_sources:
+            body = body.replace("../references/", "../references/captures/")
+            input_body = inputs / body_path.name
+            input_body.write_text(body)
         title = body.splitlines()[0].removeprefix("# ")
         sources = [
             {"id": match[1], "resource": match[3], "title": match[2]}
@@ -180,7 +211,7 @@ def demonstrate(output: Path, native: Path) -> dict:
             "--path",
             f"wiki/{body_path.name}",
             "--body-file",
-            str(body_path),
+            str(input_body),
             "--sources-file",
             str(source_file),
             "--confidence",
@@ -212,27 +243,40 @@ def demonstrate(output: Path, native: Path) -> dict:
         assert all(link["resolution"] == "resolved" for link in links["links"])
     run.cli("reader", ["get", "index.md", "--brain", SLUG])
     run.cli(
-        "reader", ["get", "references/tables/ledger-reconciled.csv", "--brain", SLUG], expected=1
+        "reader", ["get", f"{prefix}/tables/ledger-reconciled.csv", "--brain", SLUG], expected=1
     )
+    if cli_sources:
+        for record in records:
+            saved = run.cli(
+                "reader",
+                ["source", "get", record["capture"].removeprefix("knowledge/"), "--brain", SLUG],
+            )
+            assert saved["source"]["sha256"] == record["sha256"]
+            assert saved["capture_receipt"]["sha256"] == record["sha256"]
     source_reads = []
     for page in pages:
         for source in page["sources"]:
-            raw = run.command(
-                [
-                    sys.executable,
-                    "-m",
-                    "evals.groundray.saved_source",
-                    page["path"],
-                    source["id"],
-                    "--brain",
-                    SLUG,
-                    "--config",
-                    str(run.configs["reader"]),
-                    "--as-of",
-                    AS_OF,
-                ]
-            )
-            result = json.loads(raw)
+            if cli_sources:
+                result = run.cli(
+                    "reader", ["source", "get", page["path"], source["id"], "--brain", SLUG]
+                )
+            else:
+                raw = run.command(
+                    [
+                        sys.executable,
+                        "-m",
+                        "evals.groundray.saved_source",
+                        page["path"],
+                        source["id"],
+                        "--brain",
+                        SLUG,
+                        "--config",
+                        str(run.configs["reader"]),
+                        "--as-of",
+                        AS_OF,
+                    ]
+                )
+                result = json.loads(raw)
             record = next(
                 r for r in records if r["capture"] == f"knowledge/{result['source']['path']}"
             )
@@ -253,7 +297,11 @@ def demonstrate(output: Path, native: Path) -> dict:
     margin = FIXTURES / "lumen-margin.md"
     revised = inputs / "margin-revised.md"
     revised.write_text(
-        margin.read_text()
+        (
+            margin.read_text().replace("../references/", "../references/captures/")
+            if cli_sources
+            else margin.read_text()
+        )
         + "\n## Inspection note\n\nThe 62.5% project calculation does not establish collected cash or a complete company close.\n"
     )
     update_args = [
@@ -292,7 +340,12 @@ def demonstrate(output: Path, native: Path) -> dict:
     shutil.copytree(repository / "knowledge", output / "bundle")
     shutil.copyfile(repository / "brain.yaml", output / "brain.yaml")
     report = {
-        "experiment": "groundray-g0-engine-fit-v1",
+        "experiment": "groundray-g0-cli-sources-v1"
+        if cli_sources
+        else "groundray-g0-engine-fit-v1",
+        "source_workflow": "pkb source capture/get"
+        if cli_sources
+        else "manual fixture copies/development reader",
         "recorded_at": datetime.now(UTC).isoformat(),
         "validation_as_of": AS_OF,
         "fictional_business_as_of": "2026-11-06",
@@ -333,8 +386,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--native-command", type=Path, required=True)
+    parser.add_argument(
+        "--cli-sources",
+        action="store_true",
+        help="Use supported source capture/get instead of the G0 development bridge.",
+    )
     args = parser.parse_args()
-    result = demonstrate(args.output, args.native_command)
+    result = demonstrate(args.output, args.native_command, cli_sources=args.cli_sources)
     print(
         json.dumps(
             {key: result[key] for key in ("experiment", "command_count", "checks")}, indent=2

@@ -6,6 +6,11 @@ and a development saved-source reader. It calls no model and does not measure
 Groundray Lite behavior. Run `python -m evals.groundray.engine_fit --help` for its
 explicit output/native-sidecar inputs.
 
+Use `--cli-sources` for the [supported-source follow-up](../../docs/groundray-cli-sources.md).
+That mode captures originals through CLI plans/applies, checks direct receipt-backed
+reads and follows item source IDs with `pkb source get`. The earlier development
+mode and recorded traces remain available; neither mode runs a fresh model.
+
 The later [natural-question suite](NATURAL.md) exercises five ordinary business
 questions without evidence instructions in the user prompts.
 

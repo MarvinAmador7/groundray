@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/chat/03-sales.txt",
+  "original_name": "03-sales.txt",
+  "title": "03-sales.txt",
+  "bytes": 189,
+  "sha256": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:26Z"
+  },
+  "origin": "Synthetic fixture: chat/03-sales.txt"
+}

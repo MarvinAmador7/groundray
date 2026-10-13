@@ -104,6 +104,12 @@ def _load_schema(path: Path) -> Mapping[str, Any]:
     return data
 
 
+def is_valid_actor(value: str) -> bool:
+    """Check the existing profile's actor syntax; this does not authenticate a person."""
+    schema = _load_schema(_default_schema_path())
+    return Draft202012Validator(schema["$defs"]["actor"]).is_valid(value)
+
+
 def _finding(
     code: str,
     severity: Severity,

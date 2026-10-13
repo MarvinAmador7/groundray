@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/notes/13-close-query.md.txt",
+  "original_name": "13-close-query.md",
+  "title": "13-close-query.md",
+  "bytes": 308,
+  "sha256": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:37Z"
+  },
+  "origin": "Synthetic fixture: notes/13-close-query.md"
+}

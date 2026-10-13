@@ -34,6 +34,12 @@ moves with identity/provenance preservation and scoped link/index repair, and ex
 fast-forward publication of the active saved brain version. Standalone CLI
 packaging, checksum-verifying installation, CI, and version-driven GitHub
 release automation are authorized distribution work.
+Explicit plan-first capture of authorized UTF-8 source records, byte-preserving
+Git distribution, capture receipts and read-only retrieval of managed captures
+or declared local sources are also authorized. Captures under
+`knowledge/references/captures/` remain opaque artifacts, not verified concepts;
+Markdown originals use `.md.txt` names without content changes. Binary extraction,
+remote source fetching and production whole-wiki import remain deferred.
 Do not expand into automatic QMD installation, embeddings, semantic/hybrid
 querying, vector databases, other lifecycle CLI mutations, MCP servers, APIs,
 native/web UI, authentication/authorization, multitenancy, background agents,

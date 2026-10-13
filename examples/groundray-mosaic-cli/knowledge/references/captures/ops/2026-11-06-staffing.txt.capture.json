@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/ops/2026-11-06-staffing.txt",
+  "original_name": "2026-11-06-staffing.txt",
+  "title": "2026-11-06-staffing.txt",
+  "bytes": 175,
+  "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:40Z"
+  },
+  "origin": "Synthetic fixture: ops/2026-11-06-staffing.txt"
+}

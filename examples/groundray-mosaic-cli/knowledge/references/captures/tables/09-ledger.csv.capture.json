@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/tables/09-ledger.csv",
+  "original_name": "09-ledger.csv",
+  "title": "09-ledger.csv",
+  "bytes": 158,
+  "sha256": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:43Z"
+  },
+  "origin": "Synthetic fixture: tables/09-ledger.csv"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/chat/16-plan.txt",
+  "original_name": "16-plan.txt",
+  "title": "16-plan.txt",
+  "bytes": 207,
+  "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:28Z"
+  },
+  "origin": "Synthetic fixture: chat/16-plan.txt"
+}

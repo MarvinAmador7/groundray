@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/mail/01-context.txt",
+  "original_name": "01-context.txt",
+  "title": "01-context.txt",
+  "bytes": 245,
+  "sha256": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:31Z"
+  },
+  "origin": "Synthetic fixture: mail/01-context.txt"
+}

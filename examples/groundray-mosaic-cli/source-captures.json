@@ -1,0 +1,128 @@
+[
+  {
+    "original": "docs/groundray-simple/sources/chat/03-sales.txt",
+    "capture": "knowledge/references/captures/chat/03-sales.txt",
+    "bytes": 189,
+    "sha256": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556"
+  },
+  {
+    "original": "docs/groundray-simple/sources/chat/07-exception.txt",
+    "capture": "knowledge/references/captures/chat/07-exception.txt",
+    "bytes": 211,
+    "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72"
+  },
+  {
+    "original": "docs/groundray-simple/sources/chat/16-plan.txt",
+    "capture": "knowledge/references/captures/chat/16-plan.txt",
+    "bytes": 207,
+    "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057"
+  },
+  {
+    "original": "docs/groundray-simple/sources/contracts/06-lumen.txt",
+    "capture": "knowledge/references/captures/contracts/06-lumen.txt",
+    "bytes": 338,
+    "sha256": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27"
+  },
+  {
+    "original": "docs/groundray-simple/sources/docs/02-rate-card.md",
+    "capture": "knowledge/references/captures/docs/02-rate-card.md.txt",
+    "bytes": 206,
+    "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3"
+  },
+  {
+    "original": "docs/groundray-simple/sources/mail/01-context.txt",
+    "capture": "knowledge/references/captures/mail/01-context.txt",
+    "bytes": 245,
+    "sha256": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501"
+  },
+  {
+    "original": "docs/groundray-simple/sources/mail/14-client.txt",
+    "capture": "knowledge/references/captures/mail/14-client.txt",
+    "bytes": 179,
+    "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e"
+  },
+  {
+    "original": "docs/groundray-simple/sources/mail/2026-11-06-lumen.txt",
+    "capture": "knowledge/references/captures/mail/2026-11-06-lumen.txt",
+    "bytes": 186,
+    "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844"
+  },
+  {
+    "original": "docs/groundray-simple/sources/notes/04-team.md",
+    "capture": "knowledge/references/captures/notes/04-team.md.txt",
+    "bytes": 147,
+    "sha256": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c"
+  },
+  {
+    "original": "docs/groundray-simple/sources/notes/05-board.md",
+    "capture": "knowledge/references/captures/notes/05-board.md.txt",
+    "bytes": 127,
+    "sha256": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1"
+  },
+  {
+    "original": "docs/groundray-simple/sources/notes/13-close-query.md",
+    "capture": "knowledge/references/captures/notes/13-close-query.md.txt",
+    "bytes": 308,
+    "sha256": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687"
+  },
+  {
+    "original": "docs/groundray-simple/sources/notes/18-feedback.md",
+    "capture": "knowledge/references/captures/notes/18-feedback.md.txt",
+    "bytes": 202,
+    "sha256": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e"
+  },
+  {
+    "original": "docs/groundray-simple/sources/notes/2026-11-06-summary.md",
+    "capture": "knowledge/references/captures/notes/2026-11-06-summary.md.txt",
+    "bytes": 199,
+    "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb"
+  },
+  {
+    "original": "docs/groundray-simple/sources/ops/2026-11-06-staffing.txt",
+    "capture": "knowledge/references/captures/ops/2026-11-06-staffing.txt",
+    "bytes": 175,
+    "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd"
+  },
+  {
+    "original": "docs/groundray-simple/sources/owner/2026-11-02-correction.md",
+    "capture": "knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+    "bytes": 440,
+    "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+  },
+  {
+    "original": "docs/groundray-simple/sources/owner/definitions-and-authority.md",
+    "capture": "knowledge/references/captures/owner/definitions-and-authority.md.txt",
+    "bytes": 1248,
+    "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43"
+  },
+  {
+    "original": "docs/groundray-simple/sources/qa/2026-11-06.txt",
+    "capture": "knowledge/references/captures/qa/2026-11-06.txt",
+    "bytes": 239,
+    "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa"
+  },
+  {
+    "original": "docs/groundray-simple/sources/tables/09-ledger.csv",
+    "capture": "knowledge/references/captures/tables/09-ledger.csv",
+    "bytes": 158,
+    "sha256": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032"
+  },
+  {
+    "original": "docs/groundray-simple/sources/tables/10-invoices.csv",
+    "capture": "knowledge/references/captures/tables/10-invoices.csv",
+    "bytes": 148,
+    "sha256": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642"
+  },
+  {
+    "original": "docs/groundray-simple/sources/tables/ledger-reconciled.csv",
+    "capture": "knowledge/references/captures/tables/ledger-reconciled.csv",
+    "bytes": 158,
+    "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31"
+  },
+  {
+    "original": "docs/groundray-simple/sources/tickets/15-project.txt",
+    "capture": "knowledge/references/captures/tickets/15-project.txt",
+    "bytes": 251,
+    "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9"
+  }
+]

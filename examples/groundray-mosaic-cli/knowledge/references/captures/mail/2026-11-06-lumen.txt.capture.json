@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/mail/2026-11-06-lumen.txt",
+  "original_name": "2026-11-06-lumen.txt",
+  "title": "2026-11-06-lumen.txt",
+  "bytes": 186,
+  "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:33Z"
+  },
+  "origin": "Synthetic fixture: mail/2026-11-06-lumen.txt"
+}

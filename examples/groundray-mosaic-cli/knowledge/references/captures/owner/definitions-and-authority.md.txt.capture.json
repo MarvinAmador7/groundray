@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/owner/definitions-and-authority.md.txt",
+  "original_name": "definitions-and-authority.md",
+  "title": "definitions-and-authority.md",
+  "bytes": 1248,
+  "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:42Z"
+  },
+  "origin": "Synthetic fixture: owner/definitions-and-authority.md"
+}

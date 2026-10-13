@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/mail/14-client.txt",
+  "original_name": "14-client.txt",
+  "title": "14-client.txt",
+  "bytes": 179,
+  "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:32Z"
+  },
+  "origin": "Synthetic fixture: mail/14-client.txt"
+}

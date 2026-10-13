@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/chat/07-exception.txt",
+  "original_name": "07-exception.txt",
+  "title": "07-exception.txt",
+  "bytes": 211,
+  "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:27Z"
+  },
+  "origin": "Synthetic fixture: chat/07-exception.txt"
+}

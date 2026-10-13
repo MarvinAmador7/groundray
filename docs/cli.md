@@ -511,6 +511,27 @@ refused. Missing documents are reported explicitly. After a move, retrieve the
 changed index/log paths from `changes[]` and check their citation against the
 move's saved commit. A historical log entry may retain an earlier item path.
 
+## Original source capture and retrieval
+
+The draft Groundray branch implements plan-first UTF-8 capture and pinned raw-source
+reading (not yet in a tagged release):
+
+```console
+pkb source capture ./original.md --actor openai/codex --brain team --json
+pkb source capture ./original.md --actor openai/codex --brain team --apply --json
+pkb source get references/captures/original.md.txt --brain team --json
+pkb source get wiki/customer-pricing.md owner --brain team --json
+```
+
+Captures keep original bytes, add an adjacent capture receipt and save locally.
+Existing paths are never replaced. The managed namespace has explicit Git attributes
+to prevent byte conversion; Markdown copies gain `.txt` to keep them separate from
+governed concepts. Declared local source reads also support earlier unmanaged records.
+Responses include full content, hash and saved-commit citation; item-scoped reads
+retain the context citation. No index is needed and no external source is fetched.
+Capturing does not certify original authorship or business approval. See
+[source capture](source-capture.md) for limits, revision and failure behavior.
+
 ## Agent skill distribution
 
 The CLI bundles one canonical `portable-kb` skill and can copy it to the

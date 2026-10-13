@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/docs/02-rate-card.md.txt",
+  "original_name": "02-rate-card.md",
+  "title": "02-rate-card.md",
+  "bytes": 206,
+  "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:30Z"
+  },
+  "origin": "Synthetic fixture: docs/02-rate-card.md"
+}

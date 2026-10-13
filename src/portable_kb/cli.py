@@ -67,6 +67,7 @@ from .settings import (
 )
 from .setup_prompt import SetupPromptError, SetupSkillChoice, run_setup_prompts
 from .skills import SkillError, SkillTarget, install_agent_skill, skill_status
+from .sources import SourceError, get_source, plan_source_capture, save_source_capture
 
 app = typer.Typer(
     name="pkb",
@@ -82,6 +83,8 @@ skill_app = typer.Typer(help="Install the Portable KB workflow for coding agents
 app.add_typer(skill_app, name="skill")
 knowledge_app = typer.Typer(help="Plan and apply governed knowledge lifecycle changes.")
 app.add_typer(knowledge_app, name="knowledge")
+source_app = typer.Typer(help="Capture original text records and retrieve saved source evidence.")
+app.add_typer(source_app, name="source")
 
 
 def _version_callback(value: bool) -> None:
@@ -912,6 +915,78 @@ def knowledge_create(
         typer.echo("◇ Not shared with the organization")
     else:
         typer.echo("Plan only; no files changed. Re-run with --apply to write it.")
+
+
+@source_app.command("capture")
+def source_capture(
+    file: Annotated[Path, typer.Argument(help="Authorized UTF-8 source file to copy without rewriting.")],
+    destination: Annotated[str | None, typer.Option("--path", help="New path under references/captures/; .md becomes .md.txt.")] = None,
+    actor: Annotated[str, typer.Option("--actor", help="Actual capture actor; never the original source's author.")] = "process:portable-kb",
+    title: Annotated[str | None, typer.Option("--title", help="Diagnostic source title.")] = None,
+    origin: Annotated[str | None, typer.Option("--origin", help="Supplied origin description or URI; never fetched.")] = None,
+    slug: Annotated[str | None, typer.Option("--brain", help="Installed brain slug.")] = None,
+    apply: Annotated[bool, typer.Option("--apply", help="Explicitly save and activate the capture locally.")] = False,
+    config_path: Annotated[Path | None, typer.Option("--config")] = None,
+    as_of: Annotated[str | None, typer.Option("--as-of")] = None,
+    json_output: Annotated[bool, typer.Option("--json")] = False,
+) -> None:
+    """Plan a byte-identical source copy; save only with --apply. Never publish implicitly."""
+    settings = _load_cli_settings(config_path)
+    try:
+        plan = plan_source_capture(settings, file, destination=destination, actor=actor,
+                                   title=title, origin=origin, slug=slug, as_of=as_of)
+        if apply:
+            with operation_lock(settings.data_dir, "source capture"):
+                payload = save_source_capture(settings, plan, as_of=as_of)
+            for action in ("get_command", "reindex_command"):
+                if config_path is not None:
+                    payload[action].extend(["--config", str(config_path)])
+                if as_of is not None:
+                    payload[action].extend(["--as-of", as_of])
+        else:
+            payload = plan.as_dict()
+    except (BrainError, SourceError, LockError, OSError, ValueError) as error:
+        typer.echo(f"Source capture failed: {error}", err=True)
+        raise typer.Exit(1) from None
+    if json_output:
+        typer.echo(json.dumps(payload, indent=2, sort_keys=True))
+    elif apply:
+        typer.echo(f"Source captured: {plan.path}")
+        typer.echo(f"SHA-256: {plan.receipt['sha256']}")
+        typer.echo(f"Saved version: {payload['saved_version']}")
+        typer.echo(f"Read: {shlex.join(payload['get_command'])}")
+        typer.echo("Original bytes retained; capture does not record source authorship or verification.")
+        typer.echo("Saved locally; not published. Search requires an explicit index rebuild.")
+    else:
+        typer.echo(f"Validated source capture plan: {plan.path}")
+        for change in payload["changes"]:
+            typer.echo(change["diff"], nl=False)
+        typer.echo("Plan only; no files changed. Re-run with --apply to save.")
+
+
+@source_app.command("get")
+def source_get(
+    reference: Annotated[str, typer.Argument(help="Saved capture path, or knowledge item ID/path when SOURCE_ID is supplied.")],
+    source_id: Annotated[str | None, typer.Argument(help="Item-local source ID; omit to inspect a managed capture directly.")] = None,
+    slug: Annotated[str | None, typer.Option("--brain")] = None,
+    config_path: Annotated[Path | None, typer.Option("--config")] = None,
+    as_of: Annotated[str | None, typer.Option("--as-of")] = None,
+    json_output: Annotated[bool, typer.Option("--json")] = False,
+) -> None:
+    """Read the whole saved source file at the selected brain's installed Git commit."""
+    settings = _load_cli_settings(config_path)
+    try:
+        payload = get_source(settings, reference, source_id, slug, as_of=as_of)
+    except (BrainError, SearchError, SourceError, OSError, ValueError) as error:
+        typer.echo(f"Source retrieval failed: {error}", err=True)
+        raise typer.Exit(1) from None
+    if json_output:
+        typer.echo(json.dumps(payload, indent=2, sort_keys=True))
+    else:
+        citation = payload["citation"]
+        typer.echo(f"{citation['brain_slug']}@{citation['commit']}:{citation['path']}")
+        typer.echo(f"SHA-256: {payload['source']['sha256']}")
+        typer.echo(payload["source"]["content"], nl=False)
 
 
 @knowledge_app.command("update")

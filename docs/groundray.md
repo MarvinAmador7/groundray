@@ -13,6 +13,12 @@ Groundray-style pages and their original records use current storage/retrieval
 interfaces. Source handling still uses a development adapter; it is not a fresh
 Lite agent trial or released plugin integration.
 
+The [CLI source follow-up](groundray-cli-sources.md) replaces manual fixture copying
+and the development reader with implemented `source capture/get` commands, source
+receipts and byte-preserving Git rules on the draft branch. The bundled Portable KB
+workflow documents these commands; Lite remains unchanged and has not yet been
+evaluated through this integration.
+
 Groundray is a first agent-skill prototype for building and querying a company's
 understanding of its business in an interlinked Markdown wiki. Its working
 contract is simple: a comment copied from a conversation must remain distinguishable

@@ -313,7 +313,10 @@ released CLI and installation instructions above are still `pkb`.
 
 The [first engine-fit demo](docs/groundray-engine-fit.md) shows three linked company
 pages and 21 unchanged original records installed, retrieved and synced using
-the engine. Raw evidence reading currently uses a development helper.
+the engine. That run used a development helper for raw evidence reading.
+The [CLI-only follow-up](docs/groundray-cli-sources.md) implements source capture
+and saved-record reading on the draft branch, replacing that helper. These commands
+are not yet in a tagged release; see [source capture](docs/source-capture.md).
 
 ## Documentation
 

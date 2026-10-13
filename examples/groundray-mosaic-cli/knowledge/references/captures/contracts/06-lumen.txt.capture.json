@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/contracts/06-lumen.txt",
+  "original_name": "06-lumen.txt",
+  "title": "06-lumen.txt",
+  "bytes": 338,
+  "sha256": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:29Z"
+  },
+  "origin": "Synthetic fixture: contracts/06-lumen.txt"
+}

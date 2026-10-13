@@ -101,7 +101,22 @@ complete items, create honest drafts, and keep authority separate from relevance
    claims. Historical log paths can reflect earlier names. `--markdown-links`
    applies to concepts only. Do not traverse unrelated links merely to increase reads.
 
-5. Answer only from the retrieved items. Distinguish quoted knowledge,
+5. Inspect saved local source records behind consequential claims when needed:
+
+   ```console
+   pkb source get "urn:uuid:..." <source-id> --brain <slug> --json
+   ```
+
+   Use the retrieved item's actual `sources[].id`; require source and context
+   citations to match the selected commit. This reads the whole original file,
+   including TXT/CSV captures; it needs no keyword index and fetches no external
+   URL. Fragments are reported, not validated. A capture receipt shows copying
+   and matching bytes, not original authorship, approval or source authenticity.
+   See [source capture](references/sources.md) when authorized to retain a supplied
+   original. If the original is unavailable, describe that limitation rather
+   than claiming to have inspected it.
+
+6. Answer from the retrieved items and inspected sources. Distinguish quoted knowledge,
    reasonable synthesis, and gaps. Cite material claims using:
 
    ```text

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/notes/05-board.md.txt",
+  "original_name": "05-board.md",
+  "title": "05-board.md",
+  "bytes": 127,
+  "sha256": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:35Z"
+  },
+  "origin": "Synthetic fixture: notes/05-board.md"
+}

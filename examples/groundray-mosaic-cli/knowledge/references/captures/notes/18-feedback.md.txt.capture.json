@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/notes/18-feedback.md.txt",
+  "original_name": "18-feedback.md",
+  "title": "18-feedback.md",
+  "bytes": 202,
+  "sha256": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:38Z"
+  },
+  "origin": "Synthetic fixture: notes/18-feedback.md"
+}

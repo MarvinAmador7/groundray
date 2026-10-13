@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/notes/2026-11-06-summary.md.txt",
+  "original_name": "2026-11-06-summary.md",
+  "title": "2026-11-06-summary.md",
+  "bytes": 199,
+  "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:39Z"
+  },
+  "origin": "Synthetic fixture: notes/2026-11-06-summary.md"
+}

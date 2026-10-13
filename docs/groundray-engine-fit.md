@@ -5,6 +5,10 @@ brain without a spec change. Raw source capture/read support still needs a produ
 interface.** This is the G0 development demonstration, not a completed employee
 collaboration workflow or a new Groundray Lite agent evaluation.
 
+Follow-up: [supported source commands](groundray-cli-sources.md) now replace this
+demonstration's manual copying/development reader on the draft branch. The original
+construction and its traces below remain unchanged.
+
 The [Mosaic snapshot](../examples/groundray-mosaic/README.md) contains three linked
 pages covering Lumen pricing, October contribution margin and launch/Tint scope.
 They retain ordinary Markdown prose, relative source links and wikilinks. The
