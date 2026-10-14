@@ -241,3 +241,18 @@ only the Mosaic index. No automatic QMD installer is added to Groundray. Preserv
 QMD keyword mode and the installed company; do not rerun brain installation.
 Hook failures and unmanaged skill warnings remain separately undiagnosed.
 Business answering and actual human source inspection are still pending.
+
+## Current next step: bundled keyword engine
+
+The publisher declined a separate QMD installation. QMD is optional: dev.2
+already bundles the builtin Tantivy keyword engine. The earlier QMD preference
+was carried into a current Mac context that had no QMD executable. Continue
+using the user-selected builtin keyword provider, preserving the installed
+`mosaic-studio`, configured data/cache roots, all other brains and credentials.
+Build only the Mosaic derived index and verify that its commit matches the
+installed brain. This provider switch and index build are authorized next steps,
+not observed outcomes yet. The earlier QMD setup/error traces remain intact.
+A user with an existing working QMD configuration keeps it; this selected switch
+applies to the publisher’s current incomplete installation. No extra dependency
+is required for the bundled engine, and no QMD installation or download should
+be introduced to complete this pilot.

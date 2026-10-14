@@ -77,6 +77,13 @@ retains this partial setup separately; the earlier healthy-QMD report remains
 historical evidence. Manual installation of the CI-tested QMD 2.8.3 dependency
 (Node.js 22+) and a selected-brain index build remain pending.
 
+The publisher now requires completion without separately installing QMD.
+The package already includes the builtin Tantivy keyword engine, so the current
+next step is an explicit switch of this incomplete installation to builtin
+keyword search followed by a Mosaic-only index build. The provider switch and
+current index verification are pending; the brain and existing data/cache roots
+must be preserved. Existing working QMD installations remain supported.
+
 The publisher also supplied actual native installation output on Apple Silicon
 macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
 `groundray-dev` marketplace was registered and `groundray@groundray-dev` version

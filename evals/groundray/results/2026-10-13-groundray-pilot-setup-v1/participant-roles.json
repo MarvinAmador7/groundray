@@ -83,5 +83,14 @@
     "index_present": false,
     "index_commit": null,
     "business_answer_completed": false
+  },
+  "publisher_requested_provider_change": {
+    "provider": "builtin",
+    "mode": "keyword",
+    "reason": "Publisher requires packaged Groundray without a separate QMD installation",
+    "authorized": true,
+    "provider_switch_observed": false,
+    "mosaic_index_rebuild_observed": false,
+    "preserve_current_brain_and_data_roots": true
   }
 }
