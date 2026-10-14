@@ -256,3 +256,26 @@ A user with an existing working QMD configuration keeps it; this selected switch
 applies to the publisher’s current incomplete installation. No extra dependency
 is required for the bundled engine, and no QMD installation or download should
 be introduced to complete this pilot.
+
+## Current verified setup: builtin index at the hosted pin
+
+The next native setup trace reports successful builtin keyword configuration
+and a Mosaic-only index build using the bundled engine. Brain and index both
+report commit `259fea0d4a3006f5450d0705f07bc868b688ae39`; the index is current.
+No dependencies were installed and the company was not reinstalled, published
+or pushed. See the [new verification receipt](publisher-native-builtin-verification-v4.json).
+The initial setup command correctly refused existing settings; the session then
+completed the requested provider change. The before/after comparison reportedly
+changed only expected provider/command fields among existing tracked files.
+Its visible roots include Portable KB config/data/cache and Groundray cache,
+not host-authentication files; full comparison and status outputs are collapsed.
+Credential/plugin preservation is participant-reported, not an independent
+worker check. Doctor completes without a shown failure while unmanaged skill
+warnings remain; hook failures still show exit 127 without a hook command.
+
+The publisher can now run the original owner business question above in a fresh
+Homebrew Codex session. Preserve the original answer and trace, open the returned
+original evidence links, and record the passages actually inspected. Current
+provider is builtin keyword search; retain earlier QMD and discovery failures
+as separate attempts. Karol’s own-account setup/access and the actual proposal,
+review, publication and independent sync remain pending.

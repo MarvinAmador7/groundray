@@ -71,26 +71,29 @@
     "read_only_configuration_recovery_diagnostics_pending": false
   },
   "publisher_current_setup_reported": {
-    "receipt": "publisher-native-setup-v3.json",
+    "receipt": "publisher-native-builtin-verification-v4.json",
     "slug": "mosaic-studio",
     "commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
     "selected": true,
     "valid": true,
     "clean": true,
-    "provider": "qmd",
+    "provider": "builtin",
     "mode": "keyword",
-    "qmd_executable_missing": true,
-    "index_present": false,
-    "index_commit": null,
-    "business_answer_completed": false
+    "index_present": true,
+    "index_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "business_answer_completed": false,
+    "index_current": true,
+    "additional_dependencies_installed": false
   },
   "publisher_requested_provider_change": {
     "provider": "builtin",
     "mode": "keyword",
     "reason": "Publisher requires packaged Groundray without a separate QMD installation",
     "authorized": true,
-    "provider_switch_observed": false,
-    "mosaic_index_rebuild_observed": false,
-    "preserve_current_brain_and_data_roots": true
-  }
+    "provider_switch_observed": true,
+    "mosaic_index_rebuild_observed": true,
+    "preserve_current_brain_and_data_roots": true,
+    "verification_receipt": "publisher-native-builtin-verification-v4.json"
+  },
+  "publisher_ready_for_business_question_reported": true
 }

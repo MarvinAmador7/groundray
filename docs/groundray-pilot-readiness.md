@@ -84,6 +84,16 @@ keyword search followed by a Mosaic-only index build. The provider switch and
 current index verification are pending; the brain and existing data/cache roots
 must be preserved. Existing working QMD installations remain supported.
 
+The subsequent [builtin verification trace](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-native-builtin-verification-v4.json)
+now reports that provider switch and Mosaic-only index build complete, with
+brain and current index both at the full hosted pin. It visibly records builtin
+configuration and the scoped index command; full status outputs remain collapsed.
+No added dependency, company reinstall, publication or push is reported.
+The file-comparison claim is limited to visible Portable KB/Groundray roots;
+credential/plugin preservation is participant-reported. Unrelated skill warnings
+and hook failures remain recorded. Continue with a fresh publisher business
+question and actual human original-source inspection.
+
 The publisher also supplied actual native installation output on Apple Silicon
 macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
 `groundray-dev` marketplace was registered and `groundray@groundray-dev` version
