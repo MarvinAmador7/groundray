@@ -1,0 +1,53 @@
+{
+  "evidence_source": "Publisher supplied native Codex verification transcript and same-terminal plugin registration output",
+  "publisher": "MarvinAmador7",
+  "requested_skill": "groundray:groundray-setup",
+  "requested_mode": "Verify existing mosaic-studio; preserve QMD; make no changes; stop if skill absent",
+  "native_skill_use_reported": true,
+  "manual_fallback_reported": false,
+  "discovery_context": {
+    "codex_cli_version": "0.151.0",
+    "plugins_feature_enabled": true,
+    "active_home": "default Codex home",
+    "groundray_initially_registered_in_active_home": false,
+    "prior_registration_home": "separate Orca-managed Codex home",
+    "existing_marketplace_registered_in_active_home": true,
+    "plugin_installed_in_active_home": true,
+    "plugin_enabled_in_active_home": true,
+    "plugin_version": "0.1.0-dev.2",
+    "home_environment_changed": false
+  },
+  "reported_outcome": {
+    "slug": "mosaic-studio",
+    "name": "Mosaic Studio fictional G0",
+    "healthy": true,
+    "active": true,
+    "clean": true,
+    "bundle_valid": true,
+    "commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "commit_match": true,
+    "index_provider": "qmd",
+    "index_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "index_present": true,
+    "index_current": true,
+    "cli_version": "pkb 0.2.0",
+    "qmd_version": "2.5.3",
+    "qmd_compatible_and_operational": true,
+    "qmd_preserved": true,
+    "changes_made": false,
+    "brain_or_index_blockers": false,
+    "unrelated_doctor_warnings": [
+      "unmanaged agent-skill copies",
+      "legacy demo brain"
+    ]
+  },
+  "elapsed_reported_seconds": 113,
+  "model_reported": "gpt-5.6-sol",
+  "reasoning_reported": "high",
+  "raw_tool_outputs_visible": false,
+  "worker_independent_brain_inspection": false,
+  "business_answer_or_human_source_inspection_completed": false,
+  "employee_native_session_completed": false,
+  "private_machine_paths_omitted": true,
+  "earlier_trace_preserved": "publisher-native-setup-trace.json"
+}

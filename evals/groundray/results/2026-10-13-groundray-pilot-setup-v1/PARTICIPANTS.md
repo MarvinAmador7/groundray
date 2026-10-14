@@ -100,8 +100,12 @@ directory path so it can be found after restarting Terminal.
 The publisher's first native setup session now reports successful installation,
 selection and current indexing at the expected hosted pin, preserving QMD. It
 used a manual fallback after the earlier bare skill name was not found. See the
-[trace receipt](publisher-native-setup-trace.json); raw status output and a fresh
-correctly namespaced invocation still need observation. Do not reinstall or reset
+[original trace receipt](publisher-native-setup-trace.json). A later fresh
+verification session reports successful `$groundray:groundray-setup` discovery,
+a healthy/active/clean valid brain and a current QMD 2.5.3 index at the hosted pin.
+Its commands are collapsed, so raw status output remains unobserved by the worker.
+See the [new verification receipt](publisher-native-verification-v2.json).
+Do not reinstall or reset
 the publisher's existing configuration to retry discovery. Karol's setup remains
 a separate own-account run.
 
@@ -135,3 +139,27 @@ and rebuilds only the disposable index when needed. Follow the
 [employee runbook](https://github.com/MarvinAmador7/portable-kb/blob/agent/groundray-skill/docs/groundray-pilot.md)
 for original-byte preservation and blank session records. The supplied business
 records remain fictional and unverified by real humans.
+
+## Active Codex home and publisher business question
+
+The publisher diagnosed a separate plugin registration context: the earlier
+installation used an Orca-managed Codex home, while the terminal at the default
+Codex home listed no Groundray installation despite plugin support being enabled.
+Registering the existing marketplace and plugin in that active home, without
+changing HOME/CODEX_HOME, made the subsequent fresh namespaced verification work.
+Preserve both contexts and all existing plugins, brains and QMD configuration.
+The verification reports no brain/index changes; unrelated doctor warnings about
+unmanaged skill copies and a legacy demo brain were left intact.
+
+Next, in a fresh native chat, use the original owner question with only the
+plugin invocation corrected:
+
+> Use $groundray:groundray. I own Mosaic Studio. What should I tell Lumen about
+> price and launch, and what October profitability should I use in our review?
+> Tell me what needs deciding now and whether Tint is affected. As of fictional
+> November 9, 2026.
+
+Retain the unedited answer and trace. The publisher should open its original
+evidence links and record the passages actually inspected. Business answering,
+human source inspection, Karol’s installation/access, contribution, exact review,
+publication and independent sync remain pending.

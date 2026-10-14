@@ -42,7 +42,11 @@
     "provider": "qmd",
     "index_current": true,
     "native_session_with_manual_fallback": true,
-    "automatic_namespaced_skill_discovery_verified": false,
-    "status_json_independently_inspected": false
+    "status_json_independently_inspected": false,
+    "automatic_namespaced_skill_discovery_reported": true,
+    "native_read_only_verification_completed": true,
+    "verification_receipt": "publisher-native-verification-v2.json",
+    "index_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "qmd_version": "2.5.3"
   }
 }

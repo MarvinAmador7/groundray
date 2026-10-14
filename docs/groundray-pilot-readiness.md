@@ -24,16 +24,24 @@ prompt omitted the plugin namespace: Codex `0.151.0` exposes this as
 The pinned upstream namespace resolver confirms this form. Current guides and
 new packet prompts are corrected; old packet/trial bytes remain unchanged.
 This native model session with a manual fallback is not automatic skill discovery
-proof. The cache context also differs from the initial Orca-managed install path;
-that is a diagnostic lead, not an established cause.
+proof. A later namespaced attempt also stopped with the skill absent. The
+publisher then confirmed that the active default Codex home had no registered
+Groundray plugin, while the earlier installation used a separate Orca-managed
+home. Registering the existing package in the active home resolved discovery
+in a subsequent fresh session, without changing HOME/CODEX_HOME.
 
 [Sanitized setup-trace receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-native-setup-trace.json)
 retains the original trace hash, reported outcome, visible error and source
 reference. The original uploaded trace stays local to this task; unrelated private
-file paths are not published. Read-only current plugin context, `brain status`
-and `doctor` checks are requested before a fresh namespaced invocation. No prior
-native response is repaired, and no business-answer/source-inspection result or
-employee session is claimed.
+file paths are not published. The separate
+[new read-only verification receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-native-verification-v2.json)
+records namespaced skill use and a reported healthy, active, clean valid brain
+with commit and current QMD index both at
+`259fea0d4a3006f5450d0705f07bc868b688ae39`. QMD 2.5.3 was preserved; no brain
+or index changes were reported. Commands remain collapsed, so the worker has
+not independently inspected raw status outputs. Unrelated doctor warnings were
+retained. No prior native response is repaired, and no business-answer, human
+source-inspection result or employee session is claimed.
 
 The publisher also supplied actual native installation output on Apple Silicon
 macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
@@ -41,14 +49,15 @@ macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
 `0.1.0-dev.2` is installed/enabled. Existing plugins were not removed by the issued
 commands; a full post-install inventory was not supplied. The publisher subsequently
 provided “Groundray CLI compatible: pkb 0.2.0,” establishing that the packaged helper
-passed its version and actual command-capability probes. Company installation and
-model-backed skill activation remain pending, as do Karol's native installation
-and own-account access.
+passed its version and actual command-capability probes. Publisher company
+setup and native namespaced skill activation now have participant-reported
+evidence; Karol's native installation and own-account access remain pending.
 
 [Publisher installation receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-plugin-install.json)
 retains the result fields while omitting the publisher's private machine/account
-paths. Continue in a fresh native Codex session with the installed setup skill;
-inspect existing configuration and preserve providers/brains before company installation.
+paths. Continue with the publisher business question in the participant guide;
+preserve existing providers and brains. Karol installs using their own account
+and performs a separate native setup session.
 
 The publisher supplied the successful selected-mode provisioner result: source
 `https://github.com/fullkontrol/groundray-pilot-mosaic.git`, hosted base
