@@ -49,10 +49,22 @@ business recommendation and inspected no Mosaic originals. Three hook failures
 (exit 127) are visible without the hook commands. Terminal diagnostics now show default CODEX_HOME and enabled plugin support,
 but zero Groundray entries under the new Homebrew `0.161.0` executable. The
 earlier working executable was the user-local `0.151.0` CLI. Registration
-recovery and launch-method observation remain pending; neither an upgrade
+recovery subsequently completed from the restored package; launch-method
+observation remains pending; neither an upgrade
 regression nor a hook/discovery causal link is confirmed. The
 [failed business-attempt receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-business-attempt-v1.json)
 preserves this outcome separately from the earlier successful setup.
+
+A later recovery confirms the original marketplace directory missing. The
+publisher checksum-verifies and reinstalls the same dev.2 ARM package from the
+new persistent recovery directory. The next native session visibly reads the
+packaged workflow and passes the helper compatibility check. `brain list` and
+`doctor` then report the default Portable KB settings file missing; no company
+sources or current index state are inspected. The
+[second business-attempt receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-business-attempt-v2.json)
+preserves this distinct configuration blocker. Read-only XDG/config/data/cache
+checks are requested before recovery, preserving QMD and surviving company state.
+The earlier reported healthy setup and both failed answers remain intact.
 
 The publisher also supplied actual native installation output on Apple Silicon
 macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new

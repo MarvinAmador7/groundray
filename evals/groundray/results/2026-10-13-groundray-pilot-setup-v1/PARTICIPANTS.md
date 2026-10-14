@@ -186,3 +186,31 @@ exact active Homebrew executable and observe its listing before a fresh session.
 the brain, change provider settings, disable unrelated plugins, or change
 HOME/CODEX_HOME to bypass diagnosis. Preserve this attempt as a discovery
 failure; any later business response is a separate trial.
+
+## Recovered plugin; current settings blocker
+
+The original local marketplace directory no longer exists on the publisher Mac.
+The publisher downloaded the same ARM package from CI run `38446836188`,
+verified its archive checksum, and registered/installed/enabled dev.2 with the
+Homebrew CLI from the new persistent `~/groundray-pilot-recovery/marketplace`.
+Keep that directory as the current local marketplace source. Its disappearance
+was observed; why it disappeared remains unknown.
+
+A fresh second business-question attempt now reads the packaged workflow and
+passes the visible helper check (`pkb 0.2.0`). Company access then stops:
+`brain list --json` and `doctor --json` report the default Portable KB
+`config.yaml` missing or not a regular file. The session reads the setup skill
+and returns no supported business answer. See the
+[new attempt receipt](publisher-business-attempt-v2.json); unrelated private
+process listings are omitted. Hook failures (exit 127) still show no command
+and remain undiagnosed.
+
+The prior successful QMD setup is historical evidence, not proof of current
+configuration availability. Inspect current XDG selectors and the known
+configuration/data/cache paths before recovery; compare the same Mac/user
+context. Preserve any surviving QMD configuration, brains and index. Do not
+blindly rerun setup with the builtin default or re-add/reset the company. The
+authorized source URL remains `https://github.com/fullkontrol/groundray-pilot-mosaic.git`,
+so a source need not be invented or requested again. Any eventual reconfiguration
+must explicitly retain QMD and preserve existing data. Business answering and
+human original-source inspection remain incomplete.

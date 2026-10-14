@@ -32,7 +32,10 @@
     "installed": true,
     "enabled": true,
     "archive_checksum_passed": true,
-    "helper_compatibility_observed": true
+    "helper_compatibility_observed": true,
+    "current_codex_cli_version_reported": "0.161.0",
+    "current_marketplace_recovered": true,
+    "current_native_skill_use_observed": true
   },
   "employee_plugin_reported": null,
   "publisher_company_setup_reported": {
@@ -57,5 +60,14 @@
     "current_context_diagnostics_pending": false,
     "current_terminal_groundray_registration_missing": true,
     "resolution_pending": true
+  },
+  "publisher_current_business_attempt_reported": {
+    "receipt": "publisher-business-attempt-v2.json",
+    "native_skill_use": true,
+    "helper_compatible": true,
+    "configuration_missing": true,
+    "business_answer_completed": false,
+    "current_brain_and_index_status_unknown": true,
+    "read_only_configuration_recovery_diagnostics_pending": true
   }
 }
