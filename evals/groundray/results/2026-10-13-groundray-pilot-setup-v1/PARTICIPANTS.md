@@ -12,10 +12,11 @@ Silicon. Both participants use the Apple Silicon macOS package.
 The publisher has now installed/enabled `groundray@groundray-dev` version
 `0.1.0-dev.2` with native Codex CLI `0.151.0`, after the ARM archive checksum passed.
 See the [publisher installation receipt](publisher-plugin-install.json). The
-supplied terminal output ends after plugin listing; helper compatibility and
-company configuration are still unobserved. On that machine, inspect the actual
-quoted installed cache helper with `check` and `doctor --json` before running
-company setup. Missing configuration is a first-time setup state. Preserve a
+publisher subsequently supplied “Groundray CLI compatible: pkb 0.2.0,” confirming
+the helper's version and command probes. Company configuration and model-backed
+activation remain unobserved. Continue in a fresh native terminal Codex session
+with the setup prompt below; the skill inspects `doctor --json` and the catalog
+before setup. Missing configuration is a first-time setup state. Preserve a
 valid existing configuration and selected provider. Karol still needs to install
 the matching package under Karol's own account.
 

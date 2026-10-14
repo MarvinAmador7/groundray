@@ -32,7 +32,7 @@
     "installed": true,
     "enabled": true,
     "archive_checksum_passed": true,
-    "helper_compatibility_observed": false
+    "helper_compatibility_observed": true
   },
   "employee_plugin_reported": null
 }

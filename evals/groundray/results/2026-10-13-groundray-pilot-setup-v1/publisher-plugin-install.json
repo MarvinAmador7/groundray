@@ -15,11 +15,12 @@
   "auth_policy": "ON_INSTALL",
   "unrelated_plugins_removed_by_commands": false,
   "post_install_unrelated_plugin_inventory_observed": false,
-  "helper_check_output_provided": false,
-  "helper_compatibility_observed": false,
+  "helper_check_output_provided": true,
+  "helper_compatibility_observed": true,
   "company_installation_observed": false,
   "native_model_activation_observed": false,
   "human_source_inspection_observed": false,
   "employee_plugin_installation_observed": false,
-  "private_machine_paths_omitted": true
+  "private_machine_paths_omitted": true,
+  "helper_reported_output": "Groundray CLI compatible: pkb 0.2.0"
 }
