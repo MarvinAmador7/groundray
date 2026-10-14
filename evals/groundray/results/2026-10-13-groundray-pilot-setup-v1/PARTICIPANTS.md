@@ -279,3 +279,33 @@ original evidence links, and record the passages actually inspected. Current
 provider is builtin keyword search; retain earlier QMD and discovery failures
 as separate attempts. Karol’s own-account setup/access and the actual proposal,
 review, publication and independent sync remain pending.
+
+## Publisher business answer: completed; personal inspection not done
+
+The next fresh native owner-question session completes the company query with
+the working builtin setup. It shows the helper compatibility check, scoped
+searches, three concept retrievals, ten `source get` calls and a calculation.
+The answer references seven unique originals, all present in the preserved
+packet. Its scoped price, launch dependencies, corrected contribution margins,
+supplied authority and independent Tint conclusions are supported by those
+fictional captures under an unblinded root comparison. This is not measured
+accuracy/productivity improvement or human adjudication. See the
+[answer receipt](publisher-native-owner-answer-v3.json) and
+[archival answer copy](publisher-native-owner-answer-v3.md). The private upload
+retains the original trace; the copy only redacts the publisher-machine brain
+root and does not repair the response or references. Full raw source contents
+remain collapsed, so the worker cannot independently verify the Mac
+retrieval payloads. The earlier two failed business attempts remain intact.
+
+The publisher answered **none** when asked which original references they
+personally opened. No human original-source inspection or actual reference
+clickability is recorded yet. For the publisher check, open the supplied owner
+rule, corrected ledger and November 6 QA forecast from the original Codex answer,
+and record the exact passages checked and whether those references open
+directly. Any manual file-opening fallback must be recorded as such, not
+credited as successful clickable citations.
+
+Karol’s own-account installation, actual hosted access, contribution, exact
+candidate/source review, publisher acceptance and independent employee sync
+remain pending. Hook errors (exit 127) and reported slow CLI startup remain
+observed limitations; no hook command or precise latency measurement is supplied.

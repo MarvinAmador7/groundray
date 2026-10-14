@@ -94,6 +94,19 @@ credential/plugin preservation is participant-reported. Unrelated skill warnings
 and hook failures remain recorded. Continue with a fresh publisher business
 question and actual human original-source inspection.
 
+The next native owner-business session now completes searches, three concept
+retrievals, ten source calls and the contribution calculation. Its answer cites
+seven original paths present in the unchanged seed packet. An unblinded root
+comparison supports the scoped price, launch risk, corrected margins, supplied
+authority and Tint independence; raw source payloads remain collapsed. The
+[answer receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-native-owner-answer-v3.json)
+and [root-redacted archival answer](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-native-owner-answer-v3.md)
+preserve the successful response separately from earlier failures. The
+publisher reports personally opening **none** of its originals; human inspection
+and reference clickability remain unobserved. Karol’s actual hosted handoff
+remains pending. No accuracy/productivity advantage or completed human pilot
+is established by this supported synthetic answer.
+
 The publisher also supplied actual native installation output on Apple Silicon
 macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
 `groundray-dev` marketplace was registered and `groundray@groundray-dev` version

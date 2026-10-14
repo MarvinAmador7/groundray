@@ -62,13 +62,15 @@
     "resolution_pending": true
   },
   "publisher_current_business_attempt_reported": {
-    "receipt": "publisher-business-attempt-v2.json",
+    "receipt": "publisher-native-owner-answer-v3.json",
     "native_skill_use": true,
     "helper_compatible": true,
-    "configuration_missing": true,
-    "business_answer_completed": false,
-    "current_brain_and_index_status_unknown": true,
-    "read_only_configuration_recovery_diagnostics_pending": false
+    "provider_context": "builtin",
+    "business_answer_completed": true,
+    "source_get_calls_visible": 10,
+    "referenced_unique_originals": 7,
+    "publisher_personal_original_source_inspection_reported": "none",
+    "reference_clickability_observed": false
   },
   "publisher_current_setup_reported": {
     "receipt": "publisher-native-builtin-verification-v4.json",
@@ -95,5 +97,9 @@
     "preserve_current_brain_and_data_roots": true,
     "verification_receipt": "publisher-native-builtin-verification-v4.json"
   },
-  "publisher_ready_for_business_question_reported": true
+  "publisher_ready_for_business_question_reported": true,
+  "publisher_prior_business_attempt_receipts": [
+    "publisher-business-attempt-v1.json",
+    "publisher-business-attempt-v2.json"
+  ]
 }
