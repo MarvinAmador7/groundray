@@ -48,5 +48,14 @@
     "verification_receipt": "publisher-native-verification-v2.json",
     "index_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
     "qmd_version": "2.5.3"
+  },
+  "publisher_business_attempt_reported": {
+    "receipt": "publisher-business-attempt-v1.json",
+    "codex_version": "0.161.0",
+    "skill_missing": true,
+    "business_answer_completed": false,
+    "current_context_diagnostics_pending": false,
+    "current_terminal_groundray_registration_missing": true,
+    "resolution_pending": true
   }
 }

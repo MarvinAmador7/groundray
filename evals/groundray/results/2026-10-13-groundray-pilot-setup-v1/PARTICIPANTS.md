@@ -163,3 +163,26 @@ Retain the unedited answer and trace. The publisher should open its original
 evidence links and record the passages actually inspected. Business answering,
 human source inspection, Karol’s installation/access, contribution, exact review,
 publication and independent sync remain pending.
+
+## First publisher business attempt: discovery blocked again
+
+The publisher supplied the original business-question attempt from Codex
+`0.161.0`, following the successful read-only setup on `0.151.0`. The new session
+reports `$groundray:groundray` absent, searches manually and through plugin
+management, and returns unresolved questions without inspecting Mosaic sources.
+Three hook failures with exit code 127 are visible; no hook command is shown, so
+neither their cause nor a link to Groundray discovery is established. See the
+[separate failed business-attempt receipt](publisher-business-attempt-v1.json).
+The successful earlier setup remains intact; this failure does not establish
+that the brain or QMD index is missing or damaged.
+
+The subsequent terminal diagnostics show the Homebrew Codex executable at
+version `0.161.0`, default CODEX_HOME, plugin support enabled, and zero Groundray
+installed/available entries. The earlier working executable was the user-local
+`0.151.0` CLI. The cause of the missing registration and launch method remain
+unconfirmed. Upstream `rust-v0.161.0` CLI source still supports local marketplace
+registration and installation. Next, register the existing package using the
+exact active Homebrew executable and observe its listing before a fresh session. Do not infer the upgrade caused this failure, reinstall
+the brain, change provider settings, disable unrelated plugins, or change
+HOME/CODEX_HOME to bypass diagnosis. Preserve this attempt as a discovery
+failure; any later business response is a separate trial.

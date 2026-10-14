@@ -43,6 +43,17 @@ not independently inspected raw status outputs. Unrelated doctor warnings were
 retained. No prior native response is repaired, and no business-answer, human
 source-inspection result or employee session is claimed.
 
+The first publisher business-question attempt subsequently reports Codex
+`0.161.0` and a missing `$groundray:groundray` skill. It produced no supported
+business recommendation and inspected no Mosaic originals. Three hook failures
+(exit 127) are visible without the hook commands. Terminal diagnostics now show default CODEX_HOME and enabled plugin support,
+but zero Groundray entries under the new Homebrew `0.161.0` executable. The
+earlier working executable was the user-local `0.151.0` CLI. Registration
+recovery and launch-method observation remain pending; neither an upgrade
+regression nor a hook/discovery causal link is confirmed. The
+[failed business-attempt receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-business-attempt-v1.json)
+preserves this outcome separately from the earlier successful setup.
+
 The publisher also supplied actual native installation output on Apple Silicon
 macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
 `groundray-dev` marketplace was registered and `groundray@groundray-dev` version
