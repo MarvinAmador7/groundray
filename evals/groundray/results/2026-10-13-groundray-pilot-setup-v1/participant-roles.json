@@ -25,5 +25,14 @@
   "employee_machine_reported": {
     "os": "Darwin",
     "architecture": "arm64"
-  }
+  },
+  "publisher_plugin_reported": {
+    "codex_cli_version": "0.151.0",
+    "plugin_version": "0.1.0-dev.2",
+    "installed": true,
+    "enabled": true,
+    "archive_checksum_passed": true,
+    "helper_compatibility_observed": false
+  },
+  "employee_plugin_reported": null
 }

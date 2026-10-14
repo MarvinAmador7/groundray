@@ -9,6 +9,20 @@ A distinct read-only account was not supplied and remains a separate gate.
 
 ### Selected organization: fullkontrol
 
+The publisher also supplied actual native installation output on Apple Silicon
+macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
+`groundray-dev` marketplace was registered and `groundray@groundray-dev` version
+`0.1.0-dev.2` is installed/enabled. Existing plugins were not removed by the issued
+commands; a full post-install inventory was not supplied. The helper compatibility
+line was absent from the supplied output, so runtime compatibility, company
+installation and model-backed activation are not yet established. Karol's native
+installation and own-account access remain pending.
+
+[Publisher installation receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-plugin-install.json)
+retains the result fields while omitting the publisher's private machine/account
+paths. Check the actual installed helper and existing configuration next; preserve
+existing providers and brains before company installation.
+
 The publisher supplied the successful selected-mode provisioner result: source
 `https://github.com/fullkontrol/groundray-pilot-mosaic.git`, hosted base
 `259fea0d4a3006f5450d0705f07bc868b688ae39`, contributor access request complete,

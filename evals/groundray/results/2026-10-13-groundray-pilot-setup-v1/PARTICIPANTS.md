@@ -9,6 +9,16 @@ No participant native session or effective employee permission is yet recorded.
 The publisher supplied `Darwin arm64` and confirmed Karol also uses Apple
 Silicon. Both participants use the Apple Silicon macOS package.
 
+The publisher has now installed/enabled `groundray@groundray-dev` version
+`0.1.0-dev.2` with native Codex CLI `0.151.0`, after the ARM archive checksum passed.
+See the [publisher installation receipt](publisher-plugin-install.json). The
+supplied terminal output ends after plugin listing; helper compatibility and
+company configuration are still unobserved. On that machine, inspect the actual
+quoted installed cache helper with `check` and `doctor --json` before running
+company setup. Missing configuration is a first-time setup state. Preserve a
+valid existing configuration and selected provider. Karol still needs to install
+the matching package under Karol's own account.
+
 ## Check each person's own login and access
 
 The publisher can inspect Karol's effective role with normal local credentials:
