@@ -97,9 +97,17 @@ directory path so it can be found after restarting Terminal.
 
 ## Install the company and start a fresh native chat
 
+The publisher's first native setup session now reports successful installation,
+selection and current indexing at the expected hosted pin, preserving QMD. It
+used a manual fallback after the earlier bare skill name was not found. See the
+[trace receipt](publisher-native-setup-trace.json); raw status output and a fresh
+correctly namespaced invocation still need observation. Do not reinstall or reset
+the publisher's existing configuration to retry discovery. Karol's setup remains
+a separate own-account run.
+
 Run a new Codex chat with this request, using the actual installed Groundray plugin:
 
-> Use $groundray-setup. Install and select the fictional Mosaic Studio brain from
+> Use $groundray:groundray-setup. Install and select the fictional Mosaic Studio brain from
 > https://github.com/fullkontrol/groundray-pilot-mosaic.git. Preserve my existing
 > providers, credentials and brains. If unconfigured, use built-in keyword search.
 > Verify the Groundray helper, report the full installed commit, and index only
@@ -110,6 +118,14 @@ Then use the original packet's owner prompt in another fresh native chat. Record
 actual skill/helper discovery, original answer, installed pin, evidence links
 opened and passages the person inspected. A configured plugin is not activation
 proof. Keep the original answer and command errors; do not repair trial responses.
+
+The original preserved packet predates this namespace correction: when invoking
+its business prompts, use `$groundray:groundray` in the fresh session instead of
+the original bare `$groundray`. Keep original packet/trial bytes intact and record
+the corrected invocation as a new attempt. Future prepared packets use the
+namespaced form. Setup uses `$groundray:groundray-setup`. The publisher's first
+setup session used a manual fallback after bare-name lookup failed, so it does
+not establish automatic catalog discovery.
 
 Karol next receives the packet's original QA update and contributor prompt. Submit
 a named proposal, retain full candidate/base, and ask Marvin to review the exact

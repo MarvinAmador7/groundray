@@ -34,5 +34,15 @@
     "archive_checksum_passed": true,
     "helper_compatibility_observed": true
   },
-  "employee_plugin_reported": null
+  "employee_plugin_reported": null,
+  "publisher_company_setup_reported": {
+    "source_url": "https://github.com/fullkontrol/groundray-pilot-mosaic.git",
+    "slug": "mosaic-studio",
+    "commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "provider": "qmd",
+    "index_current": true,
+    "native_session_with_manual_fallback": true,
+    "automatic_namespaced_skill_discovery_verified": false,
+    "status_json_independently_inspected": false
+  }
 }

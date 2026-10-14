@@ -9,6 +9,32 @@ A distinct read-only account was not supplied and remains a separate gate.
 
 ### Selected organization: fullkontrol
 
+The publisher then supplied a real native setup transcript. Its final response
+reports `mosaic-studio` installed/selected at
+`259fea0d4a3006f5450d0705f07bc868b688ae39`, with a current keyword index using
+the already configured QMD provider. The trace shows the packaged helper check
+passing and an unsupported `brain use --json` attempt followed by in-session
+recovery. Total reported elapsed time is 4m 16s. Most command outputs are collapsed,
+so the final configuration/index claims still need the actual status JSON.
+
+The session first said bare `$groundray-setup` was absent from its catalog, then
+searched for and read installed plugin files manually. The earlier operator
+prompt omitted the plugin namespace: Codex `0.151.0` exposes this as
+`$groundray:groundray-setup`, with the main skill `$groundray:groundray`.
+The pinned upstream namespace resolver confirms this form. Current guides and
+new packet prompts are corrected; old packet/trial bytes remain unchanged.
+This native model session with a manual fallback is not automatic skill discovery
+proof. The cache context also differs from the initial Orca-managed install path;
+that is a diagnostic lead, not an established cause.
+
+[Sanitized setup-trace receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-native-setup-trace.json)
+retains the original trace hash, reported outcome, visible error and source
+reference. The original uploaded trace stays local to this task; unrelated private
+file paths are not published. Read-only current plugin context, `brain status`
+and `doctor` checks are requested before a fresh namespaced invocation. No prior
+native response is repaired, and no business-answer/source-inspection result or
+employee session is claimed.
+
 The publisher also supplied actual native installation output on Apple Silicon
 macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
 `groundray-dev` marketplace was registered and `groundray@groundray-dev` version

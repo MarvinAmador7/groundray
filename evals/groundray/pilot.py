@@ -42,10 +42,10 @@ def prepare(output: Path, plugin: Path, *, publisher: str | None = None,
     (output / 'incoming/qa-update.txt').write_bytes(NEW_QA.encode())
     (output / 'prompts').mkdir()
     prompts = {
-        'owner': 'Use $groundray. ' + QUESTION,
-        'contributor': 'Use $groundray. ' + QUESTION + '\nQA supplied incoming/qa-update.txt. Retain that original, update current launch understanding and actual dependents, and prepare a proposal for review. Keep earlier evidence. Do not publish main. Report proposal name, full candidate commit and base.',
-        'reviewer': 'Use $groundray to inspect the mosaic-studio proposal PROPOSAL_NAME at full commit CANDIDATE_COMMIT. Assess the retained evidence, scope and draft publication. Report exact candidate/base inspected and company decisions still open. Do not publish, activate, or record human verification. Replace placeholders with the actual contributor handoff before starting.',
-        'reader': 'Use $groundray. Explicitly sync the published mosaic-studio brain and answer: ' + QUESTION + ' Inspect consequential originals and give a direct answer, evidence and guidance. Answering is read-only except authorized sync/index recovery.',
+        'owner': 'Use $groundray:groundray. ' + QUESTION,
+        'contributor': 'Use $groundray:groundray. ' + QUESTION + '\nQA supplied incoming/qa-update.txt. Retain that original, update current launch understanding and actual dependents, and prepare a proposal for review. Keep earlier evidence. Do not publish main. Report proposal name, full candidate commit and base.',
+        'reviewer': 'Use $groundray:groundray to inspect the mosaic-studio proposal PROPOSAL_NAME at full commit CANDIDATE_COMMIT. Assess the retained evidence, scope and draft publication. Report exact candidate/base inspected and company decisions still open. Do not publish, activate, or record human verification. Replace placeholders with the actual contributor handoff before starting.',
+        'reader': 'Use $groundray:groundray. Explicitly sync the published mosaic-studio brain and answer: ' + QUESTION + ' Inspect consequential originals and give a direct answer, evidence and guidance. Answering is read-only except authorized sync/index recovery.',
     }
     for role, text in prompts.items():
         (output / f'prompts/{role}.txt').write_text(text + '\n')

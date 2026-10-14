@@ -1,0 +1,48 @@
+{
+  "evidence_source": "Publisher uploaded native terminal setup transcript; many commands/outputs are collapsed",
+  "original_trace_sha256": "04ebfa92502a93f6270487dec0995d00605401ef0abd3d819fd2982280772fc3",
+  "raw_private_paths_published": false,
+  "model_reported": "gpt-5.6-sol",
+  "reasoning_reported": "high",
+  "elapsed_reported_seconds": 256,
+  "requested_skill_name": "groundray-setup",
+  "requested_bare_name_not_found_reported": true,
+  "manual_plugin_file_fallback_reported": true,
+  "visible_helper_check_output": "Groundray CLI compatible: pkb 0.2.0",
+  "visible_cli_error": {
+    "command": "installed-helper brain use mosaic-studio --json",
+    "message": "No such option: --json",
+    "in_session_recovery_reported": true
+  },
+  "reported_outcome": {
+    "slug": "mosaic-studio",
+    "commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "index_present": true,
+    "index_current": true,
+    "search_mode": "keyword",
+    "preserved_existing_provider": "qmd",
+    "existing_brains_configuration_credentials_preserved": true,
+    "company_changes_published": false,
+    "company_changes_pushed": false,
+    "company_synced": false
+  },
+  "raw_brain_status_json_visible": false,
+  "raw_doctor_json_visible": false,
+  "canonical_native_skill_names": {
+    "setup": "groundray:groundray-setup",
+    "main": "groundray:groundray"
+  },
+  "namespace_source": {
+    "repository": "openai/codex",
+    "tag": "rust-v0.151.0",
+    "commit": "78c290807ce710180111df227df3b7a4fe845452",
+    "source": "codex-rs/ext/skills/src/loader/namespace.rs",
+    "behavior": "qualify returns plugin_namespace:base_skill_name; Agent Plugins manifest supplies skills root"
+  },
+  "native_automatic_skill_discovery_verified": false,
+  "plugin_context_paths_differ_from_initial_install": true,
+  "active_context_cause_confirmed": false,
+  "independent_worker_private_brain_inspection": false,
+  "business_answer_or_human_source_inspection_completed": false,
+  "employee_session_completed": false
+}

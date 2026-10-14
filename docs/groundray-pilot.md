@@ -220,6 +220,13 @@ used in a new native activation attempt here.
 
 ## Native activation and ordinary answer
 
+Invoke the packaged skills as `$groundray:groundray-setup` and
+`$groundray:groundray`. Plugin skills are namespaced by the plugin manifest name.
+The original archived packet uses bare names; preserve its original bytes and
+record a corrected namespaced prompt as a fresh attempt. Newly prepared packets
+use the correct prefix. A manual search/read fallback is evidence of a native
+model session using files, not automatic skill-catalog invocation.
+
 On each participant machine, run `codex plugin list --marketplace groundray-dev --json`
 and the installed helper's `check`. Preserve existing HOME/CODEX_HOME, credentials,
 providers, other plugins and brains. Use a dedicated pilot work directory and,

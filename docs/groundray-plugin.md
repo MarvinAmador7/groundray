@@ -43,11 +43,20 @@ codex plugin list --marketplace groundray-dev --json
 ```
 
 Native installation was exercised with Codex `0.159.0-alpha.3`. Use a new chat
-and invoke `groundray-setup` or `groundray`; the onboarding and main instructions
-are shipped as skills. Native automatic invocation still needs a successful
+and invoke `$groundray:groundray-setup` for setup or `$groundray:groundray` for
+answers. Codex prefixes plugin skill names with the manifest's plugin name;
+the bare `$groundray-setup` is not the registered plugin skill name. The onboarding
+and main instructions are shipped as skills. Native automatic invocation still needs a successful
 model-backed chat test: this cloud environment blocks the native Codex response
 endpoint with HTTP 403. Foreground evaluation agents explicitly read the native
 installed files; that is separate evidence from automatic activation.
+
+The publisher's real Codex `0.151.0` setup session ran successfully through a
+manual file fallback after the earlier guide supplied the bare setup name.
+Its collapsed transcript reports the expected Mosaic commit and a current index
+using the existing QMD provider. One unsupported `brain use --json` attempt was
+recovered in-session. Correct namespaced invocation and active plugin context
+still need observation; do not count that fallback as automatic skill discovery.
 
 ## Company workflow
 
