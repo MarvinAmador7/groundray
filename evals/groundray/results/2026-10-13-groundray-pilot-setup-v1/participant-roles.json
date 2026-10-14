@@ -68,6 +68,20 @@
     "configuration_missing": true,
     "business_answer_completed": false,
     "current_brain_and_index_status_unknown": true,
-    "read_only_configuration_recovery_diagnostics_pending": true
+    "read_only_configuration_recovery_diagnostics_pending": false
+  },
+  "publisher_current_setup_reported": {
+    "receipt": "publisher-native-setup-v3.json",
+    "slug": "mosaic-studio",
+    "commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "selected": true,
+    "valid": true,
+    "clean": true,
+    "provider": "qmd",
+    "mode": "keyword",
+    "qmd_executable_missing": true,
+    "index_present": false,
+    "index_commit": null,
+    "business_answer_completed": false
   }
 }

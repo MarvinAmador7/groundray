@@ -66,6 +66,17 @@ preserves this distinct configuration blocker. Read-only XDG/config/data/cache
 checks are requested before recovery, preserving QMD and surviving company state.
 The earlier reported healthy setup and both failed answers remain intact.
 
+Read-only diagnostics subsequently confirm the default configuration, data
+directory and Mosaic QMD index absent in the current context. A separate native
+setup now saves QMD keyword settings and installs/selects the private company
+at the expected hosted commit, reported valid and clean. It records a failed
+`brain use --json` attempt followed by successful plain selection. QMD itself
+is missing, so the scoped index build fails and index commit remains null.
+The [new setup receipt](../evals/groundray/results/2026-10-13-groundray-pilot-setup-v1/publisher-native-setup-v3.json)
+retains this partial setup separately; the earlier healthy-QMD report remains
+historical evidence. Manual installation of the CI-tested QMD 2.8.3 dependency
+(Node.js 22+) and a selected-brain index build remain pending.
+
 The publisher also supplied actual native installation output on Apple Silicon
 macOS with Codex CLI `0.151.0`: the dev.2 ARM archive checksum passed, the new
 `groundray-dev` marketplace was registered and `groundray@groundray-dev` version

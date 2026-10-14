@@ -214,3 +214,30 @@ authorized source URL remains `https://github.com/fullkontrol/groundray-pilot-mo
 so a source need not be invented or requested again. Any eventual reconfiguration
 must explicitly retain QMD and preserve existing data. Business answering and
 human original-source inspection remain incomplete.
+
+## Current installation: selected brain, QMD executable missing
+
+Read-only publisher diagnostics now confirm default XDG selectors and absence
+of the default settings file, Portable KB data directory and Mosaic QMD index.
+Whether this is the same Mac as the earlier successful verification remains
+unconfirmed. The next native setup session saves explicit QMD keyword settings,
+installs the authorized private company and selects `mosaic-studio`. It reports
+a valid, clean brain matching hosted commit
+`259fea0d4a3006f5450d0705f07bc868b688ae39`. The
+[new setup receipt](publisher-native-setup-v3.json) preserves the uploaded trace
+hash and results. An erroneous `brain use --json` invocation fails and is then
+recovered with plain `brain use`; both outcomes remain recorded.
+
+QMD is absent from PATH and checked usual locations. The scoped index build
+fails with the explicit missing-QMD error. Current index commit is null and
+index status is missing; setup is incomplete for keyword search. Nothing is
+reported published or pushed. Existing state is reported preserved; the worker
+has not independently inspected the private brain or full status JSON.
+
+The supported manual dependency is `@tobilu/qmd@2.8.3`, the real-QMD CI pin,
+whose npm metadata requires Node.js 22 or later. Install that dependency using
+the publisher’s normal Node/npm environment, verify it with doctor, then build
+only the Mosaic index. No automatic QMD installer is added to Groundray. Preserve
+QMD keyword mode and the installed company; do not rerun brain installation.
+Hook failures and unmanaged skill warnings remain separately undiagnosed.
+Business answering and actual human source inspection are still pending.
