@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-10-13T00:53:06.168Z",
+  "repository": "MarvinAmador7/portable-kb",
+  "repository_kind": "Product code repository, not a company-brain test remote",
+  "metadata_permissions": {
+    "admin": true,
+    "push": true,
+    "pull": true
+  },
+  "main_branch_metadata_protected": false,
+  "protection_details": {
+    "http_status": 403,
+    "message": "Resource not accessible by integration"
+  },
+  "collaborator_details": "Connector endpoint restriction; permission API not fetched.",
+  "distinct_ready_employee_identities": 0,
+  "negative_employee_push_tests": 0,
+  "actual_host_role_separation_tested": false
+}

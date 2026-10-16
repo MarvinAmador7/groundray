@@ -1,0 +1,8 @@
+{
+  "pluginId": "groundray@groundray-dev",
+  "name": "groundray",
+  "marketplaceName": "groundray-dev",
+  "version": "0.1.0-dev.1",
+  "installedPath": "/run/codex-environment/codex-home/plugins/cache/groundray-dev/groundray/0.1.0-dev.1",
+  "authPolicy": "ON_INSTALL"
+}

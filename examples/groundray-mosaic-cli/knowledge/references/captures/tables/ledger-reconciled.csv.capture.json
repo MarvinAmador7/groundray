@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/tables/ledger-reconciled.csv",
+  "original_name": "ledger-reconciled.csv",
+  "title": "ledger-reconciled.csv",
+  "bytes": 158,
+  "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:45Z"
+  },
+  "origin": "Synthetic fixture: tables/ledger-reconciled.csv"
+}

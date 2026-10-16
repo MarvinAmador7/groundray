@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import math
+import shutil
+import subprocess
 from collections.abc import Mapping, Sequence
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .brains import InstalledBrain, brain_status, load_catalog, read_manifest
+from .links import LinkIndex
 from .models import KnowledgeItem
 from .parsing import RESERVED_NAMES, discover_concepts, parse_concept
 from .qmd_provider import QmdProvider
@@ -87,12 +90,84 @@ def search_keyword(
     }
 
 
+def get_knowledge(
+    settings: Settings,
+    reference: str,
+    slug: str | None = None,
+    *,
+    as_of: str | None = None,
+    markdown_links: bool = False,
+) -> dict[str, Any]:
+    """Retrieve a complete concept or an explicitly named reserved document."""
+    normalized = reference.strip()
+    if PurePosixPath(normalized).name in RESERVED_NAMES:
+        if markdown_links:
+            raise SearchError("--markdown-links applies to knowledge items, not reserved documents.")
+        return get_knowledge_document(settings, normalized, slug, as_of=as_of)
+    return get_knowledge_item(
+        settings, reference, slug, as_of=as_of, markdown_links=markdown_links
+    )
+
+
+def get_knowledge_document(
+    settings: Settings,
+    reference: str,
+    slug: str | None = None,
+    *,
+    as_of: str | None = None,
+) -> dict[str, Any]:
+    """Read the exact saved UTF-8 index/log blob without assigning concept metadata."""
+    relative_text = reference.strip().removeprefix("knowledge/")
+    relative = PurePosixPath(relative_text)
+    if (
+        not relative_text
+        or "\\" in reference
+        or "\x00" in reference
+        or relative.is_absolute()
+        or ".." in relative.parts
+        or relative.name not in RESERVED_NAMES
+        or any(part.startswith(".") for part in relative_text.split("/"))
+    ):
+        raise SearchError("Reserved document requires a safe bundle-relative index.md or log.md path.")
+    brain, checkout, bundle, health = _healthy_brain(settings, slug, as_of=as_of)
+    path = bundle.joinpath(*relative.parts)
+    if (
+        not path.resolve().is_relative_to(bundle.resolve())
+        or any(bundle.joinpath(*relative.parts[:i]).is_symlink() for i in range(len(relative.parts) + 1))
+        or not path.is_file()
+    ):
+        raise SearchError(f"Reserved document was not found safely in the selected brain: {relative_text}")
+    git = shutil.which("git")
+    if git is None:
+        raise SearchError("Git is required to retrieve the saved document.")
+    repository_path = path.relative_to(checkout).as_posix()
+    try:
+        saved = subprocess.run(
+            [git, "--no-replace-objects", "-C", str(checkout), "cat-file", "blob", f"{brain.commit}:{repository_path}"],
+            capture_output=True, check=True, timeout=120,
+        )
+        content = saved.stdout.decode("utf-8")
+    except (OSError, subprocess.SubprocessError, UnicodeDecodeError) as exc:
+        raise SearchError("The reserved document could not be read as saved UTF-8 content.") from exc
+    return {
+        "brain": {"id": brain.id, "slug": brain.slug, "name": brain.name, "commit": brain.commit},
+        "document": {"kind": relative.stem, "path": relative.as_posix(), "content": content},
+        "citation": {
+            "brain_id": brain.id, "brain_slug": brain.slug,
+            "commit": brain.commit, "path": relative.as_posix(),
+        },
+        "validation_warnings": health["validation_warnings"],
+        "ok": True,
+    }
+
+
 def get_knowledge_item(
     settings: Settings,
     reference: str,
     slug: str | None = None,
     *,
     as_of: str | None = None,
+    markdown_links: bool = False,
 ) -> dict[str, Any]:
     """Retrieve one complete, cited item by immutable ID or bundle path."""
 
@@ -102,7 +177,7 @@ def get_knowledge_item(
     brain, _checkout, bundle, health = _healthy_brain(settings, slug, as_of=as_of)
     item = _find_item(bundle, normalized)
     metadata = _plain_value(item.metadata)
-    return {
+    result = {
         "brain": {
             "id": brain.id,
             "slug": brain.slug,
@@ -130,6 +205,14 @@ def get_knowledge_item(
         "validation_warnings": health["validation_warnings"],
         "ok": True,
     }
+    if markdown_links:
+        try:
+            rendered = LinkIndex.load(bundle).markdown_view(item)
+        except ValueError as exc:
+            raise SearchError(str(exc)) from exc
+        result["item"]["rendered_body"] = rendered
+        result["item"]["rendered_content"] = item.source_text[:len(item.source_text) - len(item.body)] + rendered
+    return result
 
 
 def _healthy_brain(
@@ -155,6 +238,13 @@ def _healthy_brain(
 
 
 def _find_item(bundle: Path, reference: str) -> KnowledgeItem:
+    if reference.startswith(('../', './')):
+        raise SearchError("Knowledge item path is unsafe, reserved, or lacks a source item context.")
+    if (reference.startswith("[[") or not reference.endswith(".md")) and not reference.startswith("urn:uuid:"):
+        try:
+            return LinkIndex.load(bundle).find(reference)
+        except ValueError as exc:
+            raise SearchError(str(exc)) from exc
     concepts = discover_concepts(bundle)
     if reference.startswith("urn:uuid:"):
         for path in concepts:
@@ -190,6 +280,72 @@ def _plain_value(value: Any) -> Any:
     if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
         return [_plain_value(child) for child in value]
     return value
+
+
+def knowledge_links(
+    settings: Settings,
+    reference: str,
+    slug: str | None = None,
+    *,
+    backlinks: bool = False,
+    as_of: str | None = None,
+) -> dict[str, Any]:
+    """Resolve live body links against one clean, validated pinned snapshot."""
+    brain, _checkout, bundle, health = _healthy_brain(settings, slug, as_of=as_of)
+    selected = _find_item(bundle, reference.strip())
+    index = LinkIndex.load(bundle)
+
+    def cite(item: KnowledgeItem) -> dict[str, Any]:
+        return {
+            "brain_id": brain.id,
+            "brain_slug": brain.slug,
+            "commit": brain.commit,
+            "item_id": item.id,
+            "path": item.relative_path,
+        }
+
+    results = []
+    sources = index.items.values() if backlinks else [selected]
+    for source in sources:
+        body_start = len(
+            source.source_text[: len(source.source_text) - len(source.body)].splitlines()
+        )
+        for link in index.outgoing(source):
+            if link.status in {"external", "resource"}:
+                continue
+            if backlinks and (
+                link.status != "resolved" or link.item is None or link.item.id != selected.id
+            ):
+                continue
+            target = link.item
+            result = {
+                "kind": link.reference.kind,
+                "target": link.reference.target,
+                "label": link.reference.label,
+                "line": body_start + link.reference.line,
+                "resolution": link.status,
+                "fragment": link.fragment,
+                "candidates": list(link.candidates),
+                "source_citation": cite(source),
+                "target_citation": cite(target)
+                if target is not None and link.status == "resolved"
+                else None,
+                "target_status": target.status if target else None,
+                "target_stale_after": target.metadata.get("stale_after") if target else None,
+            }
+            follow = source if backlinks else target if link.status == "resolved" else None
+            result["get_command"] = (
+                ["pkb", "get", follow.id, "--brain", brain.slug, "--json"] if follow else None
+            )
+            results.append(result)
+    return {
+        "brain": {"id": brain.id, "slug": brain.slug, "name": brain.name, "commit": brain.commit},
+        "citation": cite(selected),
+        "direction": "inbound" if backlinks else "outbound",
+        "links": results,
+        "validation_warnings": health["validation_warnings"],
+        "ok": True,
+    }
 
 
 def _require_current_index(metadata: Mapping[str, Any], brain: InstalledBrain) -> None:

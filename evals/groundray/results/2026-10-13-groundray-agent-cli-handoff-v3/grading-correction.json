@@ -1,0 +1,12 @@
+{
+  "corrected_at": "2026-10-13",
+  "scope": "Root grading only; participant outputs/CLI traces/contract and mechanical audit unchanged.",
+  "withdrawn_finding": "Invoice gross/tax assertion was incorrectly classified as uninspected compiled-only evidence because the invoice export was not retrieved.",
+  "supporting_path": "references/captures/owner/2026-11-02-correction.md.txt",
+  "supporting_sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+  "supporting_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+  "supporting_passage": "Invoice I-71 gross 4,500 includes tax 500; recognized fees remain 4,000.",
+  "complete_supporting_body_in_observer_output": true,
+  "corrected_assessment": "Figures directly supported by the inspected supplied fictional owner correction. Invoice CSV itself was not read; no independent invoice-export inspection or authenticity is established.",
+  "method": "Assess all actually inspected source passages, rather than requiring one predetermined filename. Original grading preserved in grading-before-correction.json."
+}

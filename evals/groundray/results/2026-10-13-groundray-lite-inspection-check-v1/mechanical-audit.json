@@ -1,0 +1,409 @@
+{
+  "suite": "groundray-lite-inspection-check-v1",
+  "scope": "Mechanical role-only audit, not semantic grading.",
+  "reader": {
+    "runner": {
+      "adapter": "recorded-shell-observer",
+      "elapsed_seconds": 168.851875367,
+      "exit_code": 0,
+      "model": "inherited/unknown",
+      "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+      "provider": "chat-host",
+      "runner": "codex-chat-subagent",
+      "timed_out": false
+    },
+    "shell_commands": 10,
+    "shell_nonzero_exits": 1,
+    "cli_commands": 26,
+    "cli_nonzero_exits": 1,
+    "cli_errors": [
+      {
+        "argv": [
+          "search",
+          "query",
+          "Lumen",
+          "--brain",
+          "mosaic-studio",
+          "--limit",
+          "8",
+          "--json"
+        ],
+        "exit_code": 1,
+        "stderr": "Keyword index is stale after a brain change; run `pkb search index mosaic-studio`.\n"
+      }
+    ],
+    "cli_returned_sources": [
+      {
+        "path": "references/captures/owner/definitions-and-authority.md.txt",
+        "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/chat/07-exception.txt",
+        "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/07-exception.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/docs/02-rate-card.md.txt",
+        "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/docs/02-rate-card.md.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/tables/ledger-reconciled.csv",
+        "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/ledger-reconciled.csv",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/owner/2026-11-02-correction.md.txt",
+        "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/mail/14-client.txt",
+        "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/14-client.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/tickets/15-project.txt",
+        "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/qa/2026-11-06.txt",
+        "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/mail/2026-11-06-lumen.txt",
+        "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/ops/2026-11-06-staffing.txt",
+        "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/qa/2026-11-09.txt",
+        "sha256": "9911d413f67b1e1252330416094ef77f56777be8079f8d2a0b108ee1df144b59",
+        "commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "local_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+        "command": [
+          "source",
+          "get"
+        ],
+        "context_commit": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+        "inspection": null,
+        "complete_body_in_observer_output": true
+      }
+    ],
+    "distinct_returned_source_paths": 11,
+    "skill_text_in_observer_output": {
+      "groundray-lite": true,
+      "portable-kb": true
+    },
+    "answer_matches_recorded_final": true,
+    "answer_words": 716,
+    "absolute_file_links": [
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-commercial.md",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/07-exception.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/docs/02-rate-card.md.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-launch.md",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/14-client.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-margin.md",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/ledger-reconciled.csv",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+        "exists_at_audit": true
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+        "exists_at_audit": true
+      }
+    ],
+    "local_source_links": [
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-commercial.md",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-commercial.md",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": false,
+        "matches_returned_source_hash": false,
+        "returned_source_commits": []
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/07-exception.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/chat/07-exception.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/docs/02-rate-card.md.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/docs/02-rate-card.md.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/definitions-and-authority.md.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-launch.md",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-launch.md",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": false,
+        "matches_returned_source_hash": false,
+        "returned_source_commits": []
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tickets/15-project.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-09.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/qa/2026-11-06.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/14-client.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/14-client.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/mail/2026-11-06-lumen.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-margin.md",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/wiki/lumen-margin.md",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": false,
+        "matches_returned_source_hash": false,
+        "returned_source_commits": []
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/ledger-reconciled.csv",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/tables/ledger-reconciled.csv",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+        "resolved_path": "/workspace/groundray-agent-handoff/run-4/reader/data/portable-kb/brains/mosaic-studio/knowledge/references/captures/ops/2026-11-06-staffing.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "877c1b07ff90f434ef6fad20e3646db1ed3785a8"
+        ]
+      }
+    ],
+    "artifacts": {},
+    "protected_inputs_unchanged": true
+  },
+  "preservation": {
+    "installed_knowledge_matches_exact_published_v3_brain": true,
+    "published_pin": "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+    "original_v3_remote_unchanged": true,
+    "no_knowledge_mutation_commands": true
+  },
+  "frozen_checks": {
+    "production_skills_unchanged": true,
+    "prompt_unchanged": true,
+    "reader_prompt_identical_to_v3": true
+  }
+}

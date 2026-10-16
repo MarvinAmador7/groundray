@@ -1,0 +1,283 @@
+{
+  "bounded": {
+    "runner": {
+      "adapter": "recorded-shell-observer",
+      "elapsed_seconds": 125.647533529,
+      "exit_code": 0,
+      "model": "inherited/unknown",
+      "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+      "provider": "chat-host",
+      "runner": "codex-chat-subagent",
+      "timed_out": false
+    },
+    "shell_commands": 16,
+    "shell_nonzero_exits": 0,
+    "cli_commands": 21,
+    "cli_errors": [],
+    "returned_sources": [
+      {
+        "path": "references/captures/authority.txt",
+        "sha256": "4dee372d8afec3f90ce0c76877114ed37c2d9ef92bcf23d89615a71d676a0799",
+        "commit": "b04689df264ea7e5017404a6a7f03b83f13d64c8",
+        "local_path": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/authority.txt",
+        "content": "Fictional Harbor Instruments owner record. Director Nia alone approves Beacon customer dispatch commitments. Engineering schedules are estimates. Customer dispatch and installation are different events.\r\n",
+        "command": [
+          "source",
+          "get"
+        ],
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/dispatch.txt",
+        "sha256": "d0bf9730381bc4d2e8f7d05dc0c2a1592ffa1ae0bfd63724afbc03c0eab05872",
+        "commit": "b04689df264ea7e5017404a6a7f03b83f13d64c8",
+        "local_path": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/dispatch.txt",
+        "content": "Fictional signed Beacon customer addendum, November 8, 2026. Director Nia and Beacon procurement approved the commitment: Harbor will dispatch batch H-4 by November 30, 2026. This record does not promise an installation date. No replacement or cancellation is recorded.\r\n",
+        "command": [
+          "source",
+          "get"
+        ],
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/engineering.txt",
+        "sha256": "27c0ff13325360ff427bbc8c01ae1fd6a004027d11d464fa131ad167f11afd20",
+        "commit": "b04689df264ea7e5017404a6a7f03b83f13d64c8",
+        "local_path": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/engineering.txt",
+        "content": "Fictional engineering update, November 9, 2026. If bench testing passes on November 22, installation is forecast to take between six and nine calendar days after that pass. Nine days is the upper bound of this conditional estimate, not a service guarantee. Bench testing has not passed yet.\r\n",
+        "command": [
+          "source",
+          "get"
+        ],
+        "complete_body_in_observer_output": true
+      }
+    ],
+    "distinct_returned_sources": 3,
+    "local_source_links": [
+      {
+        "target": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/authority.txt",
+        "resolved_path": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/authority.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "b04689df264ea7e5017404a6a7f03b83f13d64c8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/dispatch.txt",
+        "resolved_path": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/dispatch.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "b04689df264ea7e5017404a6a7f03b83f13d64c8"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/engineering.txt",
+        "resolved_path": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/data/portable-kb/brains/harbor/knowledge/references/captures/engineering.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "b04689df264ea7e5017404a6a7f03b83f13d64c8"
+        ]
+      }
+    ],
+    "answer_words": 365,
+    "answer_matches_final": true,
+    "installed_skill_reads": {
+      "skills/groundray/SKILL.md": true,
+      "skills/groundray-setup/SKILL.md": true,
+      "skills/groundray/references/portable-kb/SKILL.md": true
+    },
+    "runtime_sha256": "1bf8aaa4074f5902c0fa7c918015799f86dd495430117c09c75eeb8e0c8caf09",
+    "artifacts": {},
+    "installed_files_unchanged": true
+  },
+  "compiled-only": {
+    "runner": {
+      "adapter": "recorded-shell-observer",
+      "elapsed_seconds": 97.985276149,
+      "exit_code": 0,
+      "model": "inherited/unknown",
+      "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+      "provider": "chat-host",
+      "runner": "codex-chat-subagent",
+      "timed_out": false
+    },
+    "shell_commands": 13,
+    "shell_nonzero_exits": 1,
+    "cli_commands": 19,
+    "cli_errors": [
+      {
+        "argv": [
+          "source",
+          "get",
+          "urn:uuid:2973f69c-da3f-4e6a-8a37-7964796d7875",
+          "refund-register",
+          "--brain",
+          "cedar",
+          "--json"
+        ],
+        "stderr": "Source retrieval failed: Source retrieval accepts saved local files only; external sources are not fetched.\n",
+        "exit_code": 1
+      }
+    ],
+    "returned_sources": [
+      {
+        "path": "references/captures/authority.txt",
+        "sha256": "2159b4dfa526deb836bb153f8058f6e659d2e9abc645e71d93718c32a45e1336",
+        "commit": "7f19b160ea0c7b5db7b3bf242bca56570f866765",
+        "local_path": "/workspace/groundray-plugin-eval/cases-v1/compiled-only/reader/data/portable-kb/brains/cedar/knowledge/references/captures/authority.txt",
+        "content": "Fictional Cedar Services finance-owner record. Only controller Ivo can approve customer refunds. A meeting summary or a draft brain note is not approval. The current approved refund register is not supplied in this brain.\r\n",
+        "command": [
+          "source",
+          "get"
+        ],
+        "complete_body_in_observer_output": true
+      }
+    ],
+    "distinct_returned_sources": 1,
+    "local_source_links": [],
+    "answer_words": 259,
+    "answer_matches_final": true,
+    "installed_skill_reads": {
+      "skills/groundray/SKILL.md": true,
+      "skills/groundray-setup/SKILL.md": true,
+      "skills/groundray/references/portable-kb/SKILL.md": true
+    },
+    "runtime_sha256": "1bf8aaa4074f5902c0fa7c918015799f86dd495430117c09c75eeb8e0c8caf09",
+    "artifacts": {
+      "brain_commit": "7f19b160ea0c7b5db7b3bf242bca56570f866765"
+    },
+    "installed_files_unchanged": true
+  },
+  "second-company": {
+    "runner": {
+      "adapter": "recorded-shell-observer",
+      "elapsed_seconds": 104.203657023,
+      "exit_code": 0,
+      "model": "inherited/unknown",
+      "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+      "provider": "chat-host",
+      "runner": "codex-chat-subagent",
+      "timed_out": false
+    },
+    "shell_commands": 15,
+    "shell_nonzero_exits": 0,
+    "cli_commands": 21,
+    "cli_errors": [],
+    "returned_sources": [
+      {
+        "path": "references/captures/margin.txt",
+        "sha256": "2df169921c965a505ec4f0619cc798fc3516dc09a5bb0f2327011bedbed81001",
+        "commit": "dbcdf944f7ac3fae77f4a1b2372948ef9352c374",
+        "local_path": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/margin.txt",
+        "content": "Fictional Boreal October close report. Recognized assay fees 100,000, technician labor 41,000, reagent costs 32,000. Contribution 27,000; contribution margin 27 percent. Equipment depreciation 9,000 is excluded from this defined metric, not from every profitability measure.\r\n",
+        "command": [
+          "source",
+          "get"
+        ],
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/authority.txt",
+        "sha256": "5e4151b63c30e7e6f0a004c97bdc89a51d93df9f31c422552f663094847d7586",
+        "commit": "dbcdf944f7ac3fae77f4a1b2372948ef9352c374",
+        "local_path": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/authority.txt",
+        "content": "Fictional Boreal Labs definitions and authority record. Boreal Lumen is a laboratory customer, unrelated to Mosaic Studio Lumen. Boreal contribution margin subtracts technician labor and reagent costs from recognized assay fees. Lab director Sol approves prices; account manager Tess cannot approve discounts.\r\n",
+        "command": [
+          "source",
+          "get"
+        ],
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/chat.txt",
+        "sha256": "59a0310db6dd24816be711ee887f8951372fc98de80982fa47eb639e52f49ea7",
+        "commit": "dbcdf944f7ac3fae77f4a1b2372948ef9352c374",
+        "local_path": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/chat.txt",
+        "content": "Fictional Boreal chat, November 10. Tess: I saw Lumen is 4,000 and margin is 40 percent at another company; let us use those. This is my suggestion, not a Boreal approval.\r\n",
+        "command": [
+          "source",
+          "get"
+        ],
+        "complete_body_in_observer_output": true
+      },
+      {
+        "path": "references/captures/price.txt",
+        "sha256": "4d8964c4be10af8f5ee3d11cf3fe4d5e9f162eaa2ae7c956695af9bf91b24dcc",
+        "commit": "dbcdf944f7ac3fae77f4a1b2372948ef9352c374",
+        "local_path": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/price.txt",
+        "content": "Fictional Boreal Labs November 9 price approval. Director Sol approved 7,100 for Lumen batch B-9 only. The usual 8,000 list price remains for other batches. No 4,000 price is approved for Boreal Lumen.\r\n",
+        "command": [
+          "source",
+          "get"
+        ],
+        "complete_body_in_observer_output": true
+      }
+    ],
+    "distinct_returned_sources": 4,
+    "local_source_links": [
+      {
+        "target": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/price.txt",
+        "resolved_path": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/price.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "dbcdf944f7ac3fae77f4a1b2372948ef9352c374"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/margin.txt",
+        "resolved_path": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/margin.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "dbcdf944f7ac3fae77f4a1b2372948ef9352c374"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/authority.txt",
+        "resolved_path": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/authority.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "dbcdf944f7ac3fae77f4a1b2372948ef9352c374"
+        ]
+      },
+      {
+        "target": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/chat.txt",
+        "resolved_path": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/data/portable-kb/brains/boreal/knowledge/references/captures/chat.txt",
+        "within_case": true,
+        "exists_at_audit": true,
+        "matches_returned_source_path": true,
+        "matches_returned_source_hash": true,
+        "returned_source_commits": [
+          "dbcdf944f7ac3fae77f4a1b2372948ef9352c374"
+        ]
+      }
+    ],
+    "answer_words": 261,
+    "answer_matches_final": true,
+    "installed_skill_reads": {
+      "skills/groundray/SKILL.md": true,
+      "skills/groundray-setup/SKILL.md": true,
+      "skills/groundray/references/portable-kb/SKILL.md": true
+    },
+    "runtime_sha256": "1bf8aaa4074f5902c0fa7c918015799f86dd495430117c09c75eeb8e0c8caf09",
+    "artifacts": {},
+    "installed_files_unchanged": true
+  }
+}

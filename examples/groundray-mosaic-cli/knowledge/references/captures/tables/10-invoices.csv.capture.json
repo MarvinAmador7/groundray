@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/tables/10-invoices.csv",
+  "original_name": "10-invoices.csv",
+  "title": "10-invoices.csv",
+  "bytes": 148,
+  "sha256": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:44Z"
+  },
+  "origin": "Synthetic fixture: tables/10-invoices.csv"
+}

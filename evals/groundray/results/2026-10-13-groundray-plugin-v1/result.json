@@ -1,0 +1,101 @@
+{
+  "suite": "groundray-plugin-v1",
+  "synthetic": true,
+  "foreground_trials": 6,
+  "retries_or_replaced_agent_outputs": 0,
+  "native_model_chat_completed": false,
+  "native_plugin_installed_enabled": true,
+  "native_model_chat_blocker": "Cloud proxy HTTP 403",
+  "native_bootstrap_full_prompt_archived": false,
+  "package_inputs_unchanged_during_trials": true,
+  "mechanical_smoke_operations": 25,
+  "mechanical_harness_failed_attempts_preserved": 5,
+  "human_participants": 0,
+  "separate_git_host_roles_tested": false,
+  "root_semantic_review_blinded": false,
+  "runtime_sha256": "1bf8aaa4074f5902c0fa7c918015799f86dd495430117c09c75eeb8e0c8caf09",
+  "plugin_version": "0.1.0-dev.1",
+  "implementation_commit": "dc2c4688df945c2d138707f70d592f80f8ccde8d",
+  "observed_usability_gaps": [
+    "Compiled-only answer cites available source by pin without a clickable file link"
+  ],
+  "handoff": {
+    "author": {
+      "cli_commands": 73,
+      "cli_errors": [],
+      "distinct_returned_sources": 11,
+      "answer_words": 693,
+      "answer_matches_final": true
+    },
+    "reviewer": {
+      "cli_commands": 30,
+      "cli_errors": [],
+      "distinct_returned_sources": 7,
+      "answer_words": 560,
+      "answer_matches_final": true
+    },
+    "reader": {
+      "cli_commands": 40,
+      "cli_errors": [
+        {
+          "argv": [
+            "search",
+            "query",
+            "Lumen price launch October profitability Tint",
+            "--brain",
+            "mosaic-studio",
+            "--limit",
+            "8",
+            "--as-of",
+            "2026-11-09",
+            "--json"
+          ],
+          "stderr": "Keyword index is stale after a brain change; run `pkb search index mosaic-studio`.\n",
+          "exit_code": 1
+        }
+      ],
+      "distinct_returned_sources": 11,
+      "answer_words": 587,
+      "answer_matches_final": true
+    }
+  },
+  "targeted": {
+    "bounded": {
+      "cli_commands": 21,
+      "cli_errors": [],
+      "distinct_returned_sources": 3,
+      "installed_files_unchanged": true,
+      "answer_matches_final": true
+    },
+    "compiled-only": {
+      "cli_commands": 19,
+      "cli_errors": [
+        {
+          "argv": [
+            "source",
+            "get",
+            "urn:uuid:2973f69c-da3f-4e6a-8a37-7964796d7875",
+            "refund-register",
+            "--brain",
+            "cedar",
+            "--json"
+          ],
+          "stderr": "Source retrieval failed: Source retrieval accepts saved local files only; external sources are not fetched.\n",
+          "exit_code": 1
+        }
+      ],
+      "distinct_returned_sources": 1,
+      "installed_files_unchanged": true,
+      "answer_matches_final": true
+    },
+    "second-company": {
+      "cli_commands": 21,
+      "cli_errors": [],
+      "distinct_returned_sources": 4,
+      "installed_files_unchanged": true,
+      "answer_matches_final": true
+    }
+  },
+  "employee_state_preserved_across_plugin_lifecycle": true,
+  "native_chat_activation_tested": false
+}

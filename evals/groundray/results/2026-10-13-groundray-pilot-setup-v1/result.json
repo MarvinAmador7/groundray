@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-13",
+  "engine_commit": "75f58a4e8065a8251b4931c07a9d5f7d188ddaa6",
+  "publisher": "MarvinAmador7",
+  "employee_contributor_and_receiver": "KarolGarcia712",
+  "network": {
+    "github_https_status": 200,
+    "api_github_https_status": 200
+  },
+  "authentication": {
+    "cli_login": "MarvinAmador7",
+    "connector_login": "MarvinAmador7",
+    "employee_credentials_used": false
+  },
+  "repository": "MarvinAmador7/groundray-pilot-mosaic",
+  "repository_read_before": 404,
+  "repository_read_after": 404,
+  "provisioning": {
+    "attempts": 1,
+    "creation_http_status": 403,
+    "creation_message": "Resource not accessible by integration",
+    "created": false,
+    "seeded": false,
+    "protection_written": false,
+    "invitation_sent": false,
+    "hosted_base_commit": null
+  },
+  "packet": {
+    "archive_sha256": "65f8bba6e156d51673742759be7b9e5a312bceeddd03c3b7c36b80a6b55fd790",
+    "manifest_matching_brain_files": 53,
+    "excludes_git_metadata": true
+  },
+  "validation": {
+    "concepts": 3,
+    "findings": [],
+    "focused_tests_passed": 7
+  },
+  "ci_packages": {
+    "run_id": 38438717326,
+    "head_sha": "75f58a4e8065a8251b4931c07a9d5f7d188ddaa6",
+    "conclusion": "success",
+    "artifacts": [
+      "groundray-plugin-linux-x86_64",
+      "groundray-plugin-darwin-arm64"
+    ],
+    "observed_expired": false,
+    "download_attempt": "groundray-plugin-linux-x86_64",
+    "download_succeeded": false,
+    "download_error": "Backing artifact storage returned Forbidden; no signed URL retained."
+  },
+  "native_activation": {
+    "new_attempt": false,
+    "reason": "No downloaded/installed packaged runtime in resumed setup."
+  },
+  "human_sessions_completed": 0,
+  "host_enforcement_attempts": 0,
+  "distinct_read_only_account": null
+}

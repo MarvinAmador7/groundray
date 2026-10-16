@@ -25,14 +25,40 @@ migration, and explicit reader-leased cleanup of disposable generations are
 authorized. Native packaging, configured provider selection, canonical section
 remapping, diagnostics, and lease-aware index removal are authorized production
 work for the 0.2.0 release.
-Complete-item retrieval and standalone or setup-integrated installation of the
+Complete-item and read-only reserved index/log retrieval, and standalone or setup-integrated installation of the
 bundled workflow skill for Codex and Claude Code are also authorized, as is
 explicitly approved, plan-first creation of new draft knowledge through the
 existing lifecycle API, material updates that preserve identity and invalidate
-prior verification through the existing update planner, and explicit validated
+prior verification through the existing update planner, mechanical plan-first CLI
+moves with identity/provenance preservation and scoped link/index repair, and explicit validated
 fast-forward publication of the active saved brain version. Standalone CLI
 packaging, checksum-verifying installation, CI, and version-driven GitHub
 release automation are authorized distribution work.
+Explicit plan-first capture of authorized UTF-8 source records, byte-preserving
+Git distribution, capture receipts and read-only retrieval of managed captures
+or declared local sources are also authorized. Captures under
+`knowledge/references/captures/` remain opaque artifacts, not verified concepts;
+Markdown originals use `.md.txt` names without content changes. Binary extraction,
+remote source fetching and production whole-wiki import remain deferred.
+Explicit attachment of a checked authoring clone to a URL-installed brain,
+plan-first creation of new Git proposal refs, exact-commit read-only review, and
+read-only exact candidate-source retrieval, and
+explicit commit/base-pinned fast-forward acceptance through existing Git host
+permissions are now authorized. These operations do not record company approval
+or human verification; custom authorization and hosted collaboration remain deferred.
+Groundray development plugin packaging, local Codex marketplace installation,
+checksum-bound native runtime distribution, explicit setup and opt-in foreground
+agent package trials are authorized. Preserve existing host credentials, plugins
+and company state; plugin installation/update does not authorize company publication.
+Preparation of synthetic employee pilot packets, bounded native activation probes,
+and plan-first provisioning of a dedicated new private Git test repository with
+existing host protections are authorized. Real identities and participant outcomes
+must be supplied/observed; no simulated credentials or fabricated human participation.
+An explicitly user-selected private contributor pilot without main protection is
+also authorized for the dedicated synthetic pilot repository. Contributor write
+access includes main; publisher/reviewer roles are workflow conventions. Do not
+claim publisher-only enforcement or successful employee-publication denial for
+that mode. Preserve existing rules; skipping protection setup does not remove them.
 Do not expand into automatic QMD installation, embeddings, semantic/hybrid
 querying, vector databases, other lifecycle CLI mutations, MCP servers, APIs,
 native/web UI, authentication/authorization, multitenancy, background agents,
@@ -90,7 +116,11 @@ When future `knowledge/` concept files exist:
   verification for the current snapshot.
 - Preserve unknown imported OKF fields. Do not silently drop them; request a
   mapping, namespace them, or update the profile through review.
-- Use body prose and normal links to explain relationships. Typed relation IDs
+- Use body prose and normal Markdown links or resolved Portable KB wikilinks to
+explain relationships (see `docs/links.md`). Read-only link navigation is now
+authorized. Explicitly requested private wiki replication through existing CLI
+plans and matched-content wiki/skill benchmarks are authorized development work;
+production whole-wiki import and graph databases remain deferred. Typed relation IDs
   supplement rather than replace readable links.
 - Never silently overwrite, merge, delete, resolve a conflict, or infer
   supersession from semantic similarity.

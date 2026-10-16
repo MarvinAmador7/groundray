@@ -345,6 +345,38 @@ The result exposes previous/resulting lifecycle status, whether verification
 was invalidated, the exact affected paths, validation warnings, and the saved
 version. Updating locally never authorizes organization publication.
 
+## Knowledge moves
+
+Rename or relocate one existing item by UUID or bundle-relative path:
+
+```console
+pkb knowledge move "urn:uuid:..." "procedures/client-export-runbook.md" \
+  --brain team --json
+```
+
+Inspect the proposed item and `changes[].diff`, then repeat with `--apply`.
+The move preserves UUID, creation and production metadata, sources, lifecycle
+status, existing verification, and unknown fields. It repairs affected inbound
+and outbound Markdown links and wikilinks, preserves their display labels,
+updates authored index references, regenerates navigation, and appends a log
+entry. Unrelated link spelling and code examples remain unchanged. Historical
+log entries retain their original paths.
+
+The source and installed checkout must be clean and valid. Existing destinations,
+unsafe paths, and changes detected between planning and saving are refused.
+Moves that would retarget a local `sources[].resource` are refused: review that
+source metadata change separately before attempting the move. A move does not
+perform a material content revision or record new human review.
+
+All planned files are saved in one local Git commit, and the selected installed
+brain is refreshed without switching the active brain or sharing upstream.
+File replacements use the core's optimistic preflight and best-effort rollback;
+a process crash is not a filesystem-wide transaction. The applied JSON includes
+`previous_path`, the new citation, scoped `get_command` and `reindex_command`,
+and `needs_reindex: true`. Retrieve by UUID immediately; rebuild the selected
+brain's keyword index before searching. `--timestamp` sets the move log time;
+`--config` and `--as-of` work as for other authoring commands.
+
 ## Organization publication
 
 After an initialized brain has been published once, an explicitly authorized
@@ -452,9 +484,53 @@ pkb get <item-id-or-path> [--brain <slug>] [--json]
 
 The command first rechecks that the installed brain is clean, identity-matched,
 catalog-pinned, and valid. It rejects absolute paths, traversal, symbolic links,
-non-Markdown files, and reserved OKF indexes/logs. JSON output includes parsed
+and non-Markdown files. Concept JSON output includes parsed
 metadata, Markdown body, complete source text, validation warnings, and an
 immutable citation containing brain ID/slug, commit, item ID, and path.
+
+Reserved navigation and history documents are retrieved by explicit bundle path:
+
+```console
+pkb get index.md --brain team --json
+pkb get log.md --brain team --json
+pkb get inbox/procedures/index.md --brain team --json
+```
+
+These responses contain `document: {kind, path, content}` instead of `item`.
+`kind` is `index` or `log`; `content` is the complete saved UTF-8 Git blob, including
+frontmatter or generated regions where present. The citation contains brain
+ID/slug, full saved commit and bundle-relative path, without an invented item ID
+or lifecycle metadata. Plain terminal output prints that citation and content.
+`--markdown-links` remains concept-only and is refused for reserved documents.
+
+Document reads use the same selected-brain health checks, need no keyword index,
+and leave the authoring repository, installed checkout, catalog and active
+selection unchanged. Only visible bundle-relative paths named `index.md` or
+`log.md` qualify; arbitrary files, hidden paths, traversal and symlinks are
+refused. Missing documents are reported explicitly. After a move, retrieve the
+changed index/log paths from `changes[]` and check their citation against the
+move's saved commit. A historical log entry may retain an earlier item path.
+
+## Original source capture and retrieval
+
+The draft Groundray branch implements plan-first UTF-8 capture and pinned raw-source
+reading (not yet in a tagged release):
+
+```console
+pkb source capture ./original.md --actor openai/codex --brain team --json
+pkb source capture ./original.md --actor openai/codex --brain team --apply --json
+pkb source get references/captures/original.md.txt --brain team --json
+pkb source get wiki/customer-pricing.md owner --brain team --json
+```
+
+Captures keep original bytes, add an adjacent capture receipt and save locally.
+Existing paths are never replaced. The managed namespace has explicit Git attributes
+to prevent byte conversion; Markdown copies gain `.txt` to keep them separate from
+governed concepts. Declared local source reads also support earlier unmanaged records.
+Responses include full content, hash and saved-commit citation; item-scoped reads
+retain the context citation. No index is needed and no external source is fetched.
+Capturing does not certify original authorship or business approval. See
+[source capture](source-capture.md) for limits, revision and failure behavior.
 
 ## Agent skill distribution
 
@@ -504,3 +580,12 @@ an unrelated active brain's doctor summary.
 See [agent CLI evaluations](agent-cli-evals.md) for running real agents against
 an installed executable and its bundled skill, capturing traces, grading
 canonical outcomes, and comparing baseline and candidate reports.
+
+## Links and backlinks
+
+`pkb links <UUID|path|slug> --brain <slug> --json` lists outgoing concept links;
+`pkb backlinks` lists inbound occurrences. Both retain pinned citations, expose
+unresolved draft targets and require no keyword index. `pkb get` also accepts
+unique slugs and `[[wikilinks]]`; `--markdown-links` adds a derived standard
+Markdown view while keeping canonical JSON content unchanged. See
+[link syntax, diagnostics, and move behavior](links.md).

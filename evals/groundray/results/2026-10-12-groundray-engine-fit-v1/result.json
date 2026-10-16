@@ -1,0 +1,755 @@
+{
+  "experiment": "groundray-g0-engine-fit-v1",
+  "recorded_at": "2026-10-12T23:17:46.204284+00:00",
+  "validation_as_of": "2026-10-12",
+  "fictional_business_as_of": "2026-11-06",
+  "engine_commit": "6b9cbaaacf4cbffeaa31e26dcccc4feb1cb8cd43",
+  "native_sha256": "6d61f3d7925178b59eb48a66fb8652e65d6e6aa48afb10fd3a603c709768e2ac",
+  "skill_sha256": "592e55d06ccf0dc016adce5fd90bf9d1567c319d6dc6f2111d8ed29be2c6699a",
+  "scope": "Mechanical development demonstration; root-authored pages; no fresh agent trial or human review.",
+  "distribution": "Two isolated configurations on one Linux host, local Git source, no remote permissions or protected review.",
+  "first_commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+  "second_commit": "c4e1f122af8d38fd4edfb155593cf115c2ee216d",
+  "sources": [
+    {
+      "original": "docs/groundray-simple/sources/chat/03-sales.txt",
+      "capture": "knowledge/references/chat/03-sales.txt",
+      "bytes": 189,
+      "sha256": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556"
+    },
+    {
+      "original": "docs/groundray-simple/sources/chat/07-exception.txt",
+      "capture": "knowledge/references/chat/07-exception.txt",
+      "bytes": 211,
+      "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72"
+    },
+    {
+      "original": "docs/groundray-simple/sources/chat/16-plan.txt",
+      "capture": "knowledge/references/chat/16-plan.txt",
+      "bytes": 207,
+      "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057"
+    },
+    {
+      "original": "docs/groundray-simple/sources/contracts/06-lumen.txt",
+      "capture": "knowledge/references/contracts/06-lumen.txt",
+      "bytes": 338,
+      "sha256": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27"
+    },
+    {
+      "original": "docs/groundray-simple/sources/docs/02-rate-card.md",
+      "capture": "knowledge/references/docs/02-rate-card.md.txt",
+      "bytes": 206,
+      "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3"
+    },
+    {
+      "original": "docs/groundray-simple/sources/mail/01-context.txt",
+      "capture": "knowledge/references/mail/01-context.txt",
+      "bytes": 245,
+      "sha256": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501"
+    },
+    {
+      "original": "docs/groundray-simple/sources/mail/14-client.txt",
+      "capture": "knowledge/references/mail/14-client.txt",
+      "bytes": 179,
+      "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e"
+    },
+    {
+      "original": "docs/groundray-simple/sources/mail/2026-11-06-lumen.txt",
+      "capture": "knowledge/references/mail/2026-11-06-lumen.txt",
+      "bytes": 186,
+      "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844"
+    },
+    {
+      "original": "docs/groundray-simple/sources/notes/04-team.md",
+      "capture": "knowledge/references/notes/04-team.md.txt",
+      "bytes": 147,
+      "sha256": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c"
+    },
+    {
+      "original": "docs/groundray-simple/sources/notes/05-board.md",
+      "capture": "knowledge/references/notes/05-board.md.txt",
+      "bytes": 127,
+      "sha256": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1"
+    },
+    {
+      "original": "docs/groundray-simple/sources/notes/13-close-query.md",
+      "capture": "knowledge/references/notes/13-close-query.md.txt",
+      "bytes": 308,
+      "sha256": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687"
+    },
+    {
+      "original": "docs/groundray-simple/sources/notes/18-feedback.md",
+      "capture": "knowledge/references/notes/18-feedback.md.txt",
+      "bytes": 202,
+      "sha256": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e"
+    },
+    {
+      "original": "docs/groundray-simple/sources/notes/2026-11-06-summary.md",
+      "capture": "knowledge/references/notes/2026-11-06-summary.md.txt",
+      "bytes": 199,
+      "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb"
+    },
+    {
+      "original": "docs/groundray-simple/sources/ops/2026-11-06-staffing.txt",
+      "capture": "knowledge/references/ops/2026-11-06-staffing.txt",
+      "bytes": 175,
+      "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd"
+    },
+    {
+      "original": "docs/groundray-simple/sources/owner/2026-11-02-correction.md",
+      "capture": "knowledge/references/owner/2026-11-02-correction.md.txt",
+      "bytes": 440,
+      "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+    },
+    {
+      "original": "docs/groundray-simple/sources/owner/definitions-and-authority.md",
+      "capture": "knowledge/references/owner/definitions-and-authority.md.txt",
+      "bytes": 1248,
+      "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43"
+    },
+    {
+      "original": "docs/groundray-simple/sources/qa/2026-11-06.txt",
+      "capture": "knowledge/references/qa/2026-11-06.txt",
+      "bytes": 239,
+      "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa"
+    },
+    {
+      "original": "docs/groundray-simple/sources/tables/09-ledger.csv",
+      "capture": "knowledge/references/tables/09-ledger.csv",
+      "bytes": 158,
+      "sha256": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032"
+    },
+    {
+      "original": "docs/groundray-simple/sources/tables/10-invoices.csv",
+      "capture": "knowledge/references/tables/10-invoices.csv",
+      "bytes": 148,
+      "sha256": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642"
+    },
+    {
+      "original": "docs/groundray-simple/sources/tables/ledger-reconciled.csv",
+      "capture": "knowledge/references/tables/ledger-reconciled.csv",
+      "bytes": 158,
+      "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31"
+    },
+    {
+      "original": "docs/groundray-simple/sources/tickets/15-project.txt",
+      "capture": "knowledge/references/tickets/15-project.txt",
+      "bytes": 251,
+      "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9"
+    }
+  ],
+  "pages": [
+    {
+      "path": "wiki/lumen-commercial.md",
+      "item_id": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830",
+      "sources": [
+        {
+          "id": "owner",
+          "resource": "../references/owner/definitions-and-authority.md.txt",
+          "title": "Supplied fictional definitions and authority"
+        },
+        {
+          "id": "exception",
+          "resource": "../references/chat/07-exception.txt",
+          "title": "Forwarded October 1 excerpt"
+        },
+        {
+          "id": "rate",
+          "resource": "../references/docs/02-rate-card.md.txt",
+          "title": "Listed rate sheet"
+        }
+      ]
+    },
+    {
+      "path": "wiki/lumen-launch.md",
+      "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+      "sources": [
+        {
+          "id": "owner",
+          "resource": "../references/owner/definitions-and-authority.md.txt",
+          "title": "Supplied fictional delivery and authority rules"
+        },
+        {
+          "id": "client",
+          "resource": "../references/mail/14-client.txt",
+          "title": "October 26 mockup approval"
+        },
+        {
+          "id": "board",
+          "resource": "../references/tickets/15-project.txt",
+          "title": "Separate project dependencies"
+        },
+        {
+          "id": "qa",
+          "resource": "../references/qa/2026-11-06.txt",
+          "title": "November 6 QA forecast"
+        },
+        {
+          "id": "latest-client",
+          "resource": "../references/mail/2026-11-06-lumen.txt",
+          "title": "November 6 client request"
+        },
+        {
+          "id": "staffing",
+          "resource": "../references/ops/2026-11-06-staffing.txt",
+          "title": "Proposed internal shift allocation"
+        }
+      ]
+    },
+    {
+      "path": "wiki/lumen-margin.md",
+      "item_id": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4",
+      "sources": [
+        {
+          "id": "owner",
+          "resource": "../references/owner/definitions-and-authority.md.txt",
+          "title": "Supplied fictional metric rule"
+        },
+        {
+          "id": "ledger",
+          "resource": "../references/tables/ledger-reconciled.csv",
+          "title": "Reconciled ledger rows"
+        },
+        {
+          "id": "correction",
+          "resource": "../references/owner/2026-11-02-correction.md.txt",
+          "title": "Simulated November 2 correction"
+        }
+      ]
+    }
+  ],
+  "source_reads": [
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/owner/definitions-and-authority.md.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830",
+        "path": "wiki/lumen-commercial.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 1248,
+        "content": "# Supplied fictional owner replies\n\nThese are synthetic fixture rules, not real approvals or questions asked in this demo.\n\n## Metric\n\nMS contribution margin for the monthly project review is (recognized fees minus posted direct production costs) / recognized fees. Exclude sales tax and unposted owner-time estimates. In October Lumen's supplied ledger supports 50% pending the cost reconciliation; cash, invoices and pipeline are different measures.\n\n## Authority\n\nAs simulated Mosaic Studio owner, I designate Bea for commercial exceptions and client commitments, Rui for internal staffing only. Directory titles do not establish these delegations; this reply supplies our current rule. ME has its own rules.\n\n## Commercial\n\nI confirm Bea's supplied October 1 excerpt is accurate and authorized for Lumen's Oct\u2013Dec managed retainer at $80/hour only. The $120 ad-hoc rate sheet remains. The retainer copy corroborates its stated contractual terms, not a blanket company rate.\n\n## Delivery\n\nFor MS Lumen, design acceptance and launch acceptance are separate. Launch completion requires publication plus the client's acceptance after accessibility checks. Client approval of B2 is real scoped design approval, not acceptance of the final launch.\n",
+        "id": "owner",
+        "path": "references/owner/definitions-and-authority.md.txt",
+        "resource": "../references/owner/definitions-and-authority.md.txt",
+        "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/chat/07-exception.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830",
+        "path": "wiki/lumen-commercial.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 211,
+        "content": "October 1 forwarded conversation\nBea: Yes, use 80/hour for Lumen's Oct\u2013Dec managed retainer. Leave ad-hoc at the rate sheet.\nRui: I will schedule the team.\nForwarded excerpt, original chat server unavailable.\n",
+        "id": "exception",
+        "path": "references/chat/07-exception.txt",
+        "resource": "../references/chat/07-exception.txt",
+        "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/docs/02-rate-card.md.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830",
+        "path": "wiki/lumen-commercial.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 206,
+        "content": "# Rate sheet\n\nMosaic Studio ad-hoc production listed rate: USD 120/hour. Revision date September 1. This sheet has no exception delegation map. Mosaic Events also uses a Lumen label for an unrelated event.\n",
+        "id": "rate",
+        "path": "references/docs/02-rate-card.md.txt",
+        "resource": "../references/docs/02-rate-card.md.txt",
+        "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/owner/definitions-and-authority.md.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+        "path": "wiki/lumen-launch.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 1248,
+        "content": "# Supplied fictional owner replies\n\nThese are synthetic fixture rules, not real approvals or questions asked in this demo.\n\n## Metric\n\nMS contribution margin for the monthly project review is (recognized fees minus posted direct production costs) / recognized fees. Exclude sales tax and unposted owner-time estimates. In October Lumen's supplied ledger supports 50% pending the cost reconciliation; cash, invoices and pipeline are different measures.\n\n## Authority\n\nAs simulated Mosaic Studio owner, I designate Bea for commercial exceptions and client commitments, Rui for internal staffing only. Directory titles do not establish these delegations; this reply supplies our current rule. ME has its own rules.\n\n## Commercial\n\nI confirm Bea's supplied October 1 excerpt is accurate and authorized for Lumen's Oct\u2013Dec managed retainer at $80/hour only. The $120 ad-hoc rate sheet remains. The retainer copy corroborates its stated contractual terms, not a blanket company rate.\n\n## Delivery\n\nFor MS Lumen, design acceptance and launch acceptance are separate. Launch completion requires publication plus the client's acceptance after accessibility checks. Client approval of B2 is real scoped design approval, not acceptance of the final launch.\n",
+        "id": "owner",
+        "path": "references/owner/definitions-and-authority.md.txt",
+        "resource": "../references/owner/definitions-and-authority.md.txt",
+        "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/mail/14-client.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+        "path": "wiki/lumen-launch.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 179,
+        "content": "October 26 Lumen client: We approve the B2 design mockup. Website launch acceptance still needs the accessibility checks; this email is not acceptance of the final launched site.\n",
+        "id": "client",
+        "path": "references/mail/14-client.txt",
+        "resource": "../references/mail/14-client.txt",
+        "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/tickets/15-project.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+        "path": "wiki/lumen-launch.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 251,
+        "content": "Lumen board: Design Done = B2 review passed. Accessibility task AX-7 still blocked on screen-reader QA. Publishing task PUB-2 depends on AX-7. Launch plan dated Nov20 assumes AX-7 by Nov17. Tint photo delivery uses PHOTO-8 and is independent of AX-7.\n",
+        "id": "board",
+        "path": "references/tickets/15-project.txt",
+        "resource": "../references/tickets/15-project.txt",
+        "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/qa/2026-11-06.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+        "path": "wiki/lumen-launch.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 239,
+        "content": "MS Lumen AX-7 forecast: screen-reader review now expected November 23; remediation may take four more days. PUB-2 still depends on passing AX-7. No client-approved deadline amendment is attached. Tint PHOTO-8 remains expected November 16.\n",
+        "id": "qa",
+        "path": "references/qa/2026-11-06.txt",
+        "resource": "../references/qa/2026-11-06.txt",
+        "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/mail/2026-11-06-lumen.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+        "path": "wiki/lumen-launch.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 186,
+        "content": "Lumen purchasing: B2 remains approved as the design mockup. Please tell us when accessibility and publication are ready for launch acceptance. We have not accepted the launched website.\n",
+        "id": "latest-client",
+        "path": "references/mail/2026-11-06-lumen.txt",
+        "resource": "../references/mail/2026-11-06-lumen.txt",
+        "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/ops/2026-11-06-staffing.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+        "path": "wiki/lumen-launch.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 175,
+        "content": "Rui proposes moving two Studio production shifts from Lumen to Tint next week. This is a staffing proposal. No cancellation of Lumen or amendment to its retainer is recorded.\n",
+        "id": "staffing",
+        "path": "references/ops/2026-11-06-staffing.txt",
+        "resource": "../references/ops/2026-11-06-staffing.txt",
+        "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/owner/definitions-and-authority.md.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4",
+        "path": "wiki/lumen-margin.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 1248,
+        "content": "# Supplied fictional owner replies\n\nThese are synthetic fixture rules, not real approvals or questions asked in this demo.\n\n## Metric\n\nMS contribution margin for the monthly project review is (recognized fees minus posted direct production costs) / recognized fees. Exclude sales tax and unposted owner-time estimates. In October Lumen's supplied ledger supports 50% pending the cost reconciliation; cash, invoices and pipeline are different measures.\n\n## Authority\n\nAs simulated Mosaic Studio owner, I designate Bea for commercial exceptions and client commitments, Rui for internal staffing only. Directory titles do not establish these delegations; this reply supplies our current rule. ME has its own rules.\n\n## Commercial\n\nI confirm Bea's supplied October 1 excerpt is accurate and authorized for Lumen's Oct\u2013Dec managed retainer at $80/hour only. The $120 ad-hoc rate sheet remains. The retainer copy corroborates its stated contractual terms, not a blanket company rate.\n\n## Delivery\n\nFor MS Lumen, design acceptance and launch acceptance are separate. Launch completion requires publication plus the client's acceptance after accessibility checks. Client approval of B2 is real scoped design approval, not acceptance of the final launch.\n",
+        "id": "owner",
+        "path": "references/owner/definitions-and-authority.md.txt",
+        "resource": "../references/owner/definitions-and-authority.md.txt",
+        "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/tables/ledger-reconciled.csv"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4",
+        "path": "wiki/lumen-margin.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 158,
+        "content": "company,project,month,recognized_fees,posted_direct_cost,currency\nMS,Lumen,2026-10,4000,1500,USD\nMS,Tint,2026-10,3000,1000,USD\nME,Lumen,2026-10,9000,4000,USD\n",
+        "id": "ledger",
+        "path": "references/tables/ledger-reconciled.csv",
+        "resource": "../references/tables/ledger-reconciled.csv",
+        "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31"
+      }
+    },
+    {
+      "citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "path": "references/owner/2026-11-02-correction.md.txt"
+      },
+      "context_citation": {
+        "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "brain_slug": "mosaic-studio",
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "item_id": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4",
+        "path": "wiki/lumen-margin.md"
+      },
+      "fragment": null,
+      "scope": "development-only; complete source file; fragment not validated",
+      "source": {
+        "bytes": 440,
+        "content": "# Owner correction November 2\n\nSimulated MS owner: Finance has now posted the A-11 duplicate reversal of USD 500 against October Lumen costs. Use the corrected close below, and preserve the original 2,000 posted-cost snapshot and the earlier suspected duplicate as history. Invoice I-71 gross 4,500 includes tax 500; recognized fees remain 4,000. Correct related margin explanations, without rewriting the Lumen retainer or Tint's project.\n",
+        "id": "correction",
+        "path": "references/owner/2026-11-02-correction.md.txt",
+        "resource": "../references/owner/2026-11-02-correction.md.txt",
+        "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+      }
+    }
+  ],
+  "discovery": {
+    "retainer": {
+      "brain": {
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "name": "Mosaic Studio fictional G0",
+        "slug": "mosaic-studio"
+      },
+      "index_commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+      "mode": "keyword",
+      "ok": true,
+      "provider": "builtin",
+      "query": "retainer",
+      "results": [
+        {
+          "citation": {
+            "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+            "brain_slug": "mosaic-studio",
+            "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+            "item_id": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830",
+            "path": "wiki/lumen-commercial.md"
+          },
+          "docid": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830#31-39",
+          "item_id": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830",
+          "line": 31,
+          "line_end": 39,
+          "path": "wiki/lumen-commercial.md",
+          "rank": 1,
+          "score": 0.826724112033844,
+          "snippet": "## Definition\n\nFor Mosaic Studio (MS), the supplied owner rule confirms USD 80/hour for\nLumen's October\u2013December managed production retainer only.[^owner][^exception]\nThe listed ad-hoc production rate remains USD 120/hour.[^rate]\nBea has the supplied commercial/client-commitment delegation; Rui has internal\nstaffing authority only.[^owner] These are synthetic company rules, not real\napprovals recorded by this demonstration.\n\n",
+          "stale_after": null,
+          "status": "draft",
+          "title": "Lumen commercial scope",
+          "type": "concept"
+        },
+        {
+          "citation": {
+            "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+            "brain_slug": "mosaic-studio",
+            "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+            "item_id": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4",
+            "path": "wiki/lumen-margin.md"
+          },
+          "docid": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4#39-53",
+          "item_id": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4",
+          "line": 39,
+          "line_end": 53,
+          "path": "wiki/lumen-margin.md",
+          "rank": 2,
+          "score": 0.6194645166397095,
+          "snippet": "## Context\n\nThe earlier USD 2,000 cost snapshot yielded 50%; the owner fixture says a USD 500\nduplicate reversal was posted and that the earlier snapshot must be retained.[^correction]\nThe invoice gross of USD 4,500 includes USD 500 tax and is distinct from both\nrecognized fees and collection evidence.[^correction]\n\nThis is a scoped project calculation, not a complete company profitability or\ncash close. Mosaic Events' Lumen row is separate. The corrected source retains\nTint's row; correcting Lumen does not revise Tint or the [[lumen-commercial]]\nretainer. No agent output is relabeled human-verified.\n\n[^owner]: [Supplied fictional metric rule](../references/owner/definitions-and-authority.md.txt).\n[^ledger]: [Reconciled ledger rows](../references/tables/ledger-reconciled.csv).\n[^correction]: [Simulated November 2 correction](../references/owner/2026-11-02-correction.md.txt).\n",
+          "stale_after": null,
+          "status": "draft",
+          "title": "Lumen October contribution margin",
+          "type": "concept"
+        },
+        {
+          "citation": {
+            "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+            "brain_slug": "mosaic-studio",
+            "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+            "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+            "path": "wiki/lumen-launch.md"
+          },
+          "docid": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a#49-67",
+          "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+          "line": 49,
+          "line_end": 67,
+          "path": "wiki/lumen-launch.md",
+          "rank": 3,
+          "score": 0.5398522019386292,
+          "snippet": "## Context\n\nRecommend that Bea review the commitment and decide client communication;\ndo not claim that review or communication already happened.[^owner]\nA forecast signals a dependency risk, not a missed deadline as of November 6\nor an approved replacement date. The client's later message still requests\nlaunch acceptance after accessibility and publication are ready.[^latest-client]\n\nRui's two-shift move is a staffing proposal, not cancellation or a retainer\namendment.[^staffing] Tint PHOTO-8 is independent and forecast November 16;\nreview actual staffing effects without transferring AX-7's delay to Tint.[^board][^qa]\nSee [[lumen-commercial]] for authority and pricing scope.\n\n[^owner]: [Supplied fictional delivery and authority rules](../references/owner/definitions-and-authority.md.txt).\n[^client]: [October 26 mockup approval](../references/mail/14-client.txt).\n[^board]: [Separate project dependencies](../references/tickets/15-project.txt).\n[^qa]: [November 6 QA forecast](../references/qa/2026-11-06.txt).\n[^latest-client]: [November 6 client request](../references/mail/2026-11-06-lumen.txt).\n[^staffing]: [Proposed internal shift allocation](../references/ops/2026-11-06-staffing.txt).\n",
+          "stale_after": null,
+          "status": "draft",
+          "title": "Lumen launch and Tint scope",
+          "type": "concept"
+        }
+      ],
+      "validation_warnings": []
+    },
+    "margin": {
+      "brain": {
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "name": "Mosaic Studio fictional G0",
+        "slug": "mosaic-studio"
+      },
+      "index_commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+      "mode": "keyword",
+      "ok": true,
+      "provider": "builtin",
+      "query": "margin",
+      "results": [
+        {
+          "citation": {
+            "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+            "brain_slug": "mosaic-studio",
+            "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+            "item_id": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4",
+            "path": "wiki/lumen-margin.md"
+          },
+          "docid": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4#31-38",
+          "item_id": "urn:uuid:c1609c1a-3a1e-41d9-840c-03dbb1819df4",
+          "line": 31,
+          "line_end": 38,
+          "path": "wiki/lumen-margin.md",
+          "rank": 1,
+          "score": 12.553853034973145,
+          "snippet": "## Definition\n\nFor Mosaic Studio Lumen in October 2026, contribution margin is recognized fees\nminus posted direct production costs, divided by recognized fees. Sales tax and\nunposted owner-time estimates are excluded by the supplied fictional rule.[^owner]\nThe corrected ledger gives USD 4,000 fees and USD 1,500 costs:\n(4,000 - 1,500) / 4,000 = **62.5%**.[^ledger][^correction]\n\n",
+          "stale_after": null,
+          "status": "draft",
+          "title": "Lumen October contribution margin",
+          "type": "concept"
+        },
+        {
+          "citation": {
+            "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+            "brain_slug": "mosaic-studio",
+            "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+            "item_id": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830",
+            "path": "wiki/lumen-commercial.md"
+          },
+          "docid": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830#40-52",
+          "item_id": "urn:uuid:2db8307b-e98d-42f8-a19a-af69b4990830",
+          "line": 40,
+          "line_end": 52,
+          "path": "wiki/lumen-commercial.md",
+          "rank": 2,
+          "score": 1.0432478189468384,
+          "snippet": "## Context\n\nThe forwarded chat is an excerpt whose original server is unavailable. The\nowner fixture corroborates that scoped exception; repeating the excerpt does\nnot create another independent origin. The rate sheet does not supply the\ndelegation map. Mosaic Events' unrelated Lumen is a separate scope.\n\nSee [[lumen-margin]] for the October calculation and [[lumen-launch]] for the\nclient commitment. Pricing evidence does not establish launch acceptance.\n\n[^owner]: [Supplied fictional definitions and authority](../references/owner/definitions-and-authority.md.txt).\n[^exception]: [Forwarded October 1 excerpt](../references/chat/07-exception.txt).\n[^rate]: [Listed rate sheet](../references/docs/02-rate-card.md.txt).\n",
+          "stale_after": null,
+          "status": "draft",
+          "title": "Lumen commercial scope",
+          "type": "concept"
+        }
+      ],
+      "validation_warnings": []
+    },
+    "AX-7": {
+      "brain": {
+        "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+        "id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+        "name": "Mosaic Studio fictional G0",
+        "slug": "mosaic-studio"
+      },
+      "index_commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+      "mode": "keyword",
+      "ok": true,
+      "provider": "builtin",
+      "query": "AX-7",
+      "results": [
+        {
+          "citation": {
+            "brain_id": "urn:uuid:af20ed2f-cc1b-422c-815b-c3d838076e3d",
+            "brain_slug": "mosaic-studio",
+            "commit": "123c18e79d1931a2f51506043c90f45cea639a97",
+            "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+            "path": "wiki/lumen-launch.md"
+          },
+          "docid": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a#40-48",
+          "item_id": "urn:uuid:344d7bfe-916e-4402-a4d4-6d2ddee1981a",
+          "line": 40,
+          "line_end": 48,
+          "path": "wiki/lumen-launch.md",
+          "rank": 1,
+          "score": 3.4696149826049805,
+          "snippet": "## Definition\n\nAs of fictional November 6, 2026, B2 mockup approval is design approval, not\nacceptance of the launched site. Launch completion requires publication and\nclient acceptance after accessibility checks.[^owner][^client]\nThe November 20 plan assumes AX-7 by November 17; PUB-2 depends on AX-7.[^board]\nThe latest AX-7 forecast is November 23, with possible four-day remediation,\nand no client-approved amendment is attached.[^qa]\n\n",
+          "stale_after": null,
+          "status": "draft",
+          "title": "Lumen launch and Tint scope",
+          "type": "concept"
+        }
+      ],
+      "validation_warnings": []
+    }
+  },
+  "checks": {
+    "source_bytes_preserved": true,
+    "plan_read_only": true,
+    "bodies_preserved": true,
+    "relative_links_resolved": true,
+    "independent_install": true,
+    "declared_source_reads_pinned": true,
+    "explicit_sync": true,
+    "historical_body_retained": true,
+    "stale_index_refused": true,
+    "rebuild_search": true,
+    "human_verification_fabricated": false
+  },
+  "command_count": 54,
+  "expected_refusals": 2,
+  "construction_attempts": [
+    {
+      "attempt": 1,
+      "outcome": "Stopped before first creation: fictional init log date newer than actual generation timestamp.",
+      "trace": "construction-1-trace.json"
+    },
+    {
+      "attempt": 2,
+      "outcome": "Stopped after creation/installation: harness assumed link status key; API uses resolution.",
+      "trace": "construction-2-trace.json"
+    },
+    {
+      "attempt": 3,
+      "outcome": "Completed; two expected interface refusals.",
+      "trace": "trace.json"
+    }
+  ],
+  "post_run_change": "Added a clean-worktree assertion after creation plans, clarified new output directory, caught catalog errors in reader CLI, and applied Ruff formatting; these changes were not used in the recorded run.",
+  "snapshot_path": "examples/groundray-mosaic",
+  "runner_sha256_at_publication": "5d27ff46902ef7489db303f066f835d857be138740b397b71b05ffabc992d386",
+  "reader_sha256_at_publication": "2b18d5af913ab4e5fada30cf92ab99a4e2fcabddcca8ca5b5bc2a1334501201d",
+  "unit_checks": {
+    "tests": 5,
+    "passed": 5,
+    "description": "Five saved-source adapter tests, independent of the mechanical demo."
+  },
+  "focused_validation": {
+    "checks": 18,
+    "passed": 18,
+    "files": [
+      "tests/test_groundray_saved_source.py",
+      "tests/test_groundray_product_evals.py",
+      "tests/test_groundray_product_report.py",
+      "tests/test_groundray_presentation_reader.py"
+    ],
+    "example_concepts": 3,
+    "example_findings": 0,
+    "local_links_checked": 86,
+    "ruff": "pass",
+    "whitespace": "pass"
+  }
+}

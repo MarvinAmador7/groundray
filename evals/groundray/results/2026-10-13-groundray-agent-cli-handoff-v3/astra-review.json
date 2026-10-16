@@ -1,0 +1,13 @@
+{
+  "agent": "/root/astra_groundray_uncertainty_review",
+  "model": "gpt-6-astra",
+  "read_only": true,
+  "reviewed_draft_words": 532,
+  "reviewed_draft_sha256": "ecc71be4bb40d93ac1fabbf1cf3e3cd62614d1c34759b7410662e8a573b5e952",
+  "final_candidate_words": 531,
+  "final_candidate_sha256": "486398ba96d9170b0fc389b98ba955bf71a5139f2a5897164b5a46c3ef48ab1d",
+  "material_defects": 0,
+  "clarity_adjustment": "Prefer original passages; compiled-detail attribution fallback remains explicit.",
+  "empirical_validation": false,
+  "excluded_from_three_role_chain_counts": true
+}

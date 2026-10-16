@@ -1,6 +1,6 @@
 ---
 name: portable-kb
-description: Search, retrieve, create, and update governed organizational knowledge in an installed Portable KB brain, then share it when explicitly authorized. Use when answering from a business worldview, locating decisions or procedures, capturing or revising reusable knowledge, checking what the organization knows, comparing explicitly named brains, or grounding work in Portable KB citations with lifecycle and provenance signals.
+description: Search, retrieve, create, update, and move governed organizational knowledge in an installed Portable KB brain, then share it when explicitly authorized. Use when answering from a business worldview, locating decisions or procedures, capturing or revising reusable knowledge, checking what the organization knows, comparing explicitly named brains, or grounding work in Portable KB citations with lifecycle and provenance signals.
 ---
 
 # Portable KB
@@ -15,6 +15,8 @@ complete items, create honest drafts, and keep authority separate from relevance
   knowledge, use the creation workflow.
 - When the user asks to correct, revise, clarify, or extend an existing item,
   use the update workflow and preserve its immutable identity.
+- When the user asks to rename or relocate an existing item, use the move
+  workflow and preserve its identity and substantive content.
 - Share saved knowledge only when the user explicitly asks to publish, push,
   share, or distribute it to the organization.
 
@@ -66,7 +68,62 @@ complete items, create honest drafts, and keep authority separate from relevance
    decision or procedure clearly answers the question. Search again with
    different keywords when results are weak; do not infer missing content.
 
-4. Answer only from the retrieved items. Distinguish quoted knowledge,
+4. Follow relevant body relationships when a question needs connected context:
+
+   ```console
+   pkb links "urn:uuid:..." --brain <slug> --json
+   pkb backlinks "urn:uuid:..." --brain <slug> --json
+   ```
+
+   Follow entries with `resolution: resolved` using their scoped `get_command`.
+   Retrieve each target completely and verify its citation matches the link's
+   `target_citation` (for backlinks, retrieve the `source_citation`). Links need
+   no keyword index. The response's `ok` describes brain health; unresolved draft
+   links may still be present. Report missing/ambiguous targets and candidate
+   paths instead of choosing a name arbitrarily. Labels are display text, not
+   identity. Links in code examples are not navigation instructions. A connection
+   supplies context; evidence and lifecycle remain properties of each item.
+   Unique slugs, qualified paths, UUIDs and `[[wikilinks]]` are accepted by `get`.
+   `get --markdown-links --json` adds a rendered view while retaining canonical
+   content and citation. To inspect navigation or change history, retrieve its
+   explicit bundle path with the same scope:
+
+   ```console
+   pkb get index.md --brain <slug> --json
+   pkb get log.md --brain <slug> --json
+   pkb get procedures/index.md --brain <slug> --json
+   ```
+
+   Use the actual directory path, including `inbox/` when present. Reserved
+   documents return `document.kind`, `document.path`, complete `document.content`
+   and a brain/path/commit citation, without a concept UUID or lifecycle status.
+   Use their references to locate items, then retrieve those items for substantive
+   claims. Historical log paths can reflect earlier names. `--markdown-links`
+   applies to concepts only. Do not traverse unrelated links merely to increase reads.
+
+5. Inspect saved local source records behind consequential claims when needed:
+
+   ```console
+   pkb source get "urn:uuid:..." <source-id> --brain <slug> --json
+   ```
+
+   Use the retrieved item's actual `sources[].id`; require source and context
+   citations to match the selected commit. This reads the whole original file,
+   including TXT/CSV captures; it needs no keyword index and fetches no external
+   URL. Fragments are reported, not validated. A capture receipt shows copying
+   and matching bytes, not original authorship, approval or source authenticity.
+   For local file links use `source.local_path` exactly and check that the target
+   exists; citation paths are bundle-relative, not checkout-relative. Local copies
+   are mutable, so retain the full commit/hash and inspected passage. For a
+   proposal use `brain review-source` from the collaboration workflow; its
+   disposable view returns `local_path: null`. When an original is available,
+   inspect it before implying that source-specific details came from an original
+   read rather than a compiled page. Keep machine paths out of company knowledge.
+   See [source capture](references/sources.md) when authorized to retain a supplied
+   original. If the original is unavailable, describe that limitation rather
+   than claiming to have inspected it.
+
+6. Answer from the retrieved items and inspected sources. Distinguish quoted knowledge,
    reasonable synthesis, and gaps. Cite material claims using:
 
    ```text
@@ -189,10 +246,46 @@ Never lower sensitivity as an agent, claim human verification, use update to
 revive deprecated knowledge, or bypass a validation refusal. Use a new item or
 request a future supersession workflow when identity or scope materially changes.
 
+## Move workflow
+
+1. Retrieve the complete existing item and inspect `pkb links` and `pkb backlinks`
+   in the same explicit brain. A rename or relocation preserves this item's UUID,
+   creation time, sources, producer, lifecycle and existing verification. It is
+   a mechanical change, not a new draft, material rewrite or duplicate.
+2. Plan the destination as a bundle-relative `.md` path:
+
+   ```console
+   pkb knowledge move "urn:uuid:..." "procedures/client-export-runbook.md" \
+     --brain <slug> --json
+   ```
+
+3. Inspect `previous_path`, `path`, `item_id`, `proposed_item`, every affected
+   `changes[].diff` and validation warning. Confirm that substantive content,
+   provenance, display meaning and brain scope survive. If it matches the
+   authorized request, repeat the same command with `--apply`. The command
+   versions the move, required link repairs, indexes and log in one local commit.
+   It refuses existing destinations, invalid/dirty brains and changes that would
+   retarget local source provenance. Report a refusal; do not overwrite, create
+   a duplicate, delete, or edit raw managed files to simulate the operation.
+4. Retrieve the saved UUID using `get_command`; check its new path and saved
+   citation. Inspect links/backlinks and completely retrieve affected callers
+   from the saved snapshot. Follow `reindex_command` before another search;
+   old keyword indexes are stale after a move. Also retrieve each changed
+   `index.md` and `log.md` path from `changes[]` using scoped `pkb get <path> --json`.
+   Read the complete saved `document.content` and confirm its citation matches
+   the move's saved commit; a preview diff does not replace this saved read.
+5. Report the original lifecycle state and that the move remains local. A move
+   preserves existing verification without claiming any new human review.
+   Sharing still requires the separate publishing workflow.
+
 ## Sharing and synchronization
 
 Saving locally and sharing with the organization are separate authority
-boundaries. Only after explicit sharing intent, run:
+boundaries. For attaching a clone, submitting a proposal or reviewing an exact
+version, follow [the collaboration workflow](references/collaboration.md). Never
+accept a proposal merely because its validation passes.
+
+Only after explicit sharing intent and authorization for direct publication, run:
 
 ```console
 pkb brain push <slug> --json
@@ -223,7 +316,7 @@ pkb search index <slug> --json
 ```
 
 The slug is a positional argument for `index`, `brain status`, `brain push`,
-and `brain sync`; `query`, `get`, `create`, and `update` use `--brain <slug>`.
+and `brain sync`; `query`, `get`, `create`, `update`, and `move` use `--brain <slug>`.
 A bare `pkb search index` targets the active brain and may rebuild the wrong
 index during a named-brain request. Then retry the same scoped query. Do not install models, run semantic/hybrid retrieval, or
 synchronize the Git brain unless the user separately requests it.

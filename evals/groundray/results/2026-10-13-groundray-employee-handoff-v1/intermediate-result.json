@@ -1,0 +1,116 @@
+{
+  "experiment": "groundray-employee-handoff-v1",
+  "recorded_at": "2026-10-13T00:35:14.700998+00:00",
+  "scope": "Mechanical CLI demonstration on one Linux host; no fresh agent or human review.",
+  "distribution": "Two isolated configurations, file:// bare Git remote; no real host permission or branch-protection test.",
+  "base_commit": "a283388e210d659f001d3311cfbaad0c92509074",
+  "proposal_commit": "759d32fbfe15aa2f4502a7c05dffb11c50ea42e6",
+  "proposal_ref": "refs/heads/groundray/delivery-evidence",
+  "preserved_sources": [
+    {
+      "path": "knowledge/references/captures/chat/03-sales.txt",
+      "sha256": "9fce2a6cf355797ced7a6a9417801d689c61d7497974314cfa67d2025917c556"
+    },
+    {
+      "path": "knowledge/references/captures/chat/07-exception.txt",
+      "sha256": "f1e1a637b4345f3271dc704c4898eee59fcf7bbf52ba2896b5fc2344f3cb8d72"
+    },
+    {
+      "path": "knowledge/references/captures/chat/16-plan.txt",
+      "sha256": "70fafaf01d705be420c333b90619090b3923554699fe46634634d58679c2e057"
+    },
+    {
+      "path": "knowledge/references/captures/contracts/06-lumen.txt",
+      "sha256": "14aad20832ce010945e7c6db61f58cfc09443ddb82a6406d06ca0370caac7b27"
+    },
+    {
+      "path": "knowledge/references/captures/docs/02-rate-card.md.txt",
+      "sha256": "b94a158d8e6affd64a13accf3df7031ee0454162c818770091da40edf6c76ef3"
+    },
+    {
+      "path": "knowledge/references/captures/mail/01-context.txt",
+      "sha256": "42ed837f5dc826686dcae742cfa43741b253e18a9d287b7ce06dcc6dccc51501"
+    },
+    {
+      "path": "knowledge/references/captures/mail/14-client.txt",
+      "sha256": "0e0016ac6e41acd89b6caba9335564e9278c3005ec9a83290ee068570cc0d01e"
+    },
+    {
+      "path": "knowledge/references/captures/mail/2026-11-06-lumen.txt",
+      "sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844"
+    },
+    {
+      "path": "knowledge/references/captures/notes/04-team.md.txt",
+      "sha256": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c"
+    },
+    {
+      "path": "knowledge/references/captures/notes/05-board.md.txt",
+      "sha256": "6f4a094f1df939826e51478ea66d44ad8c4de60b8892aa1b022e3b72b2cdc4f1"
+    },
+    {
+      "path": "knowledge/references/captures/notes/13-close-query.md.txt",
+      "sha256": "4851363b9c67f93080dba730e889e089b6ee0cc11d17549fd6e71cf4cda82687"
+    },
+    {
+      "path": "knowledge/references/captures/notes/18-feedback.md.txt",
+      "sha256": "4c388314a3745edd834e71a1c773d576596d3adab55ab63f0693c69393a48d2e"
+    },
+    {
+      "path": "knowledge/references/captures/notes/2026-11-06-summary.md.txt",
+      "sha256": "9ae16d29585fb26b64e02559e1cc974da9ac96878c54c66f1cb1fb0f95842ccb"
+    },
+    {
+      "path": "knowledge/references/captures/ops/2026-11-06-staffing.txt",
+      "sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd"
+    },
+    {
+      "path": "knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+      "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+    },
+    {
+      "path": "knowledge/references/captures/owner/definitions-and-authority.md.txt",
+      "sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43"
+    },
+    {
+      "path": "knowledge/references/captures/qa/2026-11-06.txt",
+      "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa"
+    },
+    {
+      "path": "knowledge/references/captures/tables/09-ledger.csv",
+      "sha256": "398a46d6e5ef2baf9e08f49d34f5f98eb5793661a7224a747f8af9d10e17b032"
+    },
+    {
+      "path": "knowledge/references/captures/tables/10-invoices.csv",
+      "sha256": "cabfaa4e7c9dd33b51b617be565af694e173f11c720c4ca1ab7cd17631c2d642"
+    },
+    {
+      "path": "knowledge/references/captures/tables/ledger-reconciled.csv",
+      "sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31"
+    },
+    {
+      "path": "knowledge/references/captures/tickets/15-project.txt",
+      "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9"
+    }
+  ],
+  "new_source_sha256": "2e1b1934c26ed3ccd902f231fdbbc6884c95f82b7473afa0da147f4dff307a2d",
+  "command_count": 37,
+  "expected_refusals": 7,
+  "checks": {
+    "remote_install_attachment": true,
+    "attachment_preview_read_only": true,
+    "proposal_leaves_main_unchanged": true,
+    "exact_commit_review_without_activation": true,
+    "explicit_publication_then_sync": true,
+    "source_bytes_preserved": true,
+    "item_identity_preserved": true,
+    "historical_body_retained": true,
+    "stale_index_refused_then_rebuilt": true,
+    "human_approval_fabricated": false
+  },
+  "code_sha256": {
+    "src/portable_kb/collaboration.py": "686b30599cbc010a6deb3690c6018b4ae9624d97530ff4a3c3908d9dfa1547f4",
+    "src/portable_kb/cli.py": "185ddb1d7424c9aa2308a458be33d82fdf4b4a67225aaa854d60c85e401df44b",
+    "evals/groundray/employee_handoff.py": "5e45521c119733cb5d618422c16d1c3261f136ec2e94d7234e54841c69738190"
+  },
+  "native_sha256": "6d61f3d7925178b59eb48a66fb8652e65d6e6aa48afb10fd3a603c709768e2ac"
+}

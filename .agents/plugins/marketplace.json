@@ -1,0 +1,12 @@
+{
+  "name": "groundray-dev",
+  "interface": {"displayName": "Groundray development"},
+  "plugins": [
+    {
+      "name": "groundray",
+      "source": {"source": "local", "path": "./plugins/groundray"},
+      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/notes/04-team.md.txt",
+  "original_name": "04-team.md",
+  "title": "04-team.md",
+  "bytes": 147,
+  "sha256": "9e7cb685f67df4f52d1a6d3a7d9c6185a0f04d7deb827fcae3b84146da6f2b5c",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:34Z"
+  },
+  "origin": "Synthetic fixture: notes/04-team.md"
+}

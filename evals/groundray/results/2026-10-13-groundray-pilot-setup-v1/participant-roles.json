@@ -1,0 +1,105 @@
+{
+  "repository": "fullkontrol/groundray-pilot-mosaic",
+  "source_url": "https://github.com/fullkontrol/groundray-pilot-mosaic.git",
+  "base_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+  "publisher_account": "MarvinAmador7",
+  "contributor_account": "KarolGarcia712",
+  "receiver_account": "KarolGarcia712",
+  "read_only_account": null,
+  "host_main_ref": "refs/heads/main",
+  "pilot_mode": "private contributor without main protection",
+  "employee_access_requested": "push",
+  "employee_effective_permission_observed": null,
+  "collaborator_access_request_completed": true,
+  "main_protection_required": false,
+  "hosted_main_protected_reported": false,
+  "publisher_role_is_workflow_convention": true,
+  "publisher_only_main_access_tested": false,
+  "employee_publication_denial_in_scope": false,
+  "native_sessions_completed": false,
+  "human_source_inspection_completed": false,
+  "publisher_machine_reported": {
+    "os": "Darwin",
+    "architecture": "arm64"
+  },
+  "employee_machine_reported": {
+    "os": "Darwin",
+    "architecture": "arm64"
+  },
+  "publisher_plugin_reported": {
+    "codex_cli_version": "0.151.0",
+    "plugin_version": "0.1.0-dev.2",
+    "installed": true,
+    "enabled": true,
+    "archive_checksum_passed": true,
+    "helper_compatibility_observed": true,
+    "current_codex_cli_version_reported": "0.161.0",
+    "current_marketplace_recovered": true,
+    "current_native_skill_use_observed": true
+  },
+  "employee_plugin_reported": null,
+  "publisher_company_setup_reported": {
+    "source_url": "https://github.com/fullkontrol/groundray-pilot-mosaic.git",
+    "slug": "mosaic-studio",
+    "commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "provider": "qmd",
+    "index_current": true,
+    "native_session_with_manual_fallback": true,
+    "status_json_independently_inspected": false,
+    "automatic_namespaced_skill_discovery_reported": true,
+    "native_read_only_verification_completed": true,
+    "verification_receipt": "publisher-native-verification-v2.json",
+    "index_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "qmd_version": "2.5.3"
+  },
+  "publisher_business_attempt_reported": {
+    "receipt": "publisher-business-attempt-v1.json",
+    "codex_version": "0.161.0",
+    "skill_missing": true,
+    "business_answer_completed": false,
+    "current_context_diagnostics_pending": false,
+    "current_terminal_groundray_registration_missing": true,
+    "resolution_pending": true
+  },
+  "publisher_current_business_attempt_reported": {
+    "receipt": "publisher-native-owner-answer-v3.json",
+    "native_skill_use": true,
+    "helper_compatible": true,
+    "provider_context": "builtin",
+    "business_answer_completed": true,
+    "source_get_calls_visible": 10,
+    "referenced_unique_originals": 7,
+    "publisher_personal_original_source_inspection_reported": "none",
+    "reference_clickability_observed": false
+  },
+  "publisher_current_setup_reported": {
+    "receipt": "publisher-native-builtin-verification-v4.json",
+    "slug": "mosaic-studio",
+    "commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "selected": true,
+    "valid": true,
+    "clean": true,
+    "provider": "builtin",
+    "mode": "keyword",
+    "index_present": true,
+    "index_commit": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+    "business_answer_completed": false,
+    "index_current": true,
+    "additional_dependencies_installed": false
+  },
+  "publisher_requested_provider_change": {
+    "provider": "builtin",
+    "mode": "keyword",
+    "reason": "Publisher requires packaged Groundray without a separate QMD installation",
+    "authorized": true,
+    "provider_switch_observed": true,
+    "mosaic_index_rebuild_observed": true,
+    "preserve_current_brain_and_data_roots": true,
+    "verification_receipt": "publisher-native-builtin-verification-v4.json"
+  },
+  "publisher_ready_for_business_question_reported": true,
+  "publisher_prior_business_attempt_receipts": [
+    "publisher-business-attempt-v1.json",
+    "publisher-business-attempt-v2.json"
+  ]
+}

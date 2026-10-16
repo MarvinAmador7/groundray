@@ -1,0 +1,77 @@
+{
+  "runner": {
+    "adapter": "recorded-shell-observer",
+    "elapsed_seconds": 106.607862931,
+    "exit_code": 0,
+    "model": "inherited/unknown",
+    "notes": "Actual delegated agent with recorded shell actions; reasoning and token/cost telemetry unavailable.",
+    "provider": "chat-host",
+    "runner": "codex-chat-subagent",
+    "timed_out": false
+  },
+  "shell_commands": 14,
+  "shell_nonzero_exits": 1,
+  "cli_commands": 19,
+  "cli_errors": [
+    {
+      "argv": [
+        "source",
+        "get",
+        "urn:uuid:2973f69c-da3f-4e6a-8a37-7964796d7875",
+        "refund-register",
+        "--brain",
+        "cedar",
+        "--json"
+      ],
+      "stderr": "Source retrieval failed: Source retrieval accepts saved local files only; external sources are not fetched.\n",
+      "exit_code": 1
+    }
+  ],
+  "returned_sources": [
+    {
+      "path": "references/captures/authority.txt",
+      "sha256": "2159b4dfa526deb836bb153f8058f6e659d2e9abc645e71d93718c32a45e1336",
+      "commit": "7f19b160ea0c7b5db7b3bf242bca56570f866765",
+      "local_path": "/workspace/groundray-pilot/link-check/reader/data/portable-kb/brains/cedar/knowledge/references/captures/authority.txt",
+      "content": "Fictional Cedar Services finance-owner record. Only controller Ivo can approve customer refunds. A meeting summary or a draft brain note is not approval. The current approved refund register is not supplied in this brain.\r\n",
+      "command": [
+        "source",
+        "get"
+      ],
+      "complete_body_in_observer_output": true
+    }
+  ],
+  "distinct_returned_sources": 1,
+  "local_source_links": [
+    {
+      "target": "/workspace/groundray-pilot/link-check/reader/data/portable-kb/brains/cedar/knowledge/references/captures/authority.txt",
+      "resolved_path": "/workspace/groundray-pilot/link-check/reader/data/portable-kb/brains/cedar/knowledge/references/captures/authority.txt",
+      "within_case": true,
+      "exists_at_audit": true,
+      "matches_returned_source_path": true,
+      "matches_returned_source_hash": true,
+      "returned_source_commits": [
+        "7f19b160ea0c7b5db7b3bf242bca56570f866765"
+      ]
+    },
+    {
+      "target": "/workspace/groundray-pilot/link-check/reader/data/portable-kb/brains/cedar/knowledge/inbox/cedar-services-decision.md",
+      "resolved_path": "/workspace/groundray-pilot/link-check/reader/data/portable-kb/brains/cedar/knowledge/inbox/cedar-services-decision.md",
+      "within_case": true,
+      "exists_at_audit": true,
+      "matches_returned_source_path": false,
+      "matches_returned_source_hash": false,
+      "returned_source_commits": []
+    }
+  ],
+  "answer_words": 256,
+  "answer_matches_final": true,
+  "installed_skill_reads": {
+    "skills/groundray/SKILL.md": true,
+    "skills/groundray-setup/SKILL.md": true,
+    "skills/groundray/references/portable-kb/SKILL.md": true
+  },
+  "runtime_sha256": "1bf8aaa4074f5902c0fa7c918015799f86dd495430117c09c75eeb8e0c8caf09",
+  "artifacts": {},
+  "installed_files_unchanged": true
+}

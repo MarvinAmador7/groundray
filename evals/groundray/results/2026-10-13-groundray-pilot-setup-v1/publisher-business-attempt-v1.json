@@ -1,0 +1,50 @@
+{
+  "evidence_source": "Publisher pasted native Codex business-question transcript",
+  "publisher": "MarvinAmador7",
+  "codex_version_reported": "0.161.0",
+  "requested_skill": "groundray:groundray",
+  "question": "I own Mosaic Studio. What should I tell Lumen about price and launch, and what October profitability should I use in our review? Tell me what needs deciding now and whether Tint is affected. As of fictional November 9, 2026.",
+  "fictional_as_of": "2026-11-09",
+  "outcome": "Blocked before company evidence retrieval; no business recommendation produced",
+  "groundray_skill_missing_reported": true,
+  "groundray_file_absence_independently_confirmed": false,
+  "manual_discovery_attempt_reported": true,
+  "plugin_directory_search_reported": true,
+  "unrelated_skills_used_reported": [
+    "unslop",
+    "plugin-management:plugin-management"
+  ],
+  "hook_errors_visible": {
+    "count": 3,
+    "exit_code": 127,
+    "hook_command_visible": false,
+    "cause_confirmed": false,
+    "causal_link_to_groundray_discovery_confirmed": false
+  },
+  "brain_commit_verified_in_this_attempt": false,
+  "index_verified_in_this_attempt": false,
+  "mosaic_originals_inspected": false,
+  "business_answer_completed": false,
+  "human_source_inspection_completed": false,
+  "company_changes_reported": false,
+  "active_plugin_home_observed_for_this_attempt": true,
+  "launch_method_observed": false,
+  "current_plugin_registration_observed": true,
+  "runtime_upgrade_cause_confirmed": false,
+  "prior_successful_setup_receipt": "publisher-native-verification-v2.json",
+  "prior_successful_setup_codex_version": "0.151.0",
+  "prior_successful_setup_unchanged": true,
+  "private_machine_paths_omitted": true,
+  "trial_retried_or_response_repaired": false,
+  "current_terminal_diagnostics_reported": {
+    "codex_executable": "Homebrew codex",
+    "codex_version": "0.161.0",
+    "codex_home_selector": "default",
+    "groundray_installed_entries": 0,
+    "groundray_available_entries": 0,
+    "plugins_feature_enabled": true,
+    "recommended_plugins_feature_enabled": false,
+    "prior_successful_codex_executable": "user-local codex",
+    "registration_loss_cause_confirmed": false
+  }
+}

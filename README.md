@@ -23,6 +23,22 @@ Claude Code the same workflow for finding, citing, and updating that knowledge.
 - **Portable files.** Each brain is its own Git repository with an OKF-compatible
   Markdown bundle. Search indexes are disposable local state.
 
+**Groundray development:** the draft branch now supports
+[authoring attachment and reviewed Git proposals](docs/brain-collaboration.md).
+The [employee handoff demonstration](docs/groundray-employee-handoff.md) preserves
+original evidence through publication and sync. [Fresh-agent trials](docs/groundray-agent-cli-handoff.md)
+exposed inspection gaps, then exercised pinned candidate-source retrieval and ten
+working reader evidence targets. The [Lite refinement](docs/groundray-uncertainty-evaluation.md)
+observes preserved forecast uncertainty and corrects an invoice evidence-grading
+mistake with the actual supporting passage. These additions are unreleased. The [Groundray development plugin](docs/groundray-plugin.md)
+now packages the skills and a compatible native CLI for Codex, with local
+marketplace installation and an explicit company workflow. The
+[package trials](docs/groundray-plugin-evaluation.md) exercise a fresh employee
+handoff and three additional company cases; native chat activation and a human
+pilot remain open. [Pilot preparation](docs/groundray-pilot-readiness.md) provides
+a runnable two-person packet and private-host plan; its first dev.2 follow-up
+returns clickable evidence for the previously compiled-only case.
+
 ## Install
 
 Standalone releases support **macOS and Linux, on Intel and ARM**. They include
@@ -123,6 +139,21 @@ The path above is the default for that title; use the returned path if you chose
 a different one. Saving refreshes complete-item retrieval immediately. Rebuild
 the search index before querying a new or changed draft.
 
+## Follow connected knowledge
+
+Explain relationships with Markdown links or `[[wikilinks]]`, then navigate them
+within the same pinned brain:
+
+```sh
+pkb links "customer-onboarding" --brain team --json
+pkb backlinks "customer-onboarding" --brain team --json
+pkb get "customer-onboarding" --brain team --markdown-links --json
+```
+
+Links resolve to item UUIDs and citations. Ambiguous names and missing targets
+remain visible; backlinks are computed from the saved content. No search index
+is required. See [link navigation](docs/links.md) for syntax and portability.
+
 ## Work with an existing brain
 
 Install a repository containing a `brain.yaml` manifest and governed bundle:
@@ -190,6 +221,18 @@ reviewed change. Creation also supports `--body-file` and `--sources-file`.
 Saved results include the actual item ID, citation, and scoped follow-up commands;
 `needs_reindex` makes search readiness explicit.
 
+Rename or relocate an existing item with the same preview/apply workflow:
+
+```sh
+pkb knowledge move "urn:uuid:..." "procedures/client-export-runbook.md" \
+  --brain team --json
+```
+
+Moves preserve identity, provenance and review status, and repair affected links
+and indexes in one local commit. Repeat with `--apply` after inspecting the diff.
+Inspect complete saved navigation and history with `pkb get index.md --brain team`
+and `pkb get log.md --brain team`; nested index paths work too.
+
 New agent-authored knowledge remains draft. Material updates preserve `id` and
 `created_at`, update provenance, and invalidate prior verification. Human review
 and authority are separate from search relevance or confidence. See the
@@ -223,8 +266,9 @@ for the concurrency contract.
 ## Evaluate the CLI and skill
 
 The development harness tests a real executable and the skill it installs in
-six isolated synthetic scenarios: first run, draft correction, named-brain
-comparison, corpus gaps, embedded commands, and dirty-checkout refusal.
+seven isolated synthetic scenarios: first run, draft correction, named-brain
+comparison, corpus gaps, embedded commands, dirty-checkout refusal, and
+linked-context navigation.
 
 From this repository root, use Python 3.11+, Git, a standalone `pkb`, and an
 authenticated Codex runner with backend access. Choose a fresh evidence directory
@@ -259,6 +303,37 @@ boundary. See [agent evaluation setup and scoring](docs/agent-cli-evals.md) for
 individual scenarios, regrading, and limits. Retrieval relevance is evaluated
 separately with [`pkb search evaluate`](docs/retrieval-evaluation.md).
 
+To compare a Markdown wiki and its skill with Portable KB on the same captured
+knowledge, use the [matched-content agent benchmark](docs/wiki-comparison.md).
+It checks migration fidelity, independently grounded answers and observed effort,
+with private corpora and reports kept outside the repository.
+The [Atlas Logistics benchmark](docs/logistics-benchmark.md) adds a matched
+220-page synthetic world and eight agent workflows with independent saved-state
+checks, including scoped amendments and a runbook move.
+For agents correcting requirements, handling conflicts, isolating clients, and
+maintaining links, use the [workplace workflow suite](docs/agentic-workflows.md).
+
+The [reliability benchmark](docs/reliability-benchmark.md) adds concurrent edits,
+stale citations, hard-killed moves and rollback trials, plus CLI read profiling.
+It retains blocked runs and reports recovery-fix candidates separately.
+
+The experimental [Groundray skill](docs/groundray.md) builds portable company
+brains in a Markdown wiki, preserving evidence and authority for each claim.
+It is a separate draft skill with manual installation and a fictional walkthrough.
+
+The adopted [Groundray product goal](docs/groundray-product-goal.md) combines plugin,
+skill, CLI and shared Git-backed company brains using Portable KB as the engine.
+Its next milestones cover storage/interface fit, a two-employee workflow,
+packaging and an employee pilot. The integrated product remains planned; the
+released CLI and installation instructions above are still `pkb`.
+
+The [first engine-fit demo](docs/groundray-engine-fit.md) shows three linked company
+pages and 21 unchanged original records installed, retrieved and synced using
+the engine. That run used a development helper for raw evidence reading.
+The [CLI-only follow-up](docs/groundray-cli-sources.md) implements source capture
+and saved-record reading on the draft branch, replacing that helper. These commands
+are not yet in a tagged release; see [source capture](docs/source-capture.md).
+
 ## Documentation
 
 | Guide | What it covers |
@@ -267,11 +342,14 @@ separately with [`pkb search evaluate`](docs/retrieval-evaluation.md).
 | [Releases and installation](docs/releases.md) | Supported artifacts, checksums, upgrades, and recovery |
 | [Authoring handbook](docs/authoring-handbook.md) | Sources, lifecycle, and human review |
 | [Agent evaluations](docs/agent-cli-evals.md) | Actual CLI/skill trials, traces, and outcome grading |
+| [Wiki comparison](docs/wiki-comparison.md) | Matched wiki/Portable KB trials and CLI-based replication |
+| [Agent workflows](docs/agentic-workflows.md) | Saved changes, conflicts, client isolation, handoffs, and safe capability blocking |
 | [Retrieval evaluation](docs/retrieval-evaluation.md) | Ranking quality, citation checks, and measured results |
 | [Native search](docs/pkb-search.md) | Tantivy integration and provider architecture |
 | [Architecture](docs/architecture.md) | Product boundaries, compatibility, and design decisions |
 | [Schema](docs/schema.md) · [Lifecycle](docs/lifecycle.md) | The governed OKF-compatible profile |
 | [Roadmap](docs/roadmap.md) | Current scope and planned capabilities |
+| [Groundray product goal](docs/groundray-product-goal.md) | Plugin, skill, CLI, shared infrastructure and two-employee acceptance criteria |
 
 Brains target Open Knowledge Format v0.2 with a stricter local profile for
 identity, provenance, lifecycle, and validation. The profile's requirements are

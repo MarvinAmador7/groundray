@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/qa/2026-11-06.txt",
+  "original_name": "2026-11-06.txt",
+  "title": "2026-11-06.txt",
+  "bytes": 239,
+  "sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:42Z"
+  },
+  "origin": "Synthetic fixture: qa/2026-11-06.txt"
+}

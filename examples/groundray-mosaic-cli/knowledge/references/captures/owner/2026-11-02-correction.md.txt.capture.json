@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/owner/2026-11-02-correction.md.txt",
+  "original_name": "2026-11-02-correction.md",
+  "title": "2026-11-02-correction.md",
+  "bytes": 440,
+  "sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:41Z"
+  },
+  "origin": "Synthetic fixture: owner/2026-11-02-correction.md"
+}

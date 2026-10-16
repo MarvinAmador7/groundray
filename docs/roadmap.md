@@ -3,6 +3,34 @@
 The phases stabilize the canonical files before adding operations and only then
 describe retrieval/integrations. Phases are gates, not calendar estimates.
 
+## Current product goal — Groundray
+
+The adopted [Groundray product goal](groundray-product-goal.md) combines an agent
+plugin, the **answer → evidence → guidance** skill, a CLI and Git-backed shared
+company brains. Portable KB supplies the engine foundation. The product target
+is employees on separate computers recovering the same published evidence and
+decisions, proposing reviewed changes and syncing without losing history or scope.
+
+The next delivery sequence is **storage/interface fit → two-employee workflow →
+Groundray packaging → employee pilot**. These milestones are defined in the goal;
+[development plugin packaging](groundray-plugin.md) and local collaboration tests
+are implemented; employee deployment remains gated and unreleased. Existing
+`pkb` commands and profile behavior remain the implementation baseline. Broader
+hosted infrastructure, custom authorization and external integrations keep their
+separate scope gates.
+
+G0 now has a [reproducible development fit](groundray-engine-fit.md): three wiki
+pages, 21 unchanged sources, native retrieval and explicit local sync. The
+source capture/read interface is now [implemented and exercised through the CLI](groundray-cli-sources.md).
+Remote-installed authoring and proposal/review/publication now have a
+[mechanical shared-remote demonstration](groundray-employee-handoff.md). [Fresh Lite agent chains](groundray-agent-cli-handoff.md)
+retain the original inspection/link failures and exercise their fixes with new
+participants. The follow-up retrieved candidate originals directly and produced
+ten working reader targets. The [semantic refinement](groundray-uncertainty-evaluation.md)
+observes preserved forecast uncertainty and corrects a root evidence-grading error.
+Generalization, real host permissions and separate-computer packaging
+remain open for G1. No profile change was needed.
+
 ## Implementation status
 
 | Phase | Status | Evidence |
@@ -10,9 +38,9 @@ describe retrieval/integrations. Phases are gates, not calendar estimates.
 | 0 — Research and decisions | Implemented | The upstream revision and local decisions are pinned in `docs/profile-decisions.md`; deployment reviewer identities remain safely empty until real people configure them. |
 | 1 — Core file model | Implemented | The isolated reference fixture exercises fourteen representative concepts across five active types, indexes, a log, and bundle configuration. Production brains are created in separate repositories with `pkb brain init`. |
 | 2 — Validation | Implemented | `portable_kb.validate_bundle()` covers the rule catalog with stable structured findings and offline explicit-date behavior. |
-| 3 — Lifecycle operations | Implemented | Reviewable planners cover create, update, promote, reverify, move, supersede, and archive with base/proposed validation and optimistic application. |
+| 3 — Lifecycle operations | Implemented | Reviewable planners cover create, update, promote, reverify, move, supersede, and archive with base/proposed validation and optimistic application. The CLI exposes plan-first create, update, and mechanical move. |
 | 4 — Test corpus | Implemented | Focused fixtures and transition/operation tests assert every catalog rule; time and network behavior are deterministic. |
-| 5 — Retrieval and CLI consumers | In progress | Inline/non-interactive setup, checksum-verified standalone CLI releases, local-first brain initialization with optional GitHub publication, plan-first draft creation and material update, explicit validated fast-forward push/sync, brain distribution, QMD BM25 search, complete-item retrieval, and setup-integrated Codex/Claude skill installation are implemented. The keyword provider boundary, labeled evaluation harness, normalized section records, SQLite/Tantivy prototypes, initial shared-corpus benchmarks, and native atomic rebuild/recovery with concurrent readers and reader-safe generation cleanup are implemented. Tantivy is integrated as the builtin provider, and native distribution is wired into the 0.2.0 release gate. Remote release validation, representative domain evaluations, semantic/hybrid retrieval, and trust filtering remain pending. |
+| 5 — Retrieval and CLI consumers | In progress | Inline/non-interactive setup, checksum-verified standalone CLI releases, local-first brain initialization with optional GitHub publication, plan-first draft creation and material update, explicit validated fast-forward push/sync, brain distribution, QMD BM25 search, complete-item retrieval, read-only links/backlinks and derived Markdown views, and setup-integrated Codex/Claude skill installation are implemented. The keyword provider boundary, labeled evaluation harness, normalized section records, SQLite/Tantivy prototypes, initial shared-corpus benchmarks, and native atomic rebuild/recovery with concurrent readers and reader-safe generation cleanup are implemented. Tantivy is integrated as the builtin provider, and native distribution is wired into the 0.2.0 release gate. Remote release validation, representative domain evaluations, semantic/hybrid retrieval, and trust filtering remain pending. |
 | 6+ — Applications and integrations | Deferred | MCP, native UI, authentication/authorization, and connectors remain outside the current implementation. |
 
 Technical implementation does not substitute for human governance. When a
@@ -210,7 +238,8 @@ search is the default setup tier and requires no model download.
   (implemented for keyword queries and complete-item retrieval);
 - keyword/semantic/hybrid retrieval evaluations (item-level keyword harness,
   reference section judgments, shared QMD/SQLite/Tantivy comparison, and synthetic
-  scale runs implemented; representative domain and semantic/hybrid evaluation
+  scale runs and a 220-page fictional logistics agent benchmark implemented;
+  representative real-domain and semantic/hybrid evaluation
   pending); and
 - machine-readable output for agent skills and future native clients
   (implemented for search, retrieval, and skill installation).
@@ -233,7 +262,9 @@ MCP publication, and serving APIs.
 
 See [the built-in search plan](pkb-search.md) for the provider sequence and
 [retrieval evaluation](retrieval-evaluation.md) for labels, metrics, and the
-starter baseline's limits.
+starter baseline's limits. See [Atlas Logistics](logistics-benchmark.md) for the
+larger matched wiki/Portable KB corpus, actual-agent workflows and independent
+outcome checks.
 
 ## Phase 6 — External integrations (high level only)
 
@@ -259,7 +290,12 @@ rate/API change, and proprietary metadata coupling.
 Slack, Gmail, GitHub, or any other connector; authentication, authorization,
 multitenancy, hosted APIs, or production infrastructure.
 
-## Recommended first milestone
+## Original core-model milestone
+
+This initial core-model plan is retained as design context. The implementation
+status above records the engine work delivered since then; real content review
+and governance remain deployment responsibilities. The current next product
+milestone is Groundray G0/G1 in [the adopted goal](groundray-product-goal.md).
 
 Complete Phase 0 and a deliberately narrow slice of Phase 1:
 

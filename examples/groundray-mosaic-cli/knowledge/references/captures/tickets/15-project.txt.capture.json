@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "path": "references/captures/tickets/15-project.txt",
+  "original_name": "15-project.txt",
+  "title": "15-project.txt",
+  "bytes": 251,
+  "sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9",
+  "captured": {
+    "by": "openai/codex",
+    "at": "2026-10-12T23:52:46Z"
+  },
+  "origin": "Synthetic fixture: tickets/15-project.txt"
+}

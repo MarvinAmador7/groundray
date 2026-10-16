@@ -1,0 +1,22 @@
+{
+  "implementation_commit": "dc2c4688df945c2d138707f70d592f80f8ccde8d",
+  "runtime_core_commit": "534905bef8564502ca524ead51875a7835256bba",
+  "plugin_snapshot": {
+    ".bundled-runtime": "93486a687316de643f10724bdf83934985d41ee02b2d002f46ec472e05525242",
+    "LICENSE": "0505a8284dfae133736a724d196c23a36a7f6c6f731c7c7f37c5f43d88399103",
+    "plugin.json": "72697eef2cebb596b6ead6287c3d1832eb1782de6dcadd3706863131b3952518",
+    "runtime/SHA256SUMS": "efe1d37aa8731dcf95c2a7cf6dd8ffbd4a4e90447b657da979e141d8c6bc8e54",
+    "runtime/build.json": "0ce4dba344b21a897ad5f6a0be48b76af00984007d206ac4b5b0554672fcff80",
+    "runtime/pkb": "1bf8aaa4074f5902c0fa7c918015799f86dd495430117c09c75eeb8e0c8caf09",
+    "scripts/groundray": "609a142b23d9b100b42fce9a7c93257a2f01cfc569ec572607c4ecb2d1811d08",
+    "skills/groundray/SKILL.md": "3c9455dc81f06e54e4a655bb88c78f43ce54f5633d980a450a468fa4530be510",
+    "skills/groundray/references/portable-kb/SKILL.md": "0330a6391869e35f1c9c517d00b24b9eef7aca8320562e884cc64a6b37839614",
+    "skills/groundray/references/portable-kb/references/collaboration.md": "d8632d40732b36ff64976e364adb376f7e756854f74efeb2965d74aba8bb470e",
+    "skills/groundray/references/portable-kb/references/sources.md": "9347f4459e78e46ac52dc971704b5ced2da5b6cb8e9794fcfbd94c0b1abfd5ee",
+    "skills/groundray-setup/SKILL.md": "20e61e96cfb2e1810d1340ce197bfb10ad1d49474bbc5a676d156c203a0e87e6"
+  },
+  "canonical_lite_sha256": "b190bbcdc32a7d4ec7580cd71c1ecf64857020612110e36b8842b5e7e7c0a3a0",
+  "local_build_libc": "glibc 2.41; not a glibc 2.35 portability proof",
+  "archive_sha256": "3a5beee90bb9e6ccbfc6bc87b6dd42383a3321a88f578b4f6b19b949cabfea10",
+  "binary_archive_committed": false
+}

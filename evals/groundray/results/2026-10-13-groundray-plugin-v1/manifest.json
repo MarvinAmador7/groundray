@@ -1,0 +1,72 @@
+[
+  {
+    "role": "reader",
+    "case": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader",
+    "work": "/workspace/groundray-plugin-eval/cases-v1/bounded/reader/work",
+    "slug": "harbor",
+    "input_snapshot": {},
+    "installed_snapshot": {
+      "brain.yaml": "c624253fb2b379a4aa46f3a5c6da74c5b80a021269aa904620934f2d0b69e56a",
+      "knowledge/.core-kb.yaml": "133c37056a81bf934cb6446562a83b6e2df42cecd42494020cb5b52daeed2609",
+      "knowledge/inbox/harbor-instruments-decision.md": "ed7ac9e3c3b425d4a7e20904cfb6b0209d23b7b56a97f6915b1464aea7b37499",
+      "knowledge/inbox/index.md": "1d60780c58139179c47fd907bae43cc73c348c5e145d5df689def221b5b94d1a",
+      "knowledge/index.md": "903025b9fb317598a19b23afcc6cb3b650b4daf41c1d729cff5d8cb93d0b7aac",
+      "knowledge/log.md": "8d1d44884cf3014c65faa33d8a0deeac0a07c54fd2a42f8d4a0312d63fe20b06",
+      "knowledge/references/captures/.gitattributes": "ece797f716e9be49128549fe7e26f19cb04bd65dd20bcb3ae3b07910c38542c4",
+      "knowledge/references/captures/authority.txt": "4dee372d8afec3f90ce0c76877114ed37c2d9ef92bcf23d89615a71d676a0799",
+      "knowledge/references/captures/authority.txt.capture.json": "113c546cdc400c0fb4633a960ee6cc98fd9a20b00651cdce940d4b841f96f9be",
+      "knowledge/references/captures/dispatch.txt": "d0bf9730381bc4d2e8f7d05dc0c2a1592ffa1ae0bfd63724afbc03c0eab05872",
+      "knowledge/references/captures/dispatch.txt.capture.json": "34764d16c12f41eda091c58f38a02d3fb3c026c89dee5a222953767558086bd4",
+      "knowledge/references/captures/engineering.txt": "27c0ff13325360ff427bbc8c01ae1fd6a004027d11d464fa131ad167f11afd20",
+      "knowledge/references/captures/engineering.txt.capture.json": "eff778f9e2c40d4f3e49f77d7cb70fdc3c5feb6b358fe675c0b2f9a020790033"
+    },
+    "fixture": "bounded",
+    "published_commit": "b04689df264ea7e5017404a6a7f03b83f13d64c8"
+  },
+  {
+    "role": "reader",
+    "case": "/workspace/groundray-plugin-eval/cases-v1/compiled-only/reader",
+    "work": "/workspace/groundray-plugin-eval/cases-v1/compiled-only/reader/work",
+    "slug": "cedar",
+    "input_snapshot": {},
+    "installed_snapshot": {
+      "brain.yaml": "ad5d48a6a77c6f3f4b1e74f24ec574dc0d8d5cb4962546211bdaad0ca48fdd40",
+      "knowledge/.core-kb.yaml": "133c37056a81bf934cb6446562a83b6e2df42cecd42494020cb5b52daeed2609",
+      "knowledge/inbox/cedar-services-decision.md": "68977d8eebd1029ebb0ca83ecb32030ea12d86f5131cd1ba9599c0d5c54327d5",
+      "knowledge/inbox/index.md": "8ecceb4a870d2ba94d99b241b2267462a02a7d1b8b5eea26415c272556486d68",
+      "knowledge/index.md": "5f1d4871b3efbaf81ed2d53df0b0ce674ce83aa9a63ad7de1b9dd011bb86f4a4",
+      "knowledge/log.md": "fbd8712e888d0bdca7abd631ca34aaaf446dcf6170c6c30af5986756dcd11dcd",
+      "knowledge/references/captures/.gitattributes": "ece797f716e9be49128549fe7e26f19cb04bd65dd20bcb3ae3b07910c38542c4",
+      "knowledge/references/captures/authority.txt": "2159b4dfa526deb836bb153f8058f6e659d2e9abc645e71d93718c32a45e1336",
+      "knowledge/references/captures/authority.txt.capture.json": "a1d01341e2f17c42f0381aa750e8e8aff637e9429bda4a1aca045ced2b2a4e7d"
+    },
+    "fixture": "compiled-only",
+    "published_commit": "7f19b160ea0c7b5db7b3bf242bca56570f866765"
+  },
+  {
+    "role": "reader",
+    "case": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader",
+    "work": "/workspace/groundray-plugin-eval/cases-v1/second-company/reader/work",
+    "slug": "boreal",
+    "input_snapshot": {},
+    "installed_snapshot": {
+      "brain.yaml": "8119aad204f3e65a2f7e8be0188664a3767e0c9a6441a5296488b5e0175fb2bb",
+      "knowledge/.core-kb.yaml": "133c37056a81bf934cb6446562a83b6e2df42cecd42494020cb5b52daeed2609",
+      "knowledge/inbox/boreal-labs-decision.md": "edd326fe7d3c4a59f763aeca9fad04e3272cde7dc98423d5794e6581ef842060",
+      "knowledge/inbox/index.md": "e56ca1b51d29f03a0456c11263143892f2ed34d863158c33db6ec71f9a8e2c5e",
+      "knowledge/index.md": "5038b5185c96c92cc4d5cda0d3266ca43fdcf27950410324aa1a3fcd83f1d12b",
+      "knowledge/log.md": "6bc7951ec2944d96e5a594c2b5d6100c750405252eebf4b05c66ea1741196dbd",
+      "knowledge/references/captures/.gitattributes": "ece797f716e9be49128549fe7e26f19cb04bd65dd20bcb3ae3b07910c38542c4",
+      "knowledge/references/captures/authority.txt": "5e4151b63c30e7e6f0a004c97bdc89a51d93df9f31c422552f663094847d7586",
+      "knowledge/references/captures/authority.txt.capture.json": "4dd7f503cb373a2240f4a0a60c490bb4fa0548eae80bd083603cbd2741cad956",
+      "knowledge/references/captures/chat.txt": "59a0310db6dd24816be711ee887f8951372fc98de80982fa47eb639e52f49ea7",
+      "knowledge/references/captures/chat.txt.capture.json": "defa890187f0bde1f9186e0998f0dff16f56636805af9c0ac7fd41d4226068fb",
+      "knowledge/references/captures/margin.txt": "2df169921c965a505ec4f0619cc798fc3516dc09a5bb0f2327011bedbed81001",
+      "knowledge/references/captures/margin.txt.capture.json": "fbacb2dcb286e77f1982b55797bdba144eadc59e6deee5061829fdb48f183cbd",
+      "knowledge/references/captures/price.txt": "4d8964c4be10af8f5ee3d11cf3fe4d5e9f162eaa2ae7c956695af9bf91b24dcc",
+      "knowledge/references/captures/price.txt.capture.json": "0a1318c971bc600bf3439641c5bf6ef109bae5896745eefb852cc55e581bb447"
+    },
+    "fixture": "second-company",
+    "published_commit": "dbcdf944f7ac3fae77f4a1b2372948ef9352c374"
+  }
+]

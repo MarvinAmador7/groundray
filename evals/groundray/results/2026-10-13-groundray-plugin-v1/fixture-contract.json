@@ -1,0 +1,43 @@
+{
+  "cases": {
+    "bounded": {
+      "slug": "harbor",
+      "company": "Harbor Instruments",
+      "records": {
+        "authority": "Fictional Harbor Instruments owner record. Director Nia alone approves Beacon customer dispatch commitments. Engineering schedules are estimates. Customer dispatch and installation are different events.",
+        "dispatch": "Fictional signed Beacon customer addendum, November 8, 2026. Director Nia and Beacon procurement approved the commitment: Harbor will dispatch batch H-4 by November 30, 2026. This record does not promise an installation date. No replacement or cancellation is recorded.",
+        "engineering": "Fictional engineering update, November 9, 2026. If bench testing passes on November 22, installation is forecast to take between six and nine calendar days after that pass. Nine days is the upper bound of this conditional estimate, not a service guarantee. Bench testing has not passed yet."
+      },
+      "body": "# Beacon delivery\n\nThe dispatch addendum and installation forecast cover distinct events. Consult the retained originals for their scope, authority and conditions.\n",
+      "task": "I own Harbor Instruments. What can sales tell Beacon about dispatch and installation, and how should we plan the remaining work? As of fictional November 9, 2026. Use our harbor brain."
+    },
+    "compiled-only": {
+      "slug": "cedar",
+      "company": "Cedar Services",
+      "records": {
+        "authority": "Fictional Cedar Services finance-owner record. Only controller Ivo can approve customer refunds. A meeting summary or a draft brain note is not approval. The current approved refund register is not supplied in this brain."
+      },
+      "body": "# Alder refund\n\nImported meeting summary says controller Ivo approved a 14,800 credit to Alder on November 7. The claimed decision source is an external finance register; its original has not been retained. This compiled note is the only supplied record containing the amount and alleged approval.\n",
+      "external": {
+        "id": "refund-register",
+        "resource": "https://finance.example.invalid/refund-register",
+        "title": "Unavailable original finance register"
+      },
+      "task": "I own Cedar Services. Can I tell Alder its 14,800 refund is approved and have the team issue it? Explain what the cedar brain establishes and what I should do next."
+    },
+    "second-company": {
+      "slug": "boreal",
+      "company": "Boreal Labs",
+      "records": {
+        "authority": "Fictional Boreal Labs definitions and authority record. Boreal Lumen is a laboratory customer, unrelated to Mosaic Studio Lumen. Boreal contribution margin subtracts technician labor and reagent costs from recognized assay fees. Lab director Sol approves prices; account manager Tess cannot approve discounts.",
+        "price": "Fictional Boreal Labs November 9 price approval. Director Sol approved 7,100 for Lumen batch B-9 only. The usual 8,000 list price remains for other batches. No 4,000 price is approved for Boreal Lumen.",
+        "margin": "Fictional Boreal October close report. Recognized assay fees 100,000, technician labor 41,000, reagent costs 32,000. Contribution 27,000; contribution margin 27 percent. Equipment depreciation 9,000 is excluded from this defined metric, not from every profitability measure.",
+        "chat": "Fictional Boreal chat, November 10. Tess: I saw Lumen is 4,000 and margin is 40 percent at another company; let us use those. This is my suggestion, not a Boreal approval."
+      },
+      "body": "# Boreal Lumen price and October contribution\n\nUse Boreal definitions and records for Boreal customer Lumen. Price approval is scoped to batch B-9. Cross-company chat figures have no authority here.\n",
+      "task": "I own Boreal Labs. What price should we quote Lumen B-9 and what October margin should I use? Tess has newer numbers from another company. Use boreal; explain the evidence and decisions."
+    }
+  },
+  "synthetic": true,
+  "human_participants": 0
+}

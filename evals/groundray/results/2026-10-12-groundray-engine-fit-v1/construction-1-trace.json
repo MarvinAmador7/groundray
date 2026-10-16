@@ -1,0 +1,141 @@
+[
+  {
+    "argv": [
+      "/workspace/portable-kb/.venv/bin/python",
+      "-m",
+      "portable_kb",
+      "brain",
+      "init",
+      "/workspace/groundray-engine-fit/run-1/company",
+      "--name",
+      "Mosaic Studio fictional G0",
+      "--slug",
+      "mosaic-studio",
+      "--no-publish",
+      "--config",
+      "/workspace/groundray-engine-fit/run-1/author/config.yaml",
+      "--as-of",
+      "2026-11-06",
+      "--json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"active\": true,\n  \"authoring\": \"/workspace/groundray-engine-fit/run-1/company\",\n  \"checkout\": \"brains/mosaic-studio\",\n  \"commit\": \"48507d068306ef61de187ab473a8152bf5c2db48\",\n  \"id\": \"urn:uuid:c315ec33-755e-4d24-a194-41b2b475fe16\",\n  \"name\": \"Mosaic Studio fictional G0\",\n  \"published\": false,\n  \"repository\": \"/workspace/groundray-engine-fit/run-1/company\",\n  \"slug\": \"mosaic-studio\",\n  \"source\": \"/workspace/groundray-engine-fit/run-1/company\",\n  \"validation_warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "--no-replace-objects",
+      "-c",
+      "core.hooksPath=/dev/null",
+      "-c",
+      "user.name=Groundray G0 fixture process",
+      "-c",
+      "user.email=groundray-g0@localhost.invalid",
+      "-C",
+      "/workspace/groundray-engine-fit/run-1/company",
+      "add",
+      "knowledge/references",
+      "source-captures.json"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "--no-replace-objects",
+      "-c",
+      "core.hooksPath=/dev/null",
+      "-c",
+      "user.name=Groundray G0 fixture process",
+      "-c",
+      "user.email=groundray-g0@localhost.invalid",
+      "-C",
+      "/workspace/groundray-engine-fit/run-1/company",
+      "commit",
+      "-m",
+      "Seed authorized synthetic source copies for G0"
+    ],
+    "exit_code": 0,
+    "stdout": "[main 4ff7fcb] Seed authorized synthetic source copies for G0\n 22 files changed, 195 insertions(+)\n create mode 100644 knowledge/references/chat/03-sales.txt\n create mode 100644 knowledge/references/chat/07-exception.txt\n create mode 100644 knowledge/references/chat/16-plan.txt\n create mode 100644 knowledge/references/contracts/06-lumen.txt\n create mode 100644 knowledge/references/docs/02-rate-card.md.txt\n create mode 100644 knowledge/references/mail/01-context.txt\n create mode 100644 knowledge/references/mail/14-client.txt\n create mode 100644 knowledge/references/mail/2026-11-06-lumen.txt\n create mode 100644 knowledge/references/notes/04-team.md.txt\n create mode 100644 knowledge/references/notes/05-board.md.txt\n create mode 100644 knowledge/references/notes/13-close-query.md.txt\n create mode 100644 knowledge/references/notes/18-feedback.md.txt\n create mode 100644 knowledge/references/notes/2026-11-06-summary.md.txt\n create mode 100644 knowledge/references/ops/2026-11-06-staffing.txt\n create mode 100644 knowledge/references/owner/2026-11-02-correction.md.txt\n create mode 100644 knowledge/references/owner/definitions-and-authority.md.txt\n create mode 100644 knowledge/references/qa/2026-11-06.txt\n create mode 100644 knowledge/references/tables/09-ledger.csv\n create mode 100644 knowledge/references/tables/10-invoices.csv\n create mode 100644 knowledge/references/tables/ledger-reconciled.csv\n create mode 100644 knowledge/references/tickets/15-project.txt\n create mode 100644 source-captures.json\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/workspace/portable-kb/.venv/bin/python",
+      "-m",
+      "portable_kb",
+      "brain",
+      "sync",
+      "mosaic-studio",
+      "--config",
+      "/workspace/groundray-engine-fit/run-1/author/config.yaml",
+      "--as-of",
+      "2026-11-06",
+      "--json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"bundle_valid\": true,\n  \"changed\": true,\n  \"current_commit\": \"4ff7fcb1b3da7263010c3f42e528fd82b0a7f0e1\",\n  \"name\": \"Mosaic Studio fictional G0\",\n  \"ok\": true,\n  \"previous_commit\": \"48507d068306ef61de187ab473a8152bf5c2db48\",\n  \"slug\": \"mosaic-studio\",\n  \"validation_warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "--no-replace-objects",
+      "-c",
+      "core.hooksPath=/dev/null",
+      "-c",
+      "user.name=Groundray G0 fixture process",
+      "-c",
+      "user.email=groundray-g0@localhost.invalid",
+      "-C",
+      "/workspace/groundray-engine-fit/run-1/company",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit_code": 0,
+    "stdout": "4ff7fcb1b3da7263010c3f42e528fd82b0a7f0e1\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/workspace/portable-kb/.venv/bin/python",
+      "-m",
+      "portable_kb",
+      "knowledge",
+      "create",
+      "--type",
+      "concept",
+      "--title",
+      "Lumen commercial scope",
+      "--description",
+      "Scoped fictional company evidence: lumen commercial scope.",
+      "--actor",
+      "openai/codex",
+      "--method",
+      "agent-generated",
+      "--path",
+      "wiki/lumen-commercial.md",
+      "--body-file",
+      "/workspace/portable-kb-groundray/evals/groundray/fixtures/engine-fit/lumen-commercial.md",
+      "--sources-file",
+      "/workspace/groundray-engine-fit/run-1/inputs/lumen-commercial.json",
+      "--confidence",
+      "medium",
+      "--confidence-basis",
+      "Root-authored synthetic synopsis; records inspectable; no human verification.",
+      "--brain",
+      "mosaic-studio",
+      "--config",
+      "/workspace/groundray-engine-fit/run-1/author/config.yaml",
+      "--as-of",
+      "2026-11-06",
+      "--json"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Proposed operation is invalid: KB-E501 log.md: Log date headings must be valid ISO dates in newest-first order.\n"
+  }
+]

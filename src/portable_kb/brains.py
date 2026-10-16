@@ -759,8 +759,8 @@ def authoring_repository(
     repository = brain.authoring_path()
     if repository is None:
         raise BrainError(
-            "Brain has no local authoring repository. Clone it locally and initialize or "
-            "reinstall it from that path before authoring."
+            "Brain has no local authoring repository. Clone it locally and use "
+            "`pkb brain attach <path> --apply` before authoring."
         )
     if repository.is_symlink() or not repository.is_dir():
         raise BrainError(f"Local authoring repository is unavailable: {repository}")

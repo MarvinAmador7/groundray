@@ -1,0 +1,24 @@
+{
+  "repository": "MarvinAmador7/groundray-pilot-mosaic",
+  "private": true,
+  "publisher": "MarvinAmador7",
+  "employee_contributor_and_receiver": "KarolGarcia712",
+  "distinct_read_only_account": null,
+  "packet": "/workspace/groundray-pilot/packet-final",
+  "create_only_new_repository": true,
+  "human_pilot_completed": false,
+  "main_policy": {
+    "required_status_checks": null,
+    "enforce_admins": false,
+    "required_pull_request_reviews": {
+      "required_approving_review_count": 1,
+      "dismiss_stale_reviews": true
+    },
+    "restrictions": null,
+    "allow_force_pushes": false,
+    "allow_deletions": false
+  },
+  "role_constraint": "Employee writes proposal refs; protected main requires review. Owner admin may explicitly publish the reviewed exact draft. Host enforcement still needs actual negative attempts.",
+  "notification": "Employee collaborator invitation is sent only by explicit --apply.",
+  "host_plan_gate": "Private branch protection may require a paid GitHub plan; stop before inviting on a policy error."
+}

@@ -1,0 +1,75 @@
+
+==================================== ERRORS ====================================
+_________________ ERROR collecting tests/test_collaboration.py _________________
+ImportError while importing test module '/workspace/portable-kb-groundray/tests/test_collaboration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_collaboration.py:10: in <module>
+    from portable_kb import collaboration
+E   ImportError: cannot import name 'collaboration' from 'portable_kb' (/workspace/portable-kb/src/portable_kb/__init__.py)
+______________ ERROR collecting tests/test_document_retrieval.py _______________
+ImportError while importing test module '/workspace/portable-kb-groundray/tests/test_document_retrieval.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_document_retrieval.py:10: in <module>
+    from portable_kb.authoring import plan_knowledge_move, save_knowledge_move
+E   ImportError: cannot import name 'plan_knowledge_move' from 'portable_kb.authoring' (/workspace/portable-kb/src/portable_kb/authoring.py). Did you mean: 'plan_knowledge_create'?
+____________ ERROR collecting tests/test_groundray_saved_source.py _____________
+ImportError while importing test module '/workspace/portable-kb-groundray/tests/test_groundray_saved_source.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_groundray_saved_source.py:12: in <module>
+    from evals.groundray.saved_source import MAX_SOURCE_BYTES, read_saved_source
+evals/groundray/saved_source.py:18: in <module>
+    from portable_kb.search import SearchError, get_knowledge
+E   ImportError: cannot import name 'get_knowledge' from 'portable_kb.search' (/workspace/portable-kb/src/portable_kb/search.py). Did you mean: 'get_knowledge_item'?
+________________ ERROR collecting tests/test_knowledge_move.py _________________
+ImportError while importing test module '/workspace/portable-kb-groundray/tests/test_knowledge_move.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_knowledge_move.py:11: in <module>
+    from portable_kb.authoring import plan_knowledge_move, save_knowledge_move
+E   ImportError: cannot import name 'plan_knowledge_move' from 'portable_kb.authoring' (/workspace/portable-kb/src/portable_kb/authoring.py). Did you mean: 'plan_knowledge_create'?
+_______________ ERROR collecting tests/test_reliability_evals.py _______________
+ImportError while importing test module '/workspace/portable-kb-groundray/tests/test_reliability_evals.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_reliability_evals.py:17: in <module>
+    from evals.reliability.profiling import profile_summary
+evals/reliability/profiling.py:17: in <module>
+    from portable_kb.search import get_knowledge
+E   ImportError: cannot import name 'get_knowledge' from 'portable_kb.search' (/workspace/portable-kb/src/portable_kb/search.py). Did you mean: 'get_knowledge_item'?
+____________________ ERROR collecting tests/test_sources.py ____________________
+ImportError while importing test module '/workspace/portable-kb-groundray/tests/test_sources.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_sources.py:32: in <module>
+    from portable_kb.sources import (
+E   ModuleNotFoundError: No module named 'portable_kb.sources'
+=========================== short test summary info ============================
+ERROR tests/test_collaboration.py
+ERROR tests/test_document_retrieval.py
+ERROR tests/test_groundray_saved_source.py
+ERROR tests/test_knowledge_move.py
+ERROR tests/test_reliability_evals.py
+ERROR tests/test_sources.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 6 errors during collection !!!!!!!!!!!!!!!!!!!!
+6 errors in 0.91s

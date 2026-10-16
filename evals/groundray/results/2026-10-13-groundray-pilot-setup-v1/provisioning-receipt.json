@@ -1,0 +1,56 @@
+[
+  {
+    "command": [
+      "gh",
+      "api",
+      "user",
+      "--method",
+      "GET"
+    ],
+    "exit_code": 0,
+    "login": "MarvinAmador7",
+    "id": 13001660
+  },
+  {
+    "command": [
+      "gh",
+      "api",
+      "users/KarolGarcia712",
+      "--method",
+      "GET"
+    ],
+    "exit_code": 0,
+    "login": "KarolGarcia712",
+    "id": 38486118
+  },
+  {
+    "command": [
+      "gh",
+      "api",
+      "repos/MarvinAmador7/groundray-pilot-mosaic"
+    ],
+    "exit_code": 1,
+    "http_status": 404,
+    "message": "Not Found"
+  },
+  {
+    "command": [
+      "gh",
+      "api",
+      "user/repos",
+      "--method",
+      "POST",
+      "--input",
+      "-"
+    ],
+    "exit_code": 1,
+    "http_status": 403,
+    "message": "Resource not accessible by integration",
+    "request": {
+      "name": "groundray-pilot-mosaic",
+      "private": true,
+      "description": "Fictional Groundray two-employee pilot; no real company records",
+      "auto_init": false
+    }
+  }
+]

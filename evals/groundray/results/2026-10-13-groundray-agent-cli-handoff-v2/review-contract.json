@@ -1,0 +1,30 @@
+{
+  "suite": "groundray-agent-cli-handoff-v2",
+  "frozen_before_agent_execution": true,
+  "design": "One matched sequential three-fresh-agent follow-up chain; updated CLI/engine skill at a44e230. Original v1 failures remain unchanged. No participant replacements or retries.",
+  "primary_inspection_checks": [
+    "Reviewer discovers and successfully uses exact candidate-source retrieval at proposal pin; full536byteCRLF matches receipt and source/context citations; no activation or publication.",
+    "Reader clickable file targets all exist and refer to inspected returned source local_paths; zero links is not proof that clickable inspection was fixed.",
+    "Reader source-specific details, especially invoice/tax figures if asserted, are backed by original retrieval or accurately attributed to compiled evidence."
+  ],
+  "preservation_checks": [
+    "21originals unchanged",
+    "newsource exactbytes",
+    "launchidandcreatedpreserved",
+    "nohumanverification",
+    "unrelatedpages unchanged",
+    "mainunchangedbeforepublisher",
+    "explicitreadersync",
+    "originalresponsesunaltered",
+    "skillsandpromptsunchanged"
+  ],
+  "business_facets": [
+    "80retainer/120adhocscope",
+    "4000-1500=>2500/62.5%Octobercontributionexcludetaxcashcompanynetprofit",
+    "B2designvsfinalacceptance",
+    "Nov19forecast+possible3daysnotapproveddate/misseddeadline",
+    "Bea/Ruiauthority,Tintindependence,repeatedsummariesnotindependentorigins"
+  ],
+  "analysis": "Mechanical outcomes plus separate unblinded root business review. No literal-keyword semantic accuracy score, control arm or human effort measurement.",
+  "success_requires_observation": "Candidate API return must be visible to model; links must point to inspected source at claimed pin. Do not infer adoption solely from available command or field."
+}

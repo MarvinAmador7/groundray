@@ -1,0 +1,80 @@
+{
+  "evidence_source": "Publisher uploaded native business-answer transcript",
+  "publisher": "MarvinAmador7",
+  "original_trace_sha256": "9eb581a6bed74fe6f6e7917b9dffa64dc8ff251c614f34fcc3dbb02fbaaca9e5",
+  "original_answer_excerpt_sha256_before_path_redaction": "3207468bbe85f773e0847a1da6dc7729e81fa12e36f5151d24141f17f2a3de40",
+  "raw_private_paths_and_processes_published": false,
+  "original_response_repaired": false,
+  "redacted_answer_copy": "publisher-native-owner-answer-v3.md",
+  "answer_copy_transformation": "Only replace the publisher-machine brain root with PUBLISHER_BRAIN",
+  "requested_skill": "groundray:groundray",
+  "fictional_as_of": "2026-11-09",
+  "provider_context": "builtin keyword, verified in immediately preceding setup trace",
+  "full_installed_commit_context": "259fea0d4a3006f5450d0705f07bc868b688ae39",
+  "visible_citation_commit_prefix": "259fea0d4a30",
+  "native_skill_use_reported": true,
+  "visible_helper_check_output": "Groundray CLI compatible: pkb 0.2.0",
+  "visible_source_get_calls": 10,
+  "referenced_unique_originals": [
+    {
+      "path": "knowledge/references/captures/mail/2026-11-06-lumen.txt",
+      "preserved_packet_sha256": "5462e08993c2f8d5dd79438774f8bf27d4efcd4f6a1937b690d1df0676ced844"
+    },
+    {
+      "path": "knowledge/references/captures/ops/2026-11-06-staffing.txt",
+      "preserved_packet_sha256": "785bc59a36a76431265cdc4d7698f47d689a37827c79322948f93b2c55c8f3cd"
+    },
+    {
+      "path": "knowledge/references/captures/owner/2026-11-02-correction.md.txt",
+      "preserved_packet_sha256": "8264e981c1f8c8eb06f2533351d59ef630e6f7c602e77ee3c8c7cc38d286ba68"
+    },
+    {
+      "path": "knowledge/references/captures/owner/definitions-and-authority.md.txt",
+      "preserved_packet_sha256": "95196d0b59c7f402f7b3dde30555898cea6146de7eb78ce4e90ed4165cd2ab43"
+    },
+    {
+      "path": "knowledge/references/captures/qa/2026-11-06.txt",
+      "preserved_packet_sha256": "94e3a860e8d27cb3055dfdbcfe026b946a1415343aa2eb430ae35c0a291da8fa"
+    },
+    {
+      "path": "knowledge/references/captures/tables/ledger-reconciled.csv",
+      "preserved_packet_sha256": "c89a5a0786643df6a55e2d9bf1b6bf23fa09f8775f4bb198a04be7f09b46dd31"
+    },
+    {
+      "path": "knowledge/references/captures/tickets/15-project.txt",
+      "preserved_packet_sha256": "2bbd9c64d364e389ec2d8c7c3ad9b42d3bf7f317dd7f43d1e7addd94045a17e9"
+    }
+  ],
+  "raw_full_source_contents_visible": false,
+  "business_answer_completed": true,
+  "root_assessment": {
+    "method": "Unblinded root review against unchanged synthetic seed captures; not human adjudication or independent Mac byte inspection",
+    "scoped_retainer": "Supported: USD 80/hour Oct-Dec managed retainer; USD 120 ad-hoc; explicit supplied owner corroboration",
+    "launch": "Supported: Nov20 at risk; AX-7 review forecast Nov23; possible four remediation days; no guaranteed Nov27 launch; B2 design approval distinct from launch acceptance",
+    "october_margin": "Supported: corrected Lumen 4000 fees, 1500 costs, 2500 contribution, 62.5%; excludes tax and unposted owner time",
+    "additional_financial_scopes": "Supported: Tint 2000/3000 = 66.7%; two supplied Studio rows 4500/7000 = 64.3%; separate Events row excluded; not company net profit",
+    "authority": "Supported: Bea commercial/client authority, Rui internal staffing; shift transfer remains proposed",
+    "Tint": "Supported: PHOTO-8 independent from AX-7; forecast Nov16; no inferred delay or changed ledger row",
+    "invoice_claim_source": "November 2 owner correction expressly supplies gross 4500 and tax 500; no separate invoice-export inspection claimed"
+  },
+  "citation_targets_match_preserved_packet_paths": true,
+  "actual_native_citation_clickability_observed": false,
+  "publisher_personal_original_source_inspection_completed": false,
+  "publisher_personal_original_source_inspection_response_pending": false,
+  "hook_errors_visible": {
+    "count": 3,
+    "exit_code": 127,
+    "hook_command_visible": false,
+    "cause_confirmed": false
+  },
+  "runtime_startup_slow_reported": true,
+  "exact_elapsed_seconds_visible": false,
+  "company_changes_reported": false,
+  "employee_native_session_completed": false,
+  "human_pilot_completed": false,
+  "prior_failed_business_attempts_preserved": [
+    "publisher-business-attempt-v1.json",
+    "publisher-business-attempt-v2.json"
+  ],
+  "publisher_personal_original_source_inspection_reported": "none"
+}

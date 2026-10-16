@@ -1,0 +1,19 @@
+{
+  "operation": "Explicit fixture publication in a new copied remote, preserving original v3 trial; independent reader installed base first. No human business approval.",
+  "argv": [
+    "/workspace/groundray-agent-handoff/run-4/reader/bin/pkb",
+    "brain",
+    "accept",
+    "lumen-qa-2026-11-09",
+    "--brain",
+    "mosaic-studio",
+    "--commit",
+    "877c1b07ff90f434ef6fad20e3646db1ed3785a8",
+    "--base",
+    "20f5664ea668f2cf34531c2ba5ecd399cdcd6b0d",
+    "--json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"base_commit\": \"20f5664ea668f2cf34531c2ba5ecd399cdcd6b0d\",\n  \"business_approval_recorded\": false,\n  \"changed_paths\": [\n    \"knowledge/log.md\",\n    \"knowledge/references/captures/qa/2026-11-09.txt\",\n    \"knowledge/references/captures/qa/2026-11-09.txt.capture.json\",\n    \"knowledge/wiki/lumen-launch.md\"\n  ],\n  \"installed_brain_changed\": false,\n  \"installed_commit\": \"20f5664ea668f2cf34531c2ba5ecd399cdcd6b0d\",\n  \"needs_sync\": true,\n  \"ok\": true,\n  \"proposal\": \"lumen-qa-2026-11-09\",\n  \"proposal_commit\": \"877c1b07ff90f434ef6fad20e3646db1ed3785a8\",\n  \"proposal_ref\": \"refs/heads/groundray/lumen-qa-2026-11-09\",\n  \"published_main\": true,\n  \"slug\": \"mosaic-studio\",\n  \"source\": \"file:///workspace/groundray-agent-handoff/run-4/company.git\",\n  \"validation_warnings\": []\n}\n",
+  "stderr": ""
+}

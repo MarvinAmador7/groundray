@@ -1,0 +1,30 @@
+{
+  "authorization": "User explicitly selected full contributor pilot without main protection and requested keeping the pilot private",
+  "repository": "fullkontrol/groundray-pilot-mosaic",
+  "publisher": "MarvinAmador7",
+  "employee_contributor_and_receiver": "KarolGarcia712",
+  "private_required": true,
+  "employee_access_requested": "push",
+  "employee_main_writes_possible": true,
+  "publisher_role": "Workflow convention, not exclusive host-enforced publication rights",
+  "main_protection_required": false,
+  "main_policy": null,
+  "protection_api_calls_planned": 0,
+  "existing_protection_removed": false,
+  "resume_required": true,
+  "resume_base_source": "Full HEAD from the local fullkontrol-provisioning/pilot-seed-clone created during the publisher attempt",
+  "resume_guards": [
+    "Publisher identity and repository admin access",
+    "Private repository and requested owner/name",
+    "Exact supplied main commit",
+    "Packet-matching selected seed files without symlinks or extras",
+    "Main commit rechecked before collaborator access request"
+  ],
+  "actual_access_request_executed": false,
+  "invitation_accepted": null,
+  "publisher_only_main_access_tested": false,
+  "employee_publication_denial_in_scope": false,
+  "human_pilot_completed": false,
+  "focused_tests_passed": 52,
+  "worker_repository_read_http_status": 404
+}
