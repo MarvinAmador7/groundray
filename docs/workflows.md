@@ -25,7 +25,7 @@ integrations, and hosted workflows are not yet implemented.
 
 ## Read linked context
 
-Use `pkb links <item> --brain <slug> --json` and `pkb backlinks <item>` to
+Use `groundray links <item> --brain <slug> --json` and `groundray backlinks <item>` to
 inspect relationships before answering or planning changes. Follow only resolved
 links, retain explicit brain scope, retrieve complete target items, and cite
 their own pinned versions. Missing or ambiguous links remain diagnostics, not

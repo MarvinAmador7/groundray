@@ -1,7 +1,7 @@
 # Atlas Logistics: a larger agent benchmark
 
 Atlas is a fictional global logistics platform with **220 knowledge pages**, 12
-families, approximately **51,832 body words**, and 975 resolved Portable KB
+families, approximately **51,832 body words**, and 975 resolved Groundray
 navigation links. It exercises the actual standalone CLI and installed skill
 against a matching file-based wiki and the supplied wiki skill. The generator,
 independent world model, task labels, preparation, observation and grading live
@@ -9,7 +9,7 @@ under `evals/logistics/`; none changes production knowledge or the OKF profile.
 
 The first run completed **16 fresh foreground agent trials**: eight tasks in each
 arm, one repetition. Both arms completed eight tasks with constraints preserved
-and all 23 factual checks grounded in observed reads. Portable KB took longer
+and all 23 factual checks grounded in observed reads. Groundray took longer
 and encountered recoverable CLI friction. This is a useful workload baseline,
 not evidence that either approach is universally better.
 
@@ -37,7 +37,7 @@ human-authored enterprise document collection.
 
 The same substantive pages are rendered twice. Wiki pages use their own
 frontmatter, directory navigation, immutable `raw/` sources and an append-only
-log. Portable KB pages use quoted OKF dates, source records, draft/deprecated
+log. Groundray pages use quoted OKF dates, source records, draft/deprecated
 status, confidence and immutable UUIDs under `knowledge/inbox/`. Qualified
 wikilinks acquire the `inbox/` prefix; facts and substantive bodies match.
 The optional local fixture field `x-fixture-seed` is declared in fixture config.
@@ -94,7 +94,7 @@ with implementation matching base `ed80afad59e2943e33e2d2d032518060925305e0`.
 The actual supplied wiki skill is fingerprinted but its content is not published.
 Raw traces stay local because they include that skill.
 
-| Observed result | Wiki + skill | Portable KB + skill |
+| Observed result | Wiki + skill | Groundray + skill |
 | --- | ---: | ---: |
 | Completed with constraints | 8/8 | 8/8 |
 | Grounded accurate facts | 23/23 | 23/23 |
@@ -108,7 +108,7 @@ Raw traces stay local because they include that skill.
 CLI errors are a subset of shell activity; do not add the two error columns.
 A shell can contain several CLI invocations, and a recovered failed invocation
 can coexist with an overall successful shell action. The median of per-task
-Portable KB/wiki time ratios was 1.67. Wall times include deliberation, governance
+Groundray/wiki time ratios was 1.67. Wall times include deliberation, governance
 validation, startup and shared-host contention; they are not isolated engine
 latencies or token/cost measurements.
 
@@ -154,7 +154,7 @@ agent-authored file or trial was changed or rerun to improve the score.
 ## Reproduce
 
 Use a development checkout with its Python environment installed, a real
-standalone `pkb` executable, and the wiki skill file you want to evaluate.
+standalone `groundray` executable, and the wiki skill file you want to evaluate.
 Generation, preparation and grading do not invoke a model. Preparation exercises
 the real CLI, installs its real bundled skill and isolates HOME/XDG state.
 
@@ -163,21 +163,21 @@ python -m evals.logistics generate --output /tmp/atlas-corpus --seed 20261008
 
 python -m evals.logistics prepare \
   --corpus /tmp/atlas-corpus \
-  --cli /absolute/path/to/pkb \
+  --cli /absolute/path/to/groundray \
   --wiki-skill /absolute/path/to/wiki-skill.md \
   --output /tmp/atlas-trials --repetitions 3
 
 # These commands explicitly opt into agent/model execution.
 python -m evals.logistics run --output /tmp/atlas-trials/wiki \
   --runner codex --timeout 900 --jobs 2
-python -m evals.logistics run --output /tmp/atlas-trials/portable-kb \
+python -m evals.logistics run --output /tmp/atlas-trials/groundray \
   --runner codex --timeout 900 --jobs 2
 
 python -m evals.logistics grade --output /tmp/atlas-trials/wiki
-python -m evals.logistics grade --output /tmp/atlas-trials/portable-kb
+python -m evals.logistics grade --output /tmp/atlas-trials/groundray
 python -m evals.logistics compare \
   /tmp/atlas-trials/wiki/report.json \
-  /tmp/atlas-trials/portable-kb/report.json \
+  /tmp/atlas-trials/groundray/report.json \
   --output /tmp/atlas-trials/comparison.json
 ```
 

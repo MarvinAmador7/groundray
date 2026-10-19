@@ -2,25 +2,25 @@
 
 set -eu
 
-repository="${PKB_REPOSITORY:-MarvinAmador7/portable-kb}"
-install_dir="${PKB_INSTALL_DIR:-${HOME}/.local/bin}"
-requested_version="${PKB_VERSION:-}"
-release_base="${PKB_RELEASE_BASE_URL:-}"
+repository="${GROUNDRAY_REPOSITORY:-MarvinAmador7/groundray}"
+install_dir="${GROUNDRAY_BIN_DIR:-${HOME}/.local/bin}"
+requested_version="${GROUNDRAY_VERSION:-}"
+release_base="${GROUNDRAY_RELEASE_BASE_URL:-}"
 uninstall=false
 
 usage() {
     cat <<'EOF'
-Install the latest standalone Portable KB CLI.
+Install the latest standalone Groundray CLI.
 
 Usage:
   install [--version VERSION] [--install-dir DIRECTORY]
   install --uninstall [--install-dir DIRECTORY]
 
 Environment overrides:
-  PKB_VERSION           Release tag or version, for example v0.1.0 or 0.1.0
-  PKB_INSTALL_DIR       Destination directory (default: $HOME/.local/bin)
-  PKB_REPOSITORY        GitHub owner/repository
-  GH_TOKEN              Authenticates private-repository downloads through gh
+  GROUNDRAY_VERSION       Release tag or version, for example v0.3.0 or 0.3.0
+  GROUNDRAY_BIN_DIR       Destination directory (default: $HOME/.local/bin)
+  GROUNDRAY_REPOSITORY    GitHub owner/repository
+  GH_TOKEN               Authenticates private-repository downloads through gh
 EOF
 }
 
@@ -52,23 +52,23 @@ while [ "$#" -gt 0 ]; do
     esac
 done
 
-target="${install_dir}/pkb"
+target="${install_dir}/groundray"
 if [ "$uninstall" = true ]; then
     if [ -e "$target" ]; then
         rm -f "$target"
         echo "Removed ${target}"
     else
-        echo "Portable KB is not installed at ${target}"
+        echo "Groundray is not installed at ${target}"
     fi
     exit 0
 fi
 
 command -v curl >/dev/null 2>&1 || {
-    echo "error: curl is required to install Portable KB" >&2
+    echo "error: curl is required to install Groundray" >&2
     exit 1
 }
 command -v tar >/dev/null 2>&1 || {
-    echo "error: tar is required to install Portable KB" >&2
+    echo "error: tar is required to install Groundray" >&2
     exit 1
 }
 
@@ -106,13 +106,13 @@ case "$requested_version" in
     *) release_tag="v${requested_version}" ;;
 esac
 if ! printf '%s\n' "$release_tag" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$'; then
-    echo "error: invalid Portable KB release version: ${release_tag}" >&2
+    echo "error: invalid Groundray release version: ${release_tag}" >&2
     exit 1
 fi
 
-archive="pkb-${release_tag}-${operating_system}-${architecture}.tar.gz"
-temporary=$(mktemp -d "${TMPDIR:-/tmp}/portable-kb-install.XXXXXX")
-staged_target="${install_dir}/.pkb-install.$$"
+archive="groundray-cli-${release_tag}-${operating_system}-${architecture}.tar.gz"
+temporary=$(mktemp -d "${TMPDIR:-/tmp}/groundray-install.XXXXXX")
+staged_target="${install_dir}/.groundray-install.$$"
 cleanup() {
     rm -rf "$temporary"
     rm -f "$staged_target"
@@ -155,21 +155,21 @@ if [ "$actual_checksum" != "$expected_checksum" ]; then
 fi
 
 archive_listing=$(tar -tzf "${temporary}/${archive}")
-if [ "$archive_listing" != "pkb" ]; then
-    echo "error: release archive must contain only the pkb executable" >&2
+if [ "$archive_listing" != "groundray" ]; then
+    echo "error: release archive must contain only the groundray executable" >&2
     exit 1
 fi
 tar -xzf "${temporary}/${archive}" -C "$temporary"
-if [ ! -f "${temporary}/pkb" ] || [ -L "${temporary}/pkb" ]; then
-    echo "error: release archive does not contain a regular pkb executable" >&2
+if [ ! -f "${temporary}/groundray" ] || [ -L "${temporary}/groundray" ]; then
+    echo "error: release archive does not contain a regular groundray executable" >&2
     exit 1
 fi
 
 mkdir -p "$install_dir"
-cp "${temporary}/pkb" "$staged_target"
+cp "${temporary}/groundray" "$staged_target"
 chmod 0755 "$staged_target"
 installed_version=$("$staged_target" --version)
-if [ "$installed_version" != "pkb ${release_tag#v}" ]; then
+if [ "$installed_version" != "groundray ${release_tag#v}" ]; then
     echo "error: release executable reported an unexpected version: ${installed_version}" >&2
     exit 1
 fi
@@ -178,6 +178,6 @@ echo "Installed ${installed_version} to ${target}"
 case ":${PATH}:" in
     *:"${install_dir}":*) ;;
     *)
-        echo "Add ${install_dir} to PATH, then run: pkb setup"
+        echo "Add ${install_dir} to PATH, then run: groundray setup"
         ;;
 esac

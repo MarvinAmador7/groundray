@@ -8,15 +8,15 @@ import subprocess
 import pytest
 from typer.testing import CliRunner
 
-from portable_kb.authoring import plan_knowledge_move, save_knowledge_move
-from portable_kb.brains import BrainError, add_brain, load_catalog, use_brain
-from portable_kb.cli import app
-from portable_kb.links import LinkIndex
-from portable_kb.operations import OperationError, plan_move
-from portable_kb.parsing import parse_concept
-from portable_kb.serialization import render_concept
-from portable_kb.settings import Settings, save_settings
-from portable_kb.validation import validate_bundle
+from groundray.authoring import plan_knowledge_move, save_knowledge_move
+from groundray.brains import BrainError, add_brain, load_catalog, use_brain
+from groundray.cli import app
+from groundray.links import LinkIndex
+from groundray.operations import OperationError, plan_move
+from groundray.parsing import parse_concept
+from groundray.serialization import render_concept
+from groundray.settings import Settings, save_settings
+from groundray.validation import validate_bundle
 
 SOURCE = "curated/concepts/verification-is-evidence.md"
 DESTINATION = "curated/concepts/review-evidence.md"
@@ -137,7 +137,7 @@ def test_move_refuses_changed_state_before_writing(installed, change):
     else:
         from dataclasses import replace
 
-        from portable_kb.brains import save_catalog
+        from groundray.brains import save_catalog
 
         catalog = load_catalog(settings)
         save_catalog(catalog.updating(replace(catalog.get("moving"), name="Changed")), settings)
@@ -238,7 +238,7 @@ def test_move_blocks_relative_source_retargeting_without_metadata_edits(bundle):
 
 
 def test_move_rolls_back_partial_file_writes_before_source_deletion(bundle, monkeypatch):
-    import portable_kb.changes as changes
+    import groundray.changes as changes
 
     plan = plan_move(bundle, SOURCE, DESTINATION, timestamp=TIMESTAMP, as_of=AS_OF)
     before = snapshot(bundle)
@@ -278,7 +278,7 @@ def test_move_repairs_new_stem_ambiguity_without_changing_unrelated_wikilinks(bu
 def test_move_preserves_verified_stable_snapshot(bundle):
     from conftest import authorize
 
-    from portable_kb.operations import plan_promote
+    from groundray.operations import plan_promote
 
     reviewer = "human:reviewer-42"
     authorize(bundle, "procedure", reviewer)

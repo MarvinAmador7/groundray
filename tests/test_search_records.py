@@ -5,12 +5,12 @@ from dataclasses import replace
 
 import pytest
 
-from portable_kb.brains import add_brain
-from portable_kb.parsing import parse_concept
-from portable_kb.search import _healthy_brain
-from portable_kb.search_provider import SearchError
-from portable_kb.search_records import normalize_bundle, normalize_item
-from portable_kb.settings import Settings
+from groundray.brains import add_brain
+from groundray.parsing import parse_concept
+from groundray.search import _healthy_brain
+from groundray.search_provider import SearchError
+from groundray.search_records import normalize_bundle, normalize_item
+from groundray.settings import Settings
 
 
 def _brain(tmp_path, brain_repo_factory):

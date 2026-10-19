@@ -2,7 +2,7 @@
 # Install a release into persistent storage and register it with this Codex CLI.
 set -eu
 
-repository=${GROUNDRAY_REPOSITORY:-MarvinAmador7/portable-kb}
+repository=${GROUNDRAY_REPOSITORY:-MarvinAmador7/groundray}
 release_version=${GROUNDRAY_VERSION:-}
 release_base=${GROUNDRAY_RELEASE_BASE_URL:-}
 install_root=${GROUNDRAY_INSTALL_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/groundray}
@@ -16,7 +16,7 @@ Usage: install-groundray [--version VERSION] [--codex EXECUTABLE] [--install-dir
 
 The default storage is $XDG_DATA_HOME/groundray or $HOME/.local/share/groundray.
 HOME, CODEX_HOME, company settings and credentials are preserved. Start a fresh
-Codex session after installation. No Python, Node, QMD or separate pkb is required.
+Codex session after installation. No Python, Node, QMD or separate groundray is required.
 EOF
 }
 
@@ -67,7 +67,7 @@ if [ -z "$release_version" ]; then
 fi
 case "$release_version" in v*) tag=$release_version ;; *) tag=v$release_version ;; esac
 printf '%s\n' "$tag" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$' || {
-    echo "error: expected a stable release tag such as v0.2.1" >&2; exit 1;
+    echo "error: expected a stable release tag such as v0.3.0" >&2; exit 1;
 }
 archive="groundray-$tag-$system-$arch.tar.gz"
 marketplace=$install_root/marketplace
@@ -142,9 +142,9 @@ helper=$stage/package/plugins/groundray/scripts/groundray
 [ -f "$stage/package/.agents/plugins/marketplace.json" ] && [ -x "$helper" ] || {
     echo "error: incomplete Groundray marketplace" >&2; exit 1;
 }
-GROUNDRAY_PKB= "$helper" check
-version=$(GROUNDRAY_PKB= "$helper" --version)
-[ "$version" = "pkb ${tag#v}" ] || { echo "error: runtime does not match release $tag" >&2; exit 1; }
+GROUNDRAY_CLI= "$helper" check
+version=$(GROUNDRAY_CLI= "$helper" --version)
+[ "$version" = "groundray ${tag#v}" ] || { echo "error: runtime does not match release $tag" >&2; exit 1; }
 printf '%s\n' "$tag" > "$stage/package/.groundray-install"
 
 if [ -e "$marketplace" ]; then

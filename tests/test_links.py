@@ -9,15 +9,15 @@ from uuid import UUID
 import pytest
 from typer.testing import CliRunner
 
-from portable_kb.brains import add_brain, load_catalog
-from portable_kb.cli import app
-from portable_kb.links import LinkIndex, extract_links, heading_anchors
-from portable_kb.operations import plan_move
-from portable_kb.parsing import parse_concept
-from portable_kb.search import SearchError, get_knowledge_item, knowledge_links
-from portable_kb.serialization import quoted, render_concept
-from portable_kb.settings import Settings, save_settings
-from portable_kb.validation import validate_bundle, validate_transition
+from groundray.brains import add_brain, load_catalog
+from groundray.cli import app
+from groundray.links import LinkIndex, extract_links, heading_anchors
+from groundray.operations import plan_move
+from groundray.parsing import parse_concept
+from groundray.search import SearchError, get_knowledge_item, knowledge_links
+from groundray.serialization import quoted, render_concept
+from groundray.settings import Settings, save_settings
+from groundray.validation import validate_bundle, validate_transition
 
 
 def write_item(root: Path, path: str, body: str, number: int = 1):
@@ -248,7 +248,7 @@ def test_cli_navigation_is_cited_scoped_read_only_and_needs_no_search_index(
     resolved, missing = links["links"]
     assert resolved["source_citation"]["item_id"] == hub.id
     assert resolved["target_citation"]["item_id"] == reviewer.id
-    assert resolved["get_command"] == ["pkb", "get", reviewer.id, "--brain", "linked", "--json"]
+    assert resolved["get_command"] == ["groundray", "get", reviewer.id, "--brain", "linked", "--json"]
     assert resolved["line"] == next(
         i for i, line in enumerate(hub.source_text.splitlines(), 1) if line.startswith("[[reviewer")
     )

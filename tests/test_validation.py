@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb import validate_bundle, validate_transition
+from groundray import validate_bundle, validate_transition
 
 
 def codes(report) -> set[str]:

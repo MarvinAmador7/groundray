@@ -1,0 +1,4 @@
+interface:
+  display_name: "Groundray Brain"
+  short_description: "Search, capture, and share governed knowledge"
+  default_prompt: "Use $groundray-storage to work with the active brain while preserving provenance and sharing boundaries."

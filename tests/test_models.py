@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from portable_kb.models import Finding, Severity, ValidationReport, sorted_findings
+from groundray.models import Finding, Severity, ValidationReport, sorted_findings
 
 
 def test_finding_and_report_serialization() -> None:

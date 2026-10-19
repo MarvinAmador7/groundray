@@ -9,7 +9,7 @@ description: Explain the evidence behind consequential company answers, or prese
 
 Resolve `../../scripts/groundray` relative to this skill and run its `check` once
 before company operations. Use that quoted absolute executable wherever the
-bundled [Portable KB workflow](references/portable-kb/SKILL.md) says `pkb`.
+bundled [Groundray workflow](references/storage/SKILL.md) says `groundray`.
 Read that workflow for setup, retrieval, source capture, edits, proposals, review
 and publication. Use the supplied runtime; report compatibility failures rather
 than guessing a replacement. For first installation use the bundled

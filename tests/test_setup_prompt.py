@@ -7,15 +7,15 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb.settings import SearchMode, Settings
-from portable_kb.setup_prompt import (
+from groundray.settings import SearchMode, Settings
+from groundray.setup_prompt import (
     PromptChoice,
     QuestionaryBackend,
     SetupPromptError,
     SetupResult,
     run_setup_prompts,
 )
-from portable_kb.skills import SkillTarget
+from groundray.skills import SkillTarget
 
 
 class FakeBackend:
@@ -68,7 +68,7 @@ def test_inline_setup_collects_confirmed_settings(tmp_path: Path) -> None:
     assert result.settings.search_mode is SearchMode.SEMANTIC
     assert result.skill_target is SkillTarget.BOTH
     assert backend.calls[0] == ("Brain checkout root", str(initial.data_dir))
-    assert output[0] == "┌  portable-kb"
+    assert output[0] == "┌  groundray"
     assert "◇  Review" in output
     assert output[-1] == "└  Setup ready"
 
@@ -126,5 +126,5 @@ def test_inline_setup_handles_selector_cancellation(tmp_path: Path) -> None:
 def test_inline_setup_reports_missing_prompt_dependency(monkeypatch) -> None:
     monkeypatch.setitem(sys.modules, "questionary", None)
 
-    with pytest.raises(SetupPromptError, match="Reinstall Portable KB"):
+    with pytest.raises(SetupPromptError, match="Reinstall Groundray"):
         QuestionaryBackend()

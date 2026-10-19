@@ -8,7 +8,7 @@ explicit output/native-sidecar inputs.
 
 Use `--cli-sources` for the [supported-source follow-up](../../docs/groundray-cli-sources.md).
 That mode captures originals through CLI plans/applies, checks direct receipt-backed
-reads and follows item source IDs with `pkb source get`. The earlier development
+reads and follows item source IDs with `groundray source get`. The earlier development
 mode and recorded traces remain available; neither mode runs a fresh model.
 
 The [fresh-agent CLI handoff](../../docs/groundray-agent-cli-handoff.md) records
@@ -35,7 +35,7 @@ Two fresh sessions per case: an agent builds a fictional Cedar Commerce brain;
 a different agent recovers that saved brain and assesses a changed forecast.
 Both the supplied Hermes wiki skill and Groundray receive identical records,
 tasks, file tools and JSON output contracts. This evaluates skill-guided Markdown
-authoring and continuity; it does not exercise or claim a Portable KB CLI benefit.
+authoring and continuity; it does not exercise or claim a Groundray CLI benefit.
 
 The supplied source labels do not authenticate approvals or people. A conditional
 customer statement, supplied decision record, estimate, repeated sales report,

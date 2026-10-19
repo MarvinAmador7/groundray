@@ -36,7 +36,7 @@ def smoke(package: Path, output: Path) -> dict:
     envs = {name: environment(name) for name in ["seed", "author", "reader"]}
 
     def call(employee, *args):
-        env = {k: v for k, v in envs[employee].items() if k != "GROUNDRAY_PKB"}
+        env = {k: v for k, v in envs[employee].items() if k != "GROUNDRAY_CLI"}
         r = subprocess.run([str(wrapper), *args], env=env, text=True,
                            capture_output=True, timeout=180)
         record = {"actor": "root-fixture", "employee": employee, "argv": list(args),
@@ -119,7 +119,7 @@ def smoke(package: Path, output: Path) -> dict:
                    "package-smoke", "--json")
     assert fetched["source"]["content"].encode() == update.read_bytes()
     assert Path(fetched["source"]["local_path"]).read_bytes() == update.read_bytes()
-    installed = output / "reader/data/portable-kb/brains/package-smoke/knowledge/references/captures/original.txt"
+    installed = output / "reader/data/groundray/brains/package-smoke/knowledge/references/captures/original.txt"
     assert installed.read_bytes() == original.read_bytes()
     report = {"model_runs": 0, "host_role_separation_tested": False,
               "business_approval_recorded": False, "base_commit": base,

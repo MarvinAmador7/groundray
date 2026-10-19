@@ -84,7 +84,7 @@ def prepare(
         trials, matched, cli, wiki_skill, repetitions=repetitions, scenarios=selected
     )
     repo = Path(__file__).resolve().parents[2]
-    for arm in ("wiki", "portable-kb"):
+    for arm in ("wiki", "groundray"):
         arm_root = trials / arm
         arm_manifest = load_json(arm_root / "manifest.json")
         arm_manifest.update(
@@ -116,7 +116,7 @@ def prepare(
                             "--json",
                             actor="fault-controller",
                         )
-                        if arm == "portable-kb"
+                        if arm == "groundray"
                         else {
                             "page": atlas.wiki_pages(case / "work/wiki")[CORRECTION],
                             "citation": {"path": CORRECTION, "scope": "primary"},

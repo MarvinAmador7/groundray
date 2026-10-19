@@ -115,7 +115,7 @@ def evidence(tmp_path: Path, arm: str):
     else:
         source, checkout = (
             case / "work/source",
-            case / "home/.local/share/portable-kb/brains/synthetic",
+            case / "home/.local/share/groundray/brains/synthetic",
         )
         for root in (source, checkout):
             root.mkdir(parents=True)
@@ -137,13 +137,13 @@ def evidence(tmp_path: Path, arm: str):
     return case
 
 
-@pytest.mark.parametrize("arm", ["wiki", "portable-kb"])
+@pytest.mark.parametrize("arm", ["wiki", "groundray"])
 def test_actual_complete_observations_pass(tmp_path, arm):
     assert grade_case(evidence(tmp_path, arm), TASK)["status"] == "pass"
 
 
 def test_derived_markdown_view_retains_a_canonical_read(tmp_path):
-    case = evidence(tmp_path, "portable-kb")
+    case = evidence(tmp_path, "groundray")
     path = case / "trace/001.json"
     trace = json.loads(path.read_text())
     payload = json.loads(trace["stdout"])
@@ -173,7 +173,7 @@ def test_derived_markdown_view_retains_a_canonical_read(tmp_path):
     ],
 )
 def test_portable_false_wins_are_rejected(tmp_path, mutation):
-    case = evidence(tmp_path, "portable-kb")
+    case = evidence(tmp_path, "groundray")
     final = json.loads((case / "final.json").read_text())
     trace = json.loads((case / "trace/001.json").read_text())
     if mutation == "forged-citation":
@@ -293,13 +293,13 @@ def test_reference_adjustments_preserve_original_labels_and_response(tmp_path):
 def test_foreground_observer_records_actual_exit_output_environment_and_finish(tmp_path):
     case = tmp_path / "case"
     (case / "work").mkdir(parents=True)
-    write_json(case / "bin/shim.json", {"product_environment": {"PKB_OBSERVER_TEST": "isolated"}})
+    write_json(case / "bin/shim.json", {"product_environment": {"GROUNDRAY_OBSERVER_TEST": "isolated"}})
     entry = [sys.executable, "-m", "evals.agent_cli.observer", "--case", str(case)]
     command_text = shlex.join(
         [
             sys.executable,
             "-c",
-            'import os; print(os.environ["PKB_OBSERVER_TEST"]); raise SystemExit(7)',
+            'import os; print(os.environ["GROUNDRAY_OBSERVER_TEST"]); raise SystemExit(7)',
         ]
     )
     completed = subprocess.run(
@@ -353,7 +353,7 @@ def test_unmatched_comparisons_are_refused(tmp_path, field):
         suite_sha256="suite", labels_sha256="labels", corpus_sha256="corpus", repetitions=2
     )
     wiki = {"manifest": {**manifest, "arm": "wiki"}}
-    portable = {"manifest": {**manifest, "arm": "portable-kb", field: "different"}}
+    portable = {"manifest": {**manifest, "arm": "groundray", field: "different"}}
     with pytest.raises(ValueError, match="Unmatched benchmark"):
         compare(wiki, portable, tmp_path / "comparison")
 

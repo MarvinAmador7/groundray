@@ -12,13 +12,13 @@ from .harness import compare, grade, prepare
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Compare wiki + skill and actual Portable KB on matched private content."
+        description="Compare wiki + skill and actual Groundray on matched private content."
     )
     commands = parser.add_subparsers(dest="action", required=True)
     preparation = commands.add_parser("prepare")
     for option in ("output", "wiki", "wiki-skill", "suite", "cli"):
         preparation.add_argument(f"--{option}", type=Path, required=True)
-    preparation.add_argument("--arm", choices=["wiki", "portable-kb"], required=True)
+    preparation.add_argument("--arm", choices=["wiki", "groundray"], required=True)
     preparation.add_argument("--source", type=Path)
     preparation.add_argument("--slug", default="wiki-replica")
     preparation.add_argument("--repetitions", type=int, default=2)
@@ -75,7 +75,7 @@ def main() -> int:
                 json.loads(args.portable.read_text()),
                 args.output,
             )
-            print(json.dumps({"wiki": result["wiki"], "portable-kb": result["portable-kb"]}))
+            print(json.dumps({"wiki": result["wiki"], "groundray": result["groundray"]}))
         elif args.action == "prepare":
             result = prepare(
                 args.output,

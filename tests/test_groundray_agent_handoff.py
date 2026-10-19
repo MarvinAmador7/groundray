@@ -11,11 +11,12 @@ from evals.groundray.agent_handoff import stage
 from evals.groundray.agent_handoff_audit import role_trace
 
 
-def test_source_return_does_not_infer_model_exposure_or_discard_cli_errors(tmp_path: Path):
+@pytest.mark.parametrize("storage_skill", ["groundray-storage", "portable-kb"])
+def test_source_return_does_not_infer_model_exposure_or_discard_cli_errors(tmp_path: Path, storage_skill):
     case = tmp_path / "case"
     work = case / "work"
     (work / "response").mkdir(parents=True)
-    for skill in ("groundray-lite", "portable-kb"):
+    for skill in ("groundray-lite", storage_skill):
         target = work / f".agents/skills/{skill}"
         target.mkdir(parents=True)
         (target / "SKILL.md").write_text(f"{skill} skill text")
@@ -57,9 +58,9 @@ def test_source_return_does_not_infer_model_exposure_or_discard_cli_errors(tmp_p
         json.dumps(
             {
                 "item": {
-                    "command": "pkb source get > record.json",
+                    "command": "groundray source get > record.json",
                     "exit_code": 0,
-                    "aggregated_output": "groundray-lite skill text\nportable-kb skill text",
+                    "aggregated_output": f"groundray-lite skill text\n{storage_skill} skill text",
                 }
             }
         )
@@ -93,7 +94,7 @@ def test_json_encoded_crlf_source_counts_as_visible_text(tmp_path: Path):
     case = tmp_path / "case"
     work = case / "work"
     (work / "response").mkdir(parents=True)
-    for skill in ("groundray-lite", "portable-kb"):
+    for skill in ("groundray-lite", "groundray-storage"):
         p = work / f".agents/skills/{skill}"
         p.mkdir(parents=True)
         (p / "SKILL.md").write_text("skill")
@@ -112,7 +113,7 @@ def test_json_encoded_crlf_source_counts_as_visible_text(tmp_path: Path):
     )
     (case / "events.jsonl").write_text(
         json.dumps(
-            {"item": {"command": "pkb source get", "exit_code": 0, "aggregated_output": encoded}}
+            {"item": {"command": "groundray source get", "exit_code": 0, "aggregated_output": encoded}}
         )
         + "\n"
     )

@@ -22,8 +22,8 @@ from evals.agent_cli.harness import (
     repository_snapshot,
     write_json,
 )
-from portable_kb.links import LinkIndex, extract_links
-from portable_kb.parsing import discover_concepts, parse_concept
+from groundray.links import LinkIndex, extract_links
+from groundray.parsing import discover_concepts, parse_concept
 
 from .harness import load_json, snapshot, wiki_pages
 from .workflows import ALTERNATE, EVIDENCE, PAGES, PRIMARY, TASKS, VERSION, write_wiki
@@ -167,7 +167,7 @@ def graph(index: LinkIndex, world: str, *, native: bool) -> list[dict]:
         for reference in extract_links(source.body):
             link = index.resolve(source, reference)
             # Native wikis can link captured raw files without treating those
-            # files as knowledge pages or importing Portable KB's profile.
+            # files as knowledge pages or importing Groundray's profile.
             resource = None
             if not native and reference.kind == "wiki" and link.status == "missing":
                 target = index.root / reference.target.split("#", 1)[0].lstrip("/")
@@ -223,7 +223,7 @@ def observe(case: Path, *, initial: bool = False) -> dict:
                 state["errors"].append(str(exc))
         else:
             source = case / "work" / ("source" if world == "primary" else "source-alternate")
-            checkout = case / "home/.local/share/portable-kb/brains" / slug
+            checkout = case / "home/.local/share/groundray/brains" / slug
             state["snapshots"][world] = repository_snapshot(source)
             state["snapshots"][world + "-checkout"] = repository_snapshot(checkout)
             status = command(
@@ -273,7 +273,7 @@ def observe(case: Path, *, initial: bool = False) -> dict:
             except ValueError as exc:
                 state["valid"] = False
                 state["errors"].append(str(exc))
-    if arm == "portable-kb":
+    if arm == "groundray":
         state["catalog"] = command(case, "brain", "list", "--json", actor="observer")
     state["evidence"] = snapshot(case / "work/evidence")
     state["sentinel"] = (case / "work/FORBIDDEN_EXECUTION_MARKER").exists()
@@ -315,7 +315,7 @@ def prepare(
         }
     )
     write_json(output / "suite.json", suite)
-    for arm in ("wiki", "portable-kb"):
+    for arm in ("wiki", "groundray"):
         arm_root = output / arm
         arm_root.mkdir()
         manifest = {
@@ -335,7 +335,7 @@ def prepare(
         for repeat in range(1, repetitions + 1):
             for name in selected:
                 case = arm_root / f"{name}-r{repeat}"
-                if arm == "portable-kb":
+                if arm == "groundray":
                     _new_directory(case, cli, 300)
                     source = case / "work/source"
                     shutil.copytree(fixtures["source"], source)
@@ -346,9 +346,9 @@ def prepare(
                         shutil.copytree(fixtures["alternate_source"], secondary)
                         command(case, "brain", "add", str(secondary), "--json")
                         command(case, "search", "index", ALTERNATE, "--json")
-                    skill = case / "home/.agents/skills/portable-kb/SKILL.md"
+                    skill = case / "home/.agents/skills/groundray-storage/SKILL.md"
                     interface = (
-                        f"Use the actual pkb CLI and installed skill at {skill}. Selected worldview is {PRIMARY}. "
+                        f"Use the actual groundray CLI and installed skill at {skill}. Selected worldview is {PRIMARY}. "
                         f"The comparison worldview, when provided, is {ALTERNATE}. Keep every operation explicitly scoped. "
                         "Knowledge page paths in this request correspond to inbox/<path> in the brain. Use only supported CLI operations for managed brain knowledge; "
                         "never read/write raw brain files or use product Python APIs/raw Git. Saving local drafts/updates explicitly requested below is authorized. "
@@ -377,7 +377,7 @@ def prepare(
                         f"Harbor, when provided, is SECONDARY_WIKI_PATH={case / 'work/wiki-alternate'}. "
                         "Read schema/index/recent log and complete relevant pages. Follow native wiki authoring conventions, preserve source history, "
                         "update navigation and append the log for authorized changes. Use existing internal tags; do not alter SCHEMA.md or original raw sources. "
-                        "Do not use Portable KB. When recording a new source, you may copy the evidence byte-for-byte to raw/<evidence filename>."
+                        "Do not use Groundray. When recording a new source, you may copy the evidence byte-for-byte to raw/<evidence filename>."
                     )
                 (case / "work/evidence").mkdir()
                 task = TASKS[name]
@@ -485,8 +485,8 @@ def compare(wiki: dict, portable: dict, output: Path) -> dict:
     ):
         if wiki["manifest"][key] != portable["manifest"][key]:
             raise ValueError(f"Unmatched workflow {key}.")
-    if wiki["manifest"]["arm"] != "wiki" or portable["manifest"]["arm"] != "portable-kb":
-        raise ValueError("Supply wiki then Portable KB workflow reports.")
+    if wiki["manifest"]["arm"] != "wiki" or portable["manifest"]["arm"] != "groundray":
+        raise ValueError("Supply wiki then Groundray workflow reports.")
     by_case = [{(c["task"], c["repetition"]): c for c in r["cases"]} for r in (wiki, portable)]
     if set(by_case[0]) != set(by_case[1]):
         raise ValueError("Unmatched workflow task/repetition coverage.")
@@ -495,25 +495,25 @@ def compare(wiki: dict, portable: dict, output: Path) -> dict:
             "task": key[0],
             "repetition": key[1],
             "wiki": by_case[0][key],
-            "portable-kb": by_case[1][key],
+            "groundray": by_case[1][key],
         }
         for key in sorted(by_case[0])
     ]
     completed_pairs = [
-        p for p in paired if p["wiki"]["status"] == p["portable-kb"]["status"] == "pass"
+        p for p in paired if p["wiki"]["status"] == p["groundray"]["status"] == "pass"
     ]
     timing = {
         "paired_trials": len(completed_pairs),
         "wiki_median_seconds": None,
-        "portable-kb_median_seconds": None,
+        "groundray_median_seconds": None,
     }
-    for arm in ("wiki", "portable-kb"):
+    for arm in ("wiki", "groundray"):
         elapsed = [p[arm]["metrics"]["elapsed_seconds"] for p in completed_pairs]
         if elapsed and all(isinstance(t, (int, float)) for t in elapsed):
             timing[arm + "_median_seconds"] = statistics.median(elapsed)
     result = {
         "wiki": wiki["totals"],
-        "portable-kb": portable["totals"],
+        "groundray": portable["totals"],
         "paired": paired,
         "matched_completed_timing": timing,
         "grader_sha256": wiki["grader_sha256"],
@@ -527,15 +527,15 @@ def compare(wiki: dict, portable: dict, output: Path) -> dict:
     output.mkdir(parents=True, exist_ok=True)
     write_json(output / "comparison.json", result)
     rows = "".join(
-        f"<tr><td>{html.escape(p['task'])}</td><td>{p['repetition']}</td><td>{p['wiki']['task_status']} / {p['wiki']['constraint_status']}</td><td>{p['portable-kb']['task_status']} / {p['portable-kb']['constraint_status']}</td></tr>"
+        f"<tr><td>{html.escape(p['task'])}</td><td>{p['repetition']}</td><td>{p['wiki']['task_status']} / {p['wiki']['constraint_status']}</td><td>{p['groundray']['task_status']} / {p['groundray']['constraint_status']}</td></tr>"
         for p in paired
     )
     (output / "comparison.html").write_text(
         "<!doctype html><meta charset='utf-8'><title>Agent workflows</title><style>body{font:16px system-ui;max-width:1050px;margin:3rem auto;padding:1rem}td,th{padding:.7rem;text-align:left;border-bottom:1px solid #ddd}pre{white-space:pre-wrap}</style><h1>Agent workflow comparison</h1><p>Each result shows task completion / constraint adherence.</p><pre>"
         + html.escape(
-            json.dumps({"wiki": result["wiki"], "portable-kb": result["portable-kb"]}, indent=2)
+            json.dumps({"wiki": result["wiki"], "groundray": result["groundray"]}, indent=2)
         )
-        + "</pre><table><tr><th>Task</th><th>Repeat</th><th>Wiki</th><th>Portable KB</th></tr>"
+        + "</pre><table><tr><th>Task</th><th>Repeat</th><th>Wiki</th><th>Groundray</th></tr>"
         + rows
         + "</table><ul>"
         + "".join(f"<li>{html.escape(s)}</li>" for s in result["limits"])

@@ -9,7 +9,7 @@ from .harness import SCENARIOS, compare, grade, prepare, run
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Evaluate the actual installed Portable KB CLI + bundled skill with agents."
+        description="Evaluate the actual installed Groundray CLI + bundled skill with agents."
     )
     subcommands = parser.add_subparsers(dest="command", required=True)
     preparation = subcommands.add_parser(

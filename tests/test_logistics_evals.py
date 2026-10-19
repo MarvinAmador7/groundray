@@ -11,7 +11,7 @@ from evals.logistics.harness import compare, generate, prepare
 from evals.logistics.oracle import MOVE_FROM, downstream, final_schema, retention, route, tasks
 from evals.logistics.world import make_world, pages
 from evals.wiki_compare.harness import load_json, wiki_pages
-from portable_kb.parsing import discover_concepts, parse_concept
+from groundray.parsing import discover_concepts, parse_concept
 
 
 @pytest.fixture(scope="module")
@@ -55,7 +55,7 @@ def test_frozen_matched_corpus_valid_unique_and_qualified(corpus):
     assert len(set(identities.values())) == 220
     assert all(UUID(value.removeprefix("urn:uuid:")).version == 4 for value in identities.values())
     wiki = wiki_pages(corpus / "wiki")
-    native = corpus / "portable-kb/knowledge"
+    native = corpus / "groundray/knowledge"
     for path in discover_concepts(native):
         item = parse_concept(path, native).item
         logical = item.relative_path.removeprefix("inbox/")
@@ -92,15 +92,15 @@ def test_fact_requires_present_null_complete_chain_and_canonical_citations(tmp_p
     }
     read = dict.fromkeys(pages)
     answer = {"value": None, "citations": [citation]}
-    assert not score_fact(answer, label, read, pages, "portable-kb", tmp_path)["grounded"]
+    assert not score_fact(answer, label, read, pages, "groundray", tmp_path)["grounded"]
     answer["citations"].append({"scope": "primary", **pages["b.md"]["citation"]})
-    assert score_fact(answer, label, read, pages, "portable-kb", tmp_path)["passed"]
+    assert score_fact(answer, label, read, pages, "groundray", tmp_path)["passed"]
     assert not score_fact(
-        {"citations": answer["citations"]}, label, read, pages, "portable-kb", tmp_path
+        {"citations": answer["citations"]}, label, read, pages, "groundray", tmp_path
     )["accurate"]
-    assert not score_fact(answer, label, {"a.md": None}, pages, "portable-kb", tmp_path)["grounded"]
+    assert not score_fact(answer, label, {"a.md": None}, pages, "groundray", tmp_path)["grounded"]
     answer["citations"][0]["commit"] = "wrong"
-    assert not score_fact(answer, label, read, pages, "portable-kb", tmp_path)["grounded"]
+    assert not score_fact(answer, label, read, pages, "groundray", tmp_path)["grounded"]
     assert not citation_matches(
         {"scope": "alternate", "path": "a.md"}, "a.md", {}, "wiki", tmp_path
     )
@@ -184,7 +184,7 @@ def test_comparison_rejects_different_worlds_and_grader(tmp_path):
         "cases": [],
         "totals": {},
     }
-    native = {**wiki, "manifest": {**manifest, "arm": "portable-kb"}}
+    native = {**wiki, "manifest": {**manifest, "arm": "groundray"}}
     assert compare(wiki, native, tmp_path / "comparison.json")["pairs"] == []
     native["manifest"]["protocol_version"] = 2
     with pytest.raises(ValueError, match="Unmatched"):
@@ -275,14 +275,14 @@ def test_saved_search_accepts_new_amendment_section_but_rejects_stale_index():
         "started_ns": 111,
         "stdout": json.dumps({"results": [result]}),
     }
-    assert search_verified("portable-kb", [], [save, index, query], pages)
+    assert search_verified("groundray", [], [save, index, query], pages)
     index["started_ns"] = 99
-    assert not search_verified("portable-kb", [], [save, index, query], pages)
+    assert not search_verified("groundray", [], [save, index, query], pages)
     index["started_ns"] = 101
     query["stdout"] = json.dumps(
         {"results": [{**result, "citation": {**citation, "commit": "old"}}]}
     )
-    assert not search_verified("portable-kb", [], [save, index, query], pages)
+    assert not search_verified("groundray", [], [save, index, query], pages)
 
 
 @pytest.mark.parametrize("value", [12, {}, ["good", {}], ["duplicate", "duplicate"]])

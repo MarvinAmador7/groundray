@@ -10,10 +10,10 @@ An installation from a Git URL starts as a reader. Clone the same source into a
 separate working directory, inspect the installed version, then attach it:
 
 ```console
-pkb brain status mosaic-studio --json
+groundray brain status mosaic-studio --json
 git clone <same-source-url> ./mosaic-authoring
-pkb brain attach ./mosaic-authoring --brain mosaic-studio --json
-pkb brain attach ./mosaic-authoring --brain mosaic-studio --apply --json
+groundray brain attach ./mosaic-authoring --brain mosaic-studio --json
+groundray brain attach ./mosaic-authoring --brain mosaic-studio --apply --json
 ```
 
 Attachment checks the brain ID, slug, origin, clean `main` branch, validation and
@@ -38,8 +38,8 @@ revision. It contains the saved, validated commit, including its history and
 original records, without advancing published `main`:
 
 ```console
-pkb brain propose delivery-evidence --brain mosaic-studio --json
-pkb brain propose delivery-evidence --brain mosaic-studio --apply --json
+groundray brain propose delivery-evidence --brain mosaic-studio --json
+groundray brain propose delivery-evidence --brain mosaic-studio --apply --json
 ```
 
 Both modes explicitly contact the remote. Preview checks remote freshness but
@@ -50,7 +50,7 @@ invalid content and history that does not descend from current published main.
 A reviewer can use a URL-installed brain without an authoring clone:
 
 ```console
-pkb brain review delivery-evidence --brain mosaic-studio \
+groundray brain review delivery-evidence --brain mosaic-studio \
   --commit <full-proposal-commit> --json
 ```
 
@@ -70,9 +70,9 @@ which review reports separately from the remote base and candidate. Do not mix
 these snapshots in a business conclusion. Read an original at the exact candidate:
 
 ```console
-pkb brain review-source delivery-evidence references/captures/operations/delivery-note.txt \
+groundray brain review-source delivery-evidence references/captures/operations/delivery-note.txt \
   --brain mosaic-studio --commit <full-proposal-commit> --json
-pkb brain review-source delivery-evidence wiki/lumen-launch.md operations \
+groundray brain review-source delivery-evidence wiki/lumen-launch.md operations \
   --brain mosaic-studio --commit <full-proposal-commit> --json
 ```
 
@@ -89,10 +89,10 @@ a versioned citation. Machine paths do not belong in shared company pages.
 Only an explicitly authorized publisher should run:
 
 ```console
-pkb brain accept delivery-evidence --brain mosaic-studio \
+groundray brain accept delivery-evidence --brain mosaic-studio \
   --commit <reviewed-full-proposal-commit> --base <reviewed-full-base-commit> --json
-pkb brain sync mosaic-studio --json
-pkb search index mosaic-studio --json
+groundray brain sync mosaic-studio --json
+groundray search index mosaic-studio --json
 ```
 
 `accept` validates the candidate again, checks the supplied reviewed base and

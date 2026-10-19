@@ -10,7 +10,7 @@ reference Apple Silicon run, and the supported release matrix.
 
 ## What is implemented
 
-- `portable_kb.search_records` normalizes validated concepts into sections with
+- `groundray.search_records` normalizes validated concepts into sections with
   immutable item IDs, canonical paths, exact Git pins, lifecycle metadata,
   source line ranges, and body hashes. It excludes reserved documents,
   frontmatter search text, hidden files, symbolic links, and heading-only
@@ -19,8 +19,8 @@ reference Apple Silicon run, and the supported release matrix.
 - `benchmarks.sqlite_fts5` uses SQLite's contentless FTS5 index and separate
   metadata tables. Ingestion commits every 1,000 sections to limit pending
   transaction state. A final optimization merges the derived index.
-- `crates/pkb-search-core` owns Tantivy indexing and ranking. The
-  `pkb-search-cli` sidecar speaks version-1 JSON Lines with 64 KiB request and
+- `crates/groundray-search-core` owns Tantivy indexing and ranking. The
+  `groundray-search-cli` sidecar speaks version-1 JSON Lines with 64 KiB request and
   1 MiB normalized-record limits. The runner bounds responses to 16 MiB and
   applies per-call timeouts. There are no models, network calls, or content
   execution hooks in either engine.
@@ -40,10 +40,10 @@ The performance tables below measure the original raw build/query path. They
 exclude managed-store export copying, directory syncing, per-request manifest
 lookup, and retained generations/record snapshots.
 
-SQLite remains a development baseline. Tantivy is now wired into `pkb`
+SQLite remains a development baseline. Tantivy is now wired into `groundray`
 settings, canonical citation checks, native release artifacts, and lease-aware
 brain removal. The Python wheel keeps its Python dependencies; standalone
-releases embed the sidecar, while wheel users supply `pkb-search` separately.
+releases embed the sidecar, while wheel users supply `groundray-search` separately.
 
 ## Shared comparison inputs
 
@@ -87,8 +87,8 @@ the pinned Rust workspace:
 ```console
 python -m pip install -e '.[dev]'
 cargo build --release --locked
-python -m benchmarks.search generate --items 1000 --output /tmp/pkb-corpus-1000
-python -m benchmarks.search run /tmp/pkb-corpus-1000 --output /tmp/pkb-results-1000 --tantivy target/release/pkb-search --repeat 3
+python -m benchmarks.search generate --items 1000 --output /tmp/groundray-corpus-1000
+python -m benchmarks.search run /tmp/groundray-corpus-1000 --output /tmp/groundray-results-1000 --tantivy target/release/groundray-search --repeat 3
 ```
 
 The toolchain file pins Rust 1.90.0; `Cargo.lock` pins Tantivy 0.25.0 and its
@@ -101,7 +101,7 @@ For an installed, healthy, clean brain, export its validated pinned version
 using item labels and item/heading/grade section judgments:
 
 ```console
-python -m benchmarks.search export --config /path/to/config.yaml --brain my-brain --as-of 2026-08-17 --labels labels.json --section-labels sections.json --output /tmp/pkb-brain-corpus
+python -m benchmarks.search export --config /path/to/config.yaml --brain my-brain --as-of 2026-08-17 --labels labels.json --section-labels sections.json --output /tmp/groundray-brain-corpus
 ```
 
 Use the two reference fixture label files only with the matching reference

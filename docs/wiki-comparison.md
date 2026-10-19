@@ -1,7 +1,7 @@
-# Compare a Markdown wiki and Portable KB with agents
+# Compare a Markdown wiki and Groundray with agents
 
 `python -m evals.wiki_compare` compares a supplied wiki and its skill with the
-actual Portable KB executable and installed skill. It uses the same captured
+actual Groundray executable and installed skill. It uses the same captured
 knowledge and questions, separate fresh agents, independently observed full-page
 reads, and declared reference answers. It measures task outcomes and effort;
 it does not infer a winner from the existence of metadata or links.
@@ -19,8 +19,8 @@ the project's development dependencies to use its parser and test utilities.
 
 Give a fresh agent read-only access to the original wiki, the installed Portable
 KB skill, and the supported CLI. Explicitly authorize a new local unpublished
-brain and the intended pages. Use `pkb brain init --no-publish`, then inspected
-plan/apply pairs for `pkb knowledge create`; never write concept files directly
+brain and the intended pages. Use `groundray brain init --no-publish`, then inspected
+plan/apply pairs for `groundray knowledge create`; never write concept files directly
 or invent human verification. The benchmark does not add a production import
 command or new schema fields.
 
@@ -34,14 +34,14 @@ desktop paths, emails, or external sources were freshly inspected.
 
 Map domain types deliberately: a company/person/product can become a `concept`,
 a project a `system`, and current context a `source-summary`. Original
-`active`/`paused`/`unknown` is domain state, while Portable KB `draft` is review
+`active`/`paused`/`unknown` is domain state, while Groundray `draft` is review
 state. Retain the original domain state and dates in the source extension;
 new creation/production dates describe the transformation. Use an honest agent
 actor, `transformed` when carrying unchanged content across conventions, and a
 confidence basis limited to transcription. Do not infer new facts or authority.
 
 Archive the original `SCHEMA.md`, indexes, historical logs and raw sources
-unchanged. Let Portable KB generate its own indexes and creation log. Do not
+unchanged. Let Groundray generate its own indexes and creation log. Do not
 turn imported policies or embedded shell examples into execution authority.
 Intermediate draft missing-link warnings are expected while targets are absent;
 check final validation, every link, final canonical gets and citations, then
@@ -93,21 +93,21 @@ in a summary. Human review remains useful for interpreting that prose.
 ## Prepare and run
 
 Use the same wiki capture, suite and actual CLI artifact for both arms. Supply
-the migrated Git repository for the Portable KB arm; search is built before
+the migrated Git repository for the Groundray arm; search is built before
 timing retrieval. The wiki arm gets the supplied skill, original conventions,
-catalog, current context, log and raw sources. The Portable KB arm gets its
+catalog, current context, log and raw sources. The Groundray arm gets its
 installed skill and the migrated knowledge through the CLI. Original ancillary
 files remain archived rather than automatically converted into CLI knowledge.
 
 ```sh
 python -m evals.wiki_compare prepare \
   --arm wiki --wiki /private/wiki --wiki-skill /private/llm-wiki/SKILL.md \
-  --suite /private/tasks.json --cli /absolute/path/to/pkb \
+  --suite /private/tasks.json --cli /absolute/path/to/groundray \
   --output /private/evals/wiki --repetitions 2
 
 python -m evals.wiki_compare prepare \
-  --arm portable-kb --wiki /private/wiki --wiki-skill /private/llm-wiki/SKILL.md \
-  --suite /private/tasks.json --cli /absolute/path/to/pkb \
+  --arm groundray --wiki /private/wiki --wiki-skill /private/llm-wiki/SKILL.md \
+  --suite /private/tasks.json --cli /absolute/path/to/groundray \
   --source /private/wiki-replica --slug wiki-replica \
   --output /private/evals/portable --repetitions 2
 
@@ -150,7 +150,7 @@ network policy to run the native adapter.
 
 Complete file reads may be shown once or in contiguous observed line ranges.
 Keyword snippets do not qualify. Wiki citations may include fully read schema,
-catalog, log or raw-source files as supplementary context. Portable KB gets must
+catalog, log or raw-source files as supplementary context. Groundray gets must
 match independent canonical content and UUID/path/commit; brain scope is checked
 on search/get/link operations. The grader checks unchanged source/checkout files,
 skill and prompt digests, successful runner completion and visible draft caveats.
@@ -179,10 +179,10 @@ automatically inferred truth.
 Two fresh runs of four tasks per approach used the same 32-page wiki: ownership
 and roles, evolving file-delivery requirements, reported versus verified project
 state, and unknowns/proposals. Both arms used foreground Codex chat agents; this
-compares the supplied wiki conventions and skill with Portable KB and its skill,
+compares the supplied wiki conventions and skill with Groundray and its skill,
 not Hermes versus Codex model quality. The exact inherited model was not exposed.
 
-| Observation | Wiki + supplied skill | Portable KB + installed skill |
+| Observation | Wiki + supplied skill | Groundray + installed skill |
 |---|---:|---:|
 | Correct claims | 84/84 | 84/84 |
 | Correct claims with grounded citations | 84/84 | 84/84 |
@@ -193,11 +193,11 @@ not Hermes versus Codex model quality. The exact inherited model was not exposed
 | Observed command-output characters | 1,272,328 | 1,152,249 |
 
 Both represented the captured facts and uncertainty correctly. The wiki was faster
-in this small pilot. Portable KB required more command round trips and returned
+in this small pilot. Groundray required more command round trips and returned
 machine-checkable identities, pinned snapshots and lifecycle information. Its
 lower observed output volume is not a token or cost claim. Long log/context reads
 caused wiki rereads; large duplicated body/content JSON and broad search hits
-caused Portable KB rereads. Initial prompt-path mistakes were runner friction,
+caused Groundray rereads. Initial prompt-path mistakes were runner friction,
 not wiki defects.
 
 The migration took about six minutes including discovery, creation and extensive

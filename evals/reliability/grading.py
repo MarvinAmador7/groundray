@@ -166,7 +166,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
                 and t.get("completed_ns", 0) < cp.get("started_ns", 0)
                 for t in traces
             )
-            if arm == "portable-kb"
+            if arm == "groundray"
             else any(
                 complete_text_seen(original, [e.get("aggregated_output", "") for e in events[:i]])
                 for i, e in enumerate(events)
@@ -183,7 +183,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
                 and t.get("started_ns", 0) >= cp.get("completed_ns", 0)
                 for t in traces
             )
-            if arm == "portable-kb"
+            if arm == "groundray"
             else complete_text_seen(
                 cp.get("content", "MISSING-CHECKPOINT"),
                 [
@@ -214,7 +214,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
         outcomes["saved_rollback_searchable"] = saved_duration_searchable(
             arm, events, traces, state["pages"], 7
         )
-        if arm == "portable-kb":
+        if arm == "groundray":
             outcomes["new_revision_saved"] = state.get("status", {}).get("commit") != initial.get(
                 "status", {}
             ).get("commit")

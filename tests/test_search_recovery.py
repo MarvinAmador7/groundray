@@ -16,9 +16,9 @@ from benchmarks.search import Worker
 
 @pytest.fixture
 def native_command():
-    executable = os.environ.get("PKB_TANTIVY_COMMAND")
+    executable = os.environ.get("GROUNDRAY_TANTIVY_COMMAND")
     if not executable:
-        pytest.skip("set PKB_TANTIVY_COMMAND to exercise native generation recovery")
+        pytest.skip("set GROUNDRAY_TANTIVY_COMMAND to exercise native generation recovery")
     return [executable]
 
 

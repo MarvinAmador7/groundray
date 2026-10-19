@@ -76,7 +76,7 @@ def main() -> int:
     finally:
         signal.signal(signal.SIGTERM, previous_handler)
     trace = {
-        "actor": os.environ.get("PKB_EVAL_ACTOR", "agent"),
+        "actor": os.environ.get("GROUNDRAY_EVAL_ACTOR", "agent"),
         "time_utc": started_utc,
         "started_ns": started_ns,
         "completed_ns": time.time_ns(),

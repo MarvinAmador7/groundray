@@ -14,8 +14,8 @@ from urllib.parse import unquote, urlsplit
 
 from evals.groundray.agent_handoff import NEW_QA, git, snapshot
 from evals.groundray.engine_fit import digest
-from portable_kb.parsing import parse_concept
-from portable_kb.validation import validate_bundle
+from groundray.parsing import parse_concept
+from groundray.validation import validate_bundle
 
 
 def read_json(path: Path, fallback=None):
@@ -130,7 +130,11 @@ def role_trace(case: Path) -> dict:
         "distinct_returned_source_paths": len({r["path"] for r in returned}),
         "skill_text_in_observer_output": {
             skill: (work / f".agents/skills/{skill}/SKILL.md").read_text() in observed
-            for skill in ("groundray-lite", "portable-kb")
+            for skill in (
+                "groundray-lite",
+                "groundray-storage" if (work / ".agents/skills/groundray-storage").is_dir()
+                else "portable-kb",
+            )
         },
         "answer_matches_recorded_final": answer.exists()
         and answer.read_text() == final.get("answer"),

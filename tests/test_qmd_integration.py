@@ -6,21 +6,21 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb.brains import add_brain
-from portable_kb.retrieval_eval import evaluate_retrieval
-from portable_kb.search import index_keyword_brain, qmd_status, search_keyword
-from portable_kb.settings import Settings
+from groundray.brains import add_brain
+from groundray.retrieval_eval import evaluate_retrieval
+from groundray.search import index_keyword_brain, qmd_status, search_keyword
+from groundray.settings import Settings
 
 
 @pytest.mark.integration
 @pytest.mark.skipif(
-    os.environ.get("PKB_REAL_QMD") != "1",
-    reason="set PKB_REAL_QMD=1 to exercise the installed QMD executable",
+    os.environ.get("GROUNDRAY_REAL_QMD") != "1",
+    reason="set GROUNDRAY_REAL_QMD=1 to exercise the installed QMD executable",
 )
 def test_real_qmd_keyword_adapter(tmp_path: Path, brain_repo_factory) -> None:
     settings = Settings(
         data_dir=tmp_path / "data", cache_dir=tmp_path / "cache",
-        qmd_command=os.environ.get("PKB_QMD_COMMAND", "qmd"),
+        qmd_command=os.environ.get("GROUNDRAY_QMD_COMMAND", "qmd"),
     )
     source = brain_repo_factory(
         "real-qmd",
@@ -48,5 +48,5 @@ def test_real_qmd_keyword_adapter(tmp_path: Path, brain_repo_factory) -> None:
     assert report["citation_correctness"] == 1
     assert report["ranking_stable"] is True
     assert report["metrics"]["no_result_accuracy"] == 1
-    report_path = Path(os.environ.get("PKB_QMD_EVALUATION_REPORT", tmp_path / "qmd-evaluation.json"))
+    report_path = Path(os.environ.get("GROUNDRAY_QMD_EVALUATION_REPORT", tmp_path / "qmd-evaluation.json"))
     report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Portable KB Brain"
-  short_description: "Search, capture, and share governed knowledge"
-  default_prompt: "Use $portable-kb to work with the active brain while preserving provenance and sharing boundaries."

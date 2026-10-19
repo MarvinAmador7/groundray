@@ -3,19 +3,19 @@ from __future__ import annotations
 from collections import deque
 from collections.abc import Sequence
 
-from portable_kb.authoring import (
+from groundray.authoring import (
     ConfidenceLevel,
     GenerationMethod,
     KnowledgeType,
     Sensitivity,
     body_template,
 )
-from portable_kb.knowledge_prompt import (
+from groundray.knowledge_prompt import (
     KnowledgeCreateInputs,
     confirm_knowledge_apply,
     run_knowledge_create_prompts,
 )
-from portable_kb.setup_prompt import PromptChoice
+from groundray.setup_prompt import PromptChoice
 
 
 class FakeBackend:

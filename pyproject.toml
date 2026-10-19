@@ -3,7 +3,7 @@ requires = ["hatchling>=1.27,<2"]
 build-backend = "hatchling.build"
 
 [project]
-name = "portable-kb-core"
+name = "groundray"
 dynamic = ["version"]
 description = "Deterministic governance library for a portable OKF-compatible knowledge bundle."
 readme = "README.md"
@@ -28,15 +28,15 @@ dependencies = [
 ]
 
 [project.scripts]
-pkb = "portable_kb.cli:app"
+groundray = "groundray.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/MarvinAmador7/portable-kb"
-Issues = "https://github.com/MarvinAmador7/portable-kb/issues"
-Repository = "https://github.com/MarvinAmador7/portable-kb"
+Homepage = "https://github.com/MarvinAmador7/groundray"
+Issues = "https://github.com/MarvinAmador7/groundray/issues"
+Repository = "https://github.com/MarvinAmador7/groundray"
 
 [tool.hatch.version]
-path = "src/portable_kb/__init__.py"
+path = "src/groundray/__init__.py"
 
 [project.optional-dependencies]
 dev = [
@@ -46,11 +46,11 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/portable_kb"]
+packages = ["src/groundray"]
 
 [tool.hatch.build.targets.wheel.force-include]
-"schemas" = "portable_kb/schemas"
-".agents/skills/portable-kb" = "portable_kb/skills/portable-kb"
+"schemas" = "groundray/schemas"
+".agents/skills/groundray-storage" = "groundray/skills/groundray-storage"
 
 [tool.pytest.ini_options]
 addopts = "--strict-markers --strict-config -ra"
@@ -61,7 +61,7 @@ markers = [
 
 [tool.coverage.run]
 branch = true
-source = ["portable_kb"]
+source = ["groundray"]
 
 [tool.coverage.report]
 fail_under = 85

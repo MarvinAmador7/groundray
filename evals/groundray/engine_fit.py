@@ -18,7 +18,7 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
-from portable_kb.settings import SearchProvider, Settings, save_settings
+from groundray.settings import SearchProvider, Settings, save_settings
 
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = ROOT / "evals/groundray/fixtures/engine-fit"
@@ -77,7 +77,7 @@ class Run:
             [
                 sys.executable,
                 "-m",
-                "portable_kb",
+                "groundray",
                 *args,
                 "--config",
                 str(self.configs[who]),
@@ -113,7 +113,7 @@ def demonstrate(output: Path, native: Path, *, cli_sources: bool = False) -> dic
     if output.exists():
         raise ValueError("Choose a new output directory; previous runs are never overwritten.")
     if not native.is_file():
-        raise ValueError("Provide an existing pkb-search native executable.")
+        raise ValueError("Provide an existing groundray-search native executable.")
     output.mkdir(parents=True)
     run = Run(output, native)
     repository = output / "company"
@@ -343,7 +343,7 @@ def demonstrate(output: Path, native: Path, *, cli_sources: bool = False) -> dic
         "experiment": "groundray-g0-cli-sources-v1"
         if cli_sources
         else "groundray-g0-engine-fit-v1",
-        "source_workflow": "pkb source capture/get"
+        "source_workflow": "groundray source capture/get"
         if cli_sources
         else "manual fixture copies/development reader",
         "recorded_at": datetime.now(UTC).isoformat(),

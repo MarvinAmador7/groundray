@@ -84,7 +84,7 @@ def preserved(original: dict, current: dict, arm: str) -> bool:
     a, b = item(original).get("metadata", {}), item(current).get("metadata", {})
     stable = (
         {"id", "created_at", "type", "title", "description", "sensitivity"}
-        if arm == "portable-kb"
+        if arm == "groundray"
         else {"created", "type", "title", "tags"}
     )
     stable |= {k for k in a if k.startswith("x-")}
@@ -95,7 +95,7 @@ def preserved(original: dict, current: dict, arm: str) -> bool:
 
 def source_recorded(case: Path, page: dict, filename: str, arm: str) -> bool:
     expected = case / "work/evidence" / filename
-    if arm == "portable-kb":
+    if arm == "groundray":
         return any(
             isinstance(s, dict) and s.get("resource") == expected.as_uri() for s in sources(page)
         )
@@ -147,7 +147,7 @@ def allowed_changes(initial: dict, state: dict, task: dict, arm: str) -> tuple[b
             if world.startswith("alternate") or not task["writes"]:
                 allowed = False
                 continue
-            if arm == "portable-kb":
+            if arm == "groundray":
                 permitted = {"knowledge/inbox/" + p for p in task["writes"]}
                 allowed &= (
                     path in permitted
@@ -325,7 +325,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
     for p in written:
         if p in initial["pages"]:
             integrity["preserve:" + p] = preserved(initial["pages"][p], pages[p], arm)
-    if arm == "portable-kb":
+    if arm == "groundray":
         integrity["plans_before_successful_saves"] = planned_saves(traces)
         integrity["active_selection_preserved"] = state.get("catalog", {}).get(
             "active"
@@ -463,7 +463,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
                 r"propos|not approved",
             )
         )
-        if arm == "portable-kb":
+        if arm == "groundray":
             saves = [
                 t
                 for t in traces
@@ -517,7 +517,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
                 )
             )
             outcomes["question_type"] = item(pages.get(p, {})).get("metadata", {}).get("type") == (
-                "question" if arm == "portable-kb" else "query"
+                "question" if arm == "groundray" else "query"
             )
         else:
             outcomes["reported_qualifications_in_body"] = all(
@@ -531,7 +531,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
             )
             outcomes["summary_type"] = item(pages.get(p, {})).get("metadata", {}).get("type") in (
                 {"source-summary"}
-                if arm == "portable-kb"
+                if arm == "groundray"
                 else {"query", "project", "current", "concept", "summary"}
             )
     elif name == "client-scope":
@@ -545,7 +545,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
         outcomes["new_source_recorded"] = source_recorded(
             case, pages.get(RUNBOOK, {}), task["input"], arm
         )
-        if arm == "portable-kb":
+        if arm == "groundray":
             saves = [
                 t.get("started_ns", 0)
                 for t in traces
@@ -582,7 +582,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
             for old in old_inbound
         )
         outcomes["moved_page_read"] = MOVED in read
-        if arm == "portable-kb":
+        if arm == "groundray":
             document_paths = [
                 path.removeprefix("knowledge/")
                 for path in mutations.get("primary", [])
@@ -599,7 +599,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
     )
     blocked = (
         name == "runbook-move"
-        and arm == "portable-kb"
+        and arm == "groundray"
         and final.get("outcome") == "blocked"
         and help_seen
         and all(not c for c in mutations.values())

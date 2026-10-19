@@ -116,7 +116,7 @@ When future `knowledge/` concept files exist:
   verification for the current snapshot.
 - Preserve unknown imported OKF fields. Do not silently drop them; request a
   mapping, namespace them, or update the profile through review.
-- Use body prose and normal Markdown links or resolved Portable KB wikilinks to
+- Use body prose and normal Markdown links or resolved Groundray wikilinks to
 explain relationships (see `docs/links.md`). Read-only link navigation is now
 authorized. Explicitly requested private wiki replication through existing CLI
 plans and matched-content wiki/skill benchmarks are authorized development work;

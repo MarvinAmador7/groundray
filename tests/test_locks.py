@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb.locks import LockError, inspect_operation_lock, operation_lock
+from groundray.locks import LockError, inspect_operation_lock, operation_lock
 
 
 def test_operation_lock_is_visible_and_released(tmp_path: Path) -> None:
@@ -34,7 +34,7 @@ def test_operation_lock_times_out_while_owned(tmp_path: Path) -> None:
 
 
 def test_operation_lock_recovers_dead_same_host_owner(tmp_path: Path) -> None:
-    lock_path = tmp_path / ".portable-kb-operation.lock"
+    lock_path = tmp_path / ".groundray-operation.lock"
     lock_path.write_text(
         json.dumps(
             {
@@ -55,7 +55,7 @@ def test_operation_lock_recovers_dead_same_host_owner(tmp_path: Path) -> None:
 
 
 def test_operation_lock_does_not_remove_foreign_host_lock(tmp_path: Path) -> None:
-    lock_path = tmp_path / ".portable-kb-operation.lock"
+    lock_path = tmp_path / ".groundray-operation.lock"
     lock_path.write_text(
         json.dumps(
             {
@@ -80,7 +80,7 @@ def test_operation_lock_does_not_remove_foreign_host_lock(tmp_path: Path) -> Non
 def test_operation_lock_rejects_unsafe_lock_path(tmp_path: Path) -> None:
     target = tmp_path / "target"
     target.write_text("not a lock\n", encoding="utf-8")
-    lock_path = tmp_path / ".portable-kb-operation.lock"
+    lock_path = tmp_path / ".groundray-operation.lock"
     lock_path.symlink_to(target)
 
     status = inspect_operation_lock(tmp_path)
@@ -92,7 +92,7 @@ def test_operation_lock_rejects_unsafe_lock_path(tmp_path: Path) -> None:
 
 
 def test_inspect_operation_lock_reports_invalid_metadata(tmp_path: Path) -> None:
-    lock_path = tmp_path / ".portable-kb-operation.lock"
+    lock_path = tmp_path / ".groundray-operation.lock"
     lock_path.write_text("not json\n", encoding="utf-8")
 
     status = inspect_operation_lock(tmp_path)

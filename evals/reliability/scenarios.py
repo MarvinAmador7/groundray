@@ -62,7 +62,7 @@ def scenarios():
             incoming=("cached-answer.json",),
         ),
         "interrupted-move": row(
-            f"A real process was killed after its first destination-file rename while moving {MOVE_FROM} to {MOVE_TO}. Inspect the authoring repository and recover this interrupted operation, then complete the requested move. The pre-fault Git tag `kb-eval-baseline` is a trusted local backup. You may inspect Git status/diffs and restore only affected authoring paths from that tag, removing only the interrupted operation's untracked destination/temporary files. Never rewrite commits or edit a managed consumer checkout. Preserve identity, body, metadata and all ten callers; reread final callers and navigation/logs. For the Portable KB arm only, final authoring must use a fresh inspected CLI move plan/apply.",
+            f"A real process was killed after its first destination-file rename while moving {MOVE_FROM} to {MOVE_TO}. Inspect the authoring repository and recover this interrupted operation, then complete the requested move. The pre-fault Git tag `kb-eval-baseline` is a trusted local backup. You may inspect Git status/diffs and restore only affected authoring paths from that tag, removing only the interrupted operation's untracked destination/temporary files. Never rewrite commits or edit a managed consumer checkout. Preserve identity, body, metadata and all ten callers; reread final callers and navigation/logs. For the Groundray arm only, final authoring must use a fresh inspected CLI move plan/apply.",
             "temperature dispatch",
             {
                 "units": claim(

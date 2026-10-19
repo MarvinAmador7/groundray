@@ -207,8 +207,8 @@ def demonstrate(output: Path, native: Path) -> dict:
         "code_sha256": {
             p: digest(ROOT / p)
             for p in (
-                "src/portable_kb/collaboration.py",
-                "src/portable_kb/cli.py",
+                "src/groundray/collaboration.py",
+                "src/groundray/cli.py",
                 "evals/groundray/employee_handoff.py",
             )
         },

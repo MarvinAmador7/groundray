@@ -1,21 +1,21 @@
 # Evaluate the installed CLI and skill with agents
 
-For matched wiki/skill versus Portable KB trials and a CLI-authored replication
+For matched wiki/skill versus Groundray trials and a CLI-authored replication
 demo, see [wiki comparison](wiki-comparison.md). For knowledge maintenance and
 workplace tasks, see [agentic workflows](agentic-workflows.md). The harnesses share the CLI
 tracer, isolated product environment and runner evidence boundary. The
 `evals.agent_cli.observer` module supports explicitly delegated foreground chat
 agents when the native Codex runner is unavailable.
 
-`python -m evals.agent_cli` evaluates the actual chosen `pkb` executable and the
+`python -m evals.agent_cli` evaluates the actual chosen `groundray` executable and the
 workflow skill that executable installs. It is a repository tool, separate from
-`pkb search evaluate`: retrieval relevance labels test a ranker; these scenarios
+`groundray search evaluate`: retrieval relevance labels test a ranker; these scenarios
 test whether an agent completes a governed task through the CLI, follows the
 skill, recovers disposable state, and retains correct brain scope and citations.
 
 The harness uses Python's standard library. Real evaluations additionally need
 Git, a standalone CLI with the native engine bundled (or an available configured
-`pkb-search` for a development CLI), and an authenticated Codex executable. No
+`groundray-search` for a development CLI), and an authenticated Codex executable. No
 SDK, new model integration, Rust compilation, or network access is needed for
 the deterministic harness tests. Agent runs use the normal configured Codex
 model and provider; the harness does not choose or override a model.
@@ -27,10 +27,10 @@ new directory for each attempt:
 
 ```sh
 python -m evals.agent_cli prepare \
-  --cli /absolute/path/to/released/pkb \
-  --output /tmp/pkb-evals/baseline
+  --cli /absolute/path/to/released/groundray \
+  --output /tmp/groundray-evals/baseline
 python -m evals.agent_cli run \
-  --output /tmp/pkb-evals/baseline \
+  --output /tmp/groundray-evals/baseline \
   --runner /absolute/path/to/codex \
   --jobs 2 --timeout 600
 ```
@@ -54,15 +54,15 @@ configuration disabled.
 The first adapter targets Codex. `--runner` accepts a Codex-compatible executable;
 it does not translate Codex flags for other agent CLIs. The prepare/evidence/grade
 boundary also supports an external runner: read each scenario's `prompt.txt`, use
-its installed skill and traced `bin/pkb`, and produce the evidence described
+its installed skill and traced `bin/groundray`, and produce the evidence described
 below. Another runner adapter can implement this boundary without changing the
 scenario grader. Preparation and grading alone do not launch model calls.
 
 Select smaller suites with repeated `--scenario` arguments:
 
 ```sh
-python -m evals.agent_cli prepare --cli /absolute/path/to/pkb \
-  --output /tmp/pkb-evals/scope --scenario named-brain
+python -m evals.agent_cli prepare --cli /absolute/path/to/groundray \
+  --output /tmp/groundray-evals/scope --scenario named-brain
 ```
 
 The default suite contains:
@@ -79,7 +79,7 @@ The default suite contains:
 
 ## Evidence and grading
 
-Every agent product command goes through the scenario's `bin/pkb` shim. The shim
+Every agent product command goes through the scenario's `bin/groundray` shim. The shim
 executes the selected real CLI, captures arguments, working directory, actual
 stdout/stderr, exit status, start/completion timestamps and elapsed time, and
 records digests of authoring input files. It preserves normal product output.
@@ -103,7 +103,7 @@ readable; `report.html` is a human view. Regrade preserved evidence after improv
 a deterministic check:
 
 ```sh
-python -m evals.agent_cli grade --output /tmp/pkb-evals/baseline
+python -m evals.agent_cli grade --output /tmp/groundray-evals/baseline
 ```
 
 A scenario passes only when its required observations pass. A successful runner
@@ -143,7 +143,7 @@ a filename.
 For a manually orchestrated agent, write a `runner.json` with `exit_code` and
 `timed_out`, a `final.json` matching the scenario schema, and Codex-shaped command
 events containing `item.type: command_execution`, `command`, `exit_code`, and
-`aggregated_output` for installed skill reads. Set `PKB_EVAL_ACTOR=agent` and put
+`aggregated_output` for installed skill reads. Set `GROUNDRAY_EVAL_ACTOR=agent` and put
 that scenario's `bin` first on PATH for its commands. Preserve all runner events;
 external adapters should translate their command observations into this small
 schema. Do not fabricate an observation unavailable from the runner.
@@ -154,12 +154,12 @@ Prepare and run separate fresh baseline and candidate directories against their
 actual artifacts. Their bundled skills are installed independently:
 
 ```sh
-python -m evals.agent_cli prepare --cli /absolute/path/to/candidate/pkb \
-  --output /tmp/pkb-evals/candidate
-python -m evals.agent_cli run --output /tmp/pkb-evals/candidate --jobs 2
+python -m evals.agent_cli prepare --cli /absolute/path/to/candidate/groundray \
+  --output /tmp/groundray-evals/candidate
+python -m evals.agent_cli run --output /tmp/groundray-evals/candidate --jobs 2
 python -m evals.agent_cli compare \
-  /tmp/pkb-evals/baseline/report.json \
-  /tmp/pkb-evals/candidate/report.json
+  /tmp/groundray-evals/baseline/report.json \
+  /tmp/groundray-evals/candidate/report.json
 ```
 
 Comparison joins by scenario/check ID and shows changed outcomes, including

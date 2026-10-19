@@ -7,17 +7,17 @@ from pathlib import Path
 import pytest
 from typer.testing import CliRunner
 
-from portable_kb import retrieval_eval
-from portable_kb.brains import add_brain
-from portable_kb.cli import app
-from portable_kb.retrieval_eval import (
+from groundray import retrieval_eval
+from groundray.brains import add_brain
+from groundray.cli import app
+from groundray.retrieval_eval import (
     EvaluationError,
     evaluate_retrieval,
     load_evaluation_labels,
     score_ranking,
 )
-from portable_kb.search import index_keyword_brain, search_keyword
-from portable_kb.settings import Settings, save_settings
+from groundray.search import index_keyword_brain, search_keyword
+from groundray.settings import Settings, save_settings
 
 LABELS = Path(__file__).parent / "fixtures/retrieval/reference-labels.json"
 REVIEW = "urn:uuid:0adaf3c7-c3e0-4cdc-85f4-90438dd72020"

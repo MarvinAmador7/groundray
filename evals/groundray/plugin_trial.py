@@ -23,7 +23,7 @@ def case(root: Path, role: str, plugin: Path, source: str, slug: str) -> dict:
     (work / 'response').mkdir(parents=True)
     (employee / 'bin').mkdir()
     (employee / 'gitconfig').write_text('[commit]\n\tgpgsign = false\n')
-    shim = employee / 'bin/pkb'
+    shim = employee / 'bin/groundray'
     shim.write_text(f'#!{sys.executable}\n' + (ROOT / 'evals/agent_cli/trace_cli.py').read_text())
     shim.chmod(0o755)
     environment = {'XDG_CONFIG_HOME': str(employee / 'config'),
@@ -33,11 +33,11 @@ def case(root: Path, role: str, plugin: Path, source: str, slug: str) -> dict:
                    'GIT_AUTHOR_EMAIL': 'agent@example.invalid',
                    'GIT_COMMITTER_NAME': 'Groundray synthetic agent',
                    'GIT_COMMITTER_EMAIL': 'agent@example.invalid',
-                   'GROUNDRAY_PKB': str(shim), 'NO_COLOR': '1'}
-    config = {'cli': str(plugin / 'runtime/pkb'), 'product_environment': environment,
+                   'GROUNDRAY_CLI': str(shim), 'NO_COLOR': '1'}
+    config = {'cli': str(plugin / 'runtime/groundray'), 'product_environment': environment,
               'trace_directory': str(employee / 'trace'), 'command_timeout': 180}
     (employee / 'bin/shim.json').write_text(json.dumps(config, indent=2) + '\n')
-    env = {**os.environ, **environment, 'PKB_EVAL_ACTOR': 'setup'}
+    env = {**os.environ, **environment, 'GROUNDRAY_EVAL_ACTOR': 'setup'}
     wrapper = plugin / 'scripts/groundray'
     for args in [['check'], ['setup', '--non-interactive', '--search-provider', 'builtin'],
                  ['brain', 'add', source, '--json'], ['brain', 'use', slug],
@@ -47,14 +47,14 @@ def case(root: Path, role: str, plugin: Path, source: str, slug: str) -> dict:
             raise RuntimeError(r.stderr)
     return {'role': role, 'case': str(employee), 'work': str(work), 'slug': slug,
             'input_snapshot': snapshot(work),
-            'installed_snapshot': snapshot(employee / 'data/portable-kb/brains' / slug)}
+            'installed_snapshot': snapshot(employee / 'data/groundray/brains' / slug)}
 
 
 def protocol(plugin: Path, task: str) -> str:
     return (f'Use the installed Groundray plugin at {plugin}. Read its '
             'skills/groundray/SKILL.md and skills/groundray-setup/SKILL.md, plus the bundled '
-            'Portable KB workflow they reference. Use its quoted absolute scripts/groundray '
-            'helper and actual CLI help. The explicit GROUNDRAY_PKB override records commands '
+            'Groundray workflow they reference. Use its quoted absolute scripts/groundray '
+            'helper and actual CLI help. The explicit GROUNDRAY_CLI override records commands '
             'and delegates the installed bundled executable; it does not replace it with a fake. '
             'This is a fictional company exercise. Supplied approvals are fictional records, '
             'not newly obtained real human approvals.\n\n' + task + '\n\n'
@@ -97,7 +97,7 @@ def prepare(output: Path, plugin: Path) -> dict:
     (work / 'prompt.txt').write_text(protocol(plugin, task))
     manifest = {'suite': 'groundray-plugin-handoff-v1', 'synthetic': True, 'plugin': str(plugin),
                 'source': remote.as_uri(), 'base_commit': git(remote, 'rev-parse', 'main'),
-                'runtime_sha256': digest(plugin / 'runtime/pkb'), 'engine_commit': git(ROOT, 'rev-parse', 'HEAD'),
+                'runtime_sha256': digest(plugin / 'runtime/groundray'), 'engine_commit': git(ROOT, 'rev-parse', 'HEAD'),
                 'native_activation_tested': False, 'human_participants': 0, 'cases': cases,
                 'plugin_snapshot': snapshot(plugin), 'scope': 'Explicit installed-plugin reads; protocol-only isolation'}
     (output / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')

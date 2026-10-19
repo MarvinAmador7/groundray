@@ -11,9 +11,9 @@ from pathlib import Path
 from uuid import uuid4
 
 from evals.agent_cli.harness import write_json
-from portable_kb.authoring import KnowledgeType, body_template
-from portable_kb.indexes import generate_indexes
-from portable_kb.serialization import quoted, render_concept
+from groundray.authoring import KnowledgeType, body_template
+from groundray.indexes import generate_indexes
+from groundray.serialization import quoted, render_concept
 
 VERSION = 1
 AS_OF = "2026-10-08"
@@ -616,7 +616,7 @@ def emit(world: dict, output: Path) -> dict:
     output.mkdir(parents=True)
     content = pages(world)
     identities = {p: "urn:uuid:" + str(uuid4()) for p in content}
-    native, wiki = output / "portable-kb/knowledge", output / "wiki"
+    native, wiki = output / "groundray/knowledge", output / "wiki"
     native.mkdir(parents=True)
     wiki.mkdir()
     config = Path(__file__).resolve().parents[2] / "tests/fixtures/reference-bundle/.core-kb.yaml"
@@ -636,7 +636,7 @@ def emit(world: dict, output: Path) -> dict:
             "created_at": quoted("2026-10-01T00:00:00Z"),
             "updated_at": quoted("2026-10-02T00:00:00Z"),
             "generated": {
-                "by": "portable-kb/logistics-fixture",
+                "by": "groundray/logistics-fixture",
                 "at": quoted("2026-10-02T00:00:00Z"),
                 "method": "agent-generated",
             },

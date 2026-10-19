@@ -16,7 +16,7 @@ Every finding should include:
 - safe remediation guidance; and
 - whether the rule is baseline OKF or `core-kb/0.1`.
 
-The validator is implemented by the `portable_kb` Python API. It is read-only,
+The validator is implemented by the `groundray` Python API. It is read-only,
 offline, and deterministic for an explicit bundle, schema, date, and optional
 base tree.
 

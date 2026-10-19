@@ -41,12 +41,12 @@ def audit_case(case: Path, plugin: Path) -> dict:
             'answer_matches_final': answer.read_text() == final.get('answer'),
             'installed_skill_reads': {p: (plugin / p).read_text() in observed for p in
                                      ['skills/groundray/SKILL.md', 'skills/groundray-setup/SKILL.md',
-                                      'skills/groundray/references/portable-kb/SKILL.md']},
-            'runtime_sha256': digest(plugin / 'runtime/pkb'),
+                                      'skills/groundray/references/storage/SKILL.md']},
+            'runtime_sha256': digest(plugin / 'runtime/groundray'),
             'artifacts': final.get('artifacts', {})}
 
 
 def audit_inputs(case: Path, info: dict) -> dict:
     slug = info['slug']
-    installed = case / 'data/portable-kb/brains' / slug
+    installed = case / 'data/groundray/brains' / slug
     return {'installed_files_unchanged': snapshot(installed) == info['installed_snapshot']}

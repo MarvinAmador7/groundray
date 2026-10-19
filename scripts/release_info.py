@@ -12,7 +12,7 @@ VERSION_PATTERN = re.compile(r'^__version__ = "([0-9]+\.[0-9]+\.[0-9]+)"$', re.M
 def read_version(repository: Path) -> str:
     """Return the release version declared by the package."""
 
-    source = (repository / "src/portable_kb/__init__.py").read_text(encoding="utf-8")
+    source = (repository / "src/groundray/__init__.py").read_text(encoding="utf-8")
     match = VERSION_PATTERN.search(source)
     if match is None:
         raise ValueError("__version__ must be a stable X.Y.Z release version")

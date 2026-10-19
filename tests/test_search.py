@@ -6,17 +6,17 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb.brains import add_brain, sync_brain
-from portable_kb.parsing import discover_concepts, parse_concept
-from portable_kb.search import (
+from groundray.brains import add_brain, sync_brain
+from groundray.parsing import discover_concepts, parse_concept
+from groundray.search import (
     SearchError,
     get_knowledge_item,
     index_keyword_brain,
     qmd_status,
     search_keyword,
 )
-from portable_kb.search_provider import SearchHit
-from portable_kb.settings import Settings
+from groundray.search_provider import SearchHit
+from groundray.settings import Settings
 
 
 def _installed_settings(
@@ -109,7 +109,7 @@ def test_keyword_search_refuses_missing_stale_and_unsafe_results(
 ) -> None:
     settings, source = _installed_settings(tmp_path, brain_repo_factory, fake_qmd)
     _executable, _log, results_file = fake_qmd
-    with pytest.raises(SearchError, match="missing.*pkb search index search-brain"):
+    with pytest.raises(SearchError, match="missing.*groundray search index search-brain"):
         search_keyword(settings, "knowledge", as_of="2026-08-12")
 
     index_keyword_brain(settings, as_of="2026-08-12")
@@ -136,7 +136,7 @@ def test_keyword_search_refuses_missing_stale_and_unsafe_results(
     _git(source, "add", "brain.yaml")
     _git(source, "commit", "--quiet", "-m", "Update searchable brain")
     sync_brain(settings, as_of="2026-08-12")
-    with pytest.raises(SearchError, match="stale.*pkb search index search-brain"):
+    with pytest.raises(SearchError, match="stale.*groundray search index search-brain"):
         search_keyword(settings, "knowledge", as_of="2026-08-12")
 
 
@@ -262,7 +262,7 @@ def _git(repository: Path, *arguments: str) -> None:
 def test_alternative_provider_uses_shared_governance_and_citations(
     tmp_path: Path, brain_repo_factory, fake_qmd, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    from portable_kb import search
+    from groundray import search
 
     settings, _source = _installed_settings(tmp_path, brain_repo_factory, fake_qmd)
     indexed = index_keyword_brain(settings, as_of="2026-08-12")

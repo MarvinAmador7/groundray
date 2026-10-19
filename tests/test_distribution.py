@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb import __version__
+from groundray import __version__
 
 
 @pytest.mark.parametrize("stale", ["code", "skill", "missing-module", "schema"])
@@ -27,8 +27,8 @@ def test_standalone_build_rejects_stale_installed_inputs(tmp_path: Path, stale: 
     spec.loader.exec_module(module)
     repository, installed = tmp_path / "repository", tmp_path / "installed"
     pairs = (
-        ("src/portable_kb/links.py", "links.py"),
-        (".agents/skills/portable-kb/SKILL.md", "skills/portable-kb/SKILL.md"),
+        ("src/groundray/links.py", "links.py"),
+        (".agents/skills/groundray-storage/SKILL.md", "skills/groundray-storage/SKILL.md"),
         ("schemas/knowledge-item.schema.yaml", "schemas/knowledge-item.schema.yaml"),
     )
     for source, target in pairs:
@@ -37,7 +37,7 @@ def test_standalone_build_rejects_stale_installed_inputs(tmp_path: Path, stale: 
             path.write_text("current build input\n")
     module.require_current_package(repository, installed)
     target = installed / {"code": "links.py", "missing-module": "links.py",
-                          "skill": "skills/portable-kb/SKILL.md",
+                          "skill": "skills/groundray-storage/SKILL.md",
                           "schema": "schemas/knowledge-item.schema.yaml"}[stale]
     if stale == "missing-module":
         target.unlink()
@@ -78,9 +78,9 @@ def _write_fake_release(
 ) -> tuple[Path, Path]:
     release = root / f"v{__version__}"
     release.mkdir(parents=True, exist_ok=True)
-    archive = release / f"pkb-v{__version__}-{_release_target()}.tar.gz"
-    executable = f"#!/bin/sh\necho 'pkb {executable_version}'\n".encode()
-    info = tarfile.TarInfo("pkb")
+    archive = release / f"groundray-cli-v{__version__}-{_release_target()}.tar.gz"
+    executable = f"#!/bin/sh\necho 'groundray {executable_version}'\n".encode()
+    info = tarfile.TarInfo("groundray")
     info.mode = 0o755
     info.size = len(executable)
     with tarfile.open(archive, "w:gz") as bundle:
@@ -102,9 +102,9 @@ def test_installer_verifies_release_preserves_failure_and_uninstalls(tmp_path: P
     thread.start()
     install_dir = tmp_path / "bin"
     environment = _subprocess_environment(
-        PKB_INSTALL_DIR=str(install_dir),
-        PKB_RELEASE_BASE_URL=f"http://127.0.0.1:{server.server_port}",
-        PKB_VERSION=__version__,
+        GROUNDRAY_BIN_DIR=str(install_dir),
+        GROUNDRAY_RELEASE_BASE_URL=f"http://127.0.0.1:{server.server_port}",
+        GROUNDRAY_VERSION=__version__,
     )
     try:
         installed = subprocess.run(
@@ -114,8 +114,8 @@ def test_installer_verifies_release_preserves_failure_and_uninstalls(tmp_path: P
             text=True,
             env=environment,
         )
-        assert f"Installed pkb {__version__}" in installed.stdout
-        target = install_dir / "pkb"
+        assert f"Installed groundray {__version__}" in installed.stdout
+        target = install_dir / "groundray"
         original = target.read_bytes()
 
         checksums.write_text(f"{'0' * 64}  {archive.name}\n", encoding="utf-8")
@@ -162,10 +162,10 @@ def test_release_version_matches_cli() -> None:
     assert release.stdout == f"version={__version__}\ntag=v{__version__}\n"
 
     cli = subprocess.run(
-        [sys.executable, "-m", "portable_kb", "--version"],
+        [sys.executable, "-m", "groundray", "--version"],
         check=True,
         capture_output=True,
         text=True,
         env=_subprocess_environment(),
     )
-    assert cli.stdout.strip() == f"pkb {__version__}"
+    assert cli.stdout.strip() == f"groundray {__version__}"

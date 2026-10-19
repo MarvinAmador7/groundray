@@ -11,14 +11,14 @@ from pathlib import Path
 import pytest
 from typer.testing import CliRunner
 
-from portable_kb.authoring import (
+from groundray.authoring import (
     ConfidenceLevel,
     GenerationMethod,
     KnowledgeType,
     plan_knowledge_create,
     save_knowledge_create,
 )
-from portable_kb.brains import (
+from groundray.brains import (
     BrainError,
     add_brain,
     init_brain,
@@ -26,10 +26,10 @@ from portable_kb.brains import (
     sync_brain,
     use_brain,
 )
-from portable_kb.cli import app
-from portable_kb.search import SearchError
-from portable_kb.settings import Settings, save_settings
-from portable_kb.sources import (
+from groundray.cli import app
+from groundray.search import SearchError
+from groundray.settings import Settings, save_settings
+from groundray.sources import (
     CAPTURE_ATTRIBUTES,
     MAX_SOURCE_BYTES,
     SourceError,
@@ -153,7 +153,7 @@ def test_commit_failure_rolls_back_exact_owned_files_and_index(company, monkeypa
         git(repository, "add", "knowledge")
         raise OSError("simulated commit failure")
 
-    monkeypatch.setattr("portable_kb.sources.commit_authoring_changes", fail)
+    monkeypatch.setattr("groundray.sources.commit_authoring_changes", fail)
     with pytest.raises(OSError, match="simulated"):
         save_source_capture(settings, plan, as_of=TODAY)
     assert git(repository, "rev-parse", "HEAD") == before
@@ -169,7 +169,7 @@ def test_refresh_failure_keeps_local_commit_and_prior_install(company, monkeypat
     def fail(*args, **kwargs):
         raise OSError("simulated activation failure")
 
-    monkeypatch.setattr("portable_kb.sources.refresh_brain_from_authoring", fail)
+    monkeypatch.setattr("groundray.sources.refresh_brain_from_authoring", fail)
     with pytest.raises(SourceError, match="saved locally at"):
         save_source_capture(settings, plan, as_of=TODAY)
     assert load_catalog(settings).get("company").commit == previous
@@ -409,7 +409,7 @@ def test_changed_committed_receipt_is_detected_before_activation(company, monkey
     settings, repository, original = company
     previous = load_catalog(settings).get("company").commit
     plan = plan_source_capture(settings, original, as_of=TODAY)
-    from portable_kb.brains import commit_authoring_changes
+    from groundray.brains import commit_authoring_changes
 
     def replace_receipt(*args, **kwargs):
         receipt = repository / "knowledge" / (plan.path + ".capture.json")
@@ -418,7 +418,7 @@ def test_changed_committed_receipt_is_detected_before_activation(company, monkey
         receipt.write_text(json.dumps(value))
         return commit_authoring_changes(*args, **kwargs)
 
-    monkeypatch.setattr("portable_kb.sources.commit_authoring_changes", replace_receipt)
+    monkeypatch.setattr("groundray.sources.commit_authoring_changes", replace_receipt)
     with pytest.raises(SourceError, match="planned capture/receipt bytes"):
         save_source_capture(settings, plan, as_of=TODAY)
     assert load_catalog(settings).get("company").commit == previous

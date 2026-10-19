@@ -2,7 +2,7 @@
 
 ## Boundary
 
-`pkb` is a consumer of the deterministic `portable_kb` Python API. The CLI and
+`groundray` is a consumer of the deterministic `groundray` Python API. The CLI and
 terminal prompts must not duplicate schema, validation, lifecycle, or authority
 logic. Canonical knowledge remains in Git-versioned Markdown. Local settings,
 repository checkouts, QMD indexes, downloaded models, and query caches are
@@ -27,7 +27,7 @@ contract.
 Interactive setup runs as a sequence of inline terminal prompts:
 
 ```console
-pkb setup
+groundray setup
 ```
 
 The prompt sequence has five explicit steps:
@@ -44,7 +44,7 @@ an alternate screen or render a full-screen application. Arrow keys select
 search and agent choices, while paths use ordinary editable prompts.
 
 The recommended default installs the same skill for both agents. Selecting
-skip saves only the Portable KB configuration. Skill installation copies the
+skip saves only the Groundray configuration. Skill installation copies the
 bundled workflow; it does not clone a brain or place business knowledge inside
 an agent configuration directory.
 
@@ -52,12 +52,12 @@ Every setup choice has a non-interactive equivalent so agents, scripts, and
 managed environments never need to drive terminal pixels:
 
 ```console
-pkb setup \
+groundray setup \
   --non-interactive \
   --search-mode keyword \
   --agent-skill both \
-  --data-dir /approved/portable-kb/data \
-  --cache-dir /approved/portable-kb/cache
+  --data-dir /approved/groundray/data \
+  --cache-dir /approved/groundray/cache
 ```
 
 Non-interactive setup refuses to replace an existing configuration unless
@@ -69,7 +69,7 @@ setup prints the selected settings and saves only after confirmation.
 
 New setup selects builtin Tantivy, which supports keyword mode only. Existing
 QMD settings remain intact. QMD's documented commands separate BM25
-keyword search, vector search, and full hybrid search. Portable KB exposes
+keyword search, vector search, and full hybrid search. Groundray exposes
 those capabilities as product tiers rather than forcing the maximum footprint
 on every user.
 
@@ -89,28 +89,28 @@ requirements are documented in the [QMD repository](https://github.com/tobi/qmd)
 
 Defaults follow XDG conventions:
 
-- configuration: `$XDG_CONFIG_HOME/portable-kb/config.yaml` or
-  `~/.config/portable-kb/config.yaml`;
-- brain checkouts: `$XDG_DATA_HOME/portable-kb` or
-  `~/.local/share/portable-kb`; and
-- disposable state: `$XDG_CACHE_HOME/portable-kb` or
-  `~/.cache/portable-kb`.
+- configuration: `$XDG_CONFIG_HOME/groundray/config.yaml` or
+  `~/.config/groundray/config.yaml`;
+- brain checkouts: `$XDG_DATA_HOME/groundray` or
+  `~/.local/share/groundray`; and
+- disposable state: `$XDG_CACHE_HOME/groundray` or
+  `~/.cache/groundray`.
 
 The settings file is written atomically with owner-only permissions. Safe YAML
 loading rejects unknown structure and executable tags. Configuration paths
 that are symbolic links are rejected rather than followed during writes.
 
-QMD configuration is generated locally. Portable KB does not execute a
+QMD configuration is generated locally. Groundray does not execute a
 repository-supplied QMD `update` command or treat imported instructions as
 authorization. Git synchronization uses bounded commands owned by the CLI.
 
 ## Automation and diagnostics
 
-`pkb doctor` performs read-only local checks. `--json` is the stable direction
+`groundray doctor` performs read-only local checks. `--json` is the stable direction
 for agent and future application consumption:
 
 ```console
-pkb doctor --json
+groundray doctor --json
 ```
 
 The diagnostic checks settings structure, Git availability, the configured QMD
@@ -136,7 +136,7 @@ The brain ID is immutable UUID v4 identity for the distribution unit. The slug
 is its local command name. The bundle path is fixed to `knowledge` in schema
 version 1 so repositories cannot redirect consumers to arbitrary filesystem
 locations. `brain.yaml` is a product/distribution artifact, not an OKF concept.
-The Portable KB CLI source repository intentionally has no manifest or root
+The Groundray CLI source repository intentionally has no manifest or root
 bundle; initialize each business brain in a separate repository.
 
 ## Installation catalog
@@ -144,15 +144,15 @@ bundle; initialize each business brain in a separate repository.
 The first Git-backed commands are:
 
 ```console
-pkb brain init
-pkb brain init <empty-local-path> --name <name> --slug <slug> --no-publish
-pkb brain publish [<slug>] --to <org/repo> [--visibility private|internal|public]
-pkb brain add <local-path-or-git-url>
-pkb brain list [--json]
-pkb brain use <slug>
-pkb brain remove <slug> [--force] [--json]
-pkb brain status [<slug>] [--json]
-pkb brain sync [<slug>] [--json]
+groundray brain init
+groundray brain init <empty-local-path> --name <name> --slug <slug> --no-publish
+groundray brain publish [<slug>] --to <org/repo> [--visibility private|internal|public]
+groundray brain add <local-path-or-git-url>
+groundray brain list [--json]
+groundray brain use <slug>
+groundray brain remove <slug> [--force] [--json]
+groundray brain status [<slug>] [--json]
+groundray brain sync [<slug>] [--json]
 ```
 
 `brain init` handles an empty repository before `brain add` can possibly work.
@@ -171,7 +171,7 @@ for an `org/repo` target and visibility, defaulting to private. Publishing uses
 the already authenticated `gh` CLI to create the repository, then pushes with
 Git hooks and credential prompts disabled. A publication failure never removes
 or invalidates the local repository; the user can authenticate or resolve the
-error and retry with `pkb brain publish --to org/repo`.
+error and retry with `groundray brain publish --to org/repo`.
 
 For automation, provide the local path, `--name`, and `--slug`. `--no-publish`
 suppresses the terminal publication question, while `--publish-to org/repo`
@@ -180,7 +180,7 @@ URLs are not accepted by `brain init`; existing remote brains still use
 `brain add`.
 
 If no Git author identity is configured, the initial mechanical commit uses
-the fallback `Portable KB <portable-kb@localhost.invalid>` identity without
+the fallback `Groundray <groundray@localhost.invalid>` identity without
 changing user Git settings. After publication, the catalog and installed
 checkout origin are updated to the new remote while the local authoring
 repository remains available for continued knowledge work.
@@ -214,7 +214,7 @@ indexes. Active native reader leases block removal, including `--force`. It pres
 a remote. A dirty installed snapshot fails closed unless `--force` is explicit.
 Removing the active brain leaves no active selection rather than guessing which
 business worldview should replace it. The exact retired demo identity is
-reported by `pkb doctor` with this removal command as migration guidance.
+reported by `groundray doctor` with this removal command as migration guidance.
 
 `brain sync` is an explicit, foreground-only fast-forward operation. With no
 slug it targets the active brain. It performs this bounded sequence:
@@ -248,7 +248,7 @@ rebuilt from installed and local authoring repositories.
 The first lifecycle CLI command creates drafts only:
 
 ```console
-pkb knowledge create
+groundray knowledge create
 ```
 
 The interactive path selects the type, production method, real producer
@@ -261,23 +261,23 @@ checks its identity and ancestry against the installed pin, and calls the core
 `plan_create` operation. Planning happens in a temporary tree and validates the
 base bundle, proposed bundle, transition, generated indexes, and log entry. The
 CLI then prints the proposed file diffs and asks once before saving.
-Portable KB commits only those planned files to local history and refreshes the
+Groundray commits only those planned files to local history and refreshes the
 installed read-only snapshot automatically. The Git mechanism stays internal:
-users do not run `git status`, `git add`, `git commit`, or `pkb brain sync`.
+users do not run `git status`, `git add`, `git commit`, or `groundray brain sync`.
 Draft creation never creates stable knowledge or pushes to the organization.
 The retained authoring repository must be on `main`; a feature branch or
 detached checkout is rejected before planning so an agent cannot strand saved
 knowledge on an unrelated development branch.
 
-Generated navigation is bounded by `<!-- portable-kb:index:start -->` and
-`<!-- portable-kb:index:end -->`. Index titles, scope explanations, and other
+Generated navigation is bounded by `<!-- groundray:index:start -->` and
+`<!-- groundray:index:end -->`. Index titles, scope explanations, and other
 human-authored text outside those markers remain byte-for-byte intact while
-Portable KB adds, moves, or removes navigation entries.
+Groundray adds, moves, or removes navigation entries.
 
 Agents and automation provide the complete inputs directly:
 
 ```console
-pkb knowledge create \
+groundray knowledge create \
   --type procedure \
   --title "Review stale knowledge" \
   --description "Defines the draft workflow for reviewing stale knowledge." \
@@ -316,7 +316,7 @@ operation generates identity and governed metadata exactly once.
 Agents can revise an existing item by immutable ID or bundle-relative path:
 
 ```console
-pkb knowledge update "urn:uuid:..." \
+groundray knowledge update "urn:uuid:..." \
   --actor "openai/codex" \
   --method agent-generated \
   --body-file ./revised-body.md \
@@ -350,7 +350,7 @@ version. Updating locally never authorizes organization publication.
 Rename or relocate one existing item by UUID or bundle-relative path:
 
 ```console
-pkb knowledge move "urn:uuid:..." "procedures/client-export-runbook.md" \
+groundray knowledge move "urn:uuid:..." "procedures/client-export-runbook.md" \
   --brain team --json
 ```
 
@@ -383,7 +383,7 @@ After an initialized brain has been published once, an explicitly authorized
 agent can share the active saved version with:
 
 ```console
-pkb brain push --json
+groundray brain push --json
 ```
 
 This is a separate authority boundary from local draft creation. The command
@@ -396,7 +396,7 @@ or infer permission from draft creation.
 
 If the organization is ahead or histories diverge, the command stops without
 changing either side. Other installations continue to receive explicitly
-published versions with `pkb brain sync --json`.
+published versions with `groundray brain sync --json`.
 
 ## Keyword index and search
 
@@ -404,14 +404,14 @@ New setup selects the bundled Tantivy engine (`builtin`) for model-free keyword
 search. Existing QMD configurations remain unchanged. To choose explicitly:
 
 ```console
-pkb setup --search-provider builtin
-pkb setup --search-provider qmd
+groundray setup --search-provider builtin
+groundray setup --search-provider qmd
 ```
 
 Non-interactive setup also accepts `--search-provider` and `--search-command`.
 Builtin supports keyword mode only. The standalone release embeds the sidecar;
-Python-wheel installations need `pkb-search` on PATH or an explicit command.
-Switching provider requires `pkb search index` for the selected provider.
+Python-wheel installations need `groundray-search` on PATH or an explicit command.
+Switching provider requires `groundray search index` for the selected provider.
 
 Builtin indexes normalized sections in `<cache>/search/builtin/<slug>/` using
 immutable generations and atomic publication. Native hits include byte offsets
@@ -423,14 +423,14 @@ hold generation leases. See [native storage](native-index-recovery.md).
 
 The same index/query/evaluation commands work with either provider. For QMD:
 
-QMD must already resolve through the configured command; Portable KB does not
+QMD must already resolve through the configured command; Groundray does not
 install it automatically. Versions `>=2.5.0,<3.0.0` are accepted, and CI runs
 the adapter against pinned `@tobilu/qmd@2.8.3`. The implemented model-free
 commands are:
 
 ```console
-pkb search index [<slug>] [--json]
-pkb search query <keywords> [--brain <slug>] [-n <limit>] [--json]
+groundray search index [<slug>] [--json]
+groundray search query <keywords> [--brain <slug>] [-n <limit>] [--json]
 ```
 
 `search index` first requires a clean, identity-matched, catalog-pinned, valid
@@ -459,7 +459,7 @@ Evaluate an already indexed brain with explicit JSON relevance labels and an
 explicit validation date:
 
 ```console
-pkb search evaluate labels.json --brain <slug> --as-of 2026-08-17 --repeat 2
+groundray search evaluate labels.json --brain <slug> --as-of 2026-08-17 --repeat 2
 ```
 
 This command emits a JSON report with item-level precision at 5, recall at 10,
@@ -479,7 +479,7 @@ from. The read-only retrieval command accepts either an immutable UUID URN or a
 bundle-relative Markdown path:
 
 ```console
-pkb get <item-id-or-path> [--brain <slug>] [--json]
+groundray get <item-id-or-path> [--brain <slug>] [--json]
 ```
 
 The command first rechecks that the installed brain is clean, identity-matched,
@@ -491,9 +491,9 @@ immutable citation containing brain ID/slug, commit, item ID, and path.
 Reserved navigation and history documents are retrieved by explicit bundle path:
 
 ```console
-pkb get index.md --brain team --json
-pkb get log.md --brain team --json
-pkb get inbox/procedures/index.md --brain team --json
+groundray get index.md --brain team --json
+groundray get log.md --brain team --json
+groundray get inbox/procedures/index.md --brain team --json
 ```
 
 These responses contain `document: {kind, path, content}` instead of `item`.
@@ -517,10 +517,10 @@ The draft Groundray branch implements plan-first UTF-8 capture and pinned raw-so
 reading (not yet in a tagged release):
 
 ```console
-pkb source capture ./original.md --actor openai/codex --brain team --json
-pkb source capture ./original.md --actor openai/codex --brain team --apply --json
-pkb source get references/captures/original.md.txt --brain team --json
-pkb source get wiki/customer-pricing.md owner --brain team --json
+groundray source capture ./original.md --actor openai/codex --brain team --json
+groundray source capture ./original.md --actor openai/codex --brain team --apply --json
+groundray source get references/captures/original.md.txt --brain team --json
+groundray source get wiki/customer-pricing.md owner --brain team --json
 ```
 
 Captures keep original bytes, add an adjacent capture receipt and save locally.
@@ -534,18 +534,18 @@ Capturing does not certify original authorship or business approval. See
 
 ## Agent skill distribution
 
-The CLI bundles one canonical `portable-kb` skill and can copy it to the
+The CLI bundles one canonical `groundray` skill and can copy it to the
 user-level discovery paths used by Codex and Claude Code:
 
 ```console
-pkb skill install
-pkb skill install --target codex
-pkb skill install --target claude
-pkb skill status [--target codex|claude|both] [--json]
+groundray skill install
+groundray skill install --target codex
+groundray skill install --target claude
+groundray skill status [--target codex|claude|both] [--json]
 ```
 
-The default installs both `~/.agents/skills/portable-kb` and
-`~/.claude/skills/portable-kb`. An identical installation is left untouched and
+The default installs both `~/.agents/skills/groundray-storage` and
+`~/.claude/skills/groundray-storage`. An identical installation is left untouched and
 reported as current. A conflicting installation is never replaced unless
 `--force` is explicit. Multi-target installation stages all changed copies and
 restores prior installations if publication fails.
@@ -583,9 +583,9 @@ canonical outcomes, and comparing baseline and candidate reports.
 
 ## Links and backlinks
 
-`pkb links <UUID|path|slug> --brain <slug> --json` lists outgoing concept links;
-`pkb backlinks` lists inbound occurrences. Both retain pinned citations, expose
-unresolved draft targets and require no keyword index. `pkb get` also accepts
+`groundray links <UUID|path|slug> --brain <slug> --json` lists outgoing concept links;
+`groundray backlinks` lists inbound occurrences. Both retain pinned citations, expose
+unresolved draft targets and require no keyword index. `groundray get` also accepts
 unique slugs and `[[wikilinks]]`; `--markdown-links` adds a derived standard
 Markdown view while keeping canonical JSON content unchanged. See
 [link syntax, diagnostics, and move behavior](links.md).

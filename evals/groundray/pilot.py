@@ -94,7 +94,7 @@ def probe_native(case: Path, codex: Path, timeout: int) -> dict:
         raise ValueError('Native attempt already exists; preserve the original session')
     config = json.loads((case / 'bin/shim.json').read_text())
     prompt = (case / 'work/native-prompt.txt').read_text()
-    env = {**os.environ, **config['product_environment'], 'PKB_EVAL_ACTOR': 'agent'}
+    env = {**os.environ, **config['product_environment'], 'GROUNDRAY_EVAL_ACTOR': 'agent'}
     argv = [str(codex), 'exec', '--ephemeral', '--json', '--sandbox', 'workspace-write',
             '--add-dir', str(case), '--skip-git-repo-check', '-C', str(case / 'work'),
             '--output-last-message', str(case / 'native-answer.md'), '-']

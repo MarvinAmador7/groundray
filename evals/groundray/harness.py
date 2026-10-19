@@ -291,7 +291,7 @@ def report(root: Path) -> dict:
             "Observed full text is an exposure proxy, not proof of comprehension.",
             "Navigation checks link presence, not the meaning of dependency prose; manual review required.",
             "Sources are supplied fictional records, not authenticated company records.",
-            "Both arms use ordinary Markdown file tools; this does not evaluate the Portable KB CLI.",
+            "Both arms use ordinary Markdown file tools; this does not evaluate the Groundray CLI.",
         ],
     }
 

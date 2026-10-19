@@ -25,7 +25,7 @@ BRIDGE = """## Packaged storage workflow
 
 Resolve `../../scripts/groundray` relative to this skill and run its `check` once
 before company operations. Use that quoted absolute executable wherever the
-bundled [Portable KB workflow](references/portable-kb/SKILL.md) says `pkb`.
+bundled [Groundray workflow](references/storage/SKILL.md) says `groundray`.
 Read that workflow for setup, retrieval, source capture, edits, proposals, review
 and publication. Use the supplied runtime; report compatibility failures rather
 than guessing a replacement. For first installation use the bundled
@@ -48,7 +48,7 @@ def sync_skills(repository: Path = ROOT) -> None:
     plugin = repository / "plugins/groundray"
     destination = plugin / "skills/groundray"
     sources = repository / ".agents/skills"
-    for root in (plugin, sources / "groundray-lite", sources / "portable-kb"):
+    for root in (plugin, sources / "groundray-lite", sources / "groundray-storage"):
         if root.is_symlink() or any(p.is_symlink() for p in root.rglob("*")):
             raise ValueError("Plugin and skill inputs must not contain symlinks")
     destination.mkdir(parents=True, exist_ok=True)
@@ -56,12 +56,12 @@ def sync_skills(repository: Path = ROOT) -> None:
     text = text.replace("name: groundray-lite\n", "name: groundray\n", 1)
     text = text.replace("# Groundray: show why\n\n", "# Groundray: show why\n\n" + BRIDGE, 1)
     (destination / "SKILL.md").write_text(text)
-    storage = destination / "references/portable-kb"
+    storage = destination / "references/storage"
     storage.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(sources / "portable-kb/SKILL.md", storage / "SKILL.md")
+    shutil.copyfile(sources / "groundray-storage/SKILL.md", storage / "SKILL.md")
     references = storage / "references"
     references.mkdir(exist_ok=True)
-    for p in sorted((sources / "portable-kb/references").glob("*.md")):
+    for p in sorted((sources / "groundray-storage/references").glob("*.md")):
         shutil.copyfile(p, references / p.name)
 
 
@@ -111,24 +111,24 @@ def build(output: Path, cli: Path, repository: Path = ROOT) -> dict:
         runtime = packaged / "runtime"
         runtime.mkdir()
         (packaged / ".bundled-runtime").write_text("Bundled runtime required; no implicit PATH fallback.\n")
-        shutil.copyfile(cli, runtime / "pkb")
-        (runtime / "pkb").chmod(0o755)
-        if native_target(runtime / "pkb") != target:
+        shutil.copyfile(cli, runtime / "groundray")
+        (runtime / "groundray").chmod(0o755)
+        if native_target(runtime / "groundray") != target:
             raise ValueError("Native input changed while staging")
-        version = subprocess.run([str(runtime / "pkb"), "--version"], check=True,
+        version = subprocess.run([str(runtime / "groundray"), "--version"], check=True,
                                  text=True, capture_output=True, timeout=30).stdout.strip()
-        if re.fullmatch(r"pkb 0\.2\.\d+", version) is None:
-            raise ValueError("Groundray supports the 0.2.x CLI with required capabilities")
-        if "-" not in manifest["version"] and manifest["version"] != version.removeprefix("pkb "):
+        if re.fullmatch(r"groundray 0\.3\.\d+", version) is None:
+            raise ValueError("Groundray supports the 0.3.x CLI with required capabilities")
+        if "-" not in manifest["version"] and manifest["version"] != version.removeprefix("groundray "):
             raise ValueError("Stable Groundray and CLI versions must match to invalidate host caches")
-        environment = {**os.environ, "GROUNDRAY_PKB": str(runtime / "pkb")}
+        environment = {**os.environ, "GROUNDRAY_CLI": str(runtime / "groundray")}
         subprocess.run([str(packaged / "scripts/groundray"), "check"], check=True,
                        capture_output=True, text=True, timeout=180, env=environment)
-        cli_hash = hashlib.sha256((runtime / "pkb").read_bytes()).hexdigest()
-        (runtime / "SHA256SUMS").write_text(f"{cli_hash}  pkb\n")
+        cli_hash = hashlib.sha256((runtime / "groundray").read_bytes()).hexdigest()
+        (runtime / "SHA256SUMS").write_text(f"{cli_hash}  groundray\n")
         info = {"plugin_version": manifest["version"], "cli_version": version,
                 "target": target, "cli_sha256": cli_hash,
-                "cli_compatibility": "0.2.x with registered-command check or legacy help probes"}
+                "cli_compatibility": "0.3.x with registered-command check or explicit help probes"}
         (runtime / "build.json").write_text(json.dumps(info, indent=2) + "\n")
         catalog = json.loads((repository / ".agents/plugins/marketplace.json").read_text())
         (stage / ".agents/plugins").mkdir(parents=True)
@@ -138,7 +138,7 @@ def build(output: Path, cli: Path, repository: Path = ROOT) -> dict:
         with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as bundle:
             for p in files:
                 bundle.write(p, p.relative_to(stage).as_posix())
-        release_archive = stage / f"groundray-v{version.removeprefix('pkb ')}-{target}.tar.gz"
+        release_archive = stage / f"groundray-v{version.removeprefix('groundray ')}-{target}.tar.gz"
         with tarfile.open(release_archive, "w:gz") as bundle:
             for p in files:
                 bundle.add(p, arcname=p.relative_to(stage).as_posix(), recursive=False)

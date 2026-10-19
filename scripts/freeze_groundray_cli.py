@@ -9,7 +9,7 @@ from pathlib import Path
 
 from build_standalone import require_current_package
 
-import portable_kb
+import groundray
 
 
 def main():
@@ -18,7 +18,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
-    require_current_package(root, Path(portable_kb.__file__).resolve().parent)
+    require_current_package(root, Path(groundray.__file__).resolve().parent)
     if args.output.exists() or args.output.is_symlink():
         parser.error('Use a new output directory; previous builds are preserved')
     native = args.native.absolute()
@@ -27,12 +27,12 @@ def main():
     output = args.output.absolute()
     output.mkdir(parents=True)
     subprocess.run([sys.executable, '-m', 'PyInstaller', '--clean', '--noconfirm',
-                    '--onefile', '--name', 'pkb', '--distpath', str(output / 'dist'),
+                    '--onefile', '--name', 'groundray', '--distpath', str(output / 'dist'),
                     '--workpath', str(output / 'work'), '--specpath', str(output / 'spec'),
-                    '--add-binary', f'{native}{os.pathsep}.', '--collect-data', 'portable_kb',
-                    '--copy-metadata', 'portable-kb-core', str(root / 'scripts/frozen_entrypoint.py')],
+                    '--add-binary', f'{native}{os.pathsep}.', '--collect-data', 'groundray',
+                    '--copy-metadata', 'groundray', str(root / 'scripts/frozen_entrypoint.py')],
                    cwd=output, check=True)
-    print(output / 'dist/pkb')
+    print(output / 'dist/groundray')
 
 
 if __name__ == '__main__':

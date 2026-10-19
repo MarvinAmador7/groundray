@@ -3,19 +3,19 @@
 The [Atlas Logistics baseline](logistics-benchmark.md) gave both approaches
 8/8 successful tasks, with the wiki faster. This follow-up uses the same frozen
 220-page world and adds **16 fresh agent trials**: four failure/recovery tasks,
-two repetitions each, for wiki + skill and the actual Portable KB CLI + skill.
+two repetitions each, for wiki + skill and the actual Groundray CLI + skill.
 It also measures read costs and tests a focused recovery fix separately.
 
 The wiki completed **8/8** tasks with constraints preserved. The original
-Portable KB executable completed **6/8**, safely blocking both interrupted
+Groundray executable completed **6/8**, safely blocking both interrupted
 moves after the agents restored the authoring files. A fixed executable then
-completed **2/2 fresh Portable KB interruption trials**. Those candidate trials
+completed **2/2 fresh Groundray interruption trials**. Those candidate trials
 do not replace the two original failures or constitute a new full paired run.
 
 [Machine-readable results](../evals/reliability/results/2026-10-08-atlas-reliability-v1.json)
 include per-case checks, hashes, original failures, candidate coverage, and profiles.
 The implementation is development-only under `evals/reliability/`. The
-[production lock fix](https://github.com/MarvinAmador7/portable-kb/pull/14)
+[production lock fix](https://github.com/MarvinAmador7/groundray/pull/14)
 is a separate change.
 
 ## Matched tasks
@@ -51,7 +51,7 @@ been shown to complete this operation without an agent doing recovery.
 
 ## Observed baseline: 2026-10-08
 
-| Result | Wiki + skill | Portable KB + skill |
+| Result | Wiki + skill | Groundray + skill |
 | --- | ---: | ---: |
 | Completed with constraints | 8/8 | 6/8 |
 | Safely blocked | 0 | 2 |
@@ -147,7 +147,7 @@ the supplied wiki skill. Only synthetic outcomes and fingerprints are public.
 
 One wiki interruption agent asked whether the phrase “native final authoring”
 required a separate wiki CLI. It received a narrow interface clarification:
-CLI move plan/apply applies only to the Portable KB arm. Remaining fresh
+CLI move plan/apply applies only to the Groundray arm. Remaining fresh
 agents received that same clarification. A rollback agent received a narrow
 clarification that `kb-fault checkpoint` is only requested by concurrent-update;
 it did not invoke the controller. Future preparation states both points
@@ -200,17 +200,17 @@ python -m evals.logistics generate --output /tmp/atlas-corpus --seed 20261008
 python -m evals.reliability prepare \
   --output /tmp/atlas-recovery \
   --corpus /tmp/atlas-corpus \
-  --cli /absolute/path/to/pkb \
+  --cli /absolute/path/to/groundray \
   --wiki-skill /absolute/path/to/wiki-skill.md --repetitions 2
 
 # Explicit agent/model opt-in; an authenticated runner is required.
 python -m evals.reliability run --output /tmp/atlas-recovery/trials/wiki --jobs 2
-python -m evals.reliability run --output /tmp/atlas-recovery/trials/portable-kb --jobs 2
+python -m evals.reliability run --output /tmp/atlas-recovery/trials/groundray --jobs 2
 python -m evals.reliability grade --output /tmp/atlas-recovery/trials/wiki
-python -m evals.reliability grade --output /tmp/atlas-recovery/trials/portable-kb
+python -m evals.reliability grade --output /tmp/atlas-recovery/trials/groundray
 python -m evals.reliability compare \
   /tmp/atlas-recovery/trials/wiki/report.json \
-  /tmp/atlas-recovery/trials/portable-kb/report.json \
+  /tmp/atlas-recovery/trials/groundray/report.json \
   --output /tmp/atlas-recovery/comparison.json
 
 python -m evals.reliability profile \
