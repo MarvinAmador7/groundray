@@ -161,8 +161,8 @@ codex plugin marketplace remove groundray --json
 For Claude Code:
 
 ```sh
-claude plugin uninstall groundray@groundray --scope user
-claude plugin marketplace remove groundray
+claude plugin uninstall groundray@groundray --scope user --keep-data
+claude plugin marketplace remove groundray --scope user
 ```
 
 These commands unregister the plugin and its dedicated marketplace. They do not
