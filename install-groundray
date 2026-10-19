@@ -1,0 +1,175 @@
+#!/bin/sh
+# Install a release into persistent storage and register it with this Codex CLI.
+set -eu
+
+repository=${GROUNDRAY_REPOSITORY:-MarvinAmador7/portable-kb}
+release_version=${GROUNDRAY_VERSION:-}
+release_base=${GROUNDRAY_RELEASE_BASE_URL:-}
+install_root=${GROUNDRAY_INSTALL_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/groundray}
+codex=${GROUNDRAY_CODEX:-codex}
+
+usage() {
+    cat <<'EOF'
+Install the checksummed Groundray release and its bundled keyword engine.
+
+Usage: install-groundray [--version VERSION] [--codex EXECUTABLE] [--install-dir DIRECTORY]
+
+The default storage is $XDG_DATA_HOME/groundray or $HOME/.local/share/groundray.
+HOME, CODEX_HOME, company settings and credentials are preserved. Start a fresh
+Codex session after installation. No Python, Node, QMD or separate pkb is required.
+EOF
+}
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --version|--codex|--install-dir)
+            [ "$#" -ge 2 ] || { echo "error: $1 requires a value" >&2; exit 2; }
+            case "$1" in
+                --version) release_version=$2 ;;
+                --codex) codex=$2 ;;
+                --install-dir) install_root=$2 ;;
+            esac
+            shift 2 ;;
+        -h|--help) usage; exit 0 ;;
+        *) echo "error: unknown option: $1" >&2; usage >&2; exit 2 ;;
+    esac
+done
+
+for tool in curl tar; do
+    command -v "$tool" >/dev/null 2>&1 || { echo "error: $tool is required" >&2; exit 1; }
+done
+codex=$(command -v "$codex") || { echo "error: choose an installed Codex CLI with --codex" >&2; exit 1; }
+echo "Using $codex ($("$codex" --version))"
+echo "Codex home: ${CODEX_HOME:-$HOME/.codex}"
+features=$("$codex" features list)
+[ "$(printf '%s\n' "$features" | awk '$1 == "plugins" {print $NF}')" = true ] || {
+    echo "error: plugins are disabled or unsupported in this Codex profile" >&2; exit 1;
+}
+
+case "$(uname -s)" in
+    Darwin) system=darwin ;;
+    Linux) system=linux ;;
+    *) echo "error: supported systems are macOS and Linux" >&2; exit 1 ;;
+esac
+case "$(uname -m)" in
+    x86_64|amd64) arch=x86_64 ;;
+    arm64|aarch64) arch=arm64 ;;
+    *) echo "error: unsupported CPU architecture" >&2; exit 1 ;;
+esac
+
+if [ -z "$release_version" ]; then
+    if [ -n "${GH_TOKEN:-}" ] && command -v gh >/dev/null 2>&1; then
+        release_version=$(gh release view --repo "$repository" --json tagName --jq .tagName)
+    else
+        latest=$(curl -fsSL -o /dev/null -w '%{url_effective}' "https://github.com/$repository/releases/latest")
+        release_version=${latest##*/}
+    fi
+fi
+case "$release_version" in v*) tag=$release_version ;; *) tag=v$release_version ;; esac
+printf '%s\n' "$tag" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$' || {
+    echo "error: expected a stable release tag such as v0.2.1" >&2; exit 1;
+}
+archive="groundray-$tag-$system-$arch.tar.gz"
+marketplace=$install_root/marketplace
+if [ -L "$install_root" ] || [ -L "$marketplace" ]; then
+    echo "error: install paths must not be symlinks" >&2; exit 1
+fi
+if [ -e "$marketplace" ] && { [ ! -f "$marketplace/.groundray-install" ] || [ -L "$marketplace/.groundray-install" ]; }; then
+    echo "error: refusing to replace an unmanaged marketplace: $marketplace" >&2; exit 1
+fi
+mkdir -p "$install_root"
+lock=$install_root/.install-lock
+mkdir "$lock" 2>/dev/null || { echo "error: installation lock exists: $lock" >&2; exit 1; }
+stage=
+backup=
+cleanup() {
+    status=$?
+    if [ -n "$backup" ] && [ ! -e "$marketplace" ]; then
+        mv "$backup" "$marketplace" || true
+    fi
+    if [ -n "$stage" ]; then rm -rf "$stage"; fi
+    rmdir "$lock" || true
+    exit "$status"
+}
+trap cleanup EXIT
+trap 'exit 1' HUP INT TERM
+stage=$(mktemp -d "$install_root/.install.XXXXXX")
+
+if [ -n "$release_base" ]; then
+    curl -fsSL "${release_base%/}/$tag/$archive" -o "$stage/$archive"
+    curl -fsSL "${release_base%/}/$tag/SHA256SUMS" -o "$stage/SHA256SUMS"
+elif [ -n "${GH_TOKEN:-}" ] && command -v gh >/dev/null 2>&1; then
+    gh release download "$tag" --repo "$repository" --pattern "$archive" --pattern SHA256SUMS --dir "$stage"
+else
+    base=https://github.com/$repository/releases/download/$tag
+    curl -fsSL "$base/$archive" -o "$stage/$archive"
+    curl -fsSL "$base/SHA256SUMS" -o "$stage/SHA256SUMS"
+fi
+
+expected=$(awk -v name="$archive" '$2 == name {print $1}' "$stage/SHA256SUMS")
+[ "${#expected}" -eq 64 ] || { echo "error: release checksum is missing or ambiguous" >&2; exit 1; }
+case "$expected" in *[!0-9a-f]*) echo "error: invalid release checksum" >&2; exit 1 ;; esac
+if command -v sha256sum >/dev/null 2>&1; then
+    actual=$(sha256sum "$stage/$archive")
+elif command -v shasum >/dev/null 2>&1; then
+    actual=$(shasum -a 256 "$stage/$archive")
+else
+    echo "error: sha256sum or shasum is required" >&2; exit 1
+fi
+[ "${actual%% *}" = "$expected" ] || { echo "error: archive checksum verification failed" >&2; exit 1; }
+
+# Only regular files below the two packaged roots can be extracted.
+listing=$(tar -tzf "$stage/$archive")
+[ -n "$listing" ] || { echo "error: empty Groundray archive" >&2; exit 1; }
+printf '%s\n' "$listing" | while IFS= read -r entry; do
+    case "$entry" in
+        *[!a-zA-Z0-9_./-]*) echo "error: unsafe archive path" >&2; exit 1 ;;
+    esac
+    case "/$entry/" in
+        *'/../'*|*'/./'*|*'//'*) echo "error: unsafe archive path" >&2; exit 1 ;;
+    esac
+    case "$entry" in
+        .agents/plugins/marketplace.json|plugins/groundray/*) ;;
+        *) echo "error: unexpected archive path: $entry" >&2; exit 1 ;;
+    esac
+done
+tar -tvzf "$stage/$archive" | awk 'substr($0,1,1) != "-" {bad=1} END {exit bad}' || {
+    echo "error: archive may contain only regular files" >&2; exit 1;
+}
+mkdir "$stage/package"
+tar -xzf "$stage/$archive" --no-same-owner --no-same-permissions -C "$stage/package"
+helper=$stage/package/plugins/groundray/scripts/groundray
+[ -f "$stage/package/.agents/plugins/marketplace.json" ] && [ -x "$helper" ] || {
+    echo "error: incomplete Groundray marketplace" >&2; exit 1;
+}
+GROUNDRAY_PKB= "$helper" check
+version=$(GROUNDRAY_PKB= "$helper" --version)
+[ "$version" = "pkb ${tag#v}" ] || { echo "error: runtime does not match release $tag" >&2; exit 1; }
+printf '%s\n' "$tag" > "$stage/package/.groundray-install"
+
+if [ -e "$marketplace" ]; then
+    backup=$(mktemp -d "$install_root/.previous.XXXXXX")
+    rmdir "$backup"
+    mv "$marketplace" "$backup"
+fi
+mv "$stage/package" "$marketplace"
+echo "Persistent marketplace: $marketplace"
+if [ -n "$backup" ]; then echo "Previous package retained: $backup"; fi
+"$codex" plugin marketplace add "$marketplace" --json
+"$codex" plugin add groundray@groundray --json
+
+installed=$("$codex" plugin list --marketplace groundray --json)
+printf '%s\n' "$installed"
+if ! printf '%s\n' "$installed" | grep -Eq '"pluginId"[[:space:]]*:[[:space:]]*"groundray@groundray"' ||
+   ! printf '%s\n' "$installed" | grep -Eq '"enabled"[[:space:]]*:[[:space:]]*true'; then
+    echo "error: Groundray is not installed/enabled in the selected Codex catalog" >&2
+    exit 1
+fi
+# Upgrade this plugin only after the new catalog is verified. Keep its former
+# marketplace and all unrelated plugins, including any sharing that marketplace.
+if legacy=$("$codex" plugin list --marketplace groundray-dev --json 2>/dev/null); then
+    if printf '%s\n' "$legacy" | grep -Eq '"pluginId"[[:space:]]*:[[:space:]]*"groundray@groundray-dev"'; then
+        "$codex" plugin remove groundray@groundray-dev --json
+    fi
+fi
+echo "Groundray installed. Start a fresh session using $codex."

@@ -6,10 +6,10 @@ without losing company scope, original records or decision history.**
 
 Groundray is the intended product: plugin, skill, CLI and shared infrastructure.
 Portable KB supplies the existing engine foundation. This goal is adopted;
-development packaging and local workflows are implemented; employee rollout
-remains gated. The released interface is currently `pkb`,
-and the Groundray skills are prototypes. No Groundray plugin, renamed executable
-or hosted service is claimed to be released by this document.
+Groundray plugin 0.2.1 and Portable KB 0.2.1 package the implemented local
+workflows and bundled keyword engine. Employee rollout still needs the actual
+two-person hosted handoff and human source inspection. The CLI remains `pkb`;
+no renamed executable or hosted service is claimed.
 
 ## Product contract
 
@@ -28,9 +28,9 @@ reliable sharing and actual employee use, alongside answer quality.
 
 | Part | Responsibility | Current foundation / remaining work |
 | --- | --- | --- |
-| Plugin | Make the selected company, skill and CLI available to the agent. | Codex development package installed/enabled with bundled compatible CLI; removal/reinstall preserve employee state. Native model-backed activation remains blocked here by cloud HTTP 403. |
+| Plugin | Make the selected company, skill and CLI available to the agent. | Versioned native archives and persistent Codex installer; publisher native setup/answer observed with builtin search. Earlier cloud HTTP 403 failures remain historical records. |
 | Skill | Produce answers, evidence and guidance; preserve scoped claims and reasoning during authorized edits. | Full Groundray and Lite exist. Earlier CLI chains and six installed-package participants exercise evidence/updates. Three new-company cases cover bounded forecasts, compiled-only attribution and company definitions; broad reliability and human inspection remain unmeasured. |
-| CLI | Create/install/select brains, retrieve evidence, inspect state, publish and sync. | Existing `pkb` operations provide a base. The development plugin provides a quoted helper, capability checks and preservation rules; employee deployment remains gated. |
+| CLI | Create/install/select brains, retrieve evidence, inspect state, publish and sync. | Existing `pkb` operations, quoted helper, checksum binding and one-process registered-command compatibility checks. Company state remains separate from package updates. |
 | Infrastructure | Store published company versions, enforce access and support reviewed collaboration. | Git repositories and host permissions provide the first shared layer. Local packaged proposal/review/publication/sync is exercised. Real hosted employee roles and a separate-computer shared-remote handoff remain gates. |
 
 ## First MVP
@@ -70,8 +70,8 @@ include it. No universal platform support is assumed.
 | --- | --- | --- |
 | G0 — Storage and interface fit | Specify how company wiki prose, source bytes, definitions and authority records use the current validated bundle and retrieval/mutation interfaces. Demonstrate one usable company brain with portable evidence links. Resolve any needed adapter explicitly. | CLI source/proposal and fresh Lite chains exercised; candidate inspection and reader paths observed in one follow-up |
 | G1 — Two-employee workflow | Run the acceptance scenario below using isolated employee installations and a shared test remote. Record versions, saved-state integrity, proposal/review flow and refusal states. | Three local fresh-agent chains and a separate reader; uncertainty refinement observed, with host/platform/human and generalization gates open |
-| G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Development package installed/enabled; six fresh explicit package trials and 25-operation native smoke complete. Removal/reinstall preserve employee state. Automatic native activation (cloud 403), real host-role and human-pilot gates remain open. |
-| G3 — Employee pilot | Validate packaged behavior on supported platforms and have people inspect answers and contribute a reviewed change. Record decisions, source inspections, effort and failures separately. | Synthetic packet and private-host provisioning plan prepared for MarvinAmador7 and KarolGarcia712; dev.2 evidence links observed in one fresh matched case. Native model endpoint and GitHub creation are blocked by cloud HTTP 403; actual human/host-role attempts remain pending. |
+| G2 — Groundray packaging | Package the skill and CLI for the agent plugin; document install/select/sync/ask/propose/update/uninstall, compatible engine versions and upgrades preserving existing brains. Run G1 through the actual package. | Versioned release packaging and durable installer; 25-operation native smoke and isolated real-Codex installation checks. Publisher native activation observed; real employee handoff remains pending. |
+| G3 — Employee pilot | Validate packaged behavior on supported platforms and have people inspect answers and contribute a reviewed change. Record decisions, source inspections, effort and failures separately. | Private unprotected contributor repository provisioned. Publisher builtin setup and supported native fictional answer observed; publisher reports inspecting no originals. Karol authentication/contribution/review/sync and reference clickability remain unobserved. |
 
 G0 is important because current CLI installation validates an OKF-compatible
 bundle, while the Groundray prototypes can use ordinary wiki conventions. A raw

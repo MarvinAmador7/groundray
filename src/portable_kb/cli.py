@@ -117,6 +117,26 @@ def main(
     """Portable, governed knowledge for humans and agents."""
 
 
+@app.command("plugin-check", hidden=True)
+def plugin_check() -> None:
+    """Check Groundray's actual command surface in one process, without user setup."""
+    from typer.main import get_command
+
+    required = {
+        "source": ("capture", "get"),
+        "brain": ("attach", "propose", "review", "review-source", "accept"),
+        "knowledge": ("create", "update", "move"),
+    }
+    commands = get_command(app).commands
+    for group, names in required.items():
+        available = getattr(commands.get(group), "commands", {})
+        for name in names:
+            if name not in available:
+                typer.echo(f"error: Groundray CLI lacks required command: {group} {name}", err=True)
+                raise typer.Exit(2)
+    typer.echo(f"Groundray CLI compatible: pkb {__version__}")
+
+
 @app.command()
 def setup(
     non_interactive: Annotated[

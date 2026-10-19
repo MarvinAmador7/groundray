@@ -5,7 +5,9 @@
 `src/portable_kb/__init__.py` is the single source of truth for the stable
 `X.Y.Z` version. Hatch reads that value for Python distribution metadata, the
 CLI reports it through `pkb --version`, and release assets use the matching
-`vX.Y.Z` tag. A release never derives a version from a mutable branch name.
+`vX.Y.Z` tag. Stable Groundray manifests use the same version so Codex cache
+keys advance with every runtime release; build and regression checks refuse
+version drift. A release never derives a version from a mutable branch name.
 
 To prepare a release, change `__version__` in a focused pull request. CI tests
 the proposed commit. After it merges to `main`, the release workflow checks
@@ -19,7 +21,7 @@ read-only repository permissions. It performs:
 
 - lint and the complete coverage-gated test suite on supported Linux and macOS
   Python environments;
-- POSIX shell syntax validation for `install`;
+- POSIX shell syntax validation and failure/preservation tests for both installers;
 - wheel and source-distribution builds plus metadata checks;
 - verification that schemas and the Portable KB agent skill are in the wheel;
   and
@@ -41,6 +43,12 @@ pkb-vX.Y.Z-darwin-arm64.tar.gz
 pkb-vX.Y.Z-darwin-x86_64.tar.gz
 pkb-vX.Y.Z-linux-arm64.tar.gz
 pkb-vX.Y.Z-linux-x86_64.tar.gz
+groundray-vX.Y.Z-darwin-arm64.tar.gz
+groundray-vX.Y.Z-darwin-x86_64.tar.gz
+groundray-vX.Y.Z-linux-arm64.tar.gz
+groundray-vX.Y.Z-linux-x86_64.tar.gz
+install
+install-groundray
 SHA256SUMS
 ```
 
@@ -50,8 +58,12 @@ setup, initialize and validate a fresh brain with the bundled schemas, and
 install its bundled agent skill into an isolated temporary home. The publish
 job uses only the scoped workflow `GITHUB_TOKEN` with `contents: write`, creates
 the semantic tag at the tested `main` commit, generates release notes, and
-uploads version-named assets. Post-publication jobs then run the real installer
-against the release on all four target platforms.
+uploads version-named assets. Each native job also packages Groundray from that
+tested executable, exercises the 25-operation handoff, and verifies persistent
+installation/reinstallation with an isolated real Codex 0.161.0 host before
+publication. Post-publication jobs run both installers against the release on
+all four target platforms. Node is a CI host-test dependency, not a requirement
+for installing or using Groundray. See [the plugin guide](groundray-plugin.md).
 
 Linux executables are built on Ubuntu 22.04 to retain compatibility with that
 glibc baseline and newer compatible distributions. Alpine/musl and Windows are
@@ -130,3 +142,18 @@ Standalone builds verify that installed Python code, schemas, and the bundled
 skill match the checkout before freezing. Reinstall the current wheel when
 changing source; a matching version string alone does not establish current
 build inputs. The frozen smoke test also checks installed skill content.
+
+## 0.2.1: Groundray distribution
+
+This release includes Groundray plugin 0.2.1, its bundled keyword engine and the
+source/proposal operations merged in #16. The standalone CLI retains compatible
+0.2.x behavior. The plugin compatibility check now inspects registered commands
+in one runtime launch, retaining explicit probes for older compatible binaries.
+The dedicated installer keeps its source under persistent employee storage,
+reports the selected Codex executable/profile, preserves company state and
+upgrades only the former Groundray development plugin.
+
+The retained publisher trial uses a fictional company. Human source inspection
+and Karol's hosted handoff are still follow-up work; this release does not claim
+a completed human pilot or publisher-only permissions in the selected
+unprotected contributor repository.

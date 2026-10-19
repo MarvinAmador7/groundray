@@ -84,6 +84,7 @@ jobs:
           python -m ruff check .
           python -m pytest -q --cov=portable_kb --cov-report=term-missing
           sh -n install
+          sh -n install-groundray
           cargo fmt --all -- --check
           cargo clippy --workspace --all-targets --locked -- -D warnings
           cargo test --workspace --locked
@@ -158,6 +159,20 @@ jobs:
           python -m pip install --force-reinstall dist/*.whl
       - name: Build and smoke-test standalone archive
         run: python scripts/build_standalone.py --target "${{ matrix.target }}"
+      - name: Package Groundray with the tested native runtime
+        run: |
+          python scripts/build_groundray_plugin.py --cli "build/standalone/${{ matrix.target }}/dist/pkb" --output "${RUNNER_TEMP}/groundray-marketplace"
+          python scripts/smoke_groundray_plugin.py --package "${RUNNER_TEMP}/groundray-marketplace" --output "${RUNNER_TEMP}/groundray-smoke"
+          cp "${RUNNER_TEMP}/groundray-marketplace/"*.tar.gz release/
+      - name: Set up Node.js for the Codex host test
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - name: Install the pinned Codex host
+        run: npm install --prefix "${RUNNER_TEMP}/groundray-codex" @openai/codex@0.161.0
+      - name: Verify installer before publication
+        run: python scripts/smoke_groundray_install.py --package "${RUNNER_TEMP}/groundray-marketplace" --codex "${RUNNER_TEMP}/groundray-codex/node_modules/.bin/codex" --output "${RUNNER_TEMP}/groundray-install-smoke"
       - name: Upload standalone archive
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -179,14 +194,18 @@ jobs:
     outputs:
       url: ${{ steps.publish.outputs.url }}
     steps:
+      - name: Check out release installers
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - name: Download all release artifacts
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
         with:
           path: release
           merge-multiple: true
+      - name: Include standalone installers
+        run: cp install install-groundray release/
       - name: Generate checksums
         working-directory: release
-        run: sha256sum portable_kb_core-* pkb-*.tar.gz > SHA256SUMS
+        run: sha256sum portable_kb_core-* pkb-*.tar.gz groundray-*.tar.gz install install-groundray > SHA256SUMS
       - name: Publish versioned assets
         id: publish
         env:
@@ -222,6 +241,13 @@ jobs:
     steps:
       - name: Check out installer
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set up Node.js for the Codex host test
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - name: Install the pinned Codex host
+        run: npm install --prefix "${RUNNER_TEMP}/groundray-codex" @openai/codex@0.161.0
       - name: Install the published release
         env:
           PKB_INSTALL_DIR: ${{ runner.temp }}/pkb-bin
@@ -237,3 +263,21 @@ jobs:
           sh install
           "${PKB_INSTALL_DIR}/pkb" --version
           "${PKB_INSTALL_DIR}/pkb" --help >/dev/null
+      - name: Install the published Groundray package into an isolated host
+        env:
+          GROUNDRAY_VERSION: ${{ needs.prepare.outputs.tag }}
+          GROUNDRAY_INSTALL_DIR: ${{ runner.temp }}/groundray-install
+          GROUNDRAY_CODEX: ${{ runner.temp }}/groundray-codex/node_modules/.bin/codex
+          CODEX_HOME: ${{ runner.temp }}/groundray-codex-home
+          RELEASE_TOKEN: ${{ github.token }}
+          REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+        run: |
+          if [ "$REPOSITORY_PRIVATE" = "true" ]; then
+            export GH_TOKEN="$RELEASE_TOKEN"
+          else
+            unset GH_TOKEN
+          fi
+          mkdir -p "$CODEX_HOME"
+          sh install-groundray
+          "${GROUNDRAY_INSTALL_DIR}/marketplace/plugins/groundray/scripts/groundray" check
+          "${GROUNDRAY_CODEX}" plugin list --marketplace groundray --json

@@ -5,6 +5,32 @@ employee contributor and receiver**, as supplied by the user. No real employee
 session, accepted invitation or company-brain host enforcement has been observed.
 A distinct read-only account was not supplied and remains a separate gate.
 
+## Current status
+
+PR #16 is merged, and its main-branch CI passed. The publisher's native Codex
+session successfully used the installed Groundray helper and builtin keyword
+index at `259fea0d4a3006f5450d0705f07bc868b688ae39`, then produced a supported
+fictional owner answer citing seven original paths. The publisher reports
+personally opening **none**; actual reference clickability and human source
+inspection remain unobserved. Karol's actual authentication, hosted proposal,
+review/publication and independent sync are still pending.
+
+The selected private contributor mode has no main protection; publisher/reviewer
+roles are conventions and contributor access includes main. Publisher-only
+host enforcement is not a requirement of this selected pilot. A distinct
+read-only identity remains unsupplied.
+
+Groundray 0.2.1 / CLI 0.2.1 add a persistent, checksummed release installer and
+one-process runtime compatibility checking. QMD is optional; new setup uses the
+bundled keyword engine. The latest publisher report says the historical hook
+errors are no longer reproducing; no failing command/owner was identified.
+No unrelated hook/plugin settings were changed to conceal those failures.
+
+The sections below retain the setup chronology. Earlier cloud HTTP 403,
+missing-directory, absent-QMD and pre-merge statements describe their original
+attempts; they do not supersede this current status. All original packets,
+transcripts, hashes and response copies remain unchanged.
+
 ## Resumed setup: GitHub reachable, creation denied
 
 ### Selected organization: fullkontrol

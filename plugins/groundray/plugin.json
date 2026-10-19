@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "groundray",
-  "version": "0.1.0-dev.2",
+  "version": "0.2.1",
   "description": "Portable company brains: direct answers, inspectable evidence and reviewed updates.",
   "author": {
     "name": "Marvin Amador"
