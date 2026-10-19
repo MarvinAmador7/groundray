@@ -23,7 +23,7 @@ No embedding models or QMD installation is required for builtin keyword search.
 When a company is named, resolve its installed slug once and use that scope on
 every operation. Ask for its repository only if needed. Install an explicitly
 supplied authorized source through `brain add`; select through `brain use` only
-when selection is requested. Receive updates through `brain sync` only when
+when selection is requested. `brain use` takes no `--json` option. Receive updates through `brain sync` only when
 requested, and rebuild only the selected derived index when missing/stale.
 
 Explain the selected company, installed version and any real blocker. Installation

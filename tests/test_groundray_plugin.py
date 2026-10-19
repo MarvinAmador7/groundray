@@ -10,7 +10,10 @@ import struct
 import subprocess
 
 import pytest
+from typer.testing import CliRunner
 
+from portable_kb import __version__
+from portable_kb.cli import app, source_app
 from scripts.build_groundray_plugin import BRIDGE, ROOT, build, native_target
 
 
@@ -114,3 +117,34 @@ def test_future_or_invalid_cli_version_is_not_silently_accepted(tmp_path):
                                 env={**os.environ, "GROUNDRAY_PKB": str(cli)},
                                 capture_output=True)
         assert result.returncode != 0
+
+
+def test_plugin_check_validates_registered_commands_without_user_configuration(monkeypatch, tmp_path):
+    monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "absent"))
+    result = CliRunner().invoke(app, ["plugin-check"])
+    assert result.exit_code == 0
+    assert result.stdout.strip() == f"Groundray CLI compatible: pkb {__version__}"
+    assert not (tmp_path / "absent").exists()
+    monkeypatch.setattr(source_app, "registered_commands", [
+        command for command in source_app.registered_commands if command.name != "get"
+    ])
+    result = CliRunner().invoke(app, ["plugin-check"])
+    assert result.exit_code == 2
+    assert "lacks required command: source get" in result.output
+
+
+def test_current_compatibility_check_launches_runtime_once(tmp_path):
+    log = tmp_path / "launches"
+    cli = tmp_path / "CLI with spaces"
+    cli.write_text(
+        f'#!/bin/sh\nprintf "%s\\n" "$*" >> "{log}"\n'
+        f'if [ "$1" = plugin-check ]; then echo "Groundray CLI compatible: pkb {__version__}"; exit 0; fi\n'
+        'exit 99\n'
+    )
+    cli.chmod(0o755)
+    result = subprocess.run(
+        [str(ROOT / "plugins/groundray/scripts/groundray"), "check"],
+        env={**os.environ, "GROUNDRAY_PKB": str(cli)}, capture_output=True, text=True,
+    )
+    assert result.returncode == 0
+    assert log.read_text().splitlines() == ["plugin-check"]

@@ -45,6 +45,19 @@ if [ -z "$cli" ] || [ ! -f "$cli" ] || [ ! -x "$cli" ]; then
 fi
 
 if [ "${1:-}" = check ]; then
+    # Current runtimes inspect the registered command tree in one launch. Older
+    # 0.2.x runtimes retain the explicit help probes below.
+    if compatible=$("$cli" plugin-check 2>/dev/null); then
+        case "$compatible" in
+            'Groundray CLI compatible: pkb 0.2.'*)
+                patch=${compatible#Groundray CLI compatible: pkb 0.2.}
+                case "$patch" in
+                    ''|*[!0-9]*) ;;
+                    *) printf '%s\n' "$compatible"; exit 0 ;;
+                esac
+                ;;
+        esac
+    fi
     version=$("$cli" --version)
     case "$version" in
         'pkb 0.2.'*)

@@ -1,6 +1,6 @@
 {
-  "name": "groundray-dev",
-  "interface": {"displayName": "Groundray development"},
+  "name": "groundray",
+  "interface": {"displayName": "Groundray"},
   "plugins": [
     {
       "name": "groundray",

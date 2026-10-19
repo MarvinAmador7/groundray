@@ -1,0 +1,51 @@
+{
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "runtime_sha256": "769d4c0ba071eff3c977f30d8ca48f11981a0cea7e2e598e708c616276088fdc",
+  "same_native_runtime_for_both_helpers": true,
+  "checksum_verification_enabled_for_both_helpers": true,
+  "before_runtime_launches": 11,
+  "after_runtime_launches": 1,
+  "concurrent_test_suite": true,
+  "model_calls": 0,
+  "macos_performance_measured": false,
+  "measurements": [
+    {
+      "pair": 1,
+      "helper": "before",
+      "elapsed_seconds": 14.408771405011066,
+      "stdout": "Groundray CLI compatible: pkb 0.2.1"
+    },
+    {
+      "pair": 1,
+      "helper": "after",
+      "elapsed_seconds": 0.8104445279896026,
+      "stdout": "Groundray CLI compatible: pkb 0.2.1"
+    },
+    {
+      "pair": 2,
+      "helper": "before",
+      "elapsed_seconds": 10.64330195900402,
+      "stdout": "Groundray CLI compatible: pkb 0.2.1"
+    },
+    {
+      "pair": 2,
+      "helper": "after",
+      "elapsed_seconds": 0.8021593779994873,
+      "stdout": "Groundray CLI compatible: pkb 0.2.1"
+    },
+    {
+      "pair": 3,
+      "helper": "before",
+      "elapsed_seconds": 9.30728724799701,
+      "stdout": "Groundray CLI compatible: pkb 0.2.1"
+    },
+    {
+      "pair": 3,
+      "helper": "after",
+      "elapsed_seconds": 0.8819387819967233,
+      "stdout": "Groundray CLI compatible: pkb 0.2.1"
+    }
+  ],
+  "before_helper_commit": "f526a4b56c1578be9d5a3ff0e38d656466c7bccd",
+  "measurement_scope": "Paired readonly compatibility checks on the same Linux frozen CLI, shared VM with the test suite; not a Mac or human productivity measurement"
+}

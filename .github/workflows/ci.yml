@@ -41,7 +41,9 @@ jobs:
       - name: Test with coverage gate
         run: python -m pytest -q --cov=portable_kb --cov-report=term-missing
       - name: Check installer syntax
-        run: sh -n install
+        run: |
+          sh -n install
+          sh -n install-groundray
 
   package:
     name: Build and inspect Python package
@@ -201,6 +203,15 @@ jobs:
           python scripts/build_groundray_plugin.py --cli "${RUNNER_TEMP}/groundray-freeze/dist/pkb" --output "${RUNNER_TEMP}/groundray-marketplace"
       - name: Exercise installed native CLI through packaged helper
         run: python scripts/smoke_groundray_plugin.py --package "${RUNNER_TEMP}/groundray-marketplace" --output "${RUNNER_TEMP}/groundray-smoke"
+      - name: Set up Node.js for the Codex host test
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - name: Install the pinned Codex host
+        run: npm install --prefix "${RUNNER_TEMP}/groundray-codex" @openai/codex@0.161.0
+      - name: Verify persistent installation with the actual Codex host
+        run: python scripts/smoke_groundray_install.py --package "${RUNNER_TEMP}/groundray-marketplace" --codex "${RUNNER_TEMP}/groundray-codex/node_modules/.bin/codex" --output "${RUNNER_TEMP}/groundray-install-smoke"
       - name: Retain development package and smoke traces
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -208,7 +219,9 @@ jobs:
           name: groundray-plugin-${{ matrix.target }}
           path: |
             ${{ runner.temp }}/groundray-marketplace/*.zip
+            ${{ runner.temp }}/groundray-marketplace/*.tar.gz
             ${{ runner.temp }}/groundray-marketplace/SHA256SUMS
             ${{ runner.temp }}/groundray-smoke/operations.jsonl
             ${{ runner.temp }}/groundray-smoke/result.json
+            ${{ runner.temp }}/groundray-install-smoke/result.json
           if-no-files-found: warn

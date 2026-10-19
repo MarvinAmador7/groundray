@@ -1,0 +1,48 @@
+{
+  "installer": {
+    "tag": "v0.2.1",
+    "target": "linux-x86_64",
+    "installed": true,
+    "enabled": true,
+    "reinstall_preserves_persistent_source": true,
+    "development_registration_migrated": true,
+    "legacy_fixture_uses_current_runtime": true,
+    "unrelated_plugin_and_legacy_marketplace_preserved": true,
+    "isolated_codex_home": true,
+    "model_calls": 0,
+    "codex_version": "0.161.0",
+    "company_or_employee_roles_tested": false,
+    "preliminary_fixture_failures": "Two preliminary harness attempts omitted creation of the explicitly selected isolated Codex home; another preservation fixture omitted the Agent Plugin schema field. Those fixture errors were corrected; real auth homes were not changed."
+  },
+  "packaged_collaboration": {
+    "model_runs": 0,
+    "host_role_separation_tested": false,
+    "business_approval_recorded": false,
+    "base_commit": "337797123d726e9130a6a7b847efa585a87d4ac1",
+    "candidate_commit": "ee6de2f75bce7bed8761b47c2cdc6d79d38e20dd",
+    "operations": 25,
+    "original_and_update_bytes_preserved": true,
+    "native_keyword_query": true,
+    "source_file_target_resolves": true,
+    "review_base": "337797123d726e9130a6a7b847efa585a87d4ac1",
+    "original_sha256": "83951d2c9317de1ae4b7dec0c07fdf6e183a8b28d385951e8aa289df70cb3e6a"
+  },
+  "runtime_sha256": "769d4c0ba071eff3c977f30d8ca48f11981a0cea7e2e598e708c616276088fdc",
+  "source_sha256": {
+    "install-groundray": "2cc099ecae45c7c7cd4e8522601d4b81f3040edde7aaea10f45e65ee76ff7f1e",
+    "plugins/groundray/plugin.json": "de7474194e8ef3f6147a18672d22a44d0e8a3b24bd00be22d39e1c6dc5fb5098",
+    "plugins/groundray/scripts/groundray": "fa6f84a7a4dbeb3414976a9707adaeb0f112555e669e68544752edd08937edca",
+    "scripts/build_groundray_plugin.py": "1f92054ffa84e7c522b8919193292e0f76db9b5478f60f25f9377805640385df",
+    "src/portable_kb/cli.py": "b54ab625a0f352b8e653b291b8ff2383b689824478a468f8da850b84fe1cdc3f"
+  },
+  "latest_publisher_hook_report": "No failed hook visible; previous exit-127 entries have no identified command/owner",
+  "human_pilot_completed": false,
+  "local_test_suite": {
+    "passed": 637,
+    "optional_real_qmd_skipped": 1,
+    "coverage_percent": 86.83,
+    "elapsed_seconds": 548.83,
+    "current_focused_install_package_distribution_tests_passed": 22,
+    "final_tree_ci_required_before_merge": true
+  }
+}

@@ -23,21 +23,13 @@ Claude Code the same workflow for finding, citing, and updating that knowledge.
 - **Portable files.** Each brain is its own Git repository with an OKF-compatible
   Markdown bundle. Search indexes are disposable local state.
 
-**Groundray development:** the draft branch now supports
-[authoring attachment and reviewed Git proposals](docs/brain-collaboration.md).
-The [employee handoff demonstration](docs/groundray-employee-handoff.md) preserves
-original evidence through publication and sync. [Fresh-agent trials](docs/groundray-agent-cli-handoff.md)
-exposed inspection gaps, then exercised pinned candidate-source retrieval and ten
-working reader evidence targets. The [Lite refinement](docs/groundray-uncertainty-evaluation.md)
-observes preserved forecast uncertainty and corrects an invoice evidence-grading
-mistake with the actual supporting passage. These additions are unreleased. The [Groundray development plugin](docs/groundray-plugin.md)
-now packages the skills and a compatible native CLI for Codex, with local
-marketplace installation and an explicit company workflow. The
-[package trials](docs/groundray-plugin-evaluation.md) exercise a fresh employee
-handoff and three additional company cases; native chat activation and a human
-pilot remain open. [Pilot preparation](docs/groundray-pilot-readiness.md) provides
-a runnable two-person packet and private-host plan; its first dev.2 follow-up
-returns clickable evidence for the previously compiled-only case.
+**Groundray for Codex:** [install the plugin](docs/groundray-plugin.md) with its
+bundled CLI and keyword engine. Ask scoped questions, inspect original evidence,
+propose updates and explicitly publish reviewed versions through Git. No QMD or
+model download is required. [Retained package trials](docs/groundray-plugin-evaluation.md)
+and the [publisher pilot](docs/groundray-pilot-readiness.md) include native
+activation and a supported fictional business answer. Human source inspection
+and the employee's real hosted handoff remain incomplete.
 
 ## Install
 
@@ -324,15 +316,16 @@ It is a separate draft skill with manual installation and a fictional walkthroug
 The adopted [Groundray product goal](docs/groundray-product-goal.md) combines plugin,
 skill, CLI and shared Git-backed company brains using Portable KB as the engine.
 Its next milestones cover storage/interface fit, a two-employee workflow,
-packaging and an employee pilot. The integrated product remains planned; the
-released CLI and installation instructions above are still `pkb`.
+packaging and an employee pilot. The versioned plugin installer supplies the
+Groundray skills and compatible `pkb` runtime; standalone CLI users can use the
+installation instructions above.
 
 The [first engine-fit demo](docs/groundray-engine-fit.md) shows three linked company
 pages and 21 unchanged original records installed, retrieved and synced using
 the engine. That run used a development helper for raw evidence reading.
 The [CLI-only follow-up](docs/groundray-cli-sources.md) implements source capture
-and saved-record reading on the draft branch, replacing that helper. These commands
-are not yet in a tagged release; see [source capture](docs/source-capture.md).
+and saved-record reading through the CLI, replacing that helper. These commands
+ship with 0.2.1; see [source capture](docs/source-capture.md).
 
 ## Documentation
 

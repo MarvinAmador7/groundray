@@ -15,6 +15,7 @@ import re
 import shutil
 import struct
 import subprocess
+import tarfile
 import tempfile
 import zipfile
 from pathlib import Path
@@ -118,6 +119,8 @@ def build(output: Path, cli: Path, repository: Path = ROOT) -> dict:
                                  text=True, capture_output=True, timeout=30).stdout.strip()
         if re.fullmatch(r"pkb 0\.2\.\d+", version) is None:
             raise ValueError("Groundray supports the 0.2.x CLI with required capabilities")
+        if "-" not in manifest["version"] and manifest["version"] != version.removeprefix("pkb "):
+            raise ValueError("Stable Groundray and CLI versions must match to invalidate host caches")
         environment = {**os.environ, "GROUNDRAY_PKB": str(runtime / "pkb")}
         subprocess.run([str(packaged / "scripts/groundray"), "check"], check=True,
                        capture_output=True, text=True, timeout=180, env=environment)
@@ -125,21 +128,30 @@ def build(output: Path, cli: Path, repository: Path = ROOT) -> dict:
         (runtime / "SHA256SUMS").write_text(f"{cli_hash}  pkb\n")
         info = {"plugin_version": manifest["version"], "cli_version": version,
                 "target": target, "cli_sha256": cli_hash,
-                "cli_compatibility": "0.2.x plus explicit command-capability probes"}
+                "cli_compatibility": "0.2.x with registered-command check or legacy help probes"}
         (runtime / "build.json").write_text(json.dumps(info, indent=2) + "\n")
         catalog = json.loads((repository / ".agents/plugins/marketplace.json").read_text())
         (stage / ".agents/plugins").mkdir(parents=True)
         (stage / ".agents/plugins/marketplace.json").write_text(json.dumps(catalog, indent=2) + "\n")
         archive = stage / f"groundray-{manifest['version']}-{target}.zip"
+        files = sorted(p for p in stage.rglob("*") if p.is_file() and p != archive)
         with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as bundle:
-            for p in sorted(stage.rglob("*")):
-                if p.is_file() and p != archive:
-                    bundle.write(p, p.relative_to(stage).as_posix())
+            for p in files:
+                bundle.write(p, p.relative_to(stage).as_posix())
+        release_archive = stage / f"groundray-v{version.removeprefix('pkb ')}-{target}.tar.gz"
+        with tarfile.open(release_archive, "w:gz") as bundle:
+            for p in files:
+                bundle.add(p, arcname=p.relative_to(stage).as_posix(), recursive=False)
         archive_hash = hashlib.sha256(archive.read_bytes()).hexdigest()
-        (stage / "SHA256SUMS").write_text(f"{archive_hash}  {archive.name}\n")
+        release_hash = hashlib.sha256(release_archive.read_bytes()).hexdigest()
+        (stage / "SHA256SUMS").write_text(
+            f"{archive_hash}  {archive.name}\n{release_hash}  {release_archive.name}\n"
+        )
         os.replace(stage, output)
         return {**info, "marketplace_root": str(output), "archive": str(output / archive.name),
-                "archive_sha256": archive_hash}
+                "archive_sha256": archive_hash,
+                "release_archive": str(output / release_archive.name),
+                "release_archive_sha256": release_hash}
     except BaseException:
         shutil.rmtree(stage, ignore_errors=True)
         raise

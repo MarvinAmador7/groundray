@@ -13,8 +13,10 @@ decisions, proposing reviewed changes and syncing without losing history or scop
 
 The next delivery sequence is **storage/interface fit → two-employee workflow →
 Groundray packaging → employee pilot**. These milestones are defined in the goal;
-[development plugin packaging](groundray-plugin.md) and local collaboration tests
-are implemented; employee deployment remains gated and unreleased. Existing
+[versioned plugin packaging](groundray-plugin.md), persistent installation and
+local collaboration tests are implemented for 0.2.1. Publisher native setup and
+a fictional business answer have been observed; employee rollout still needs
+the actual hosted handoff and human source inspection. Existing
 `pkb` commands and profile behavior remain the implementation baseline. Broader
 hosted infrastructure, custom authorization and external integrations keep their
 separate scope gates.
@@ -28,8 +30,8 @@ retain the original inspection/link failures and exercise their fixes with new
 participants. The follow-up retrieved candidate originals directly and produced
 ten working reader targets. The [semantic refinement](groundray-uncertainty-evaluation.md)
 observes preserved forecast uncertainty and corrects a root evidence-grading error.
-Generalization, real host permissions and separate-computer packaging
-remain open for G1. No profile change was needed.
+Generalization, actual employee host permissions and the separate-computer
+handoff remain open for G1. No profile change was needed.
 
 ## Implementation status
 
