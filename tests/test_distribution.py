@@ -152,6 +152,8 @@ def test_installer_verifies_release_preserves_failure_and_uninstalls(tmp_path: P
 def test_release_version_matches_cli() -> None:
     plugin = json.loads(Path("plugins/groundray/plugin.json").read_text())
     assert plugin["version"] == __version__
+    claude = json.loads(Path("plugins/groundray/.claude-plugin/plugin.json").read_text())
+    assert claude["version"] == __version__
     release = subprocess.run(
         [sys.executable, "scripts/release_info.py"],
         check=True,

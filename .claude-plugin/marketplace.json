@@ -1,0 +1,14 @@
+{
+  "name": "groundray",
+  "owner": {
+    "name": "Marvin Amador"
+  },
+  "plugins": [
+    {
+      "name": "groundray",
+      "source": "./plugins/groundray",
+      "description": "Portable company brains: direct answers, inspectable evidence and reviewed updates."
+    }
+  ],
+  "description": "Portable company brains with inspectable evidence and reviewed updates."
+}

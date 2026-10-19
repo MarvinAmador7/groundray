@@ -1,5 +1,5 @@
 #!/bin/sh
-# Install a release into persistent storage and register it with this Codex CLI.
+# Install a release into persistent storage and register it with Codex or Claude Code.
 set -eu
 
 repository=${GROUNDRAY_REPOSITORY:-MarvinAmador7/groundray}
@@ -7,26 +7,33 @@ release_version=${GROUNDRAY_VERSION:-}
 release_base=${GROUNDRAY_RELEASE_BASE_URL:-}
 install_root=${GROUNDRAY_INSTALL_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/groundray}
 codex=${GROUNDRAY_CODEX:-codex}
+claude=${GROUNDRAY_CLAUDE:-claude}
+host=codex
 
 usage() {
     cat <<'EOF'
 Install the checksummed Groundray release and its bundled keyword engine.
 
-Usage: install-groundray [--version VERSION] [--codex EXECUTABLE] [--install-dir DIRECTORY]
+Usage: install-groundray [--host codex|claude] [--version VERSION]
+                         [--codex EXECUTABLE] [--claude EXECUTABLE]
+                         [--install-dir DIRECTORY]
 
 The default storage is $XDG_DATA_HOME/groundray or $HOME/.local/share/groundray.
-HOME, CODEX_HOME, company settings and credentials are preserved. Start a fresh
-Codex session after installation. No Python, Node, QMD or separate groundray is required.
+Codex is the default host; use --host claude for Claude Code (user scope).
+HOME, CODEX_HOME, CLAUDE_CONFIG_DIR, company settings and credentials are preserved.
+Start a fresh session in the selected host after installation. No Python, Node, QMD or separate groundray is required.
 EOF
 }
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
-        --version|--codex|--install-dir)
+        --host|--version|--codex|--claude|--install-dir)
             [ "$#" -ge 2 ] || { echo "error: $1 requires a value" >&2; exit 2; }
             case "$1" in
                 --version) release_version=$2 ;;
                 --codex) codex=$2 ;;
+                --claude) claude=$2 ;;
+                --host) host=$2 ;;
                 --install-dir) install_root=$2 ;;
             esac
             shift 2 ;;
@@ -38,13 +45,22 @@ done
 for tool in curl tar; do
     command -v "$tool" >/dev/null 2>&1 || { echo "error: $tool is required" >&2; exit 1; }
 done
-codex=$(command -v "$codex") || { echo "error: choose an installed Codex CLI with --codex" >&2; exit 1; }
-echo "Using $codex ($("$codex" --version))"
-echo "Codex home: ${CODEX_HOME:-$HOME/.codex}"
-features=$("$codex" features list)
-[ "$(printf '%s\n' "$features" | awk '$1 == "plugins" {print $NF}')" = true ] || {
-    echo "error: plugins are disabled or unsupported in this Codex profile" >&2; exit 1;
-}
+case "$host" in
+    codex)
+        codex=$(command -v "$codex") || { echo "error: choose an installed Codex CLI with --codex" >&2; exit 1; }
+        echo "Using $codex ($("$codex" --version))"
+        echo "Codex home: ${CODEX_HOME:-$HOME/.codex}"
+        features=$("$codex" features list)
+        [ "$(printf '%s\n' "$features" | awk '$1 == "plugins" {print $NF}')" = true ] || {
+            echo "error: plugins are disabled or unsupported in this Codex profile" >&2; exit 1;
+        } ;;
+    claude)
+        claude=$(command -v "$claude") || { echo "error: choose an installed Claude Code CLI with --claude" >&2; exit 1; }
+        echo "Using $claude ($("$claude" --version))"
+        echo "Claude config: ${CLAUDE_CONFIG_DIR:-$HOME/.claude} (user scope)"
+        "$claude" plugin list --json >/dev/null ;;
+    *) echo "error: --host must be codex or claude" >&2; exit 2 ;;
+esac
 
 case "$(uname -s)" in
     Darwin) system=darwin ;;
@@ -118,7 +134,7 @@ else
 fi
 [ "${actual%% *}" = "$expected" ] || { echo "error: archive checksum verification failed" >&2; exit 1; }
 
-# Only regular files below the two packaged roots can be extracted.
+# Only regular files below the packaged roots can be extracted.
 listing=$(tar -tzf "$stage/$archive")
 [ -n "$listing" ] || { echo "error: empty Groundray archive" >&2; exit 1; }
 printf '%s\n' "$listing" | while IFS= read -r entry; do
@@ -129,7 +145,7 @@ printf '%s\n' "$listing" | while IFS= read -r entry; do
         *'/../'*|*'/./'*|*'//'*) echo "error: unsafe archive path" >&2; exit 1 ;;
     esac
     case "$entry" in
-        .agents/plugins/marketplace.json|plugins/groundray/*) ;;
+        .agents/plugins/marketplace.json|.claude-plugin/marketplace.json|plugins/groundray/*) ;;
         *) echo "error: unexpected archive path: $entry" >&2; exit 1 ;;
     esac
 done
@@ -142,6 +158,14 @@ helper=$stage/package/plugins/groundray/scripts/groundray
 [ -f "$stage/package/.agents/plugins/marketplace.json" ] && [ -x "$helper" ] || {
     echo "error: incomplete Groundray marketplace" >&2; exit 1;
 }
+if [ "$host" = claude ]; then
+    [ -f "$stage/package/.claude-plugin/marketplace.json" ] &&
+    [ -f "$stage/package/plugins/groundray/.claude-plugin/plugin.json" ] || {
+        echo "error: release does not contain a Claude Code plugin" >&2; exit 1;
+    }
+    "$claude" plugin validate "$stage/package" --strict
+    "$claude" plugin validate "$stage/package/plugins/groundray" --strict
+fi
 GROUNDRAY_CLI= "$helper" check
 version=$(GROUNDRAY_CLI= "$helper" --version)
 [ "$version" = "groundray ${tag#v}" ] || { echo "error: runtime does not match release $tag" >&2; exit 1; }
@@ -155,21 +179,54 @@ fi
 mv "$stage/package" "$marketplace"
 echo "Persistent marketplace: $marketplace"
 if [ -n "$backup" ]; then echo "Previous package retained: $backup"; fi
-"$codex" plugin marketplace add "$marketplace" --json
-"$codex" plugin add groundray@groundray --json
-
-installed=$("$codex" plugin list --marketplace groundray --json)
-printf '%s\n' "$installed"
-if ! printf '%s\n' "$installed" | grep -Eq '"pluginId"[[:space:]]*:[[:space:]]*"groundray@groundray"' ||
-   ! printf '%s\n' "$installed" | grep -Eq '"enabled"[[:space:]]*:[[:space:]]*true'; then
-    echo "error: Groundray is not installed/enabled in the selected Codex catalog" >&2
-    exit 1
-fi
-# Upgrade this plugin only after the new catalog is verified. Keep its former
-# marketplace and all unrelated plugins, including any sharing that marketplace.
-if legacy=$("$codex" plugin list --marketplace groundray-dev --json 2>/dev/null); then
-    if printf '%s\n' "$legacy" | grep -Eq '"pluginId"[[:space:]]*:[[:space:]]*"groundray@groundray-dev"'; then
-        "$codex" plugin remove groundray@groundray-dev --json
+if [ "$host" = claude ]; then
+    "$claude" plugin marketplace add "$marketplace" --scope user --json
+    "$claude" plugin install groundray@groundray --scope user --json
+    "$claude" plugin update groundray@groundray --scope user --json
+    claude_ready() {
+        printf '%s\n' "$1" | awk -v version="${tag#v}" '
+        BEGIN {RS="}"}
+        /"id"[[:space:]]*:[[:space:]]*"groundray@groundray"/ &&
+        /"scope"[[:space:]]*:[[:space:]]*"user"/ &&
+        /"enabled"[[:space:]]*:[[:space:]]*true/ {
+            record=$0
+            sub(/^.*"version"[[:space:]]*:[[:space:]]*"/, "", record)
+            sub(/".*$/, "", record)
+            if (record == version) found=1
+        }
+        END {exit !found}'
+    }
+    installed=$("$claude" plugin list --json)
+    # Enabling an already enabled plugin is an error on Claude Code. Only ask
+    # for that transition when the exact release is not already enabled.
+    if ! claude_ready "$installed"; then
+        "$claude" plugin enable groundray@groundray --scope user --json
+        installed=$("$claude" plugin list --json)
     fi
+    printf '%s\n' "$installed"
+    if ! claude_ready "$installed"; then
+        echo "error: Groundray release is not installed/enabled in the selected Claude user catalog" >&2
+        exit 1
+    fi
+    echo "Groundray installed. Start a fresh session using $claude."
+else
+    "$codex" plugin marketplace add "$marketplace" --json
+    "$codex" plugin add groundray@groundray --json
+
+    installed=$("$codex" plugin list --marketplace groundray --json)
+    printf '%s\n' "$installed"
+    if ! printf '%s\n' "$installed" | grep -Eq '"pluginId"[[:space:]]*:[[:space:]]*"groundray@groundray"' ||
+       ! printf '%s\n' "$installed" | grep -Eq '"enabled"[[:space:]]*:[[:space:]]*true'; then
+        echo "error: Groundray is not installed/enabled in the selected Codex catalog" >&2
+        exit 1
+    fi
+    # Upgrade this plugin only after the new catalog is verified. Keep its former
+    # marketplace and all unrelated plugins, including any sharing that marketplace.
+    if legacy=$("$codex" plugin list --marketplace groundray-dev --json 2>/dev/null); then
+        if printf '%s\n' "$legacy" | grep -Eq '"pluginId"[[:space:]]*:[[:space:]]*"groundray@groundray-dev"'; then
+            "$codex" plugin remove groundray@groundray-dev --json
+        fi
+    fi
+
+    echo "Groundray installed. Start a fresh session using $codex."
 fi
-echo "Groundray installed. Start a fresh session using $codex."
