@@ -52,7 +52,7 @@ def prepare(root: Path, plugin: Path):
                'GIT_CONFIG_GLOBAL': str(seed / 'gitconfig'), 'GIT_CONFIG_NOSYSTEM': '1',
                'GIT_AUTHOR_NAME': 'Groundray fixture', 'GIT_AUTHOR_EMAIL': 'fixture@example.invalid',
                'GIT_COMMITTER_NAME': 'Groundray fixture', 'GIT_COMMITTER_EMAIL': 'fixture@example.invalid'}
-        env.pop('GROUNDRAY_PKB', None)
+        env.pop('GROUNDRAY_CLI', None)
         (seed / 'gitconfig').write_text('[commit]\n\tgpgsign = false\n')
         def call(*args, env=env, seed=seed):
             r = subprocess.run([str(plugin / 'scripts/groundray'), *args], env=env,

@@ -303,7 +303,7 @@ mean every statement is infallible.
 - Standard bundle-root Markdown links are preferred for concept links. Relative
   links are allowed for portability outside renderers that interpret `/` as a
   web root.
-- Resolved `[[wikilinks]]` are an optional Portable KB body extension; use the
+- Resolved `[[wikilinks]]` are an optional Groundray body extension; use the
   standard Markdown view for generic readers. Exact unique slugs, qualified
   paths, UUIDs, display labels and headings follow [link resolution](links.md).
 - Relationship ID fields do not replace readable links and prose.

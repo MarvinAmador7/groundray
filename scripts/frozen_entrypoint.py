@@ -1,6 +1,6 @@
-"""PyInstaller entry point for the standalone Portable KB executable."""
+"""PyInstaller entry point for the standalone Groundray executable."""
 
-from portable_kb.cli import app
+from groundray.cli import app
 
 if __name__ == "__main__":
     app()

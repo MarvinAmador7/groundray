@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/pkb-search-core", "crates/pkb-search-cli"]
+members = ["crates/groundray-search-core", "crates/groundray-search-cli"]
 resolver = "2"
 
 [workspace.package]

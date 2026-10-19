@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb.brains import (
+from groundray.brains import (
     BrainCatalog,
     BrainError,
     GitHubVisibility,
@@ -26,7 +26,7 @@ from portable_kb.brains import (
     sync_brain,
     use_brain,
 )
-from portable_kb.settings import Settings
+from groundray.settings import Settings
 
 ACME_ID = "urn:uuid:11111111-1111-4111-8111-111111111111"
 BETA_ID = "urn:uuid:22222222-2222-4222-8222-222222222222"
@@ -113,7 +113,7 @@ def test_remove_brain_restores_derived_state_when_catalog_save_fails(
     def fail_save(*_args, **_kwargs):
         raise OSError("disk full")
 
-    monkeypatch.setattr("portable_kb.brains.save_catalog", fail_save)
+    monkeypatch.setattr("groundray.brains.save_catalog", fail_save)
     with pytest.raises(OSError, match="disk full"):
         remove_brain("acme", settings)
 
@@ -125,7 +125,7 @@ def test_legacy_demo_detection_requires_exact_identity() -> None:
     legacy = InstalledBrain(
         id="urn:uuid:6e7cc12e-b3f7-49da-875d-32b714fdc1e8",
         slug="portable-kb-core",
-        name="Portable KB Core",
+        name="Groundray Core",
         source="/tmp/source",
         checkout="brains/portable-kb-core",
         commit="1" * 40,
@@ -169,7 +169,7 @@ def test_init_brain_creates_commits_installs_and_activates_local_repository(
     assert _git_output(repository, "branch", "--show-current").strip() == "main"
     assert _git_output(repository, "rev-parse", "HEAD").strip() == result.brain.commit
     assert _git_output(repository, "show", "-s", "--format=%an <%ae>", "HEAD").strip() == (
-        "Portable KB <portable-kb@localhost.invalid>"
+        "Groundray <groundray@localhost.invalid>"
     )
     status = brain_status(settings, as_of="2026-08-13")
     assert status["ok"] is True
@@ -238,8 +238,8 @@ def test_publish_brain_creates_github_repo_pushes_and_updates_distribution_state
         _git(repository, "remote", "add", "origin", str(remote))
         return ""
 
-    monkeypatch.setattr("portable_kb.brains.shutil.which", which)
-    monkeypatch.setattr("portable_kb.brains._run_gh", create_repository)
+    monkeypatch.setattr("groundray.brains.shutil.which", which)
+    monkeypatch.setattr("groundray.brains._run_gh", create_repository)
 
     result, catalog = publish_brain_to_github(
         settings,
@@ -403,7 +403,7 @@ def test_publish_brain_validates_target_and_preserves_local_brain_without_gh(
         publish_brain_to_github(settings, "not-a-repository")
     real_which = __import__("shutil").which
     monkeypatch.setattr(
-        "portable_kb.brains.shutil.which",
+        "groundray.brains.shutil.which",
         lambda command: None if command == "gh" else real_which(command),
     )
     with pytest.raises(BrainError, match="GitHub CLI is required"):
@@ -701,7 +701,7 @@ def test_sync_restores_checkout_when_catalog_write_fails(
     def fail_save(*args, **kwargs) -> None:
         raise OSError("simulated catalog failure")
 
-    monkeypatch.setattr("portable_kb.brains.save_catalog", fail_save)
+    monkeypatch.setattr("groundray.brains.save_catalog", fail_save)
     with pytest.raises(BrainError, match="checkout was restored"):
         sync_brain(settings, "acme", as_of="2026-08-12")
     checkout = installed.checkout_path(settings)

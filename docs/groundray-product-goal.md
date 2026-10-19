@@ -5,10 +5,10 @@ computers, inspect the evidence behind an answer, and exchange reviewed updates
 without losing company scope, original records or decision history.**
 
 Groundray is the intended product: plugin, skill, CLI and shared infrastructure.
-Portable KB supplies the existing engine foundation. This goal is adopted;
-Groundray plugin 0.2.1 and Portable KB 0.2.1 package the implemented local
+Groundray supplies the existing engine foundation. This goal is adopted;
+Groundray plugin 0.2.1 and Groundray 0.2.1 package the implemented local
 workflows and bundled keyword engine. Employee rollout still needs the actual
-two-person hosted handoff and human source inspection. The CLI remains `pkb`;
+two-person hosted handoff and human source inspection. The CLI remains `groundray`;
 no renamed executable or hosted service is claimed.
 
 ## Product contract
@@ -30,7 +30,7 @@ reliable sharing and actual employee use, alongside answer quality.
 | --- | --- | --- |
 | Plugin | Make the selected company, skill and CLI available to the agent. | Versioned native archives and persistent Codex installer; publisher native setup/answer observed with builtin search. Earlier cloud HTTP 403 failures remain historical records. |
 | Skill | Produce answers, evidence and guidance; preserve scoped claims and reasoning during authorized edits. | Full Groundray and Lite exist. Earlier CLI chains and six installed-package participants exercise evidence/updates. Three new-company cases cover bounded forecasts, compiled-only attribution and company definitions; broad reliability and human inspection remain unmeasured. |
-| CLI | Create/install/select brains, retrieve evidence, inspect state, publish and sync. | Existing `pkb` operations, quoted helper, checksum binding and one-process registered-command compatibility checks. Company state remains separate from package updates. |
+| CLI | Create/install/select brains, retrieve evidence, inspect state, publish and sync. | Existing `groundray` operations, quoted helper, checksum binding and one-process registered-command compatibility checks. Company state remains separate from package updates. |
 | Infrastructure | Store published company versions, enforce access and support reviewed collaboration. | Git repositories and host permissions provide the first shared layer. Local packaged proposal/review/publication/sync is exercised. Real hosted employee roles and a separate-computer shared-remote handoff remain gates. |
 
 ## First MVP
@@ -75,7 +75,7 @@ include it. No universal platform support is assumed.
 
 G0 is important because current CLI installation validates an OKF-compatible
 bundle, while the Groundray prototypes can use ordinary wiki conventions. A raw
-Markdown folder is not automatically an installable `pkb` brain. Preserve original
+Markdown folder is not automatically an installable `groundray` brain. Preserve original
 source bytes and meaningful body prose; generate required engine metadata through
 supported tools. Do not silently rewrite originals, discard unknown fields or
 promise whole-wiki import. Any adapter, new source-read surface or profile change

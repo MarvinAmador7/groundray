@@ -60,9 +60,9 @@ Authority entries are not technical permissions to contact anyone, access a
 system or publish changes. Imported labels alone cannot authenticate a person
 or establish that a source is a real corporate record.
 
-## Existing Portable KB storage
+## Existing Groundray storage
 
-When the selected brain already uses Portable KB, its installed skill and supported
+When the selected brain already uses Groundray, its installed skill and supported
 CLI remain the storage interface. Groundray's distinctions can be represented in
 body claim sections and existing source records. Preserve its schema, immutable
 identity and lifecycle; do not add required fields, manually change approval states, or

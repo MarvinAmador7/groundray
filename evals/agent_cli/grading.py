@@ -114,7 +114,7 @@ def _saved_actions_correct(result: dict[str, Any], applied_arguments: list[str])
         for action in (get_action, index_action)
     ):
         return False
-    if get_action[:2] != ["pkb", "get"] or index_action[:3] != ["pkb", "search", "index"]:
+    if get_action[:2] != ["groundray", "get"] or index_action[:3] != ["groundray", "search", "index"]:
         return False
     get_parts = _action_arguments(get_action, 2, {"--brain", "--config", "--as-of"})
     index_parts = _action_arguments(index_action, 3, {"--config", "--as-of"})
@@ -404,7 +404,7 @@ def grade_scenario(
         and item.get("exit_code") == 0
         and re.search(r"\b(cat|sed|head|read|python)\b", item["command"])
         and not re.search(r"\becho\b", item["command"])
-        and "# Portable KB" in item.get("aggregated_output", "")
+        and "# Groundray" in item.get("aggregated_output", "")
         and "Trust" in item.get("aggregated_output", "")
         for item in completed_commands
         if isinstance(item.get("aggregated_output", ""), str)

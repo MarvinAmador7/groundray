@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from portable_kb.parsing import discover_concepts, parse_concept
+from groundray.parsing import discover_concepts, parse_concept
 
 
 def test_discovery_excludes_reserved_and_hidden(bundle: Path) -> None:
@@ -92,7 +92,7 @@ def test_symbolic_link_concepts_are_rejected(bundle: Path) -> None:
     link = bundle / "inbox/external-concept.md"
     link.parent.mkdir()
     link.symlink_to(bundle.parent.parent / "README.md")
-    from portable_kb import validate_bundle
+    from groundray import validate_bundle
 
     report = validate_bundle(bundle, as_of="2026-08-12")
     assert "KB-E007" in {finding.code for finding in report.findings}

@@ -13,15 +13,15 @@ from evals.logistics.harness import fingerprint
 from evals.logistics.oracle import CORRECTION
 from evals.logistics.world import AS_OF, SLUG
 from evals.wiki_compare.harness import load_json
-from portable_kb.brains import brain_status
-from portable_kb.search import get_knowledge
-from portable_kb.settings import load_settings
+from groundray.brains import brain_status
+from groundray.search import get_knowledge
+from groundray.settings import load_settings
 
 
 def profile_summary(profile: cProfile.Profile) -> dict:
     stats = pstats.Stats(profile)
     categories = dict.fromkeys(
-        ("yaml", "jsonschema", "portable_kb", "subprocess", "pathlib", "other"), 0.0
+        ("yaml", "jsonschema", "groundray", "subprocess", "pathlib", "other"), 0.0
     )
     rows = []
     for (file, line, name), (
@@ -36,8 +36,8 @@ def profile_summary(profile: cProfile.Profile) -> dict:
             if "ruamel/yaml" in file
             else "jsonschema"
             if "jsonschema" in file or "referencing" in file
-            else "portable_kb"
-            if "portable_kb/" in file
+            else "groundray"
+            if "groundray/" in file
             else "subprocess"
             if "subprocess.py" in file
             else "pathlib"
@@ -48,8 +48,8 @@ def profile_summary(profile: cProfile.Profile) -> dict:
         rows.append(
             {
                 "function": (
-                    "portable_kb/" + file.split("portable_kb/", 1)[1]
-                    if "portable_kb/" in file
+                    "groundray/" + file.split("groundray/", 1)[1]
+                    if "groundray/" in file
                     else Path(file).name
                 )
                 + f":{line}:{name}",
@@ -76,7 +76,7 @@ def measure(case: Path, output: Path, *, samples=3) -> dict:
     if output.exists() or not 1 <= samples <= 10:
         raise ValueError("Use fresh profile output and 1–10 samples")
     output.mkdir(parents=True)
-    settings = load_settings(case / "home/.config/portable-kb/config.yaml")
+    settings = load_settings(case / "home/.config/groundray/config.yaml")
     path = "inbox/" + CORRECTION
     actual = command(
         case, "get", path, "--brain", SLUG, "--as-of", AS_OF, "--json", actor="profiler"
@@ -141,7 +141,7 @@ def measure(case: Path, output: Path, *, samples=3) -> dict:
     after = {"source": repository_snapshot(source), "checkout": repository_snapshot(checkout)}
     if before != after:
         raise ValueError("Profiling modified canonical content")
-    package = Path(__file__).parents[2] / "src/portable_kb"
+    package = Path(__file__).parents[2] / "src/groundray"
     result = {
         "samples": samples,
         "documents": 220,

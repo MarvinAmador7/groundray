@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb.settings import (
+from groundray.settings import (
     SearchMode,
     Settings,
     SettingsError,
@@ -57,6 +57,6 @@ def test_xdg_defaults_are_isolated(monkeypatch: pytest.MonkeyPatch, tmp_path: Pa
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path / "config"))
     monkeypatch.setenv("XDG_DATA_HOME", str(tmp_path / "data"))
     monkeypatch.setenv("XDG_CACHE_HOME", str(tmp_path / "cache"))
-    assert default_config_path() == tmp_path / "config/portable-kb/config.yaml"
-    assert default_data_dir() == tmp_path / "data/portable-kb"
-    assert default_cache_dir() == tmp_path / "cache/portable-kb"
+    assert default_config_path() == tmp_path / "config/groundray/config.yaml"
+    assert default_data_dir() == tmp_path / "data/groundray"
+    assert default_cache_dir() == tmp_path / "cache/groundray"

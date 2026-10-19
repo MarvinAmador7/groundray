@@ -54,15 +54,15 @@ def test_native_rollback_search_requires_saved_current_citation_and_index_order(
         "started_ns": 111,
         "stdout": json.dumps({"results": [hit]}),
     }
-    assert saved_duration_searchable("portable-kb", [], [save, index, query], pages, 7)
-    assert not saved_duration_searchable("portable-kb", [], [index, query], pages, 7)
+    assert saved_duration_searchable("groundray", [], [save, index, query], pages, 7)
+    assert not saved_duration_searchable("groundray", [], [index, query], pages, 7)
     index["started_ns"] = 99
-    assert not saved_duration_searchable("portable-kb", [], [save, index, query], pages, 7)
+    assert not saved_duration_searchable("groundray", [], [save, index, query], pages, 7)
     index["started_ns"] = 101
     query["stdout"] = json.dumps(
         {"results": [{**hit, "citation": {**citation, "commit": "stale"}}]}
     )
-    assert not saved_duration_searchable("portable-kb", [], [save, index, query], pages, 7)
+    assert not saved_duration_searchable("groundray", [], [save, index, query], pages, 7)
 
 
 def test_wiki_search_requires_final_current_line_not_only_historical_value():
@@ -150,7 +150,7 @@ def test_recovery_requests_explicitly_match_controller_and_user_intent():
     assert "kb-fault checkpoint" in taskset["concurrent-update"]["request"]
     assert "checkpoint" not in taskset["rollback-amendment"]["request"]
     assert taskset["stale-citation"]["writes"] == []
-    assert "Portable KB arm only" in taskset["interrupted-move"]["request"]
+    assert "Groundray arm only" in taskset["interrupted-move"]["request"]
 
 
 def test_wiki_copied_evidence_can_be_renamed_but_not_changed_or_escape_raw(tmp_path):

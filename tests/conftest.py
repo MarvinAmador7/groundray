@@ -47,8 +47,8 @@ def brain_repo_factory(tmp_path: Path) -> Callable[[str, str], Path]:
             encoding="utf-8",
         )
         _git(repository, "init", "--quiet", "--initial-branch=main")
-        _git(repository, "config", "user.name", "Portable KB Tests")
-        _git(repository, "config", "user.email", "portable-kb-tests@example.invalid")
+        _git(repository, "config", "user.name", "Groundray Tests")
+        _git(repository, "config", "user.email", "groundray-tests@example.invalid")
         _git(repository, "config", "commit.gpgsign", "false")
         _git(repository, "add", "brain.yaml", "knowledge")
         _git(repository, "commit", "--quiet", "-m", "Create test brain")

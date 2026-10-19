@@ -7,17 +7,18 @@ describe retrieval/integrations. Phases are gates, not calendar estimates.
 
 The adopted [Groundray product goal](groundray-product-goal.md) combines an agent
 plugin, the **answer → evidence → guidance** skill, a CLI and Git-backed shared
-company brains. Portable KB supplies the engine foundation. The product target
+company brains. The CLI and deterministic library provide the engine foundation. The product target
 is employees on separate computers recovering the same published evidence and
 decisions, proposing reviewed changes and syncing without losing history or scope.
 
 The next delivery sequence is **storage/interface fit → two-employee workflow →
 Groundray packaging → employee pilot**. These milestones are defined in the goal;
 [versioned plugin packaging](groundray-plugin.md), persistent installation and
-local collaboration tests are implemented for 0.2.1. Publisher native setup and
+local collaboration tests shipped in 0.2.1. The breaking 0.3.0 rename uses
+Groundray consistently for the repository, CLI and Python package. Publisher native setup and
 a fictional business answer have been observed; employee rollout still needs
 the actual hosted handoff and human source inspection. Existing
-`pkb` commands and profile behavior remain the implementation baseline. Broader
+`groundray` commands and profile behavior remain the implementation baseline. Broader
 hosted infrastructure, custom authorization and external integrations keep their
 separate scope gates.
 
@@ -38,8 +39,8 @@ handoff remain open for G1. No profile change was needed.
 | Phase | Status | Evidence |
 |---|---|---|
 | 0 — Research and decisions | Implemented | The upstream revision and local decisions are pinned in `docs/profile-decisions.md`; deployment reviewer identities remain safely empty until real people configure them. |
-| 1 — Core file model | Implemented | The isolated reference fixture exercises fourteen representative concepts across five active types, indexes, a log, and bundle configuration. Production brains are created in separate repositories with `pkb brain init`. |
-| 2 — Validation | Implemented | `portable_kb.validate_bundle()` covers the rule catalog with stable structured findings and offline explicit-date behavior. |
+| 1 — Core file model | Implemented | The isolated reference fixture exercises fourteen representative concepts across five active types, indexes, a log, and bundle configuration. Production brains are created in separate repositories with `groundray brain init`. |
+| 2 — Validation | Implemented | `groundray.validate_bundle()` covers the rule catalog with stable structured findings and offline explicit-date behavior. |
 | 3 — Lifecycle operations | Implemented | Reviewable planners cover create, update, promote, reverify, move, supersede, and archive with base/proposed validation and optimistic application. The CLI exposes plan-first create, update, and mechanical move. |
 | 4 — Test corpus | Implemented | Focused fixtures and transition/operation tests assert every catalog rule; time and network behavior are deterministic. |
 | 5 — Retrieval and CLI consumers | In progress | Inline/non-interactive setup, checksum-verified standalone CLI releases, local-first brain initialization with optional GitHub publication, plan-first draft creation and material update, explicit validated fast-forward push/sync, brain distribution, QMD BM25 search, complete-item retrieval, read-only links/backlinks and derived Markdown views, and setup-integrated Codex/Claude skill installation are implemented. The keyword provider boundary, labeled evaluation harness, normalized section records, SQLite/Tantivy prototypes, initial shared-corpus benchmarks, and native atomic rebuild/recovery with concurrent readers and reader-safe generation cleanup are implemented. Tantivy is integrated as the builtin provider, and native distribution is wired into the 0.2.0 release gate. Remote release validation, representative domain evaluations, semantic/hybrid retrieval, and trust filtering remain pending. |
@@ -225,7 +226,7 @@ search is the default setup tier and requires no model download.
 
 **Deliverables:**
 
-- `pkb` command with inline and non-interactive setup parity;
+- `groundray` command with inline and non-interactive setup parity;
 - versioned local settings and XDG-aware data/cache locations;
 - a brain manifest, local catalog, Git initialization/publication/install/sync,
   and commit lock contract (local-first empty-repository initialization,
@@ -262,10 +263,10 @@ model-dependent embeddings, and hidden filtering.
 authorization, cross-organization multitenancy, background synchronization,
 MCP publication, and serving APIs.
 
-See [the built-in search plan](pkb-search.md) for the provider sequence and
+See [the built-in search plan](groundray-search.md) for the provider sequence and
 [retrieval evaluation](retrieval-evaluation.md) for labels, metrics, and the
 starter baseline's limits. See [Atlas Logistics](logistics-benchmark.md) for the
-larger matched wiki/Portable KB corpus, actual-agent workflows and independent
+larger matched wiki/Groundray corpus, actual-agent workflows and independent
 outcome checks.
 
 ## Phase 6 — External integrations (high level only)

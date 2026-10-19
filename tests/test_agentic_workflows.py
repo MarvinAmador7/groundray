@@ -177,11 +177,11 @@ def test_source_history_creation_and_unknown_fields_survive_updates():
     }
     current = copy.deepcopy(old)
     current["metadata"]["sources"].append({"resource": "new"})
-    assert preserved(old, current, "portable-kb")
+    assert preserved(old, current, "groundray")
     for field in ("id", "created_at", "sources", "x-unknown"):
         altered = copy.deepcopy(current)
         altered["metadata"].pop(field)
-        assert not preserved(old, altered, "portable-kb")
+        assert not preserved(old, altered, "groundray")
 
 
 def plan(apply=False, digest_value="a", attached=False):
@@ -254,7 +254,7 @@ def test_workflow_comparison_refuses_unmatched_protocol(tmp_path, field):
         compare(
             {"manifest": {**m, "arm": "wiki"}, "grader_sha256": "rubric"},
             {
-                "manifest": {**m, "arm": "portable-kb", field: "different"},
+                "manifest": {**m, "arm": "groundray", field: "different"},
                 "grader_sha256": "rubric",
             },
             tmp_path / "comparison",
@@ -264,7 +264,7 @@ def test_workflow_comparison_refuses_unmatched_protocol(tmp_path, field):
 def test_native_unsupported_move_is_blocked_only_with_observed_help_and_no_change(tmp_path):
     case = wiki_case(tmp_path, "runbook-move")
     config = json.loads((case / "case.json").read_text())
-    config["arm"] = "portable-kb"
+    config["arm"] = "groundray"
     write_json(case / "case.json", config)
     state = json.loads((case / "initial-state.json").read_text())
     state["catalog"] = {"active": "sim-northstar"}

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from portable_kb.changes import diff_trees
-from portable_kb.models import ValidationReport
+from groundray.changes import diff_trees
+from groundray.models import ValidationReport
 
 
 def test_tree_diff_classifies_and_applies_all_change_kinds(tmp_path: Path) -> None:

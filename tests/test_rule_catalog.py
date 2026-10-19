@@ -5,7 +5,7 @@ from pathlib import Path
 
 from ruamel.yaml import YAML
 
-from portable_kb import validate_bundle, validate_transition
+from groundray import validate_bundle, validate_transition
 
 
 def codes(bundle: Path, as_of: str = "2026-08-12") -> set[str]:

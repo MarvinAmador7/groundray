@@ -1,7 +1,7 @@
 # Original source records
 
 The source-tree CLI supports **plan-first UTF-8 capture and saved-version reading**
-through `pkb source capture` and `pkb source get`. These commands are implemented
+through `groundray source capture` and `groundray source get`. These commands are implemented
 on the draft Groundray branch, not yet included in a tagged release. They preserve
 original evidence separately from the wiki's governed explanations. No KB profile
 field, concept type or lifecycle status changes.
@@ -9,7 +9,7 @@ field, concept type or lifecycle status changes.
 ## Capture a supplied record
 
 ```console
-pkb source capture ./owner-rules.md \
+groundray source capture ./owner-rules.md \
   --path references/captures/owner/owner-rules.md \
   --actor openai/codex \
   --title "Supplied company rules" \
@@ -47,7 +47,7 @@ workflow to explain the new evidence and update only the applicable dependents.
 
 Each copy has an adjacent `.capture.json` receipt recording stored path, original
 basename, title, byte count, SHA-256, actual capture actor/time and optional
-caller-supplied origin. The default actor is `process:portable-kb`, the CLI process;
+caller-supplied origin. The default actor is `process:groundray`, the CLI process;
 agents can supply their real producer identity with `--actor`.
 
 The actor captured a copy; the receipt does not identify that actor as the original
@@ -67,14 +67,14 @@ Git blob before activation.
 Read a managed capture directly:
 
 ```console
-pkb source get references/captures/owner/owner-rules.md.txt \
+groundray source get references/captures/owner/owner-rules.md.txt \
   --brain company --json
 ```
 
 Or select a local source declared by a knowledge item:
 
 ```console
-pkb source get wiki/customer-pricing.md owner --brain company --json
+groundray source get wiki/customer-pricing.md owner --brain company --json
 ```
 
 Here `owner` is the item's `sources[].id`. Item-relative and bundle-root source

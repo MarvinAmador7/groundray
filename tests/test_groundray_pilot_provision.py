@@ -29,7 +29,7 @@ def test_plan_limits_repository_scope_and_detects_changed_packet(tmp_path):
         plan('fullkontrol/groundray-pilot-mosaic', 'KarolGarcia712', root,
              publisher='MarvinAmador7', resume_base='main')
     with pytest.raises(ValueError, match='dedicated'):
-        plan('MarvinAmador7/portable-kb', 'KarolGarcia712', root)
+        plan('MarvinAmador7/groundray', 'KarolGarcia712', root)
     (root / 'brain/extra-private-notes.txt').write_text('Never seed this by accident')
     with pytest.raises(ValueError, match='changed'):
         plan('MarvinAmador7/groundray-pilot-mosaic', 'KarolGarcia712', root)

@@ -86,7 +86,7 @@ as a workflow difference, rather than automatically treated as semantic failure.
 The corpus deliberately contains authority and scope traps; it is not sampled
 from real businesses. Both skills are explicitly loaded and run on one inherited,
 unreported chat model. Two repetitions give descriptive results only. This is
-Markdown skill evaluation, not a Portable KB CLI comparison. The fixture's fictional
+Markdown skill evaluation, not a Groundray CLI comparison. The fixture's fictional
 approval records are supplied evidence, not independently authenticated approvals.
 Case boundaries and observer use are agent instructions, not OS-enforced isolation.
 Tokens, cost and reasoning traces may be unavailable; elapsed time includes thinking.

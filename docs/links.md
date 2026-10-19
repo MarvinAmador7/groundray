@@ -3,10 +3,10 @@
 Use links to explain relationships in prose, then follow their canonical items:
 
 ```sh
-pkb links "customer-onboarding" --brain team --json
-pkb backlinks "customer-onboarding" --brain team --json
-pkb get "[[procedures/customer-onboarding]]" --brain team --json
-pkb get "customer-onboarding" --brain team --markdown-links --json
+groundray links "customer-onboarding" --brain team --json
+groundray backlinks "customer-onboarding" --brain team --json
+groundray get "[[procedures/customer-onboarding]]" --brain team --json
+groundray get "customer-onboarding" --brain team --markdown-links --json
 ```
 
 These commands read a clean, validated, pinned installed brain. They do not need
@@ -17,7 +17,7 @@ checkouts through the same health gate as `get` and search.
 ## Authoring links
 
 Standard inline Markdown links remain supported. Wikilinks are an optional
-Portable KB body-syntax extension; upstream OKF specifies standard Markdown
+Groundray body-syntax extension; upstream OKF specifies standard Markdown
 links. Generic readers may display wikilinks literally. Use the Markdown view
 when sharing with a standard Markdown reader. Reserved indexes and logs keep
 their existing standard Markdown format.

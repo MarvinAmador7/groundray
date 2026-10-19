@@ -20,10 +20,10 @@ from evals.agent_cli.harness import (
 )
 from evals.wiki_compare.agentic import graph
 from evals.wiki_compare.harness import load_json, snapshot, wiki_pages
-from portable_kb.links import LinkIndex
-from portable_kb.parsing import discover_concepts, parse_concept
-from portable_kb.search import _plain_value
-from portable_kb.validation import validate_bundle
+from groundray.links import LinkIndex
+from groundray.parsing import discover_concepts, parse_concept
+from groundray.search import _plain_value
+from groundray.validation import validate_bundle
 
 from .oracle import EVIDENCE, MOVE_FROM, final_schema, retrieval_labels, tasks
 from .world import AS_OF, SLUG, VERSION, emit, make_world
@@ -61,10 +61,10 @@ def generate(output: Path, seed=20261008) -> dict:
     world, ids = load_json(output / "world.json"), load_json(output / "identities.json")
     write_json(output / "oracle.json", {"version": VERSION, "tasks": tasks(world)})
     write_json(output / "retrieval-labels.json", retrieval_labels(world, ids))
-    report = validate_bundle(output / "portable-kb/knowledge", as_of=AS_OF)
+    report = validate_bundle(output / "groundray/knowledge", as_of=AS_OF)
     if not report.profile_passes:
         raise ValueError(report.render_text())
-    native = LinkIndex.load(output / "portable-kb/knowledge")
+    native = LinkIndex.load(output / "groundray/knowledge")
     # LinkIndex.load includes SCHEMA and raw docs in the wiki; use knowledge pages only.
     wiki = LinkIndex(
         [
@@ -91,7 +91,7 @@ def generate(output: Path, seed=20261008) -> dict:
                 if edge["target"] == MOVE_FROM and Path(edge["source"]).name != "index.md"
             }
         ),
-        native_sha256=fingerprint(snapshot(output / "portable-kb/knowledge")),
+        native_sha256=fingerprint(snapshot(output / "groundray/knowledge")),
         wiki_sha256=fingerprint(snapshot(output / "wiki")),
         world_sha256=digest(output / "world.json"),
         oracle_sha256=digest(output / "oracle.json"),
@@ -152,7 +152,7 @@ def observe(case: Path, initial=False) -> dict:
             state["catalog"] = command(case, "brain", "list", "--json", actor="observer")
             state["valid"] &= bool(status.get("ok"))
             state["pages"] = native_pages(root, status)
-            checkout = case / "home/.local/share/portable-kb/brains" / SLUG
+            checkout = case / "home/.local/share/groundray/brains" / SLUG
             state["snapshots"] = {
                 "primary": repository_snapshot(root.parent),
                 "primary-checkout": repository_snapshot(checkout),
@@ -211,7 +211,7 @@ def prepare(
         raise ValueError("Keep output separate from frozen corpus and inputs")
     manifest, oracle = load_json(corpus / "manifest.json"), load_json(corpus / "oracle.json")
     if (
-        fingerprint(snapshot(corpus / "portable-kb/knowledge")) != manifest["native_sha256"]
+        fingerprint(snapshot(corpus / "groundray/knowledge")) != manifest["native_sha256"]
         or fingerprint(snapshot(corpus / "wiki")) != manifest["wiki_sha256"]
         or digest(corpus / "oracle.json") != manifest["oracle_sha256"]
         or digest(corpus / "world.json") != manifest["world_sha256"]
@@ -241,7 +241,7 @@ def prepare(
         "--json",
     )
     shutil.rmtree(source / "knowledge")
-    shutil.copytree(corpus / "portable-kb/knowledge", source / "knowledge")
+    shutil.copytree(corpus / "groundray/knowledge", source / "knowledge")
     git(controller, source, "add", "knowledge")
     git(controller, source, "commit", "--quiet", "-m", "Seed frozen fictional Atlas corpus")
     command(controller, "brain", "sync", SLUG, "--as-of", AS_OF, "--json")
@@ -251,7 +251,7 @@ def prepare(
         controller, "search", "evaluate", str(labels), "--brain", SLUG, "--as-of", AS_OF
     )
     write_json(output / "retrieval-baseline.json", retrieval)
-    for arm in ("wiki", "portable-kb"):
+    for arm in ("wiki", "groundray"):
         arm_root = output / arm
         arm_root.mkdir()
         names = []
@@ -259,15 +259,15 @@ def prepare(
             for name in selected:
                 task = oracle["tasks"][name]
                 case = arm_root / f"{name}-r{repeat}"
-                if arm == "portable-kb":
+                if arm == "groundray":
                     _new_directory(case, cli, 300)
                     shutil.copytree(source, case / "work/source")
                     command(
                         case, "brain", "add", str(case / "work/source"), "--as-of", AS_OF, "--json"
                     )
                     command(case, "search", "index", SLUG, "--as-of", AS_OF, "--json")
-                    skill = case / "home/.agents/skills/portable-kb/SKILL.md"
-                    interface = f"Use the actual pkb CLI and installed skill at {skill}. Scope every operation that accepts a brain selector with --brain {SLUG} (index/status slug is positional). Global commands such as doctor use no --brain flag; use their supported help/options. Logical page paths below correspond to inbox/<path> in this brain. Never read/write raw managed files, use raw Git or product Python APIs. Local authoring through inspected supported plan/apply commands is authorized only where requested."
+                    skill = case / "home/.agents/skills/groundray-storage/SKILL.md"
+                    interface = f"Use the actual groundray CLI and installed skill at {skill}. Scope every operation that accepts a brain selector with --brain {SLUG} (index/status slug is positional). Global commands such as doctor use no --brain flag; use their supported help/options. Logical page paths below correspond to inbox/<path> in this brain. Never read/write raw managed files, use raw Git or product Python APIs. Local authoring through inspected supported plan/apply commands is authorized only where requested."
                 else:
                     case.mkdir()
                     (case / "work").mkdir()
@@ -281,7 +281,7 @@ def prepare(
                     config = load_json(case / "bin/shim.json")
                     config["product_environment"]["WIKI_PATH"] = str(case / "work/wiki")
                     write_json(case / "bin/shim.json", config)
-                    interface = f"Use the supplied wiki skill at {skill} and ordinary shell/file tools with WIKI_PATH={case / 'work/wiki'}. Read schema/navigation/recent log and complete relevant pages. Follow native wiki conventions, preserve creation/source history and unknown fields, update navigation and append the log for requested changes. Never alter schema or existing raw evidence. Do not use Portable KB. Incoming sources may be copied unchanged into raw/."
+                    interface = f"Use the supplied wiki skill at {skill} and ordinary shell/file tools with WIKI_PATH={case / 'work/wiki'}. Read schema/navigation/recent log and complete relevant pages. Follow native wiki conventions, preserve creation/source history and unknown fields, update navigation and append the log for requested changes. Never alter schema or existing raw evidence. Do not use Groundray. Incoming sources may be copied unchanged into raw/."
                 evidence = case / "work/evidence"
                 evidence.mkdir()
                 if task.get("input"):
@@ -393,7 +393,7 @@ def compare(wiki: dict, native: dict, output: Path) -> dict:
     )
     if (
         wiki["manifest"]["arm"] != "wiki"
-        or native["manifest"]["arm"] != "portable-kb"
+        or native["manifest"]["arm"] != "groundray"
         or any(wiki["manifest"][k] != native["manifest"][k] for k in keys)
         or wiki["manifest"].get("protocol_version", 1)
         != native["manifest"].get("protocol_version", 1)
@@ -405,9 +405,9 @@ def compare(wiki: dict, native: dict, output: Path) -> dict:
         raise ValueError("Unmatched executed case coverage")
     result = {
         "wiki": wiki["totals"],
-        "portable-kb": native["totals"],
+        "groundray": native["totals"],
         "pairs": [
-            {"task": k[0], "repetition": k[1], "wiki": arms[0][k], "portable-kb": arms[1][k]}
+            {"task": k[0], "repetition": k[1], "wiki": arms[0][k], "groundray": arms[1][k]}
             for k in sorted(arms[0])
         ],
         "grader_sha256": wiki["grader_sha256"],

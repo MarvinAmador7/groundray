@@ -7,10 +7,10 @@ from pathlib import Path
 
 from typer.testing import CliRunner
 
-from portable_kb import __version__
-from portable_kb.authoring import GenerationMethod, KnowledgeType, Sensitivity
-from portable_kb.brain_prompt import BrainInitInputs, BrainPublishChoice
-from portable_kb.brains import (
+from groundray import __version__
+from groundray.authoring import GenerationMethod, KnowledgeType, Sensitivity
+from groundray.brain_prompt import BrainInitInputs, BrainPublishChoice
+from groundray.brains import (
     BrainError,
     BrainPublishResult,
     GitHubVisibility,
@@ -18,11 +18,11 @@ from portable_kb.brains import (
     load_catalog,
     save_catalog,
 )
-from portable_kb.cli import app
-from portable_kb.knowledge_prompt import KnowledgeCreateInputs
-from portable_kb.parsing import discover_concepts
-from portable_kb.settings import SearchMode, Settings, load_settings, save_settings
-from portable_kb.skills import SkillError
+from groundray.cli import app
+from groundray.knowledge_prompt import KnowledgeCreateInputs
+from groundray.parsing import discover_concepts
+from groundray.settings import SearchMode, Settings, load_settings, save_settings
+from groundray.skills import SkillError
 
 runner = CliRunner()
 
@@ -31,7 +31,7 @@ def test_cli_reports_package_version() -> None:
     result = runner.invoke(app, ["--version"])
 
     assert result.exit_code == 0
-    assert result.output.strip() == f"pkb {__version__}"
+    assert result.output.strip() == f"groundray {__version__}"
 
 
 def test_non_interactive_setup_and_doctor(tmp_path: Path, monkeypatch) -> None:
@@ -56,12 +56,12 @@ def test_non_interactive_setup_and_doctor(tmp_path: Path, monkeypatch) -> None:
         ],
     )
     assert result.exit_code == 0, result.output
-    assert "Portable KB configured" in result.output
+    assert "Groundray configured" in result.output
     assert load_settings(config).search_mode is SearchMode.SEMANTIC
 
-    monkeypatch.setattr("portable_kb.cli.shutil.which", lambda command: f"/opt/bin/{command}")
+    monkeypatch.setattr("groundray.cli.shutil.which", lambda command: f"/opt/bin/{command}")
     monkeypatch.setattr(
-        "portable_kb.cli.qmd_status",
+        "groundray.cli.qmd_status",
         lambda _settings: {
             "command": "qmd",
             "path": "/opt/bin/qmd",
@@ -95,13 +95,13 @@ def test_non_interactive_setup_can_install_agent_skill(tmp_path: Path, monkeypat
     def installed(target, *, force=False):
         calls.append((target, force))
         return {
-            "skill": "portable-kb",
-            "targets": {"codex": "/tmp/codex/portable-kb"},
+            "skill": "groundray",
+            "targets": {"codex": "/tmp/codex/groundray"},
             "unchanged": [],
             "ok": True,
         }
 
-    monkeypatch.setattr("portable_kb.cli.install_agent_skill", installed)
+    monkeypatch.setattr("groundray.cli.install_agent_skill", installed)
     result = runner.invoke(
         app,
         [
@@ -117,7 +117,7 @@ def test_non_interactive_setup_can_install_agent_skill(tmp_path: Path, monkeypat
 
     assert result.exit_code == 0, result.output
     assert calls == [("codex", True)]
-    assert "Installed Portable KB agent skill" in result.output
+    assert "Installed Groundray agent skill" in result.output
 
 
 def test_interactive_setup_requires_a_terminal(tmp_path: Path) -> None:
@@ -160,7 +160,7 @@ def test_doctor_reports_active_brain_index_legacy_and_skill_warning(
         encoding="utf-8",
     )
     monkeypatch.setattr(
-        "portable_kb.cli.qmd_status",
+        "groundray.cli.qmd_status",
         lambda _settings: {
             "command": "qmd",
             "path": "/opt/bin/qmd",
@@ -172,7 +172,7 @@ def test_doctor_reports_active_brain_index_legacy_and_skill_warning(
         },
     )
     monkeypatch.setattr(
-        "portable_kb.cli.skill_status",
+        "groundray.cli.skill_status",
         lambda: {"ok": False, "targets": {"codex": {"state": "outdated"}}},
     )
 
@@ -394,7 +394,7 @@ def test_brain_publish_cli_uses_explicit_org_repo(tmp_path: Path, monkeypatch) -
             load_catalog(settings),
         )
 
-    monkeypatch.setattr("portable_kb.cli.publish_brain_to_github", published)
+    monkeypatch.setattr("groundray.cli.publish_brain_to_github", published)
     result = runner.invoke(
         app,
         [
@@ -435,7 +435,7 @@ def test_brain_push_cli_reports_machine_and_human_results(tmp_path: Path, monkey
             "ok": True,
         }
 
-    monkeypatch.setattr("portable_kb.cli.push_brain", pushed)
+    monkeypatch.setattr("groundray.cli.push_brain", pushed)
     machine = runner.invoke(
         app,
         [
@@ -456,7 +456,7 @@ def test_brain_push_cli_reports_machine_and_human_results(tmp_path: Path, monkey
     human = runner.invoke(app, ["brain", "push", "--config", str(config)])
     assert human.exit_code == 0, human.output
     assert "◆ Shared brain: Business" in human.output
-    assert "pkb brain sync" in human.output
+    assert "groundray brain sync" in human.output
 
     def unchanged(*_args, **_kwargs):
         result = pushed(settings, "business", as_of="2026-08-13")
@@ -464,7 +464,7 @@ def test_brain_push_cli_reports_machine_and_human_results(tmp_path: Path, monkey
         result["validation_warnings"] = [{"code": "review.required"}]
         return result
 
-    monkeypatch.setattr("portable_kb.cli.push_brain", unchanged)
+    monkeypatch.setattr("groundray.cli.push_brain", unchanged)
     current = runner.invoke(app, ["brain", "push", "--config", str(config)])
     assert current.exit_code == 0, current.output
     assert "Brain is already shared: business" in current.output
@@ -478,7 +478,7 @@ def test_brain_push_cli_exposes_safe_failure(tmp_path: Path, monkeypatch) -> Non
     def failed(*_args, **_kwargs):
         raise BrainError("organization knowledge is newer")
 
-    monkeypatch.setattr("portable_kb.cli.push_brain", failed)
+    monkeypatch.setattr("groundray.cli.push_brain", failed)
     result = runner.invoke(app, ["brain", "push", "--config", str(config), "--json"])
 
     assert result.exit_code == 1
@@ -659,13 +659,13 @@ def test_brain_init_interactive_flow_creates_locally_then_publishes(
     settings = Settings(data_dir=tmp_path / "data", cache_dir=tmp_path / "cache")
     save_settings(settings, config)
     repository = tmp_path / "interactive"
-    monkeypatch.setattr("portable_kb.cli._interactive_terminal", lambda: True)
+    monkeypatch.setattr("groundray.cli._interactive_terminal", lambda: True)
     monkeypatch.setattr(
-        "portable_kb.cli.run_brain_init_prompts",
+        "groundray.cli.run_brain_init_prompts",
         lambda **_kwargs: BrainInitInputs(repository, "Interactive Brain", "interactive-brain"),
     )
     monkeypatch.setattr(
-        "portable_kb.cli.run_brain_publish_prompt",
+        "groundray.cli.run_brain_publish_prompt",
         lambda *_args, **_kwargs: BrainPublishChoice(
             "acme/interactive-brain",
             GitHubVisibility.PRIVATE,
@@ -680,7 +680,7 @@ def test_brain_init_interactive_flow_creates_locally_then_publishes(
             catalog,
         )
 
-    monkeypatch.setattr("portable_kb.cli.publish_brain_to_github", published)
+    monkeypatch.setattr("groundray.cli.publish_brain_to_github", published)
     result = runner.invoke(
         app,
         ["brain", "init", "--config", str(config), "--as-of", "2026-08-13"],
@@ -703,7 +703,7 @@ def test_brain_init_keeps_local_result_when_explicit_publication_fails(
     def failed(*_args, **_kwargs):
         raise BrainError("simulated GitHub failure")
 
-    monkeypatch.setattr("portable_kb.cli.publish_brain_to_github", failed)
+    monkeypatch.setattr("groundray.cli.publish_brain_to_github", failed)
     result = runner.invoke(
         app,
         [
@@ -838,7 +838,7 @@ This definition gives product and customer-success teams a shared milestone.
     assert applied_payload["retrieval_ready"] is True
     assert applied_payload["citation"]["item_id"] == applied_payload["item_id"]
     assert applied_payload["citation"]["commit"] == applied_payload["saved_version"]
-    assert applied_payload["reindex_command"] == ["pkb", "search", "index", "authoring-brain", "--json", "--config", str(config), "--as-of", "2026-08-13"]
+    assert applied_payload["reindex_command"] == ["groundray", "search", "index", "authoring-brain", "--json", "--config", str(config), "--as-of", "2026-08-13"]
     retrieved = runner.invoke(app, applied_payload["get_command"][1:])
     assert retrieved.exit_code == 0, retrieved.output
     retrieved_payload = json.loads(retrieved.output)
@@ -989,7 +989,7 @@ def test_knowledge_update_cli_plans_then_saves_by_path(tmp_path: Path) -> None:
     assert "◆ Update saved" in human_apply.output
     assert "Active brain updated: Update Brain" in human_apply.output
     assert "Ready for complete-item retrieval" in human_apply.output
-    assert "Search needs an index rebuild: pkb search index update-brain" in human_apply.output
+    assert "Search needs an index rebuild: groundray search index update-brain" in human_apply.output
     assert "Not shared with the organization" in human_apply.output
 
     missing_change = runner.invoke(
@@ -1116,9 +1116,9 @@ def test_knowledge_create_cli_interactive_preview_and_apply(tmp_path: Path, monk
         ],
     )
     assert initialized.exit_code == 0, initialized.output
-    monkeypatch.setattr("portable_kb.cli._interactive_terminal", lambda: True)
+    monkeypatch.setattr("groundray.cli._interactive_terminal", lambda: True)
     monkeypatch.setattr(
-        "portable_kb.cli.run_knowledge_create_prompts",
+        "groundray.cli.run_knowledge_create_prompts",
         lambda **_kwargs: KnowledgeCreateInputs(
             item_type=KnowledgeType.QUESTION,
             title="Which onboarding checkpoint matters",
@@ -1142,7 +1142,7 @@ The answer changes how the team measures onboarding.
             sensitivity=Sensitivity.INTERNAL,
         ),
     )
-    monkeypatch.setattr("portable_kb.cli.confirm_knowledge_apply", lambda **_kwargs: True)
+    monkeypatch.setattr("groundray.cli.confirm_knowledge_apply", lambda **_kwargs: True)
 
     result = runner.invoke(
         app,
@@ -1153,7 +1153,7 @@ The answer changes how the team measures onboarding.
     assert "Validated draft plan: inbox/onboarding-checkpoint.md" in result.output
     assert "◆ Draft saved" in result.output
     assert "Ready for complete-item retrieval" in result.output
-    assert "Search needs an index rebuild: pkb search index interactive-authoring" in result.output
+    assert "Search needs an index rebuild: groundray search index interactive-authoring" in result.output
     assert "+Which checkpoint best predicts activation?" in result.output
     assert "+status: draft" in result.output
     assert "Not shared with the organization" in result.output
@@ -1271,30 +1271,30 @@ def test_search_cli_indexes_and_returns_json_citations(
 def test_skill_install_cli(monkeypatch) -> None:
     def installed(target, *, force=False):
         return {
-            "skill": "portable-kb",
-            "targets": {target.value: f"/tmp/{target.value}/portable-kb"},
+            "skill": "groundray",
+            "targets": {target.value: f"/tmp/{target.value}/groundray"},
             "forced": force,
             "ok": True,
         }
 
-    monkeypatch.setattr("portable_kb.cli.install_agent_skill", installed)
+    monkeypatch.setattr("groundray.cli.install_agent_skill", installed)
     result = runner.invoke(
         app,
         ["skill", "install", "--target", "codex", "--force", "--json"],
     )
     assert result.exit_code == 0, result.output
     payload = json.loads(result.output)
-    assert payload["targets"]["codex"] == "/tmp/codex/portable-kb"
+    assert payload["targets"]["codex"] == "/tmp/codex/groundray"
     assert payload["forced"] is True
 
     human = runner.invoke(app, ["skill", "install", "--target", "claude"])
     assert human.exit_code == 0, human.output
-    assert "Installed Portable KB agent skill" in human.output
+    assert "Installed Groundray agent skill" in human.output
 
     def failed(target, *, force=False):
         raise SkillError("cannot install skill")
 
-    monkeypatch.setattr("portable_kb.cli.install_agent_skill", failed)
+    monkeypatch.setattr("groundray.cli.install_agent_skill", failed)
     error = runner.invoke(app, ["skill", "install"])
     assert error.exit_code == 1
     assert "cannot install skill" in error.output
@@ -1302,14 +1302,14 @@ def test_skill_install_cli(monkeypatch) -> None:
 
 def test_skill_status_cli_reports_drift(monkeypatch) -> None:
     monkeypatch.setattr(
-        "portable_kb.cli.skill_status",
+        "groundray.cli.skill_status",
         lambda target: {
-            "skill": "portable-kb",
+            "skill": "groundray",
             "ok": False,
             "bundled_hash": "sha256:current",
             "targets": {
                 "codex": {
-                    "path": "/tmp/codex/portable-kb",
+                    "path": "/tmp/codex/groundray",
                     "state": "outdated",
                 }
             },
@@ -1324,7 +1324,7 @@ def test_skill_status_cli_reports_drift(monkeypatch) -> None:
     human = runner.invoke(app, ["skill", "status", "--target", "codex"])
     assert human.exit_code == 1
     assert "outdated" in human.output
-    assert "pkb skill install --force" in human.output
+    assert "groundray skill install --force" in human.output
 
 
 def test_brain_remove_cli_reports_remote_source_and_cleanup_warning(
@@ -1333,7 +1333,7 @@ def test_brain_remove_cli_reports_remote_source_and_cleanup_warning(
     config = tmp_path / "config.yaml"
     save_settings(Settings(data_dir=tmp_path / "data", cache_dir=tmp_path / "cache"), config)
     monkeypatch.setattr(
-        "portable_kb.cli.remove_brain",
+        "groundray.cli.remove_brain",
         lambda _slug, _settings, *, force: {
             "ok": False,
             "slug": "remote-brain",
@@ -1356,7 +1356,7 @@ def test_brain_remove_cli_reports_remote_source_and_cleanup_warning(
     assert "Cleanup warnings: 1" in result.output
 
     monkeypatch.setattr(
-        "portable_kb.cli.remove_brain",
+        "groundray.cli.remove_brain",
         lambda *_args, **_kwargs: (_ for _ in ()).throw(BrainError("cannot remove")),
     )
     failed = runner.invoke(

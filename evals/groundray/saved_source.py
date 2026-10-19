@@ -14,9 +14,9 @@ import subprocess
 from pathlib import PurePosixPath
 from urllib.parse import unquote, urlsplit
 
-from portable_kb.brains import BrainError, load_catalog
-from portable_kb.search import SearchError, get_knowledge
-from portable_kb.settings import Settings, load_settings
+from groundray.brains import BrainError, load_catalog
+from groundray.search import SearchError, get_knowledge
+from groundray.settings import Settings, load_settings
 
 MAX_SOURCE_BYTES = 1024 * 1024
 

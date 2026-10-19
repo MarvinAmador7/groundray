@@ -10,10 +10,10 @@ this skill: `../../scripts/groundray`. Quote absolute paths. Run it with `check`
 first. It checks version and required commands without changing a brain. A
 matching version alone is insufficient. If incompatible or missing, report the
 actual blocker and use a compatible bundled package; do not download a guessed
-release or change credentials. A source-only plugin can use a compatible `pkb`
-on PATH, or an explicitly selected `GROUNDRAY_PKB` executable.
+release or change credentials. A source-only plugin can use a compatible `groundray`
+on PATH, or an explicitly selected `GROUNDRAY_CLI` executable.
 
-Read the bundled storage workflow at `../groundray/references/portable-kb/SKILL.md`.
+Read the bundled storage workflow at `../groundray/references/storage/SKILL.md`.
 Run `scripts/groundray doctor --json` and `brain list --json`. Existing configuration
 and brains belong to the employee. Keep configured providers and existing brains;
 do not reset setup just because another provider is absent. If unconfigured,

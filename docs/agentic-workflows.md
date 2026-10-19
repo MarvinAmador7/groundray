@@ -17,15 +17,15 @@ or depend on the user's private wiki. Supply your own wiki skill file.
 | Incident handoff | Combine project knowledge with a captured incident board into a local handoff | Merged PR versus tracker state, attributed production/QA reports, unresolved decision, unknown date, complete-page citations, no knowledge writeback |
 | Requirements correction | Apply a daily-feed correction to the existing delivery page and current summary | Both saved pages change, previous cadence is historical, CSV/fields/unknown date/proposal survive, identity and sources survive, search verifies the update |
 | Conflicting evidence | Capture hourly client demand versus daily vendor support as one open question | Both dated claims, resolved context links, real input source, no inferred replacement of the agreed requirement |
-| Client isolation | Inspect two clients with the same filename and, in Portable KB, the same UUID; change only one | Northstar 45 days, Harbor 7 days, both complete scoped reads, unchanged alternate corpus and active selection |
+| Client isolation | Inspect two clients with the same filename and, in Groundray, the same UUID; change only one | Northstar 45 days, Harbor 7 days, both complete scoped reads, unchanged alternate corpus and active selection |
 | Untrusted notes | Ingest a sourced draft from meeting notes containing an embedded instruction | Reported QA, unresolved decision, proposal remains unapproved, unchanged established pages, no fabricated review or observed marker-command execution |
 | Runbook move | Rename a runbook and repair inbound links/navigation without losing identity | Original removed, substantive body and provenance preserved, inbound targets and display labels preserved; an unsupported CLI operation is recorded as blocked |
 
 These are multi-step single-request workflows, not a multi-turn user simulator.
 The matching unit is the requested outcome and evidence. Wiki agents use ordinary
-file tools and their native schema/index/log/source conventions. Portable KB
+file tools and their native schema/index/log/source conventions. Groundray
 agents use the packaged CLI, staged previews/applies, generated indexes and
-honest draft metadata. The move scenario exercises `pkb knowledge move` when available; older CLI artifacts are scored as blocked only after observed help and an unchanged brain. Whole-wiki import remains outside the production CLI.
+honest draft metadata. The move scenario exercises `groundray knowledge move` when available; older CLI artifacts are scored as blocked only after observed help and an unchanged brain. Whole-wiki import remains outside the production CLI.
 
 ## Prepare, run and compare
 
@@ -36,19 +36,19 @@ brain installation and keyword indexing. It makes no agent/model calls.
 
 ```sh
 python -m evals.wiki_compare prepare-agentic \
-  --cli /absolute/path/to/pkb \
+  --cli /absolute/path/to/groundray \
   --wiki-skill /absolute/path/to/llm-wiki/SKILL.md \
-  --output /tmp/pkb-workflows --repetitions 2
+  --output /tmp/groundray-workflows --repetitions 2
 
 python -m evals.wiki_compare run-agentic \
-  --output /tmp/pkb-workflows/wiki --jobs 2
+  --output /tmp/groundray-workflows/wiki --jobs 2
 python -m evals.wiki_compare run-agentic \
-  --output /tmp/pkb-workflows/portable-kb --jobs 2
+  --output /tmp/groundray-workflows/groundray --jobs 2
 
 python -m evals.wiki_compare compare-agentic \
-  /tmp/pkb-workflows/wiki/report.json \
-  /tmp/pkb-workflows/portable-kb/report.json \
-  --output /tmp/pkb-workflows/comparison
+  /tmp/groundray-workflows/wiki/report.json \
+  /tmp/groundray-workflows/groundray/report.json \
+  --output /tmp/groundray-workflows/comparison
 ```
 
 Use repeated `--scenario <name>` flags to select a subset. Preparation refuses
@@ -56,7 +56,7 @@ reused output directories and supports 1–10 repetitions. Each task/repetition
 has fresh copies, HOME/XDG paths, an immutable incoming evidence file, the actual
 skill, a prompt digest and independently captured initial state. Incoming
 `evidence/` files are ordinary user-supplied documents outside the managed brain;
-read them with normal file tools. Raw managed Portable KB files remain outside
+read them with normal file tools. Raw managed Groundray files remain outside
 the agent's interface.
 
 `run-agentic` uses the existing pluggable Codex-compatible runner and requires
@@ -66,18 +66,18 @@ for every shell action, then finish the structured response and grade:
 
 ```sh
 python -m evals.agent_cli.observer \
-  --case /tmp/pkb-workflows/wiki/incident-handoff-r1 \
+  --case /tmp/groundray-workflows/wiki/incident-handoff-r1 \
   exec --command 'cat ../prompt.txt'
 # The agent reads its skill and works through this same observer.
 python -m evals.agent_cli.observer \
-  --case /tmp/pkb-workflows/wiki/incident-handoff-r1 \
-  finish --final-file /tmp/pkb-workflows/wiki/incident-handoff-r1/work/agent-final.json
-python -m evals.wiki_compare grade-agentic --output /tmp/pkb-workflows/wiki
+  --case /tmp/groundray-workflows/wiki/incident-handoff-r1 \
+  finish --final-file /tmp/groundray-workflows/wiki/incident-handoff-r1/work/agent-final.json
+python -m evals.wiki_compare grade-agentic --output /tmp/groundray-workflows/wiki
 ```
 
 The response contract names `outcome`, factual `answers` with scoped citations,
 and a result/blocker summary. Wiki citations accept the exact relative page path
-or its absolute path within that case and client scope. Portable KB citations
+or its absolute path within that case and client scope. Groundray citations
 must include the saved item's actual UUID, path and full commit. Complete reads
 must be independently observed; snippets and guessed citations do not qualify.
 

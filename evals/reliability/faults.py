@@ -17,8 +17,8 @@ from evals.logistics.harness import git
 from evals.logistics.oracle import CORRECTION, MOVE_FROM, MOVE_TO
 from evals.logistics.world import AS_OF, SLUG
 from evals.wiki_compare.harness import load_json
-from portable_kb.parsing import parse_concept
-from portable_kb.serialization import quoted, render_concept
+from groundray.parsing import parse_concept
+from groundray.serialization import quoted, render_concept
 
 from .scenarios import COMPETING, CONTACT
 
@@ -51,8 +51,8 @@ def compile_stop_library(output: Path) -> Path:
 def external_update(case: Path, *, contact=False) -> dict:
     """Save the collaborator's revision through the actual native CLI or wiki files."""
     config = load_json(case / "case.json")
-    root = case / ("work/source/knowledge" if config["arm"] == "portable-kb" else "work/wiki")
-    path = root / ("inbox/" + CORRECTION if config["arm"] == "portable-kb" else CORRECTION)
+    root = case / ("work/source/knowledge" if config["arm"] == "groundray" else "work/wiki")
+    path = root / ("inbox/" + CORRECTION if config["arm"] == "groundray" else CORRECTION)
     parsed = parse_concept(path, root).item
     body = parsed.body
     if contact:
@@ -71,7 +71,7 @@ def external_update(case: Path, *, contact=False) -> dict:
         )
         body += "\n[^revision]: Fictional collaborator revision; no real human review.\n"
         source_name = "revision-source.md"
-    if config["arm"] == "portable-kb":
+    if config["arm"] == "groundray":
         fault = case / "fault"
         fault.mkdir(exist_ok=True)
         body_file, metadata_file = fault / "external-body.md", fault / "external-metadata.json"
@@ -132,8 +132,8 @@ def checkpoint(case: Path) -> dict:
     config = load_json(case / "case.json")
     if config["task"] != "concurrent-update" or (case / "fault/checkpoint.json").exists():
         raise ValueError("Checkpoint is allowed exactly once for the concurrent-update case")
-    root = case / ("work/source/knowledge" if config["arm"] == "portable-kb" else "work/wiki")
-    page = root / ("inbox/" + CORRECTION if config["arm"] == "portable-kb" else CORRECTION)
+    root = case / ("work/source/knowledge" if config["arm"] == "groundray" else "work/wiki")
+    page = root / ("inbox/" + CORRECTION if config["arm"] == "groundray" else CORRECTION)
     before_sha = digest(page)
     start = time.time_ns()
     result = external_update(case, contact=True)
@@ -154,7 +154,7 @@ def checkpoint(case: Path) -> dict:
 
 def interrupt_move(case: Path, library: Path) -> dict:
     config = load_json(case / "case.json")
-    native = config["arm"] == "portable-kb"
+    native = config["arm"] == "groundray"
     root = case / ("work/source/knowledge" if native else "work/wiki")
     prefix = "inbox/" if native else ""
     destination = root / (prefix + MOVE_TO)
@@ -163,7 +163,7 @@ def interrupt_move(case: Path, library: Path) -> dict:
     env = {
         **os.environ,
         **product_environment(case),
-        "PKB_EVAL_ACTOR": "fault-controller",
+        "GROUNDRAY_EVAL_ACTOR": "fault-controller",
         "LD_PRELOAD": str(library),
         "KB_EVAL_STOP_DEST": str(destination),
         "KB_EVAL_STOP_MARKER": str(marker),
@@ -181,7 +181,7 @@ def interrupt_move(case: Path, library: Path) -> dict:
             "--json",
         ]
         command(case, *args, actor="fault-controller")
-        argv = [str(case / "bin/pkb"), *args, "--apply"]
+        argv = [str(case / "bin/groundray"), *args, "--apply"]
     else:
         argv = [
             sys.executable,

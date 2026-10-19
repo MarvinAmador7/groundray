@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from portable_kb.serialization import quoted, render_concept
+from groundray.serialization import quoted, render_concept
 
 VERSION = 1
 PRIMARY = "sim-northstar"
@@ -126,7 +126,7 @@ TASKS = {
         "writes": [CONFLICT],
     },
     "client-scope": {
-        "request": "Apply evidence/scope-change.md to Northstar only. First inspect both client scopes; they deliberately share a filename and, for Portable KB, the same item UUID. Update the EXISTING Northstar runbook to 45-day retention. Harbor remains 7 days. Retrieve both resulting pages with explicit worldview scope and preserve the active selection. Do not combine the clients or change Harbor.",
+        "request": "Apply evidence/scope-change.md to Northstar only. First inspect both client scopes; they deliberately share a filename and, for Groundray, the same item UUID. Update the EXISTING Northstar runbook to 45-day retention. Harbor remains 7 days. Retrieve both resulting pages with explicit worldview scope and preserve the active selection. Do not combine the clients or change Harbor.",
         "claims": {
             "northstar": claim("Northstar retention in days (number).", 45, RUNBOOK),
             "harbor": claim("Harbor retention in days (number).", 7, "alternate:" + RUNBOOK),

@@ -22,8 +22,8 @@ from pathlib import Path
 
 from ruamel.yaml import YAML
 
-from portable_kb.qmd_provider import _require_qmd_compatibility, _run_qmd
-from portable_kb.retrieval_eval import _percentiles, score_ranking
+from groundray.qmd_provider import _require_qmd_compatibility, _run_qmd
+from groundray.retrieval_eval import _percentiles, score_ranking
 
 from .common import MAX_REQUEST_BYTES, literal_tokens, query_parts, records_from
 from .corpus import export_brain, synthetic_corpus

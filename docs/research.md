@@ -195,7 +195,7 @@ Recommendations:
 - Prefer one durable subject per file, but do not fragment procedures or
   decisions into unusably small notes.
 - Standard links remain the portable interchange form. The user-approved
-  Portable KB wikilink extension adds exact local resolution and a standard
+  Groundray wikilink extension adds exact local resolution and a standard
   Markdown view; it is a local consumer convention, not upstream OKF syntax.
   See [the contract and migration notes](links.md).
 - Keep generated indexes reproducible and never hand-edit generated regions.
@@ -263,7 +263,7 @@ Architectural recommendations:
 On 2026-10-07, upstream cross-linking section 6 was rechecked at specification
 commit `62432a095456147ee71e70ac6e4dc0d2dea3ac30`. It defines standard Markdown
 relative/bundle-root links and untyped relationships conveyed by prose.
-Portable KB wikilinks are a local authoring/navigation extension with a derived
+Groundray wikilinks are a local authoring/navigation extension with a derived
 standard Markdown view; this does not redefine upstream link semantics.
 The motivating private wiki was reviewed outside the source repository.
 Product fixtures and agent scenarios use independently invented content.

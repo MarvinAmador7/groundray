@@ -1,12 +1,12 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "groundray",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Portable company brains: direct answers, inspectable evidence and reviewed updates.",
   "author": {
     "name": "Marvin Amador"
   },
-  "repository": "https://github.com/MarvinAmador7/portable-kb",
+  "repository": "https://github.com/MarvinAmador7/groundray",
   "license": "Apache-2.0",
   "keywords": [
     "company-knowledge",

@@ -2,9 +2,9 @@
 
 ## Version contract
 
-`src/portable_kb/__init__.py` is the single source of truth for the stable
+`src/groundray/__init__.py` is the single source of truth for the stable
 `X.Y.Z` version. Hatch reads that value for Python distribution metadata, the
-CLI reports it through `pkb --version`, and release assets use the matching
+CLI reports it through `groundray --version`, and release assets use the matching
 `vX.Y.Z` tag. Stable Groundray manifests use the same version so Codex cache
 keys advance with every runtime release; build and regression checks refuse
 version drift. A release never derives a version from a mutable branch name.
@@ -23,7 +23,7 @@ read-only repository permissions. It performs:
   Python environments;
 - POSIX shell syntax validation and failure/preservation tests for both installers;
 - wheel and source-distribution builds plus metadata checks;
-- verification that schemas and the Portable KB agent skill are in the wheel;
+- verification that schemas and the Groundray agent skill are in the wheel;
   and
 - a clean-environment wheel install and CLI smoke test.
 
@@ -37,12 +37,12 @@ release, deployment credential, or writable repository token.
 published only after the release gate passes. The workflow builds:
 
 ```text
-portable_kb_core-X.Y.Z-py3-none-any.whl
-portable_kb_core-X.Y.Z.tar.gz
-pkb-vX.Y.Z-darwin-arm64.tar.gz
-pkb-vX.Y.Z-darwin-x86_64.tar.gz
-pkb-vX.Y.Z-linux-arm64.tar.gz
-pkb-vX.Y.Z-linux-x86_64.tar.gz
+groundray-X.Y.Z-py3-none-any.whl
+groundray-X.Y.Z.tar.gz
+groundray-cli-vX.Y.Z-darwin-arm64.tar.gz
+groundray-cli-vX.Y.Z-darwin-x86_64.tar.gz
+groundray-cli-vX.Y.Z-linux-arm64.tar.gz
+groundray-cli-vX.Y.Z-linux-x86_64.tar.gz
 groundray-vX.Y.Z-darwin-arm64.tar.gz
 groundray-vX.Y.Z-darwin-x86_64.tar.gz
 groundray-vX.Y.Z-linux-arm64.tar.gz
@@ -82,13 +82,13 @@ downloading embedding models during installation.
 The root `install` script requires `curl`, `tar`, and either `sha256sum` or
 `shasum`. It downloads the selected archive and `SHA256SUMS` into an
 operation-owned temporary directory, verifies the exact filename digest, and
-stages the executable before an atomic move to `~/.local/bin/pkb` (or
-`PKB_INSTALL_DIR`). A failed download, missing checksum, checksum mismatch, bad
+stages the executable before an atomic move to `~/.local/bin/groundray` (or
+`GROUNDRAY_BIN_DIR`). A failed download, missing checksum, checksum mismatch, bad
 archive, or failed version check leaves the previous executable intact.
 
 Re-running the installer upgrades to the latest GitHub release. Use
 `--version vX.Y.Z` to install or restore a specific version. Explicit
-`--uninstall` removes only the `pkb` executable at the selected install path;
+`--uninstall` removes only the `groundray` executable at the selected install path;
 it intentionally preserves brain repositories, configuration, indexes, and
 agent skills.
 
@@ -157,3 +157,39 @@ The retained publisher trial uses a fictional company. Human source inspection
 and Karol's hosted handoff are still follow-up work; this release does not claim
 a completed human pilot or publisher-only permissions in the selected
 unprotected contributor repository.
+
+## 0.3.0: Groundray rename
+
+The repository is `MarvinAmador7/groundray`. This intentionally breaking release
+uses `groundray` for the executable, Python distribution and import package.
+The native sidecar is `groundray-search`; development environment variables use
+`GROUNDRAY_`. No `pkb` command or `portable_kb` import alias is installed.
+
+New configuration, brain storage and disposable cache defaults are
+`~/.config/groundray`, `~/.local/share/groundray` and `~/.cache/groundray`, with
+the existing XDG overrides. Old Portable KB directories are not moved, deleted
+or implicitly selected. For an existing configuration, pass its path explicitly
+to the operation, for example:
+
+```sh
+groundray doctor --config "$HOME/.config/portable-kb/config.yaml" --json
+```
+
+Existing QMD provider settings remain valid. A builtin configuration with the
+old `pkb-search` command needs explicit reconfiguration to `groundray-search`.
+Brain content, identities and OKF schema semantics are unchanged.
+
+Standalone CLI archives use `groundray-cli-vX.Y.Z-TARGET.tar.gz`; Codex plugin
+archives use `groundray-vX.Y.Z-TARGET.tar.gz`. The `install` script installs the
+CLI with `GROUNDRAY_BIN_DIR` as its optional destination override;
+`install-groundray` registers the plugin with `GROUNDRAY_INSTALL_DIR` as its
+persistent package root. Both installers default to the renamed repository.
+The standalone agent workflow is `groundray-storage`; the Codex plugin retains
+`groundray@groundray` and `$groundray:groundray` / `$groundray:groundray-setup`.
+
+The current installers target the renamed 0.3.x interfaces. To restore a
+pre-0.3 version, use the installer attached to that historical release.
+
+Earlier tags, release assets, frozen pilot packets and retained evaluation
+records keep the names and bytes used when they were produced. Run traces
+remain historical evidence, not observations of the renamed release.

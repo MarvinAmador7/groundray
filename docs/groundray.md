@@ -15,7 +15,7 @@ Lite agent trial or released plugin integration.
 
 The [CLI source follow-up](groundray-cli-sources.md) replaces manual fixture copying
 and the development reader with implemented `source capture/get` commands, source
-receipts and byte-preserving Git rules on the draft branch. The bundled Portable KB
+receipts and byte-preserving Git rules on the draft branch. The bundled Groundray
 workflow documents these commands. The [fresh-agent CLI handoffs](groundray-agent-cli-handoff.md)
 exercise Lite through contribution, review and reader sync. The
 [uncertainty and inspection follow-up](groundray-uncertainty-evaluation.md) refines
@@ -53,9 +53,9 @@ Choose a fresh destination instead of overwriting a customized skill. Invoke
 `$groundray` in an agent that supports that convention, or explicitly ask it to
 read the skill and use it for the selected company's brain.
 
-This draft has not been installed globally or added to `pkb skill install` or a
-release. It introduces no required Portable KB schema fields or CLI changes.
-An existing Portable KB brain can represent the distinctions in body sections
+This draft has not been installed globally or added to `groundray skill install` or a
+release. It introduces no required Groundray schema fields or CLI changes.
+An existing Groundray brain can represent the distinctions in body sections
 and source records while retaining its supported storage interface. A normal
 wiki can use file tools. The initial behavior should be evaluated before adding
 more product machinery.

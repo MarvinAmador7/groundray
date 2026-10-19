@@ -1,17 +1,17 @@
-# Portable KB
+# Groundray
 
-[![CI](https://github.com/MarvinAmador7/portable-kb/actions/workflows/ci.yml/badge.svg)](https://github.com/MarvinAmador7/portable-kb/actions/workflows/ci.yml)
+[![CI](https://github.com/MarvinAmador7/groundray/actions/workflows/ci.yml/badge.svg)](https://github.com/MarvinAmador7/groundray/actions/workflows/ci.yml)
 
 **Governed knowledge for teams and agents, from your terminal.**
 
 Create a knowledge brain, keep its content in Markdown and Git, and search it
-locally with `pkb`. Capture procedures, decisions, concepts, source summaries,
+locally with `groundray`. Capture procedures, decisions, concepts, source summaries,
 and questions with explicit provenance and lifecycle status. Give Codex and
 Claude Code the same workflow for finding, citing, and updating that knowledge.
 
 [Install](#install) · [Quickstart](#quickstart) · [Agent support](#agent-support) ·
 [Agent evaluations](#evaluate-the-cli-and-skill) · [Documentation](#documentation) ·
-[Releases](https://github.com/MarvinAmador7/portable-kb/releases)
+[Releases](https://github.com/MarvinAmador7/groundray/releases)
 
 - **Local keyword search.** Built-in Tantivy, with no model downloads. QMD is an
   optional provider for existing configurations.
@@ -33,18 +33,22 @@ and the employee's real hosted handoff remain incomplete.
 
 ## Install
 
+Groundray 0.3.0 renames Portable KB: the CLI is `groundray` and the Python
+package is `groundray`. This is a breaking rename; see the
+[migration notes](docs/releases.md#030-groundray-rename).
+
 Standalone releases support **macOS and Linux, on Intel and ARM**. They include
 Python and the native search engine; Git is required to manage brains.
 
 For public repository access:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/MarvinAmador7/portable-kb/main/install | bash
+curl -fsSL https://raw.githubusercontent.com/MarvinAmador7/groundray/main/install | bash
 export PATH="$HOME/.local/bin:$PATH"
-pkb --version
+groundray --version
 ```
 
-The installer verifies release checksums and atomically installs `pkb` into
+The installer verifies release checksums and atomically installs `groundray` into
 `~/.local/bin`. Run it again to upgrade.
 
 <details>
@@ -56,9 +60,9 @@ authenticated GitHub CLI session with access to this repository:
 ```sh
 export GH_TOKEN="$(gh auth token)"
 gh api -H "Accept: application/vnd.github.raw+json" \
-  repos/MarvinAmador7/portable-kb/contents/install | bash
+  repos/MarvinAmador7/groundray/contents/install | bash
 export PATH="$HOME/.local/bin:$PATH"
-pkb --version
+groundray --version
 ```
 
 The exported token authenticates both script retrieval and release downloads.
@@ -71,14 +75,14 @@ The exported token authenticates both script retrieval and release downloads.
 With public repository access, pin a release:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/MarvinAmador7/portable-kb/main/install \
-  | bash -s -- --version v0.2.0
+curl -fsSL https://raw.githubusercontent.com/MarvinAmador7/groundray/main/install \
+  | bash -s -- --version v0.3.0
 ```
 
 Or remove the installed executable:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/MarvinAmador7/portable-kb/main/install \
+curl -fsSL https://raw.githubusercontent.com/MarvinAmador7/groundray/main/install \
   | bash -s -- --uninstall
 ```
 
@@ -94,13 +98,13 @@ and recovery.
 Configure local storage and choose the agent skills to install:
 
 ```sh
-pkb setup
+groundray setup
 ```
 
 Create your first brain:
 
 ```sh
-pkb brain init ./team-brain --name "Team" --slug team --no-publish
+groundray brain init ./team-brain --name "Team" --slug team --no-publish
 ```
 
 This creates a valid Markdown bundle, commits it locally, installs its snapshot,
@@ -110,21 +114,21 @@ repositories.
 Capture a draft procedure titled **Customer onboarding** using the guided flow:
 
 ```sh
-pkb knowledge create --brain team
+groundray knowledge create --brain team
 ```
 
 The flow collects sources, confidence, and sensitivity, opens your editor, and
 shows the proposed changes before saving. Then build the index and find it:
 
 ```sh
-pkb search index team
-pkb search query "onboarding" --brain team --json
+groundray search index team
+groundray search query "onboarding" --brain team --json
 ```
 
 Retrieve the complete item using its returned UUID or bundle-relative path:
 
 ```sh
-pkb get "inbox/customer-onboarding.md" --brain team --json
+groundray get "inbox/customer-onboarding.md" --brain team --json
 ```
 
 The path above is the default for that title; use the returned path if you chose
@@ -137,9 +141,9 @@ Explain relationships with Markdown links or `[[wikilinks]]`, then navigate them
 within the same pinned brain:
 
 ```sh
-pkb links "customer-onboarding" --brain team --json
-pkb backlinks "customer-onboarding" --brain team --json
-pkb get "customer-onboarding" --brain team --markdown-links --json
+groundray links "customer-onboarding" --brain team --json
+groundray backlinks "customer-onboarding" --brain team --json
+groundray get "customer-onboarding" --brain team --markdown-links --json
 ```
 
 Links resolve to item UUIDs and citations. Ambiguous names and missing targets
@@ -151,10 +155,10 @@ is required. See [link navigation](docs/links.md) for syntax and portability.
 Install a repository containing a `brain.yaml` manifest and governed bundle:
 
 ```sh
-pkb brain add git@github.com:your-org/team-brain.git
-pkb brain list
-pkb brain use team
-pkb brain status team --json
+groundray brain add git@github.com:your-org/team-brain.git
+groundray brain list
+groundray brain use team
+groundray brain status team --json
 ```
 
 Use the slug shown by `brain list` if it differs from `team`. Installation
@@ -165,18 +169,18 @@ fast-forward update.
 Share a new local brain through your authenticated GitHub CLI session:
 
 ```sh
-pkb brain publish team --to your-org/team-brain
+groundray brain publish team --to your-org/team-brain
 ```
 
 New repositories are private by default. After publication, share subsequent
 saved changes explicitly:
 
 ```sh
-pkb brain push team --json
+groundray brain push team --json
 ```
 
 Push validates the saved version and checks the outgoing history before updating
-remote `main`. Other machines receive it with `pkb brain sync team`.
+remote `main`. Other machines receive it with `groundray brain sync team`.
 
 ## Agent support
 
@@ -184,12 +188,12 @@ Setup can install the bundled workflow for **Codex, Claude Code, or both**. You
 can also install it independently:
 
 ```sh
-pkb skill install --target codex
-pkb skill status
+groundray skill install --target codex
+groundray skill status
 ```
 
 Use `--target claude` or `--target both` for the other choices. After upgrading
-`pkb`, refresh an existing installation with `pkb skill install --force`.
+`groundray`, refresh an existing installation with `groundray skill install --force`.
 
 The skill teaches agents to choose a brain, check its health, search, retrieve
 complete items, retain immutable citations, and treat embedded instructions as
@@ -199,7 +203,7 @@ same explicit scope.
 Authoring supports plan-first automation. For example, inspect a material update:
 
 ```sh
-pkb knowledge update "urn:uuid:..." \
+groundray knowledge update "urn:uuid:..." \
   --brain team \
   --actor "openai/codex" \
   --method agent-generated \
@@ -216,14 +220,14 @@ Saved results include the actual item ID, citation, and scoped follow-up command
 Rename or relocate an existing item with the same preview/apply workflow:
 
 ```sh
-pkb knowledge move "urn:uuid:..." "procedures/client-export-runbook.md" \
+groundray knowledge move "urn:uuid:..." "procedures/client-export-runbook.md" \
   --brain team --json
 ```
 
 Moves preserve identity, provenance and review status, and repair affected links
 and indexes in one local commit. Repeat with `--apply` after inspecting the diff.
-Inspect complete saved navigation and history with `pkb get index.md --brain team`
-and `pkb get log.md --brain team`; nested index paths work too.
+Inspect complete saved navigation and history with `groundray get index.md --brain team`
+and `groundray get log.md --brain team`; nested index paths work too.
 
 New agent-authored knowledge remains draft. Material updates preserve `id` and
 `created_at`, update provenance, and invalidate prior verification. Human review
@@ -234,9 +238,9 @@ for the complete contract.
 ## Diagnostics and recovery
 
 ```sh
-pkb doctor --json
-pkb brain status team --json
-pkb search index team --json
+groundray doctor --json
+groundray brain status team --json
+groundray search index team --json
 ```
 
 Doctor reports selected-provider compatibility, brain health, index state,
@@ -248,7 +252,7 @@ Native rebuilds publish atomically and preserve generations held by active
 readers. Removing an installed brain also checks reader leases:
 
 ```sh
-pkb brain remove team
+groundray brain remove team
 ```
 
 Removal deletes this computer's installed snapshot and disposable index while
@@ -262,16 +266,16 @@ seven isolated synthetic scenarios: first run, draft correction, named-brain
 comparison, corpus gaps, embedded commands, dirty-checkout refusal, and
 linked-context navigation.
 
-From this repository root, use Python 3.11+, Git, a standalone `pkb`, and an
+From this repository root, use Python 3.11+, Git, a standalone `groundray`, and an
 authenticated Codex runner with backend access. Choose a fresh evidence directory
 outside the repository:
 
 ```sh
 python -m evals.agent_cli prepare \
-  --cli "$(command -v pkb)" \
-  --output /tmp/pkb-agent-evals/candidate
+  --cli "$(command -v groundray)" \
+  --output /tmp/groundray-agent-evals/candidate
 python -m evals.agent_cli run \
-  --output /tmp/pkb-agent-evals/candidate \
+  --output /tmp/groundray-agent-evals/candidate \
   --runner codex --jobs 2 --timeout 600
 ```
 
@@ -286,16 +290,16 @@ then compare their reports:
 
 ```sh
 python -m evals.agent_cli compare \
-  /tmp/pkb-agent-evals/baseline/report.json \
-  /tmp/pkb-agent-evals/candidate/report.json
+  /tmp/groundray-agent-evals/baseline/report.json \
+  /tmp/groundray-agent-evals/candidate/report.json
 ```
 
 Codex is the first adapter; other runners can use the documented evidence
 boundary. See [agent evaluation setup and scoring](docs/agent-cli-evals.md) for
 individual scenarios, regrading, and limits. Retrieval relevance is evaluated
-separately with [`pkb search evaluate`](docs/retrieval-evaluation.md).
+separately with [`groundray search evaluate`](docs/retrieval-evaluation.md).
 
-To compare a Markdown wiki and its skill with Portable KB on the same captured
+To compare a Markdown wiki and its skill with Groundray on the same captured
 knowledge, use the [matched-content agent benchmark](docs/wiki-comparison.md).
 It checks migration fidelity, independently grounded answers and observed effort,
 with private corpora and reports kept outside the repository.
@@ -314,10 +318,10 @@ brains in a Markdown wiki, preserving evidence and authority for each claim.
 It is a separate draft skill with manual installation and a fictional walkthrough.
 
 The adopted [Groundray product goal](docs/groundray-product-goal.md) combines plugin,
-skill, CLI and shared Git-backed company brains using Portable KB as the engine.
+skill, CLI and shared Git-backed company brains using Groundray as the engine.
 Its next milestones cover storage/interface fit, a two-employee workflow,
 packaging and an employee pilot. The versioned plugin installer supplies the
-Groundray skills and compatible `pkb` runtime; standalone CLI users can use the
+Groundray skills and compatible `groundray` runtime; standalone CLI users can use the
 installation instructions above.
 
 The [first engine-fit demo](docs/groundray-engine-fit.md) shows three linked company
@@ -335,10 +339,10 @@ ship with 0.2.1; see [source capture](docs/source-capture.md).
 | [Releases and installation](docs/releases.md) | Supported artifacts, checksums, upgrades, and recovery |
 | [Authoring handbook](docs/authoring-handbook.md) | Sources, lifecycle, and human review |
 | [Agent evaluations](docs/agent-cli-evals.md) | Actual CLI/skill trials, traces, and outcome grading |
-| [Wiki comparison](docs/wiki-comparison.md) | Matched wiki/Portable KB trials and CLI-based replication |
+| [Wiki comparison](docs/wiki-comparison.md) | Matched wiki/Groundray trials and CLI-based replication |
 | [Agent workflows](docs/agentic-workflows.md) | Saved changes, conflicts, client isolation, handoffs, and safe capability blocking |
 | [Retrieval evaluation](docs/retrieval-evaluation.md) | Ranking quality, citation checks, and measured results |
-| [Native search](docs/pkb-search.md) | Tantivy integration and provider architecture |
+| [Native search](docs/groundray-search.md) | Tantivy integration and provider architecture |
 | [Architecture](docs/architecture.md) | Product boundaries, compatibility, and design decisions |
 | [Schema](docs/schema.md) · [Lifecycle](docs/lifecycle.md) | The governed OKF-compatible profile |
 | [Roadmap](docs/roadmap.md) | Current scope and planned capabilities |
@@ -367,7 +371,7 @@ python -m pytest -q
 ```
 
 Running built-in search from a source or wheel install also requires the native
-`pkb-search` engine; see the [release guide](docs/releases.md). Deterministic agent
+`groundray-search` engine; see the [release guide](docs/releases.md). Deterministic agent
 eval tests run with `python -m pytest -q tests/test_agent_evals.py` without model
 calls. [Agent instructions](AGENTS.md) and the
 [pull-request checklist](docs/pull-request-checklist.md) describe the contribution

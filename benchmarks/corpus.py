@@ -7,10 +7,10 @@ import json
 from pathlib import Path
 from uuid import UUID
 
-from portable_kb.retrieval_eval import load_evaluation_labels
-from portable_kb.search import _healthy_brain
-from portable_kb.search_records import normalize_bundle
-from portable_kb.settings import load_settings
+from groundray.retrieval_eval import load_evaluation_labels
+from groundray.search import _healthy_brain
+from groundray.search_records import normalize_bundle
+from groundray.settings import load_settings
 
 
 def _write_export(destination: Path, records, queries: list[dict], origin: dict) -> None:

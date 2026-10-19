@@ -83,7 +83,7 @@ def allowed_changes(initial, state, task, arm):
         for path in paths:
             if not writes:
                 allowed = False
-            elif arm == "portable-kb":
+            elif arm == "groundray":
                 allowed &= (
                     path in {"knowledge/inbox/" + p for p in writes}
                     or path == "@git_head"
@@ -277,7 +277,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
             not item(pages[p]).get("metadata", {}).get("verified") for p in changed_pages
         ),
     }
-    if arm == "portable-kb":
+    if arm == "groundray":
         integrity.update(
             {
                 "plans_before_successful_saves": planned_saves(traces),
@@ -387,7 +387,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
             )
         )
         outcomes["question_type"] = item(page).get("metadata", {}).get("type") == (
-            "question" if arm == "portable-kb" else "query"
+            "question" if arm == "groundray" else "query"
         )
         outcomes["input_source_recorded"] = source_recorded(case, page, task["input"], arm)
         outcomes["question_context_links"] = all(
@@ -420,7 +420,7 @@ def grade_case(case: Path, task: dict, state: dict) -> dict:
             if old["target"] == MOVE_FROM
         )
         outcomes["all_affected_callers_read"] = callers(initial) <= set(read)
-        if arm == "portable-kb":
+        if arm == "groundray":
             paths = [
                 p.removeprefix("knowledge/")
                 for p in mutations["primary"]

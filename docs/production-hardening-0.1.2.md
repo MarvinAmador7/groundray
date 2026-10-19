@@ -62,6 +62,6 @@ The release is ready when:
 ## Deferred
 
 The built-in Rust/SQLite search work is intentionally separate and documented
-in [pkb-search.md](pkb-search.md). Automatic QMD installation, semantic models,
+in [pkb-search.md](groundray-search.md). Automatic QMD installation, semantic models,
 MCP, native UI, background synchronization, and hosted services remain outside
 0.1.2.

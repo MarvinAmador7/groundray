@@ -46,14 +46,14 @@ The same bounded JSONL protocol adds:
 | `release_store` | `index_path` | Whether this sidecar released its cached snapshot |
 | `query_store` | `index_path`, `query`, `tokens`, optional `exact_field`, `limit`, `filters` | Ranked hits, manifest, immutable generation records path, and open/query timings |
 
-For example, after building `target/release/pkb-search`, run it with one JSON
+For example, after building `target/release/groundray-search`, run it with one JSON
 request per line on standard input:
 
 ```json
-{"protocol_version":1,"op":"rebuild","index_path":"/tmp/pkb-native-store","records_path":"/tmp/pkb-corpus/records.jsonl"}
-{"protocol_version":1,"op":"query_store","index_path":"/tmp/pkb-native-store","query":"Aurora000000","tokens":["Aurora000000"],"limit":10}
-{"protocol_version":1,"op":"recover","index_path":"/tmp/pkb-native-store"}
-{"protocol_version":1,"op":"cleanup","index_path":"/tmp/pkb-native-store"}
+{"protocol_version":1,"op":"rebuild","index_path":"/tmp/groundray-native-store","records_path":"/tmp/groundray-corpus/records.jsonl"}
+{"protocol_version":1,"op":"query_store","index_path":"/tmp/groundray-native-store","query":"Aurora000000","tokens":["Aurora000000"],"limit":10}
+{"protocol_version":1,"op":"recover","index_path":"/tmp/groundray-native-store"}
+{"protocol_version":1,"op":"cleanup","index_path":"/tmp/groundray-native-store"}
 ```
 
 The caller must supply a stable, validated normalized export. The engine copies
@@ -168,7 +168,7 @@ Reproduce from the repository checkout:
 ```sh
 cargo test --workspace --locked
 cargo build --release --locked
-PKB_TANTIVY_COMMAND="$PWD/target/release/pkb-search" \
+GROUNDRAY_TANTIVY_COMMAND="$PWD/target/release/groundray-search" \
   python -m pytest -q tests/test_search_recovery.py tests/test_search_benchmarks.py
 ```
 

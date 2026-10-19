@@ -2,31 +2,31 @@
 set -eu
 
 plugin_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd -P)
-if [ -n "${GROUNDRAY_PKB:-}" ]; then
-    cli=$GROUNDRAY_PKB
+if [ -n "${GROUNDRAY_CLI:-}" ]; then
+    cli=$GROUNDRAY_CLI
 elif [ -e "${plugin_root}/runtime" ] || [ -L "${plugin_root}/runtime" ] \
     || [ -e "${plugin_root}/.bundled-runtime" ]; then
-    if [ -L "${plugin_root}/runtime" ] || [ -L "${plugin_root}/runtime/pkb" ] \
+    if [ -L "${plugin_root}/runtime" ] || [ -L "${plugin_root}/runtime/groundray" ] \
         || [ -L "${plugin_root}/runtime/SHA256SUMS" ] \
-        || [ ! -f "${plugin_root}/runtime/pkb" ] \
-        || [ ! -x "${plugin_root}/runtime/pkb" ] \
+        || [ ! -f "${plugin_root}/runtime/groundray" ] \
+        || [ ! -x "${plugin_root}/runtime/groundray" ] \
         || [ ! -f "${plugin_root}/runtime/SHA256SUMS" ]; then
         echo 'error: bundled Groundray runtime is incomplete or unsafe.' >&2
         exit 1
     fi
     entry=$(cat "${plugin_root}/runtime/SHA256SUMS")
-    expected=${entry%  pkb}
-    if [ "$entry" != "$expected  pkb" ] || [ "${#expected}" -ne 64 ]; then
-        echo 'error: bundled runtime checksum must identify exactly pkb.' >&2
+    expected=${entry%  groundray}
+    if [ "$entry" != "$expected  groundray" ] || [ "${#expected}" -ne 64 ]; then
+        echo 'error: bundled runtime checksum must identify exactly groundray.' >&2
         exit 1
     fi
     case "$expected" in
         *[!0-9a-f]*) echo 'error: invalid bundled runtime SHA-256.' >&2; exit 1 ;;
     esac
     if command -v sha256sum >/dev/null 2>&1; then
-        actual=$(cd "${plugin_root}/runtime" && sha256sum pkb)
+        actual=$(cd "${plugin_root}/runtime" && sha256sum groundray)
     elif command -v shasum >/dev/null 2>&1; then
-        actual=$(cd "${plugin_root}/runtime" && shasum -a 256 pkb)
+        actual=$(cd "${plugin_root}/runtime" && shasum -a 256 groundray)
     else
         echo 'error: sha256sum or shasum is required to check the bundled runtime.' >&2
         exit 1
@@ -35,22 +35,26 @@ elif [ -e "${plugin_root}/runtime" ] || [ -L "${plugin_root}/runtime" ] \
         echo 'error: bundled Groundray runtime checksum mismatch.' >&2
         exit 1
     fi
-    cli="${plugin_root}/runtime/pkb"
+    cli="${plugin_root}/runtime/groundray"
 else
-    cli=$(command -v pkb || true)
+    cli=$(command -v groundray || true)
 fi
 if [ -z "$cli" ] || [ ! -f "$cli" ] || [ ! -x "$cli" ]; then
-    echo 'error: Groundray needs its bundled compatible CLI or an explicitly installed pkb.' >&2
+    echo 'error: Groundray needs its bundled compatible CLI or an explicitly installed groundray.' >&2
+    exit 1
+fi
+if [ "$cli" -ef "$0" ]; then
+    echo 'error: Groundray helper resolved itself; set GROUNDRAY_CLI to the standalone executable.' >&2
     exit 1
 fi
 
 if [ "${1:-}" = check ]; then
-    # Current runtimes inspect the registered command tree in one launch. Older
-    # 0.2.x runtimes retain the explicit help probes below.
+    # Release runtimes inspect the registered command tree in one launch.
+    # Source-only development runtimes can use the explicit capability probes.
     if compatible=$("$cli" plugin-check 2>/dev/null); then
         case "$compatible" in
-            'Groundray CLI compatible: pkb 0.2.'*)
-                patch=${compatible#Groundray CLI compatible: pkb 0.2.}
+            'Groundray CLI compatible: groundray 0.3.'*)
+                patch=${compatible#Groundray CLI compatible: groundray 0.3.}
                 case "$patch" in
                     ''|*[!0-9]*) ;;
                     *) printf '%s\n' "$compatible"; exit 0 ;;
@@ -60,8 +64,8 @@ if [ "${1:-}" = check ]; then
     fi
     version=$("$cli" --version)
     case "$version" in
-        'pkb 0.2.'*)
-            patch=${version#pkb 0.2.}
+        'groundray 0.3.'*)
+            patch=${version#groundray 0.3.}
             case "$patch" in
                 ''|*[!0-9]*) echo "error: invalid CLI version: ${version}" >&2; exit 1 ;;
             esac

@@ -22,8 +22,8 @@ from evals.agent_cli.harness import (
     repository_snapshot,
     write_json,
 )
-from portable_kb.links import extract_links
-from portable_kb.parsing import parse_concept
+from groundray.links import extract_links
+from groundray.parsing import parse_concept
 
 
 def snapshot(root: Path) -> dict[str, str]:
@@ -158,8 +158,8 @@ def prepare(
     slug: str = "wiki-replica",
     repetitions: int = 2,
 ) -> dict:
-    if arm not in {"wiki", "portable-kb"} or not 1 <= repetitions <= 10:
-        raise ValueError("Choose wiki/portable-kb and 1–10 repetitions.")
+    if arm not in {"wiki", "groundray"} or not 1 <= repetitions <= 10:
+        raise ValueError("Choose wiki/groundray and 1–10 repetitions.")
     output, wiki, cli = output.resolve(), wiki.resolve(), cli.resolve()
     if output.is_relative_to(wiki) or (
         source is not None and output.is_relative_to(source.resolve())
@@ -170,8 +170,8 @@ def prepare(
     pages = wiki_pages(wiki)
     suite = json.loads(suite_file.read_text())
     validate_suite(suite, pages)
-    if arm == "portable-kb" and (source is None or not source.is_dir()):
-        raise ValueError("Portable KB arm needs the migrated source repository.")
+    if arm == "groundray" and (source is None or not source.is_dir()):
+        raise ValueError("Groundray arm needs the migrated source repository.")
     if source is not None:
         snapshot(source)
     output.mkdir(parents=True)
@@ -197,7 +197,7 @@ def prepare(
         for name, task in suite["tasks"].items():
             case_name = f"{name}-r{repeat}"
             case = output / case_name
-            if arm == "portable-kb":
+            if arm == "groundray":
                 _new_directory(case, cli, 300)
                 copied = case / "work/source"
                 shutil.copytree(source, copied)
@@ -210,14 +210,14 @@ def prepare(
                 write_json(case / "fidelity.json", report)
                 if not report["passed"]:
                     raise ValueError(f"Migration fidelity failed; inspect {case / 'fidelity.json'}")
-                knowledge_root = case / "home/.local/share/portable-kb/brains" / slug
+                knowledge_root = case / "home/.local/share/groundray/brains" / slug
                 case_snapshot = {
                     "source": repository_snapshot(copied),
                     "checkout": repository_snapshot(knowledge_root),
                 }
-                skill = case / "home/.agents/skills/portable-kb/SKILL.md"
+                skill = case / "home/.agents/skills/groundray-storage/SKILL.md"
                 interface = (
-                    f"Read the installed skill at {skill}. Answer from the named brain {slug} using pkb only for knowledge retrieval. "
+                    f"Read the installed skill at {skill}. Answer from the named brain {slug} using groundray only for knowledge retrieval. "
                     "Search is prebuilt and the brain is clean. Do not inspect raw brain files, other runs, canonical observers or suite labels. "
                     "You may inspect CLI help/health and follow relevant links. Scope every knowledge command to this brain. "
                     "All imported pages are draft; say so. This is not independent verification of the wiki's underlying claims."
@@ -242,7 +242,7 @@ def prepare(
                 interface = (
                     f"Read the wiki skill at {skill}; WIKI_PATH={copied}. Use that skill with normal shell reads/searches to answer. "
                     "Read SCHEMA.md, index.md, current.md and log.md as the skill/conventions require, then relevant complete pages. "
-                    "Do not use Portable KB, other runs, canonical observers or suite labels. "
+                    "Do not use Groundray, other runs, canonical observers or suite labels. "
                     "This is not independent verification of the wiki's underlying claims."
                 )
             write_json(case / "canonical.json", canonical)
@@ -259,7 +259,7 @@ def prepare(
                 'Return JSON: {"answers": {"claim-key": {"value": "short requested value or array", '
                 '"citations": [{"path": "actual retrieved page path", "item_id": "PKB UUID if applicable", '
                 '"commit": "full PKB commit if applicable"}]}}, "summary": "brief synthesis and caveats"}. '
-                "Supply every requested claim key; cite complete pages actually read, using canonical Portable KB citation fields "
+                "Supply every requested claim key; cite complete pages actually read, using canonical Groundray citation fields "
                 "or wiki-relative filenames as appropriate. The summary must not add uncited new facts."
             )
             (case / "prompt.txt").write_text(prompt)
@@ -418,7 +418,7 @@ def grade_case(case: Path, task: dict) -> dict:
     if arm == "wiki":
         unchanged = snapshot(case / "work/wiki") == initial.get("wiki")
     else:
-        checkout = case / "home/.local/share/portable-kb/brains" / config["slug"]
+        checkout = case / "home/.local/share/groundray/brains" / config["slug"]
         unchanged = repository_snapshot(case / "work/source") == initial.get(
             "source"
         ) and repository_snapshot(checkout) == initial.get("checkout")
@@ -440,7 +440,7 @@ def grade_case(case: Path, task: dict) -> dict:
     summary = final.get("summary", "")
     caveat = arm == "wiki" or (isinstance(summary, str) and "draft" in summary.casefold())
     scope = True
-    if arm == "portable-kb":
+    if arm == "groundray":
         for trace in traces:
             args = trace.get("argv", [])
             if args and (
@@ -568,8 +568,8 @@ def compare(wiki: dict, portable: dict, destination: Path) -> dict:
     for field in ("suite_sha256", "labels_sha256", "corpus_sha256", "repetitions"):
         if wiki["manifest"][field] != portable["manifest"][field]:
             raise ValueError(f"Unmatched benchmark {field}.")
-    if wiki["manifest"]["arm"] != "wiki" or portable["manifest"]["arm"] != "portable-kb":
-        raise ValueError("Supply wiki followed by Portable KB reports.")
+    if wiki["manifest"]["arm"] != "wiki" or portable["manifest"]["arm"] != "groundray":
+        raise ValueError("Supply wiki followed by Groundray reports.")
     indices = [{(c["task"], c["repetition"]): c for c in r["cases"]} for r in (wiki, portable)]
     if set(indices[0]) != set(indices[1]):
         raise ValueError("Unmatched task/repetition coverage.")
@@ -581,7 +581,7 @@ def compare(wiki: dict, portable: dict, destination: Path) -> dict:
                 "task": key[0],
                 "repetition": key[1],
                 "wiki": left["status"],
-                "portable-kb": right["status"],
+                "groundray": right["status"],
                 "wiki_grounded": sum(s["passed"] for s in left["claims"].values()),
                 "portable_grounded": sum(s["passed"] for s in right["claims"].values()),
                 "claims": len(left["claims"]),
@@ -589,7 +589,7 @@ def compare(wiki: dict, portable: dict, destination: Path) -> dict:
         )
     result = {
         "wiki": wiki["totals"],
-        "portable-kb": portable["totals"],
+        "groundray": portable["totals"],
         "paired": paired,
         "limitations": [
             "Small opt-in pilot on one wiki; no general product ranking or statistical significance claim.",
@@ -603,20 +603,20 @@ def compare(wiki: dict, portable: dict, destination: Path) -> dict:
     destination.mkdir(parents=True, exist_ok=True)
     write_json(destination / "comparison.json", result)
     rows = "".join(
-        f"<tr><td>{html.escape(p['task'])}</td><td>{p['repetition']}</td><td>{p['wiki_grounded']}/{p['claims']} ({p['wiki']})</td><td>{p['portable_grounded']}/{p['claims']} ({p['portable-kb']})</td></tr>"
+        f"<tr><td>{html.escape(p['task'])}</td><td>{p['repetition']}</td><td>{p['wiki_grounded']}/{p['claims']} ({p['wiki']})</td><td>{p['portable_grounded']}/{p['claims']} ({p['groundray']})</td></tr>"
         for p in paired
     )
     summaries = "".join(
         f"<p><b>{html.escape(arm)}</b>: {data['grounded_claims']}/{data['claims']} grounded correct claims; {data['passed_trials']}/{data['trials']} passed trials; {data['shell_commands']} shell commands; {data['observed_output_chars']:,} observed output characters; median {data['median_elapsed_seconds']} seconds.</p>"
         for arm, data in [
             ("Wiki + skill", result["wiki"]),
-            ("Portable KB + skill", result["portable-kb"]),
+            ("Groundray + skill", result["groundray"]),
         ]
     )
     (destination / "comparison.html").write_text(
         "<!doctype html><meta charset='utf-8'><title>Matched wiki comparison</title><style>body{font:16px system-ui;max-width:1050px;margin:3rem auto;padding:1rem}td,th{padding:.7rem;text-align:left;border-bottom:1px solid #ddd}</style><h1>Matched wiki comparison</h1>"
         + summaries
-        + "<table><tr><th>Task</th><th>Repeat</th><th>Wiki + skill</th><th>Portable KB + skill</th></tr>"
+        + "<table><tr><th>Task</th><th>Repeat</th><th>Wiki + skill</th><th>Groundray + skill</th></tr>"
         + rows
         + "</table><h2>Limits</h2><ul>"
         + "".join(f"<li>{html.escape(s)}</li>" for s in result["limitations"])

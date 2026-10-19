@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb.authoring import (
+from groundray.authoring import (
     ConfidenceLevel,
     GenerationMethod,
     KnowledgeType,
@@ -18,7 +18,7 @@ from portable_kb.authoring import (
     save_knowledge_update,
     slugify,
 )
-from portable_kb.brains import (
+from groundray.brains import (
     BrainError,
     brain_status,
     clean_repository_head,
@@ -28,10 +28,10 @@ from portable_kb.brains import (
     save_catalog,
     sync_brain,
 )
-from portable_kb.operations import OperationError
-from portable_kb.parsing import parse_concept
-from portable_kb.settings import Settings
-from portable_kb.validation import validate_bundle
+from groundray.operations import OperationError
+from groundray.parsing import parse_concept
+from groundray.settings import Settings
+from groundray.validation import validate_bundle
 
 
 def test_plan_knowledge_create_is_reviewable_then_applies_to_authoring_repo(

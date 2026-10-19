@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-import portable_kb.skills as skills_module
-from portable_kb.skills import (
+import groundray.skills as skills_module
+from groundray.skills import (
     SkillError,
     bundled_skill_path,
     install_agent_skill,
@@ -26,9 +26,9 @@ def test_install_agent_skill_for_both_agents_and_force_replace(tmp_path: Path) -
         assert agent in {"codex", "claude"}
         assert (destination / "SKILL.md").read_bytes() == (source / "SKILL.md").read_bytes()
         installed_text = (destination / "SKILL.md").read_text(encoding="utf-8")
-        assert "pkb knowledge create" in installed_text
-        assert "pkb knowledge update" in installed_text
-        assert "pkb brain push <slug> --json" in installed_text
+        assert "groundray knowledge create" in installed_text
+        assert "groundray knowledge update" in installed_text
+        assert "groundray brain push <slug> --json" in installed_text
         assert "Only after explicit sharing intent" in installed_text
         normalized = " ".join(installed_text.split())
         assert "Do not add names, email addresses" in normalized
@@ -37,7 +37,7 @@ def test_install_agent_skill_for_both_agents_and_force_replace(tmp_path: Path) -
     repeated = install_agent_skill(user_home=home)
     assert set(repeated["unchanged"]) == {"codex", "claude"}
 
-    codex_skill = home / ".agents/skills/portable-kb/SKILL.md"
+    codex_skill = home / ".agents/skills/groundray-storage/SKILL.md"
     codex_skill.write_text("changed", encoding="utf-8")
     with pytest.raises(SkillError, match="already exists"):
         install_agent_skill(user_home=home)
@@ -51,7 +51,7 @@ def test_install_agent_skill_can_target_only_codex(tmp_path: Path) -> None:
 
     assert set(result["targets"]) == {"codex"}
     assert result["unchanged"] == []
-    assert (home / ".agents/skills/portable-kb/SKILL.md").is_file()
+    assert (home / ".agents/skills/groundray-storage/SKILL.md").is_file()
     assert not (home / ".claude").exists()
 
 
@@ -65,7 +65,7 @@ def test_skill_status_detects_current_modified_and_missing_targets(tmp_path: Pat
     assert status["targets"]["codex"]["managed"] is True
     assert status["targets"]["claude"]["state"] == "missing"
 
-    skill = home / ".agents/skills/portable-kb/SKILL.md"
+    skill = home / ".agents/skills/groundray-storage/SKILL.md"
     skill.write_text("locally changed\n", encoding="utf-8")
     modified = skill_status("codex", user_home=home)
     assert modified["ok"] is False
@@ -77,7 +77,7 @@ def test_skill_status_detects_outdated_unmanaged_and_unsafe_targets(
 ) -> None:
     home = tmp_path / "home"
     install_agent_skill("codex", user_home=home)
-    installed = home / ".agents/skills/portable-kb"
+    installed = home / ".agents/skills/groundray-storage"
     replacement = tmp_path / "new-bundled-skill"
     shutil.copytree(bundled_skill_path(), replacement)
     replacement.joinpath("SKILL.md").write_text("new bundled version\n", encoding="utf-8")
@@ -86,7 +86,7 @@ def test_skill_status_detects_outdated_unmanaged_and_unsafe_targets(
     outdated = skill_status("codex", user_home=home)
     assert outdated["targets"]["codex"]["state"] == "outdated"
 
-    receipt = installed / ".portable-kb-skill.json"
+    receipt = installed / ".groundray-skill.json"
     receipt.unlink()
     unmanaged = skill_status("codex", user_home=home)
     assert unmanaged["targets"]["codex"]["state"] == "unmanaged"
@@ -99,10 +99,10 @@ def test_skill_status_detects_outdated_unmanaged_and_unsafe_targets(
 
 def test_skill_status_treats_invalid_receipt_as_unmanaged(tmp_path: Path) -> None:
     home = tmp_path / "home"
-    destination = home / ".agents/skills/portable-kb"
+    destination = home / ".agents/skills/groundray-storage"
     destination.mkdir(parents=True)
     destination.joinpath("SKILL.md").write_text("custom\n", encoding="utf-8")
-    destination.joinpath(".portable-kb-skill.json").write_text(
+    destination.joinpath(".groundray-skill.json").write_text(
         json.dumps({"schema_version": 99}), encoding="utf-8"
     )
 
@@ -128,7 +128,7 @@ def test_install_agent_skill_rejects_invalid_target_and_symlink(
 
 
 def test_install_agent_skill_rejects_non_directory_target(tmp_path: Path) -> None:
-    destination = tmp_path / ".agents/skills/portable-kb"
+    destination = tmp_path / ".agents/skills/groundray-storage"
     destination.parent.mkdir(parents=True)
     destination.write_text("occupied", encoding="utf-8")
 
@@ -140,7 +140,7 @@ def test_bundled_skill_path_reports_missing_package(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    fake_module = tmp_path / "package/src/portable_kb/skills.py"
+    fake_module = tmp_path / "package/src/groundray/skills.py"
     monkeypatch.setattr(skills_module, "__file__", str(fake_module))
 
     with pytest.raises(SkillError, match="unavailable or unsafe"):

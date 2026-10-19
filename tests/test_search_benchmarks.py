@@ -10,8 +10,8 @@ import pytest
 from benchmarks.common import query_parts, records_from
 from benchmarks.corpus import export_brain, synthetic_corpus
 from benchmarks.search import Worker, run_benchmark
-from portable_kb.brains import add_brain
-from portable_kb.settings import Settings, save_settings
+from groundray.brains import add_brain
+from groundray.settings import Settings, save_settings
 
 
 @pytest.fixture(params=["sqlite", "tantivy"])
@@ -19,9 +19,9 @@ def engine_worker(request):
     if request.param == "sqlite":
         command = [sys.executable, "-m", "benchmarks.sqlite_fts5"]
     else:
-        executable = os.environ.get("PKB_TANTIVY_COMMAND")
+        executable = os.environ.get("GROUNDRAY_TANTIVY_COMMAND")
         if not executable:
-            pytest.skip("set PKB_TANTIVY_COMMAND to exercise the Rust prototype")
+            pytest.skip("set GROUNDRAY_TANTIVY_COMMAND to exercise the Rust prototype")
         command = [executable]
     worker = Worker(command)
     try:
@@ -152,7 +152,7 @@ def test_real_brain_export_uses_validation_and_unambiguous_section_labels(
     config = save_settings(settings, tmp_path / "config.yaml")
     labels = Path(__file__).parent / "fixtures/retrieval/reference-labels.json"
     sections = labels.with_name("reference-sections.json")
-    destination = Path(os.environ.get("PKB_BENCHMARK_REFERENCE_EXPORT", tmp_path / "export"))
+    destination = Path(os.environ.get("GROUNDRAY_BENCHMARK_REFERENCE_EXPORT", tmp_path / "export"))
     export_brain(config, None, "2026-08-17", labels, sections, destination)
     manifest = json.loads((destination / "corpus.json").read_text())
     assert manifest["origin"] == "git-brain"

@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 from conftest import authorize
 
-from portable_kb import (
+from groundray import (
     OperationError,
     OperationValidationError,
     plan_archive,
@@ -17,8 +17,8 @@ from portable_kb import (
     plan_update,
     validate_bundle,
 )
-from portable_kb.changes import ConcurrentChangeError
-from portable_kb.parsing import parse_concept
+from groundray.changes import ConcurrentChangeError
+from groundray.parsing import parse_concept
 
 TIMESTAMP = "2026-08-13T03:00:00Z"
 REVIEWER = "human:reviewer-42"

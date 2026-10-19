@@ -12,9 +12,9 @@
 4. Add sources for imported, transformed, calculated, summarized, and
    agent-generated content. Cite consequential claims with matching footnotes.
 5. Use a readable lowercase kebab-case filename and normal Markdown links.
-6. Use `pkb knowledge create` or `pkb knowledge update` to preview a validated
+6. Use `groundray knowledge create` or `groundray knowledge update` to preview a validated
    plan, then repeat with `--apply` to save and refresh the active local brain.
-7. Share only after separate publication intent with `pkb brain push`; Git
+7. Share only after separate publication intent with `groundray brain push`; Git
    remains an inspectable persistence layer rather than a required user task.
 
 Participant-reported knowledge may use a fresh `urn:uuid:` source descriptor
@@ -24,8 +24,8 @@ underlying record was reviewed, and do not add names, email addresses, or other
 personal identifiers unless the user supplied them for the item and they are
 necessary to its meaning.
 
-Portable KB updates only navigation enclosed by
-`<!-- portable-kb:index:start -->` and `<!-- portable-kb:index:end -->`.
+Groundray updates only navigation enclosed by
+`<!-- groundray:index:start -->` and `<!-- groundray:index:end -->`.
 Titles and explanatory prose outside that region are author-owned and must be
 preserved.
 

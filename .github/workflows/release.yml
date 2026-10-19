@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - src/portable_kb/__init__.py
+      - src/groundray/__init__.py
   workflow_dispatch:
 
 concurrency:
-  group: portable-kb-release
+  group: groundray-release
   cancel-in-progress: false
 
 permissions:
@@ -78,11 +78,11 @@ jobs:
           cargo build --release --locked
       - name: Verify release candidate
         env:
-          PKB_REAL_QMD: "1"
-          PKB_TANTIVY_COMMAND: ${{ github.workspace }}/target/release/pkb-search
+          GROUNDRAY_REAL_QMD: "1"
+          GROUNDRAY_TANTIVY_COMMAND: ${{ github.workspace }}/target/release/groundray-search
         run: |
           python -m ruff check .
-          python -m pytest -q --cov=portable_kb --cov-report=term-missing
+          python -m pytest -q --cov=groundray --cov-report=term-missing
           sh -n install
           sh -n install-groundray
           cargo fmt --all -- --check
@@ -155,13 +155,13 @@ jobs:
           cargo test --workspace --locked
           cargo build --release --locked
           python -m pip install -e ".[dev]"
-          PKB_TANTIVY_COMMAND="$PWD/target/release/pkb-search" python -m pytest -q tests/test_tantivy_provider.py tests/test_search_recovery.py
+          GROUNDRAY_TANTIVY_COMMAND="$PWD/target/release/groundray-search" python -m pytest -q tests/test_tantivy_provider.py tests/test_search_recovery.py
           python -m pip install --force-reinstall dist/*.whl
       - name: Build and smoke-test standalone archive
         run: python scripts/build_standalone.py --target "${{ matrix.target }}"
       - name: Package Groundray with the tested native runtime
         run: |
-          python scripts/build_groundray_plugin.py --cli "build/standalone/${{ matrix.target }}/dist/pkb" --output "${RUNNER_TEMP}/groundray-marketplace"
+          python scripts/build_groundray_plugin.py --cli "build/standalone/${{ matrix.target }}/dist/groundray" --output "${RUNNER_TEMP}/groundray-marketplace"
           python scripts/smoke_groundray_plugin.py --package "${RUNNER_TEMP}/groundray-marketplace" --output "${RUNNER_TEMP}/groundray-smoke"
           cp "${RUNNER_TEMP}/groundray-marketplace/"*.tar.gz release/
       - name: Set up Node.js for the Codex host test
@@ -205,7 +205,7 @@ jobs:
         run: cp install install-groundray release/
       - name: Generate checksums
         working-directory: release
-        run: sha256sum portable_kb_core-* pkb-*.tar.gz groundray-*.tar.gz install install-groundray > SHA256SUMS
+        run: sha256sum groundray-*.whl groundray-*.tar.gz install install-groundray > SHA256SUMS
       - name: Publish versioned assets
         id: publish
         env:
@@ -250,8 +250,8 @@ jobs:
         run: npm install --prefix "${RUNNER_TEMP}/groundray-codex" @openai/codex@0.161.0
       - name: Install the published release
         env:
-          PKB_INSTALL_DIR: ${{ runner.temp }}/pkb-bin
-          PKB_VERSION: ${{ needs.prepare.outputs.tag }}
+          GROUNDRAY_BIN_DIR: ${{ runner.temp }}/groundray-bin
+          GROUNDRAY_VERSION: ${{ needs.prepare.outputs.tag }}
           RELEASE_TOKEN: ${{ github.token }}
           REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
         run: |
@@ -261,8 +261,8 @@ jobs:
             unset GH_TOKEN
           fi
           sh install
-          "${PKB_INSTALL_DIR}/pkb" --version
-          "${PKB_INSTALL_DIR}/pkb" --help >/dev/null
+          "${GROUNDRAY_BIN_DIR}/groundray" --version
+          "${GROUNDRAY_BIN_DIR}/groundray" --help >/dev/null
       - name: Install the published Groundray package into an isolated host
         env:
           GROUNDRAY_VERSION: ${{ needs.prepare.outputs.tag }}

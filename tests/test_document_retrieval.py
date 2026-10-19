@@ -7,16 +7,16 @@ from pathlib import Path
 import pytest
 from typer.testing import CliRunner
 
-from portable_kb.authoring import plan_knowledge_move, save_knowledge_move
-from portable_kb.brains import add_brain, load_catalog, use_brain
-from portable_kb.cli import app
-from portable_kb.search import (
+from groundray.authoring import plan_knowledge_move, save_knowledge_move
+from groundray.brains import add_brain, load_catalog, use_brain
+from groundray.cli import app
+from groundray.search import (
     SearchError,
     get_knowledge,
     get_knowledge_document,
     get_knowledge_item,
 )
-from portable_kb.settings import Settings, save_settings
+from groundray.settings import Settings, save_settings
 
 AS_OF = "2026-08-14"
 
@@ -178,7 +178,7 @@ def test_post_move_indexes_and_log_are_readable_at_the_saved_commit(installed):
 def test_document_citation_stays_exact_if_checkout_changes_after_health_check(
     installed, monkeypatch
 ):
-    from portable_kb import search
+    from groundray import search
 
     settings, _, _ = installed
     brain = load_catalog(settings).get("documents")

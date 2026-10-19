@@ -1,4 +1,4 @@
-"""Build and smoke-test one standalone Portable KB release archive."""
+"""Build and smoke-test one standalone Groundray release archive."""
 
 from __future__ import annotations
 
@@ -13,8 +13,8 @@ import tarfile
 import tempfile
 from pathlib import Path
 
-import portable_kb
-from portable_kb import __version__
+import groundray
+from groundray import __version__
 
 
 def run(*arguments: str, env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
@@ -26,9 +26,9 @@ def run(*arguments: str, env: dict[str, str] | None = None) -> subprocess.Comple
 def require_current_package(repository: Path, package: Path) -> None:
     """A matching version alone cannot establish the installed build inputs."""
     trees = (
-        (repository / "src/portable_kb", package, "*.py"),
+        (repository / "src/groundray", package, "*.py"),
         (repository / "schemas", package / "schemas", "*"),
-        (repository / ".agents/skills/portable-kb", package / "skills/portable-kb", "*"),
+        (repository / ".agents/skills/groundray-storage", package / "skills/groundray-storage", "*"),
     )
     for source, installed, pattern in trees:
         for original in source.rglob(pattern):
@@ -67,10 +67,10 @@ def main() -> None:
         )
 
     repository = Path.cwd()
-    require_current_package(repository, Path(portable_kb.__file__).resolve().parent)
-    native = repository / "target/release/pkb-search"
+    require_current_package(repository, Path(groundray.__file__).resolve().parent)
+    native = repository / "target/release/groundray-search"
     if not native.is_file() or native.is_symlink():
-        raise RuntimeError("Build the native pkb-search sidecar before packaging pkb")
+        raise RuntimeError("Build the native groundray-search sidecar before packaging groundray")
     build_root = repository / "build" / "standalone" / arguments.target
     distribution = build_root / "dist"
     specification = build_root / "spec"
@@ -85,7 +85,7 @@ def main() -> None:
         "--noconfirm",
         "--onefile",
         "--name",
-        "pkb",
+        "groundray",
         "--distpath",
         str(distribution),
         "--workpath",
@@ -95,17 +95,17 @@ def main() -> None:
         "--add-binary",
         f"{native}{os.pathsep}.",
         "--collect-data",
-        "portable_kb",
+        "groundray",
         "--copy-metadata",
-        "portable-kb-core",
+        "groundray",
         str(repository / "scripts/frozen_entrypoint.py"),
     )
-    executable = distribution / "pkb"
+    executable = distribution / "groundray"
     version_result = run(str(executable), "--version")
-    if version_result.stdout.strip() != f"pkb {__version__}":
+    if version_result.stdout.strip() != f"groundray {__version__}":
         raise RuntimeError(f"Unexpected standalone version: {version_result.stdout.strip()}")
 
-    with tempfile.TemporaryDirectory(prefix="portable-kb-frozen-home-") as temporary_home:
+    with tempfile.TemporaryDirectory(prefix="groundray-frozen-home-") as temporary_home:
         environment = {**os.environ, "HOME": temporary_home}
         temporary = Path(temporary_home)
         config = temporary / "config.yaml"
@@ -123,7 +123,7 @@ def main() -> None:
             str(temporary / "cache"),
             env=environment,
         )
-        if "Portable KB configured" not in setup_result.stdout:
+        if "Groundray configured" not in setup_result.stdout:
             raise RuntimeError("Standalone executable could not complete local setup")
         brain_result = run(
             str(executable),
@@ -169,15 +169,15 @@ def main() -> None:
         payload = json.loads(skill_result.stdout)
         if payload.get("ok") is not True:
             raise RuntimeError("Standalone executable could not install its bundled agent skill")
-        skill = Path(temporary_home) / ".agents/skills/portable-kb/SKILL.md"
+        skill = Path(temporary_home) / ".agents/skills/groundray-storage/SKILL.md"
         if not skill.is_file():
             raise RuntimeError("Standalone executable omitted the bundled agent skill")
-        if skill.read_bytes() != (repository / ".agents/skills/portable-kb/SKILL.md").read_bytes():
+        if skill.read_bytes() != (repository / ".agents/skills/groundray-storage/SKILL.md").read_bytes():
             raise RuntimeError("Standalone executable bundled an outdated agent skill")
 
-    archive = arguments.output / f"pkb-v{__version__}-{arguments.target}.tar.gz"
+    archive = arguments.output / f"groundray-cli-v{__version__}-{arguments.target}.tar.gz"
     with tarfile.open(archive, "w:gz") as tar:
-        tar.add(executable, arcname="pkb")
+        tar.add(executable, arcname="groundray")
     print(archive)
 
 

@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pytest
 
-from portable_kb import __version__
+from groundray import __version__
 from tests.test_distribution import QuietHandler, _release_target
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,12 +26,12 @@ def write_package(releases, *, extra=None, runtime_version=__version__, bad_runt
     tag = f"v{__version__}"
     release = releases / tag
     release.mkdir(parents=True, exist_ok=True)
-    runtime = (f'#!/bin/sh\nif [ "$1" = plugin-check ]; then echo "Groundray CLI compatible: pkb {runtime_version}";'
-               f' else echo "pkb {runtime_version}"; fi\n').encode()
+    runtime = (f'#!/bin/sh\nif [ "$1" = plugin-check ]; then echo "Groundray CLI compatible: groundray {runtime_version}";'
+               f' else echo "groundray {runtime_version}"; fi\n').encode()
     digest = "0" * 64 if bad_runtime_hash else hashlib.sha256(runtime).hexdigest()
     files = {
-        "plugins/groundray/runtime/pkb": runtime,
-        "plugins/groundray/runtime/SHA256SUMS": f"{digest}  pkb\n".encode(),
+        "plugins/groundray/runtime/groundray": runtime,
+        "plugins/groundray/runtime/SHA256SUMS": f"{digest}  groundray\n".encode(),
         "plugins/groundray/scripts/groundray": (ROOT / "plugins/groundray/scripts/groundray").read_bytes(),
         ".agents/plugins/marketplace.json": (ROOT / ".agents/plugins/marketplace.json").read_bytes(),
         "plugins/groundray/plugin.json": (ROOT / "plugins/groundray/plugin.json").read_bytes(),
@@ -41,7 +41,7 @@ def write_package(releases, *, extra=None, runtime_version=__version__, bad_runt
         for name, data in files.items():
             entry = tarfile.TarInfo(name)
             entry.size = len(data)
-            entry.mode = 0o755 if name.endswith(("/pkb", "/groundray")) else 0o644
+            entry.mode = 0o755 if name.endswith(("/groundray", "/groundray")) else 0o644
             bundle.addfile(entry, io.BytesIO(data))
         if extra:
             entry = tarfile.TarInfo(extra)
@@ -111,7 +111,7 @@ else: print('{}')
 
 def test_install_and_upgrade_use_explicit_host_persistent_path_and_preserve_state(host):
     install, environment, root, releases, log = host
-    result = install(LEGACY="1", GROUNDRAY_PKB="/does/not/exist")
+    result = install(LEGACY="1", GROUNDRAY_CLI="/does/not/exist")
     assert result.returncode == 0, result.stderr
     marketplace = root / "marketplace"
     assert (marketplace / ".groundray-install").read_text().strip() == f"v{__version__}"
@@ -155,7 +155,7 @@ def test_bad_runtime_or_release_version_leaves_existing_installation_intact(host
 def test_host_failure_retains_verified_package_for_retry_and_refuses_unmanaged_overwrite(host):
     install, _, root, _, _ = host
     assert install(FAIL_ADD='1').returncode != 0
-    assert (root / 'marketplace/plugins/groundray/runtime/pkb').exists()
+    assert (root / 'marketplace/plugins/groundray/runtime/groundray').exists()
     assert install().returncode == 0
     marker = root / 'marketplace/.groundray-install'
     marker.unlink()

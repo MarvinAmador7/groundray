@@ -7,17 +7,17 @@ from pathlib import Path
 import pytest
 from typer.testing import CliRunner
 
-from portable_kb import collaboration
-from portable_kb.brains import BrainError, add_brain, load_catalog, sync_brain
-from portable_kb.cli import app
-from portable_kb.collaboration import (
+from groundray import collaboration
+from groundray.brains import BrainError, add_brain, load_catalog, sync_brain
+from groundray.cli import app
+from groundray.collaboration import (
     attach_authoring,
     propose_brain,
     publish_proposal,
     review_proposal,
 )
-from portable_kb.settings import Settings, save_settings
-from portable_kb.sources import get_source, plan_source_capture, save_source_capture
+from groundray.settings import Settings, save_settings
+from groundray.sources import get_source, plan_source_capture, save_source_capture
 
 AS_OF = "2026-10-13"
 IDENTITY = "urn:uuid:11111111-1111-4111-8111-111111111111"
@@ -314,7 +314,7 @@ def test_cli_complete_handoff(team, tmp_path):
 
 
 def test_named_company_workflow_preserves_active_selection(team, tmp_path, brain_repo_factory):
-    from portable_kb.brains import use_brain
+    from groundray.brains import use_brain
 
     a, b, author, _remote = team
     other = brain_repo_factory("other-company", "urn:uuid:22222222-2222-4222-8222-222222222222")
@@ -391,7 +391,7 @@ def test_separate_push_url_cannot_publish_to_another_company(team, tmp_path):
 
 
 def test_candidate_original_read_preserves_crlf_without_activating_or_leaking_paths(team, tmp_path):
-    from portable_kb.collaboration import get_proposal_source
+    from groundray.collaboration import get_proposal_source
 
     a, b, _author, _remote = team
     commit = capture(team, tmp_path)
@@ -417,14 +417,14 @@ def test_candidate_original_read_preserves_crlf_without_activating_or_leaking_pa
 
 
 def test_candidate_declared_source_uses_candidate_item_context(team, tmp_path):
-    from portable_kb.authoring import (
+    from groundray.authoring import (
         ConfidenceLevel,
         GenerationMethod,
         KnowledgeType,
         plan_knowledge_create,
         save_knowledge_create,
     )
-    from portable_kb.collaboration import get_proposal_source
+    from groundray.collaboration import get_proposal_source
 
     a, b, _author, _remote = team
     capture(team, tmp_path)
@@ -455,8 +455,8 @@ def test_candidate_declared_source_uses_candidate_item_context(team, tmp_path):
 
 @pytest.mark.parametrize("reference", ["references/captures/missing.txt", "../outside.txt"])
 def test_candidate_source_refusal_cleans_worktree_and_preserves_pin(team, tmp_path, reference):
-    from portable_kb.collaboration import get_proposal_source
-    from portable_kb.sources import SourceError
+    from groundray.collaboration import get_proposal_source
+    from groundray.sources import SourceError
 
     a, b, _author, _remote = team
     commit = capture(team, tmp_path)
@@ -474,8 +474,8 @@ def test_candidate_source_refusal_cleans_worktree_and_preserves_pin(team, tmp_pa
 
 
 def test_candidate_receipt_mismatch_refuses_read_without_activation(team, tmp_path):
-    from portable_kb.collaboration import get_proposal_source
-    from portable_kb.sources import SourceError
+    from groundray.collaboration import get_proposal_source
+    from groundray.sources import SourceError
 
     a, b, author, _remote = team
     capture(team, tmp_path)

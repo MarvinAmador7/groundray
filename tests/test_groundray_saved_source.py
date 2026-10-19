@@ -10,16 +10,16 @@ from pathlib import Path
 import pytest
 
 from evals.groundray.saved_source import MAX_SOURCE_BYTES, read_saved_source
-from portable_kb.authoring import (
+from groundray.authoring import (
     ConfidenceLevel,
     GenerationMethod,
     KnowledgeType,
     plan_knowledge_create,
     save_knowledge_create,
 )
-from portable_kb.brains import init_brain, load_catalog, sync_brain
-from portable_kb.search import SearchError
-from portable_kb.settings import Settings
+from groundray.brains import init_brain, load_catalog, sync_brain
+from groundray.search import SearchError
+from groundray.settings import Settings
 
 
 def prepare(tmp_path: Path, material: bytes) -> tuple[Settings, str]:

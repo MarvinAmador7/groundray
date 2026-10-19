@@ -25,7 +25,7 @@ def smoke(package: Path, codex: Path, output: Path) -> dict:
         raise ValueError("Use a new install-smoke directory")
     output.mkdir(parents=True)
     metadata = json.loads((package / "plugins/groundray/runtime/build.json").read_text())
-    tag = "v" + metadata["cli_version"].removeprefix("pkb ")
+    tag = "v" + metadata["cli_version"].removeprefix("groundray ")
     name = f"groundray-{tag}-{metadata['target']}.tar.gz"
     release = output / "releases" / tag
     release.mkdir(parents=True)
@@ -113,7 +113,7 @@ def smoke(package: Path, codex: Path, output: Path) -> dict:
         assert entries[0]["enabled"] is True
         assert entries[0]["version"] == metadata["plugin_version"]
         assert Path(entries[0]["source"]["path"]) == expected_root
-        assert (expected_root / "runtime/pkb").is_file()
+        assert (expected_root / "runtime/groundray").is_file()
         remaining = host("plugin", "list", "--marketplace", "groundray-dev", "--json")
         assert [p["pluginId"] for p in remaining["installed"]] == ["keep-me@groundray-dev"]
         assert other_cached.read_bytes() == original_other_bytes

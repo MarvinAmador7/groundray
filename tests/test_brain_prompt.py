@@ -4,14 +4,14 @@ from collections import deque
 from collections.abc import Sequence
 from pathlib import Path
 
-from portable_kb.brain_prompt import (
+from groundray.brain_prompt import (
     BrainInitInputs,
     BrainPublishChoice,
     run_brain_init_prompts,
     run_brain_publish_prompt,
 )
-from portable_kb.brains import GitHubVisibility
-from portable_kb.setup_prompt import PromptChoice
+from groundray.brains import GitHubVisibility
+from groundray.setup_prompt import PromptChoice
 
 
 class FakeBackend:

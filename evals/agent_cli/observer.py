@@ -53,7 +53,7 @@ def main() -> int:
     environment = os.environ.copy()
     environment.update(configuration["product_environment"])
     environment["PATH"] = str(case / "bin") + os.pathsep + environment.get("PATH", "")
-    environment["PKB_EVAL_ACTOR"] = "agent"
+    environment["GROUNDRAY_EVAL_ACTOR"] = "agent"
     process = subprocess.Popen(
         ["/bin/bash", "--noprofile", "--norc", "-c", args.command],
         cwd=case / "work",

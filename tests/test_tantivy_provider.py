@@ -7,13 +7,13 @@ from dataclasses import replace
 import pytest
 from typer.testing import CliRunner
 
-from portable_kb.brains import add_brain, remove_brain
-from portable_kb.cli import app
-from portable_kb.native_sidecar import ENGINE_VERSION, NativeSidecar
-from portable_kb.parsing import discover_concepts, parse_concept
-from portable_kb.search import index_keyword_brain, search_keyword
-from portable_kb.search_provider import SearchError
-from portable_kb.settings import (
+from groundray.brains import add_brain, remove_brain
+from groundray.cli import app
+from groundray.native_sidecar import ENGINE_VERSION, NativeSidecar
+from groundray.parsing import discover_concepts, parse_concept
+from groundray.search import index_keyword_brain, search_keyword
+from groundray.search_provider import SearchError
+from groundray.settings import (
     SearchMode,
     SearchProvider,
     Settings,
@@ -21,15 +21,15 @@ from portable_kb.settings import (
     load_settings,
     save_settings,
 )
-from portable_kb.tantivy_provider import TantivyProvider, _metadata, _records
+from groundray.tantivy_provider import TantivyProvider, _metadata, _records
 
 
 @pytest.fixture
 def native_executable(tmp_path):
-    real = os.environ.get("PKB_TANTIVY_COMMAND")
+    real = os.environ.get("GROUNDRAY_TANTIVY_COMMAND")
     if real:
         return real
-    executable = tmp_path / "pkb-search"
+    executable = tmp_path / "groundray-search"
     executable.write_text('''#!/usr/bin/env python3
 import json, pathlib, sys, shutil, unicodedata
 for raw in sys.stdin:
@@ -146,7 +146,7 @@ def test_native_missing_and_stale_metadata_fail_closed(native_brain):
     with pytest.raises(SearchError, match="stale"):
         search_keyword(settings, "stale", as_of="2026-08-17")
     assert indexed["commit"] == brain.commit
-    unavailable = TantivyProvider(replace(settings, native_command="no-such-pkb-sidecar"))
+    unavailable = TantivyProvider(replace(settings, native_command="no-such-groundray-sidecar"))
     assert unavailable.status()["ok"] is False
 
 
@@ -216,7 +216,7 @@ def test_native_removal_rolls_back_catalog_failure(native_brain, monkeypatch):
     before = (root / "CURRENT.json").read_bytes()
     def fail(*args):
         raise OSError("catalog write failed")
-    monkeypatch.setattr("portable_kb.brains.save_catalog", fail)
+    monkeypatch.setattr("groundray.brains.save_catalog", fail)
     with pytest.raises(OSError, match="catalog write failed"):
         remove_brain(brain.slug, settings)
     assert (root / "CURRENT.json").read_bytes() == before
@@ -341,13 +341,13 @@ def test_native_setup_defaults_and_explicit_qmd_preserve_configuration(tmp_path,
 def test_named_brain_recovery_and_saved_item_actions_preserve_scope(
     native_brain, brain_repo_factory,
 ):
-    from portable_kb.authoring import (
+    from groundray.authoring import (
         GenerationMethod,
         plan_knowledge_update,
         save_knowledge_update,
     )
-    from portable_kb.brains import load_catalog
-    from portable_kb.search import get_knowledge_item
+    from groundray.brains import load_catalog
+    from groundray.search import get_knowledge_item
 
     settings, primary = native_brain
     source = brain_repo_factory("alternate", "urn:uuid:99999999-9999-4999-8999-999999999999")
@@ -362,8 +362,8 @@ def test_named_brain_recovery_and_saved_item_actions_preserve_scope(
     )
     saved = save_knowledge_update(settings, update, as_of="2026-08-17").as_dict()
     assert saved["citation"]["brain_slug"] == alternate.slug
-    assert saved["get_command"] == ["pkb", "get", identity, "--brain", alternate.slug, "--json"]
-    assert saved["reindex_command"] == ["pkb", "search", "index", alternate.slug, "--json"]
+    assert saved["get_command"] == ["groundray", "get", identity, "--brain", alternate.slug, "--json"]
+    assert saved["reindex_command"] == ["groundray", "search", "index", alternate.slug, "--json"]
     assert saved["needs_reindex"] is True and saved["search_ready"] is False
     selected = get_knowledge_item(settings, identity, alternate.slug, as_of="2026-08-17")
     assert selected["citation"] == saved["citation"]
@@ -371,7 +371,7 @@ def test_named_brain_recovery_and_saved_item_actions_preserve_scope(
     assert get_knowledge_item(settings, identity, as_of="2026-08-17")["item"]["body"] == original["item"]["body"]
     assert load_catalog(settings).active == primary.slug
 
-    with pytest.raises(SearchError, match="pkb search index alternate"):
+    with pytest.raises(SearchError, match="groundray search index alternate"):
         search_keyword(settings, "quarantine", alternate.slug, as_of="2026-08-17")
     index_keyword_brain(settings, alternate.slug, as_of="2026-08-17")
     found = search_keyword(settings, "quarantine", alternate.slug, as_of="2026-08-17")
@@ -383,6 +383,6 @@ def test_named_brain_recovery_and_saved_item_actions_preserve_scope(
         timestamp="2026-08-17T13:00:00Z", as_of="2026-08-17",
     )
     save_knowledge_update(settings, update, as_of="2026-08-17")
-    with pytest.raises(SearchError, match="stale.*pkb search index alternate"):
+    with pytest.raises(SearchError, match="stale.*groundray search index alternate"):
         search_keyword(settings, "quarantine", alternate.slug, as_of="2026-08-17")
     assert load_catalog(settings).active == primary.slug
