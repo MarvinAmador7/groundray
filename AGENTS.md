@@ -1,5 +1,10 @@
 # Agent instructions
 
+## Git identity
+
+Use `MarvinAmador7 <marvin.ac.cr@gmail.com>` for the author and committer of
+agent-created commits. Check the effective Git identity before committing.
+
 ## Scope
 
 This repository contains an implemented OKF-compatible core plus the active
