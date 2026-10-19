@@ -4,12 +4,12 @@
 computers, inspect the evidence behind an answer, and exchange reviewed updates
 without losing company scope, original records or decision history.**
 
-Groundray is the intended product: plugin, skill, CLI and shared infrastructure.
-Groundray supplies the existing engine foundation. This goal is adopted;
-Groundray plugin 0.2.1 and Groundray 0.2.1 package the implemented local
-workflows and bundled keyword engine. Employee rollout still needs the actual
-two-person hosted handoff and human source inspection. The CLI remains `groundray`;
-no renamed executable or hosted service is claimed.
+Groundray combines a Codex plugin, agent workflow, CLI, and Git-backed company
+brains. Release 0.3.0 packages the implemented local workflows and bundled
+keyword engine for macOS and Linux on Intel and ARM. The adopted goal below
+extends that foundation into validated employee collaboration. Real two-person
+hosted handoffs and human source inspection remain pilot gates; hosted services
+remain future work. See the [release guide](releases.md) for current distribution.
 
 ## Product contract
 
