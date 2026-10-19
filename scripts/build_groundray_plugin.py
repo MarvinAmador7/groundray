@@ -103,6 +103,9 @@ def build(output: Path, cli: Path, repository: Path = ROOT) -> dict:
         r"\d+\.\d+\.\d+(?:-[0-9A-Za-z.]+)?", str(manifest.get("version", ""))
     ) is None:
         raise ValueError("Plugin identity/version is invalid")
+    claude_manifest = json.loads((plugin / ".claude-plugin/plugin.json").read_text())
+    if any(claude_manifest.get(key) != manifest[key] for key in ("name", "version")):
+        raise ValueError("Claude and Codex plugin identities/versions must match")
     output.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix=".groundray-build-", dir=output.parent))
     try:
@@ -130,9 +133,11 @@ def build(output: Path, cli: Path, repository: Path = ROOT) -> dict:
                 "target": target, "cli_sha256": cli_hash,
                 "cli_compatibility": "0.3.x with registered-command check or explicit help probes"}
         (runtime / "build.json").write_text(json.dumps(info, indent=2) + "\n")
-        catalog = json.loads((repository / ".agents/plugins/marketplace.json").read_text())
-        (stage / ".agents/plugins").mkdir(parents=True)
-        (stage / ".agents/plugins/marketplace.json").write_text(json.dumps(catalog, indent=2) + "\n")
+        for catalog_path in (".agents/plugins/marketplace.json", ".claude-plugin/marketplace.json"):
+            catalog = json.loads((repository / catalog_path).read_text())
+            destination = stage / catalog_path
+            destination.parent.mkdir(parents=True)
+            destination.write_text(json.dumps(catalog, indent=2) + "\n")
         archive = stage / f"groundray-{manifest['version']}-{target}.zip"
         files = sorted(p for p in stage.rglob("*") if p.is_file() and p != archive)
         with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as bundle:

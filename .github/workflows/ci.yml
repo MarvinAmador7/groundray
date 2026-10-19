@@ -177,6 +177,10 @@ jobs:
         include:
           - target: linux-x86_64
             runner: ubuntu-22.04
+          - target: linux-arm64
+            runner: ubuntu-22.04-arm
+          - target: darwin-x86_64
+            runner: macos-15-intel
           - target: darwin-arm64
             runner: macos-15
     steps:
@@ -203,15 +207,19 @@ jobs:
           python scripts/build_groundray_plugin.py --cli "${RUNNER_TEMP}/groundray-freeze/dist/groundray" --output "${RUNNER_TEMP}/groundray-marketplace"
       - name: Exercise installed native CLI through packaged helper
         run: python scripts/smoke_groundray_plugin.py --package "${RUNNER_TEMP}/groundray-marketplace" --output "${RUNNER_TEMP}/groundray-smoke"
-      - name: Set up Node.js for the Codex host test
+      - name: Set up Node.js for plugin host tests
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: "24"
           package-manager-cache: false
       - name: Install the pinned Codex host
         run: npm install --prefix "${RUNNER_TEMP}/groundray-codex" @openai/codex@0.161.0
+      - name: Install the pinned Claude Code host
+        run: npm install --prefix "${RUNNER_TEMP}/groundray-claude" @anthropic-ai/claude-code@2.1.303
       - name: Verify persistent installation with the actual Codex host
         run: python scripts/smoke_groundray_install.py --package "${RUNNER_TEMP}/groundray-marketplace" --codex "${RUNNER_TEMP}/groundray-codex/node_modules/.bin/codex" --output "${RUNNER_TEMP}/groundray-install-smoke"
+      - name: Verify installation and skill discovery with the actual Claude Code host
+        run: python scripts/smoke_groundray_claude.py --package "${RUNNER_TEMP}/groundray-marketplace" --claude "${RUNNER_TEMP}/groundray-claude/node_modules/.bin/claude" --output "${RUNNER_TEMP}/groundray-claude-smoke"
       - name: Retain development package and smoke traces
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -224,4 +232,6 @@ jobs:
             ${{ runner.temp }}/groundray-smoke/operations.jsonl
             ${{ runner.temp }}/groundray-smoke/result.json
             ${{ runner.temp }}/groundray-install-smoke/result.json
+            ${{ runner.temp }}/groundray-claude-smoke/result.json
+            ${{ runner.temp }}/groundray-claude-smoke/operations.json
           if-no-files-found: warn

@@ -53,9 +53,25 @@ Use $groundray:groundray. What can we promise this customer about price and
 launch? Show the evidence and what still needs a decision.
 ```
 
+### In Claude Code
+
+Use the same native package with an installed Claude Code CLI:
+
+```sh
+curl -fsSL https://github.com/MarvinAmador7/groundray/releases/latest/download/install-groundray | sh -s -- --host claude
+```
+
+Start a fresh Claude Code session, then connect your brain and ask:
+
+```text
+/groundray:groundray-setup Connect my company brain from <repository-url>.
+/groundray:groundray What can we promise this customer about price and launch?
+Show the evidence and what still needs a decision.
+```
+
 A company brain is a separate Git repository. To create your first one, use the
-CLI below. See the [plugin guide](docs/groundray-plugin.md) for choosing a Codex
-installation, upgrading, and removing the plugin.
+CLI below. See the [plugin guide](docs/groundray-plugin.md) for choosing a host
+executable, upgrading, and removing the plugin.
 
 ### From the terminal
 
@@ -84,7 +100,7 @@ groundray search query "customer onboarding" --brain team --json
 ```
 
 Setup can also install the standalone agent workflow for **Codex, Claude Code,
-or both**. The packaged plugin targets Codex. See the
+or both**. See the
 [CLI guide](docs/cli.md) for connecting an existing brain, reading original
 sources, and authoring changes.
 
@@ -108,7 +124,7 @@ See [reviewed collaboration](docs/brain-collaboration.md) and the
 
 ## Status
 
-**Early release: 0.3.0.** The Codex plugin, standalone CLI, original-source
+**Early release: 0.3.1.** The Codex and Claude Code plugins, standalone CLI, original-source
 retrieval, and proposal/review/publish/sync workflows are implemented. Native
 packages and installers are tested on all four supported platform combinations.
 Real employee handoffs and the human evidence-review experience remain pilot
@@ -126,7 +142,7 @@ and configuration paths.
 
 | Start here | Details |
 | --- | --- |
-| [Plugin guide](docs/groundray-plugin.md) | Codex installation, company setup, upgrades, and removal |
+| [Plugin guide](docs/groundray-plugin.md) | Codex and Claude Code installation, company setup, upgrades, and removal |
 | [CLI guide](docs/cli.md) | Brains, search, source capture, edits, sharing, and diagnostics |
 | [Release guide](docs/releases.md) | Downloads, checksums, version pins, and migration |
 | [Product direction](docs/groundray-product-goal.md) | Product contract, milestones, and acceptance criteria |

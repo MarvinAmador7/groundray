@@ -34,6 +34,8 @@ def write_package(releases, *, extra=None, runtime_version=__version__, bad_runt
         "plugins/groundray/runtime/SHA256SUMS": f"{digest}  groundray\n".encode(),
         "plugins/groundray/scripts/groundray": (ROOT / "plugins/groundray/scripts/groundray").read_bytes(),
         ".agents/plugins/marketplace.json": (ROOT / ".agents/plugins/marketplace.json").read_bytes(),
+        ".claude-plugin/marketplace.json": (ROOT / ".claude-plugin/marketplace.json").read_bytes(),
+        "plugins/groundray/.claude-plugin/plugin.json": (ROOT / "plugins/groundray/.claude-plugin/plugin.json").read_bytes(),
         "plugins/groundray/plugin.json": (ROOT / "plugins/groundray/plugin.json").read_bytes(),
     }
     archive = release / f"groundray-{tag}-{_release_target()}.tar.gz"
@@ -66,10 +68,17 @@ import json,os,sys
 from pathlib import Path
 args=sys.argv[1:]
 with Path(os.environ['HOST_LOG']).open('a') as log:
-    log.write(json.dumps({'args':args,'home':os.environ.get('HOME'),'codex_home':os.environ.get('CODEX_HOME')})+'\\n')
+    log.write(json.dumps({'args':args,'home':os.environ.get('HOME'),'codex_home':os.environ.get('CODEX_HOME'),'claude_config':os.environ.get('CLAUDE_CONFIG_DIR')})+'\\n')
 if args==['--version']: print('codex-cli fixture')
 elif args==['features','list']: print('plugins stable '+('false' if os.environ.get('DISABLE_PLUGINS') else 'true'))
-elif args[:2]==['plugin','add'] and os.environ.get('FAIL_ADD'): sys.exit(3)
+elif args[:2] in [['plugin','add'],['plugin','install']] and os.environ.get('FAIL_ADD'): sys.exit(3)
+elif args[:2]==['plugin','validate'] and os.environ.get('FAIL_VALIDATE'): sys.exit(2)
+elif args[:2]==['plugin','enable']:
+    Path(os.environ['HOST_LOG']+'.enabled').touch()
+elif args==['plugin','list','--json']:
+    print(json.dumps([{'id':'groundray@groundray','scope':os.environ.get('LIST_SCOPE','user'),
+        'version':os.environ.get('LIST_VERSION',os.environ['GROUNDRAY_VERSION']),
+        'enabled':not bool(os.environ.get('HIDE_PLUGIN')) and (not os.environ.get('NEEDS_ENABLE') or Path(os.environ['HOST_LOG']+'.enabled').exists())}, {'id':'keep-me@other','enabled':True}]))
 elif args[:3]==['plugin','list','--marketplace'] and args[3]=='groundray-dev':
     print(json.dumps({'installed':[{'pluginId':'groundray@groundray-dev'}] if os.environ.get('LEGACY') else []}))
 elif args[:3]==['plugin','list','--marketplace'] and args[3]=='groundray':
@@ -93,11 +102,12 @@ else: print('{}')
     thread.start()
     environment.update(GROUNDRAY_VERSION=__version__, GROUNDRAY_CODEX=str(cli),
                        GROUNDRAY_INSTALL_DIR=str(root), HOST_LOG=str(log), CODEX_HOME=str(profile),
+                       GROUNDRAY_CLAUDE=str(cli), CLAUDE_CONFIG_DIR=str(profile),
                        XDG_CONFIG_HOME=str(config.parent),
                        GROUNDRAY_RELEASE_BASE_URL=f"http://127.0.0.1:{server.server_port}")
 
-    def install(**updates):
-        result = subprocess.run(["sh", "install-groundray"], cwd=ROOT,
+    def install(_args=(), **updates):
+        result = subprocess.run(["sh", "install-groundray", *_args], cwd=ROOT,
                                 env={**environment, **updates}, text=True, capture_output=True)
         assert marker.read_bytes() == b"Preserve this plugin state\r\n"
         assert config.read_text() == "existing company/provider settings"
@@ -172,3 +182,47 @@ def test_disabled_feature_and_empty_host_catalog_are_reported_as_failure(host):
     result = install(HIDE_PLUGIN='1', LEGACY='1')
     assert result.returncode != 0 and 'not installed/enabled' in result.stderr
     assert not any(json.loads(line)['args'][:2] == ['plugin','remove'] for line in log.read_text().splitlines())
+
+
+def test_claude_install_uses_explicit_user_scope_and_preserves_selected_profile(host):
+    install, environment, root, _, log = host
+    result = install(_args=("--host", "claude"), GROUNDRAY_CODEX="/never/use/codex", NEEDS_ENABLE="1")
+    assert result.returncode == 0, result.stderr
+    calls = [json.loads(line) for line in log.read_text().splitlines()]
+    assert all(c['home'] == environment.get('HOME') and
+               c['claude_config'] == environment['CLAUDE_CONFIG_DIR'] for c in calls)
+    assert not any(c['args'] == ['features', 'list'] for c in calls)
+    for command in ('install', 'update', 'enable'):
+        assert any(c['args'] == ['plugin', command, 'groundray@groundray', '--scope', 'user', '--json']
+                   for c in calls)
+    assert (root / 'marketplace/.claude-plugin/marketplace.json').is_file()
+    assert install(_args=("--host", "claude")).returncode == 0
+
+
+@pytest.mark.parametrize('options', [
+    {'LIST_SCOPE':'project'}, {'LIST_VERSION':'0x3x1'}, {'HIDE_PLUGIN':'1'},
+])
+def test_claude_catalog_must_have_exact_enabled_user_version(host, options):
+    install, _, _, _, _ = host
+    result = install(_args=("--host", "claude"), **options)
+    assert result.returncode != 0
+    assert 'not installed/enabled' in result.stderr
+
+
+def test_claude_validation_failure_keeps_existing_package_and_never_registers(host):
+    install, _, root, _, log = host
+    assert install(_args=("--host", "claude")).returncode == 0
+    original = (root / 'marketplace/.groundray-install').read_bytes()
+    log.write_text('')
+    result = install(_args=("--host", "claude"), FAIL_VALIDATE='1')
+    assert result.returncode != 0
+    assert (root / 'marketplace/.groundray-install').read_bytes() == original
+    assert not any(json.loads(line)['args'][:3] == ['plugin','marketplace','add']
+                   for line in log.read_text().splitlines())
+
+
+def test_invalid_host_is_rejected_before_download_or_registration(host):
+    install, _, root, _, _ = host
+    result = install(_args=("--host", "unknown"))
+    assert result.returncode == 2
+    assert not root.exists()

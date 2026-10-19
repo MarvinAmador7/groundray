@@ -164,15 +164,19 @@ jobs:
           python scripts/build_groundray_plugin.py --cli "build/standalone/${{ matrix.target }}/dist/groundray" --output "${RUNNER_TEMP}/groundray-marketplace"
           python scripts/smoke_groundray_plugin.py --package "${RUNNER_TEMP}/groundray-marketplace" --output "${RUNNER_TEMP}/groundray-smoke"
           cp "${RUNNER_TEMP}/groundray-marketplace/"*.tar.gz release/
-      - name: Set up Node.js for the Codex host test
+      - name: Set up Node.js for plugin host tests
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: "24"
           package-manager-cache: false
       - name: Install the pinned Codex host
         run: npm install --prefix "${RUNNER_TEMP}/groundray-codex" @openai/codex@0.161.0
+      - name: Install the pinned Claude Code host
+        run: npm install --prefix "${RUNNER_TEMP}/groundray-claude" @anthropic-ai/claude-code@2.1.303
       - name: Verify installer before publication
         run: python scripts/smoke_groundray_install.py --package "${RUNNER_TEMP}/groundray-marketplace" --codex "${RUNNER_TEMP}/groundray-codex/node_modules/.bin/codex" --output "${RUNNER_TEMP}/groundray-install-smoke"
+      - name: Verify Claude Code installation and skill discovery before publication
+        run: python scripts/smoke_groundray_claude.py --package "${RUNNER_TEMP}/groundray-marketplace" --claude "${RUNNER_TEMP}/groundray-claude/node_modules/.bin/claude" --output "${RUNNER_TEMP}/groundray-claude-smoke"
       - name: Upload standalone archive
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -241,13 +245,15 @@ jobs:
     steps:
       - name: Check out installer
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
-      - name: Set up Node.js for the Codex host test
+      - name: Set up Node.js for plugin host tests
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: "24"
           package-manager-cache: false
       - name: Install the pinned Codex host
         run: npm install --prefix "${RUNNER_TEMP}/groundray-codex" @openai/codex@0.161.0
+      - name: Install the pinned Claude Code host
+        run: npm install --prefix "${RUNNER_TEMP}/groundray-claude" @anthropic-ai/claude-code@2.1.303
       - name: Install the published release
         env:
           GROUNDRAY_BIN_DIR: ${{ runner.temp }}/groundray-bin
@@ -281,3 +287,22 @@ jobs:
           sh install-groundray
           "${GROUNDRAY_INSTALL_DIR}/marketplace/plugins/groundray/scripts/groundray" check
           "${GROUNDRAY_CODEX}" plugin list --marketplace groundray --json
+      - name: Install the published plugin into isolated Claude Code
+        env:
+          GROUNDRAY_VERSION: ${{ needs.prepare.outputs.tag }}
+          GROUNDRAY_INSTALL_DIR: ${{ runner.temp }}/groundray-install
+          GROUNDRAY_CLAUDE: ${{ runner.temp }}/groundray-claude/node_modules/.bin/claude
+          CLAUDE_CONFIG_DIR: ${{ runner.temp }}/groundray-claude-config
+          CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: "1"
+          RELEASE_TOKEN: ${{ github.token }}
+          REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+        run: |
+          if [ "$REPOSITORY_PRIVATE" = "true" ]; then
+            export GH_TOKEN="$RELEASE_TOKEN"
+          else
+            unset GH_TOKEN
+          fi
+          mkdir -p "$CLAUDE_CONFIG_DIR"
+          sh install-groundray --host claude
+          "${GROUNDRAY_CLAUDE}" plugin details groundray@groundray
+          "${GROUNDRAY_INSTALL_DIR}/marketplace/plugins/groundray/scripts/groundray" check

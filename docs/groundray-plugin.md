@@ -3,14 +3,21 @@
 Groundray packages the answer → evidence → guidance skill, onboarding, a native
 Groundray CLI and the builtin Tantivy keyword engine. Company brains stay in
 separate Git repositories and employee storage. No Python, Node, QMD or model
-download is needed to use the package. Git and an installed Codex CLI are required.
+download is needed to use the package. Git and an installed Codex or Claude Code CLI are required.
 
-Groundray plugin **0.3.0** ships with Groundray **0.3.0**. The portable
+Groundray plugin **0.3.1** ships with Groundray **0.3.1**. Both hosts share the
+same skills, helper and native runtime. The portable
 [root manifest](../plugins/groundray/plugin.json) follows the
 [official plugin layout](https://developers.openai.com/plugins/build/plugins).
+Claude Code uses its native
+[manifest](../plugins/groundray/.claude-plugin/plugin.json) and
+[marketplace catalog](../.claude-plugin/marketplace.json), following the
+[Claude plugin format](https://code.claude.com/docs/en/plugins-reference).
 The plugin defines no hooks, MCP server, authentication service or background sync.
 
 ## Install or update
+
+### Codex
 
 On macOS or Linux, Intel or ARM, run this single line in the terminal you use for Codex:
 
@@ -29,7 +36,7 @@ configuration stays intact; new company setup defaults to builtin keyword search
 For a version pin and an explicit Codex executable, use:
 
 ```sh
-curl -fsSL https://github.com/MarvinAmador7/groundray/releases/latest/download/install-groundray | sh -s -- --version v0.3.0 --codex /opt/homebrew/bin/codex
+curl -fsSL https://github.com/MarvinAmador7/groundray/releases/latest/download/install-groundray | sh -s -- --version v0.3.1 --codex /opt/homebrew/bin/codex
 ```
 
 `--install-dir DIRECTORY` changes the persistent package root. Reuse that root
@@ -47,6 +54,46 @@ Codex prefixes plugin skills with their plugin name. Choosing another Codex
 binary/profile can expose a different plugin catalog. Do not change auth homes
 or copy credentials to repair discovery. Codex **0.161.0** is the pinned host in
 installation tests; the package must be installed/enabled in the session's catalog.
+
+### Claude Code
+
+Use the same installer with an explicit host:
+
+```sh
+curl -fsSL https://github.com/MarvinAmador7/groundray/releases/latest/download/install-groundray | sh -s -- --host claude
+```
+
+For an explicit executable and version pin, add
+`--claude /path/to/claude --version v0.3.1`. Installation is in **user scope**,
+using the selected executable and its existing `CLAUDE_CONFIG_DIR` (default
+`~/.claude`). The installer prints that profile, validates Claude's native
+manifests strictly, registers the persistent local marketplace, installs/updates
+and enables only `groundray@groundray`, then checks the exact user-scoped version.
+It preserves HOME, Claude configuration location, unrelated settings/plugins,
+credentials and company data. It never changes project settings or enables
+Groundray in Codex unless Codex is the selected host.
+
+Start a **fresh Claude Code session using that executable/profile**:
+
+```text
+/groundray:groundray-setup Connect my company brain from <repository-url>.
+/groundray:groundray What changed in our customer launch plan? Show the evidence.
+```
+
+Claude Code **2.1.303** is the pinned installation-test host. Other versions need
+compatible marketplace, JSON listing, strict validation, and user-scope commands;
+upgrade the host if it reports unsupported options. Claude's current local
+marketplace loader reads the plugin from its persistent source folder. Keep that
+folder after installation. Re-run the installer to update or re-enable it; a
+running session needs a restart to use the updated skills/runtime.
+
+The release archive contains both host manifests, with one version and runtime.
+Installing in one host does not register it in the other. Do not register the
+GitHub source repository as a substitute for the native release: source checkout
+plugins require a separate compatible CLI. See Claude's official
+[installation guide](https://code.claude.com/docs/en/discover-plugins) for host
+permissions and scopes. Company operations remain subject to the host's ordinary
+tool permissions; the installer grants no additional tool access.
 
 The release also includes standalone `groundray` archives and the existing
 [CLI installer](releases.md). Installing standalone `groundray` alone does not register
@@ -104,11 +151,18 @@ runtime launches. Platform-specific timings require actual measurements.
 
 ## Remove
 
-Use the same Codex executable/profile that installed the package:
+Use the same executable/profile that installed the package. For Codex:
 
 ```sh
 codex plugin remove groundray@groundray --json
 codex plugin marketplace remove groundray --json
+```
+
+For Claude Code:
+
+```sh
+claude plugin uninstall groundray@groundray --scope user --keep-data
+claude plugin marketplace remove groundray --scope user
 ```
 
 These commands unregister the plugin and its dedicated marketplace. They do not
@@ -137,7 +191,11 @@ brains and settings. Canonical skills generate the packaged views through
 
 Native release jobs validate all four platform archives, the 25-operation
 packaged collaboration smoke and persistent installation/reinstallation with a
-real isolated Codex host. No model or authenticated employee role is simulated.
+real isolated Codex 0.161.0 and Claude Code 2.1.303 hosts. The Claude smoke checks
+strict manifests, both skills in the host inventory, helper paths from the actual
+load root, native bytes, manifest-version refresh, reinstallation/re-enabling, and
+preservation of other plugins, settings and company state. No model calls are made;
+a Claude assistant answer and human handoff remain untested.
 [Earlier package trials](groundray-plugin-evaluation.md) and the
 [publisher pilot record](groundray-pilot-readiness.md) retain their original
 failures and later successful native answer. Publisher personal source inspection

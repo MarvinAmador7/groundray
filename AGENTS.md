@@ -1,5 +1,10 @@
 # Agent instructions
 
+## Git identity
+
+Use `MarvinAmador7 <marvin.ac.cr@gmail.com>` for the author and committer of
+agent-created commits. Check the effective Git identity before committing.
+
 ## Scope
 
 This repository contains an implemented OKF-compatible core plus the active
@@ -46,7 +51,7 @@ read-only exact candidate-source retrieval, and
 explicit commit/base-pinned fast-forward acceptance through existing Git host
 permissions are now authorized. These operations do not record company approval
 or human verification; custom authorization and hosted collaboration remain deferred.
-Groundray development plugin packaging, local Codex marketplace installation,
+Groundray plugin packaging and local marketplace installation for Codex and Claude Code,
 checksum-bound native runtime distribution, explicit setup and opt-in foreground
 agent package trials are authorized. Preserve existing host credentials, plugins
 and company state; plugin installation/update does not authorize company publication.

@@ -162,7 +162,9 @@ complete items, create honest drafts, and keep authority separate from relevance
 4. Prepare a UTF-8 Markdown body without YAML frontmatter and a JSON array of
    real sources. Agent-generated knowledge must use an agent producer/version,
    `--method agent-generated`, at least one source, and a confidence level plus
-   plain-language basis. Never use a `human:` actor for yourself. When a source
+   plain-language basis. Never use a `human:` actor for yourself. Replace the actor placeholder below
+   with your actual agent producer and version; do not attribute Claude work to
+   Codex or invent a model/version you cannot establish. When a source
    has an item-local `id`, cite consequential body claims using its matching
    footnote marker, for example `Keep backups for 30 days.[^participant]` for
    `sources[].id: participant`. A Markdown resource link or `[source:participant]`
@@ -181,7 +183,7 @@ complete items, create honest drafts, and keep authority separate from relevance
      --type procedure \
      --title "Review stale knowledge" \
      --description "Defines the draft procedure for reviewing stale knowledge." \
-     --actor "openai/codex" \
+     --actor "<actual-producer>/<actual-version>" \
      --method agent-generated \
      --body-file ./body.md \
      --sources-file ./sources.json \
@@ -224,7 +226,7 @@ operation. Never fabricate sources, human review, or authority.
 
    ```console
    groundray knowledge update "urn:uuid:..." \
-     --actor "openai/codex" \
+     --actor "<actual-producer>/<actual-version>" \
      --method agent-generated \
      --body-file ./revised-body.md \
      --metadata-file ./metadata-updates.json \

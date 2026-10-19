@@ -5,7 +5,7 @@
 `src/groundray/__init__.py` is the single source of truth for the stable
 `X.Y.Z` version. Hatch reads that value for Python distribution metadata, the
 CLI reports it through `groundray --version`, and release assets use the matching
-`vX.Y.Z` tag. Stable Groundray manifests use the same version so Codex cache
+`vX.Y.Z` tag. Stable Groundray manifests use the same version so host cache
 keys advance with every runtime release; build and regression checks refuse
 version drift. A release never derives a version from a mutable branch name.
 
@@ -60,7 +60,8 @@ job uses only the scoped workflow `GITHUB_TOKEN` with `contents: write`, creates
 the semantic tag at the tested `main` commit, generates release notes, and
 uploads version-named assets. Each native job also packages Groundray from that
 tested executable, exercises the 25-operation handoff, and verifies persistent
-installation/reinstallation with an isolated real Codex 0.161.0 host before
+installation/reinstallation with isolated real Codex 0.161.0 and Claude Code
+2.1.303 hosts before
 publication. Post-publication jobs run both installers against the release on
 all four target platforms. Node is a CI host-test dependency, not a requirement
 for installing or using Groundray. See [the plugin guide](groundray-plugin.md).
@@ -157,6 +158,21 @@ The retained publisher trial uses a fictional company. Human source inspection
 and Karol's hosted handoff are still follow-up work; this release does not claim
 a completed human pilot or publisher-only permissions in the selected
 unprotected contributor repository.
+
+## 0.3.1: Claude Code plugin
+
+The same native Groundray release now installs in Codex or Claude Code. Select
+Claude with `install-groundray --host claude`; use `/groundray:groundray-setup`
+and `/groundray:groundray` in a fresh session. Each host has its own native
+manifest and marketplace catalog, sharing one pair of skills and bundled CLI.
+
+Claude installation uses the current profile's user scope, validates manifests,
+refreshes the exact installed version, and preserves unrelated plugins,
+permissions, credentials and company state. No separate Python, Node or QMD is
+required beyond the chosen host and Git. Canonical authoring guidance now uses
+the actual agent producer/version rather than a Codex-only example actor.
+Native host checks make no model calls; they do not establish Claude answer
+quality, personal source inspection or a completed employee pilot.
 
 ## 0.3.0: Groundray rename
 

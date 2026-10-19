@@ -1,0 +1,15 @@
+{
+  "name": "groundray",
+  "version": "0.3.1",
+  "description": "Portable company brains: direct answers, inspectable evidence and reviewed updates.",
+  "author": {
+    "name": "Marvin Amador"
+  },
+  "repository": "https://github.com/MarvinAmador7/groundray",
+  "license": "Apache-2.0",
+  "keywords": [
+    "company-knowledge",
+    "evidence",
+    "portable-brains"
+  ]
+}
