@@ -48,7 +48,9 @@ required. Preview serves that production output locally.
   Groundray terminal, and AI agent as a folder, laptop, and desktop monitor. `technical-inspector.tsx` and
   `technical-inspector.css` explain provenance, collaboration, publication, and
   explicit versioned sync. `sync-network.tsx` and `sync-network.css` show a
-  company-brain graph with three independently synced coworker installations.
+  company-brain graph that animates publication, explicit coworker sync, and
+  local indexing. It plays once in view, pauses offscreen or in hidden tabs,
+  supports pause/replay, and starts at a static final state for reduced motion.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 
