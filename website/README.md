@@ -33,6 +33,10 @@ required. Preview serves that production output locally.
 ## Structure
 
 - `apps/web/src/routes/_index.tsx`: landing page, GitHub quickstart links, and FAQ.
+- `apps/web/src/components/hero-setup.tsx`: agent-neutral setup prompt, one-click
+  clipboard action, inspectable prompt text, and manual-copy fallback. The hero
+  identifies Codex and Claude Code plugin access and terminal-based CLI access
+  for Cursor, Gemini CLI, and OpenCode using self-hosted official marks.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
   continuity scenario tabs, workflow illustrations, and the
@@ -64,7 +68,9 @@ required. Preview serves that production output locally.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 
-The hero uses a separate image asset with live HTML typography. Get started
+The hero uses a separate image asset with live HTML typography. Its primary
+action copies a setup prompt to paste into an agent with terminal access; it
+does not run installation commands in the browser. Get started
 links open the repository’s quickstart, which documents installation for each
 supported host. The animated examples
 use clearly labeled fictional records; they do not call a model or read company

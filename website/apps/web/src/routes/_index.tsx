@@ -26,6 +26,7 @@ import {
 } from "@website/ui/components/sheet";
 import type { Route } from "./+types/_index";
 import { TechnicalOverview } from "../components/technical-overview";
+import { HeroSetup } from "../components/hero-setup";
 import {
   ContinuityExplorer,
   PortableBrain,
@@ -157,9 +158,7 @@ function Hero() {
           <br className="desktop-break" /> Carry what your company learns
           <br className="desktop-break" /> forward—with the evidence behind it.
         </p>
-        <a className="pill hero-cta" href={`${REPO}#get-started`}>
-          Build your company brain <ArrowUpRight aria-hidden="true" />
-        </a>
+        <HeroSetup />
         <p className="ownership">
           <strong>Yours to keep. Yours to move.</strong>
           <span>Knowledge in files you control.</span>
