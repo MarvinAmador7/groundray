@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://groundray.com/sitemap.xml

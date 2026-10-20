@@ -148,6 +148,7 @@ and configuration paths.
 | [Product direction](docs/groundray-product-goal.md) | Product contract, milestones, and acceptance criteria |
 | [Evaluations](docs/agent-cli-evals.md) | Reproducible agent trials, evidence, scoring, and related benchmarks |
 | [Development](docs/development.md) | Contributor setup, native builds, tests, and architecture |
+| [Website](website/README.md) | React/Vite landing page, local preview, and static build |
 
 ## License
 
