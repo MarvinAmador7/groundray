@@ -263,9 +263,12 @@ function HowItWorks() {
     </section>
   );
 }
+const OWNERSHIP_COMMAND =
+  'groundray search query "launch decisions" --brain team --json';
 function Ownership() {
   return (
     <section
+      id="ownership"
       className="ownership-section section-padding"
       aria-labelledby="ownership-title"
     >
@@ -297,7 +300,15 @@ function Ownership() {
           Explore the open-source project <ArrowUpRight aria-hidden="true" />
         </a>
       </div>
-      <PortableBrain />
+      <PortableBrain
+        command={OWNERSHIP_COMMAND}
+        copyControl={
+          <CopyButton
+            text={OWNERSHIP_COMMAND}
+            label="Copy shared Groundray command"
+          />
+        }
+      />
     </section>
   );
 }

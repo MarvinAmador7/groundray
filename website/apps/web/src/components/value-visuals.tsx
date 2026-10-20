@@ -15,7 +15,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@website/ui/components/tabs";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { BrainChatDemo } from "./brain-chat-demo";
 
 const scenarios = [
@@ -202,30 +202,13 @@ export function WorkflowVisual({ step }: { step: string }) {
   );
 }
 
-const hosts = [
-  {
-    id: "codex",
-    label: "With Codex",
-    title: "Codex",
-    prompt: "Use $groundray:groundray. Why did we choose this approach?",
-    detail: "Company context through the Groundray plugin.",
-  },
-  {
-    id: "claude",
-    label: "With Claude Code",
-    title: "Claude Code",
-    prompt: "/groundray:groundray Why did we choose this approach?",
-    detail: "The same brain, connected to another AI host.",
-  },
-  {
-    id: "terminal",
-    label: "From the terminal",
-    title: "Terminal",
-    prompt: 'groundray search query "chosen approach" --brain team --json',
-    detail: "Search your knowledge directly with the CLI.",
-  },
-];
-export function PortableBrain() {
+export function PortableBrain({
+  command,
+  copyControl,
+}: {
+  command: string;
+  copyControl: ReactNode;
+}) {
   return (
     <div className="portability-visual">
       <div className="portable-orbit">
@@ -255,29 +238,44 @@ export function PortableBrain() {
           <span>Same knowledge. Different doorway.</span>
         </div>
       </div>
-      <Tabs defaultValue="codex" className="host-explorer">
-        <TabsList
-          className="host-tabs"
-          aria-label="Explore the tools you can use with your brain"
-        >
-          {hosts.map((host) => (
-            <TabsTrigger value={host.id} key={host.id}>
-              {host.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {hosts.map((host) => (
-          <TabsContent value={host.id} key={host.id} className="host-preview">
-            <div>
-              <Terminal size={14} aria-hidden="true" />
-              <span>{host.title}</span>
-              <span className="host-example-label">Example</span>
-            </div>
-            <code>{host.prompt}</code>
-            <p>{host.detail}</p>
-          </TabsContent>
-        ))}
-      </Tabs>
+      <ul
+        className="portable-tools"
+        aria-label="Use your company brain with these tools"
+      >
+        <li>
+          <img
+            src="/images/tools/codex.png"
+            width="48"
+            height="48"
+            alt=""
+            loading="lazy"
+          />
+          <span>Codex</span>
+        </li>
+        <li>
+          <img
+            src="/images/tools/claude-code.png"
+            width="48"
+            height="48"
+            alt=""
+            loading="lazy"
+          />
+          <span>Claude Code</span>
+        </li>
+        <li>
+          <span className="portable-terminal-mark" aria-hidden="true">
+            <Terminal size={27} strokeWidth={1.4} />
+          </span>
+          <span>Terminal</span>
+        </li>
+      </ul>
+      <div className="portable-command">
+        <div>
+          <code>{command}</code>
+          {copyControl}
+        </div>
+        <p>One CLI. The same company knowledge.</p>
+      </div>
     </div>
   );
 }

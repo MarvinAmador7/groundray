@@ -36,7 +36,8 @@ required. Preview serves that production output locally.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
   continuity scenario tabs, workflow illustrations, and the
-  portable brain with host-specific prompt examples.
+  portable brain with Codex/Claude Code logos, Terminal, and one shared CLI
+  command using the installation section’s existing clipboard control.
 - `apps/web/src/components/brain-chat-demo.tsx` and `brain-chat-demo.css`:
   animated fictional agent conversations for the continuity tabs. They show CLI
   sync and indexing before lookups, an inspectable source note, a validated draft
