@@ -1,30 +1,31 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, X } from "lucide-react";
 
-const SETUP_PROMPT = `Help me set up Groundray, a Git-backed company brain for my team and AI.
+const SETUP_PROMPT = `Help me set up Groundray using the official guide: https://github.com/MarvinAmador7/groundray#get-started
 
-Read the official setup instructions at https://github.com/MarvinAmador7/groundray#readme and the CLI guide at https://github.com/MarvinAmador7/groundray/blob/main/docs/cli.md before running commands.
+Check my platform and existing installation. Use the Codex or Claude Code plugin when applicable; otherwise use the standalone CLI with terminal access. Follow the linked CLI documentation for commands.
 
-Check my operating system, architecture, and existing Groundray installation first. Use the documented Codex or Claude Code plugin if that is the agent I am using; for other agents with terminal access, use the standalone Groundray CLI and its documented workflow. Preserve existing configuration, brains, and QMD indexes. If a change would replace them, explain it and ask first.
+Ask whether to connect an existing company brain or create a new local one. Preserve existing configuration, brains, and QMD indexes; ask before replacing anything. Keep new knowledge as local drafts. Do not publish or invite anyone.
 
-Ask whether I want to connect an existing brain or create a new local one, and collect its repository URL or name. Guide me through local setup, then index the selected brain and verify it with a search. Keep new knowledge as local drafts; do not publish or invite anyone during setup.
-
-Finish by showing which brain is selected, its full saved commit, its index status, and how I can ask my first question with evidence.`;
+Index the selected brain, verify it with a search, and report its full saved commit and index status. Show me how to ask my first question with evidence.`;
 
 const AGENTS = [
-  { name: "Codex", image: "codex.png", access: "plugin or CLI" },
-  { name: "Claude Code", image: "claude-code.png", access: "plugin or CLI" },
-  { name: "Cursor", image: "cursor.svg", access: "via CLI" },
-  { name: "Gemini CLI", image: "gemini-cli.png", access: "via CLI" },
-  { name: "OpenCode", image: "opencode.svg", access: "via CLI" },
+  { name: "Codex", mark: "openai", access: "plugin or CLI" },
+  { name: "Claude Code", mark: "claude", access: "plugin or CLI" },
+  { name: "Cursor", mark: "cursor", access: "via CLI" },
+  { name: "Gemini CLI", mark: "gemini", access: "via CLI" },
+  { name: "OpenCode", mark: "opencode", access: "via CLI" },
 ];
 
 export function HeroSetup() {
   const [copied, setCopied] = useState(false);
   const [failed, setFailed] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const details = useRef<HTMLDetailsElement>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
   const prompt = useRef<HTMLTextAreaElement>(null);
+  const preview = useRef<HTMLButtonElement>(null);
+  const copy = useRef<HTMLButtonElement>(null);
+  const returnFocus = useRef<HTMLButtonElement | null>(null);
 
   useEffect(
     () => () => {
@@ -32,6 +33,15 @@ export function HeroSetup() {
     },
     [],
   );
+
+  function showPrompt(manualCopy = false) {
+    returnFocus.current = manualCopy ? copy.current : preview.current;
+    dialog.current?.showModal();
+    if (manualCopy) {
+      prompt.current?.focus();
+      prompt.current?.select();
+    }
+  }
 
   async function copyPrompt() {
     try {
@@ -43,53 +53,97 @@ export function HeroSetup() {
     } catch {
       setCopied(false);
       setFailed(true);
-      if (details.current) details.current.open = true;
-      prompt.current?.focus();
-      prompt.current?.select();
+      if (!dialog.current?.open) showPrompt(true);
+      else {
+        prompt.current?.focus();
+        prompt.current?.select();
+      }
     }
   }
 
   return (
     <div className="hero-setup">
-      <button type="button" className="pill hero-cta" onClick={copyPrompt}>
-        {copied ? "Setup prompt copied" : "Copy setup prompt"}
-        {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
-      </button>
+      <div className="hero-setup-control">
+        <button ref={copy} type="button" className="hero-setup-copy" onClick={copyPrompt}>
+          <span>{copied ? "Copied. Ready to paste." : "Copy setup prompt"}</span>
+          {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
+        </button>
+      </div>
       <div className="hero-agents">
+        <span>Paste into</span>
         <ul aria-label="Agents that can use Groundray">
           {AGENTS.map((agent) => (
             <li key={agent.name} title={`${agent.name} — ${agent.access}`}>
-              <img
-                src={`/images/tools/${agent.image}`}
-                width="25"
-                height="25"
-                alt={`${agent.name} (${agent.access})`}
+              <span
+                className="hero-agent-mark"
+                role="img"
+                aria-label={`${agent.name} (${agent.access})`}
+                style={{ maskImage: `url(/images/tools/${agent.mark}-mark.svg)` }}
               />
             </li>
           ))}
         </ul>
-        <span>Paste into your agent.</span>
+        <button
+          ref={preview}
+          type="button"
+          className="hero-setup-preview"
+          aria-label="Preview setup prompt"
+          aria-haspopup="dialog"
+          onClick={() => { setFailed(false); showPrompt(); }}
+        >
+          Preview
+        </button>
       </div>
-      <details ref={details} className="hero-prompt">
-        <summary>View setup prompt</summary>
-        <label htmlFor="setup-prompt">One prompt. Any agent with terminal access.</label>
-        <textarea
-          ref={prompt}
-          id="setup-prompt"
-          readOnly
-          value={SETUP_PROMPT}
-          spellCheck={false}
-          onFocus={(event) => event.currentTarget.select()}
-        />
-        <p>Codex &amp; Claude Code plugins. Other agents use the CLI.</p>
-      </details>
-      <span role="status" className={failed ? "hero-copy-status" : "sr-only"}>
-        {failed
-          ? "Copy is unavailable. The prompt is selected; copy it manually."
-          : copied
-            ? "Copied. Paste the setup prompt into your AI agent."
-            : ""}
+      <span role="status" className="sr-only">
+        {copied ? "Setup prompt copied. Paste it into your AI agent." : ""}
       </span>
+      <dialog
+        ref={dialog}
+        className="setup-dialog"
+        aria-labelledby="setup-dialog-title"
+        aria-describedby="setup-dialog-description"
+        onClose={() => returnFocus.current?.focus()}
+        onKeyDown={(event) => {
+          if (event.key !== "Tab") return;
+          const controls = event.currentTarget.querySelectorAll<HTMLElement>(
+            "button:not([disabled]), textarea",
+          );
+          const first = controls[0];
+          const last = controls[controls.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) dialog.current?.close();
+        }}
+      >
+        <div className="setup-dialog-body">
+          <button type="button" className="setup-dialog-close" aria-label="Close prompt preview"
+            onClick={() => dialog.current?.close()} autoFocus>
+            <X aria-hidden="true" />
+          </button>
+          <h2 id="setup-dialog-title">Set up Groundray.</h2>
+          <p id="setup-dialog-description">Copy this into an agent with terminal access.</p>
+          <label htmlFor="setup-prompt" className="sr-only">Setup prompt</label>
+          <textarea ref={prompt} id="setup-prompt" readOnly value={SETUP_PROMPT}
+            spellCheck={false} onFocus={(event) => event.currentTarget.select()} />
+          <div className="setup-dialog-footer">
+            <p>Codex &amp; Claude Code plugins.<br />Other agents use the CLI.</p>
+            <button type="button" onClick={copyPrompt}>
+              {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
+              {copied ? "Copied" : "Copy prompt"}
+            </button>
+          </div>
+          <p role="status" className="setup-dialog-error">
+            {failed ? "Copy is unavailable. The prompt is selected; copy it manually." : ""}
+          </p>
+        </div>
+      </dialog>
     </div>
   );
 }

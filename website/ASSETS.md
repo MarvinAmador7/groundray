@@ -22,15 +22,9 @@
   [published app icon](https://code.claude.com/docs/_mintlify/favicons/claude-code/pLsy-mRpNksna2sx/_generated/favicon/android-chrome-192x192.png).
   Both product marks identify supported tools and are self-hosted unchanged.
   Retrieved October 20, 2026. The Terminal symbol uses the existing Lucide icon.
-- `apps/web/public/images/tools/cursor.svg`: Cursor's official dark-mode
-  [favicon](https://cursor.com/marketing-static/favicon.svg), linked from
-  [cursor.com](https://cursor.com/).
-- `apps/web/public/images/tools/gemini-cli.png`: Gemini CLI's official
-  [app icon](https://geminicli.com/icon.png), linked from
-  [geminicli.com](https://geminicli.com/).
-- `apps/web/public/images/tools/opencode.svg`: OpenCode's official
-  [favicon](https://github.com/anomalyco/opencode/blob/dev/packages/ui/src/assets/favicon/favicon.svg),
-  which the website's favicon symlinks to in the upstream repository.
-  These three marks are self-hosted unchanged and identify agents that can
-  invoke Groundray through terminal access, rather than native plugin packages.
-  Retrieved October 20, 2026.
+- `apps/web/public/images/tools/{openai,claude,cursor,gemini,opencode}-mark.svg`:
+  monochrome brand marks from [Lobe Icons](https://github.com/lobehub/lobe-icons/tree/master/packages/static-svg/icons),
+  distributed under MIT; the notice is retained as `tools/LOBE-ICONS-LICENSE.txt`.
+  Rendered as single-color masks for a consistent, unboxed hero row. The OpenAI
+  mark identifies Codex; Cursor, Gemini CLI, and OpenCode use Groundray through
+  terminal access rather than native plugin packages. Retrieved October 20, 2026.

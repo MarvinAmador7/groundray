@@ -34,9 +34,9 @@ required. Preview serves that production output locally.
 
 - `apps/web/src/routes/_index.tsx`: landing page, GitHub quickstart links, and FAQ.
 - `apps/web/src/components/hero-setup.tsx`: agent-neutral setup prompt, one-click
-  clipboard action, inspectable prompt text, and manual-copy fallback. The hero
+  clipboard action, a modal prompt preview, and manual-copy fallback. The hero
   identifies Codex and Claude Code plugin access and terminal-based CLI access
-  for Cursor, Gemini CLI, and OpenCode using self-hosted official marks.
+  for Cursor, Gemini CLI, and OpenCode using self-hosted monochrome brand marks.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
   continuity scenario tabs, workflow illustrations, and the
