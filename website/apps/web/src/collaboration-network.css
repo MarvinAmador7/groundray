@@ -1,0 +1,241 @@
+.collaboration-network-view {
+  padding-top: 35px;
+}
+.collaboration-network {
+  max-width: 900px;
+  margin: 45px auto 0;
+}
+.collaboration-workspace {
+  position: relative;
+  height: 360px;
+}
+.collaboration-workspace > svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 340px;
+  overflow: visible;
+}
+.collaboration-edge {
+  stroke: #56664b;
+  stroke-width: 1;
+}
+.collaboration-edge:last-of-type {
+  stroke-dasharray: 4 5;
+}
+.collaboration-edge.is-used {
+  stroke: #b8dc85;
+  stroke-width: 1.3;
+}
+.collaboration-packet {
+  fill: var(--lime);
+  filter: drop-shadow(0 0 4px #d5fa8b80);
+}
+.collaboration-teammate {
+  position: absolute;
+  top: 110px;
+  width: 22.222%;
+  text-align: center;
+}
+.collaboration-author {
+  left: 0;
+}
+.collaboration-reviewer {
+  right: 0;
+}
+.collaboration-avatar {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 14px;
+  border: 1px solid #99b581;
+  border-radius: 50%;
+  color: var(--lime);
+  background: #2a3526;
+  font: 28px/1 var(--font-serif);
+}
+.collaboration-teammate.is-working .collaboration-avatar {
+  animation: collaboration-node-pulse 1.4s ease-out infinite;
+}
+.collaboration-teammate h4 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 0 9px;
+}
+.collaboration-teammate h4 span {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--technical-muted);
+  margin-top: 5px;
+}
+.collaboration-teammate > p {
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--technical-muted);
+}
+.collaboration-draft {
+  position: absolute;
+  top: 75px;
+  left: 28%;
+  width: 44%;
+  border: 1px solid #778267;
+  border-radius: 5px;
+  background: #e8e5d2;
+  color: #263022;
+  box-shadow: 0 10px 30px #00000012;
+}
+.collaboration-draft-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px 18px;
+  border-bottom: 1px solid #c6cab5;
+  font-size: 10px;
+}
+.collaboration-draft-top > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.collaboration-draft-top > span:last-child {
+  font:
+    9px/1.5 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+}
+.collaboration-lesson {
+  min-height: 91px;
+  padding: 19px 22px;
+  font: 29px/1.1 var(--font-serif);
+  letter-spacing: -0.01em;
+}
+.collaboration-source {
+  margin: 0 20px;
+  padding: 12px 0;
+  border-top: 1px solid #bac2aa;
+}
+.collaboration-source > span {
+  font-size: 9px;
+  color: #56634b;
+}
+.collaboration-source blockquote {
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 5px 0 0;
+}
+.collaboration-draft-status {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding: 12px 20px;
+  border-top: 1px solid #c6cab5;
+  color: #4b5e3e;
+  font-size: 9px;
+}
+.collaboration-draft.is-revised {
+  border-color: var(--lime);
+}
+.collaboration-draft.is-revised .collaboration-draft-status {
+  background: #d5e9ba;
+}
+.collaboration-feedback {
+  position: absolute;
+  top: 0;
+  left: 32%;
+  width: 36%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #20281e;
+  padding: 10px;
+  color: var(--lime);
+  visibility: hidden;
+}
+.collaboration-feedback.is-visible {
+  visibility: visible;
+}
+.collaboration-feedback > svg {
+  flex-shrink: 0;
+}
+.collaboration-feedback p {
+  font-size: 11px;
+  line-height: 1.6;
+}
+.collaboration-network figcaption {
+  margin-top: 25px;
+  text-align: center;
+}
+.collaboration-network[data-playing="false"] * {
+  animation-play-state: paused;
+}
+@keyframes collaboration-node-pulse {
+  from {
+    box-shadow: 0 0 0 0 #d5fa8b30;
+  }
+  to {
+    box-shadow: 0 0 0 14px #d5fa8b00;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collaboration-network * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (max-width: 760px) {
+  .collaboration-network {
+    margin-top: 32px;
+  }
+  .collaboration-workspace {
+    height: 500px;
+  }
+  .collaboration-workspace > svg {
+    height: 480px;
+  }
+  .collaboration-teammate {
+    top: 24px;
+    width: 50%;
+  }
+  .collaboration-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+  .collaboration-teammate h4 {
+    font-size: 12px;
+  }
+  .collaboration-teammate > p {
+    font-size: 9px;
+  }
+  .collaboration-draft {
+    top: 190px;
+    left: 0;
+    width: 100%;
+  }
+  .collaboration-draft-top {
+    padding: 13px 15px;
+  }
+  .collaboration-lesson {
+    font-size: 30px;
+    padding: 19px;
+    min-height: 102px;
+  }
+  .collaboration-feedback {
+    top: 155px;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+  }
+  .collaboration-feedback p {
+    font-size: 10px;
+  }
+  .collaboration-source blockquote {
+    font-size: 12px;
+  }
+}

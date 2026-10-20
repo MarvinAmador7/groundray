@@ -32,23 +32,43 @@ required. Preview serves that production output locally.
 
 ## Structure
 
-- `apps/web/src/routes/_index.tsx`: landing page, evidence illustration,
-  installation commands, and FAQ.
+- `apps/web/src/routes/_index.tsx`: landing page, GitHub quickstart links, and FAQ.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
-  continuity scenarios, workflow illustrations, and the
-  portable brain with host-specific prompt examples.
-- `apps/web/src/components/company-field-guide.tsx` and
-  `company-field-guide.css`: an interactive field guide showing a lesson’s
-  original record, reviewed update, and reuse by a teammate or AI conversation.
-  Readers can open the sample source notes and revisit the earlier entry.
+  continuity scenario tabs, workflow illustrations, and the
+  portable brain with Codex/Claude Code logos, Terminal, and one shared CLI
+  command with a clipboard control.
+- `apps/web/src/components/brain-chat-demo.tsx` and `brain-chat-demo.css`:
+  animated fictional agent conversations for the continuity tabs. They show CLI
+  sync and indexing before lookups, an inspectable source note, a validated draft
+  preview, confirmed local saving, exact-proposal/source review, and publication
+  after a separate confirmation. Published knowledge still requires explicit
+  coworker sync. The new-project example has the agent proactively suggest
+  preserving a Lumen business fact, then wait for consent before previewing it.
+  Tool command details and the source open on demand and pause playback. No commands or model calls run.
+- `apps/web/src/components/technical-overview.tsx` and
+  `technical-overview.css`: a short technical introduction and one four-tab
+  explainer. Files & tools, Provenance, Collaboration, and Publish & sync show
+  one visual at a time; there is no separate lifecycle strip or nested host selector.
+  `computer-flow.tsx` and `computer-flow.css` illustrate the company files,
+  Groundray terminal, and AI agent as a folder, laptop, and desktop monitor. `technical-inspector.tsx` and
+  `technical-inspector.css` explain provenance, collaboration, publication, and
+  explicit versioned sync. `collaboration-network.tsx` and its CSS animate a
+  fictional author/reviewer exchange: a teammate checks an attached original
+  note, requests a correction, and reviews the author’s revised proposal. This
+  ends before publication. `sync-network.tsx` and its CSS show a
+  company-brain graph that animates publication, explicit coworker sync, and
+  local indexing. Both graphs share an in-view playback clock, play once, pause
+  offscreen or in hidden tabs, support pause/replay, and start at a static final
+  state for reduced motion.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 
-The hero uses a separate image asset with live HTML typography. Installation
-commands point to Groundray's current GitHub release. The evidence interaction
-uses clearly labeled fictional sample records; it does not call a model or read
-company data. The page has no analytics or automatic data collection.
+The hero uses a separate image asset with live HTML typography. Get started
+links open the repository’s quickstart, which documents installation for each
+supported host. The animated examples
+use clearly labeled fictional records; they do not call a model or read company
+data. The page has no analytics or automatic data collection.
 
 ## Artwork and fonts
 

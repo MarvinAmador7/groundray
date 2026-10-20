@@ -324,22 +324,6 @@ svg {
   color: var(--olive);
   padding-bottom: 7px;
 }
-.evidence-section {
-  background: #e9ecdf;
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 8%;
-  align-items: center;
-}
-.evidence-intro h2 {
-  margin: 27px 0;
-}
-.evidence-intro > p {
-  max-width: 330px;
-  font-size: 15px;
-  color: var(--olive);
-  margin-bottom: 30px;
-}
 .how {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -391,112 +375,6 @@ svg {
   color: var(--lime);
   font-size: 12px;
 }
-.get-started {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 9%;
-  align-items: start;
-  padding-top: 120px;
-  padding-bottom: 120px;
-}
-.start-intro h2 {
-  margin: 26px 0 20px;
-}
-.start-intro > p {
-  font-size: 18px;
-  color: var(--olive);
-}
-.release-note {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  font-size: 10px;
-  margin-top: 35px;
-  color: #647153;
-}
-.release-note > span:last-child {
-  width: 100%;
-  padding-left: 14px;
-  margin-top: 3px;
-  color: var(--olive);
-}
-.release-note a:hover {
-  text-decoration: underline;
-}
-.install-panel {
-  min-width: 0;
-  padding-top: 4px;
-}
-.install-tabs[data-slot="tabs-list"] {
-  width: 100%;
-  height: auto;
-  background: transparent;
-  padding: 0;
-  border-bottom: 1px solid #d4d9c9;
-  gap: 0;
-  justify-content: flex-start;
-}
-.install-tabs [data-slot="tabs-trigger"] {
-  border: 0;
-  border-bottom: 2px solid transparent;
-  font-size: 12px;
-  padding: 13px 18px;
-  color: var(--olive);
-  flex: none;
-  height: auto;
-  background: transparent;
-}
-.install-tabs [data-active] {
-  color: #26391c;
-  border-color: #4b6732;
-}
-.install-content {
-  padding-top: 23px;
-  min-height: 344px;
-}
-.install-step-label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  margin-bottom: 13px;
-}
-.install-step-label > span {
-  font-size: 9px;
-  border: 1px solid #c5ceba;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: #62724f;
-}
-.code-block {
-  display: flex;
-  align-items: start;
-  gap: 8px;
-  background: #252d21;
-  color: #e2edcf;
-  border: 1px solid #384632;
-  border-radius: 4px;
-  padding: 14px 12px 14px 17px;
-  min-width: 0;
-}
-.code-block pre {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  font:
-    10px/1.9 ui-monospace,
-    SFMono-Regular,
-    Consolas,
-    monospace;
-  flex: 1;
-  min-width: 0;
-  margin: 0;
-  user-select: all;
-}
 .copy-control {
   position: relative;
   flex-shrink: 0;
@@ -523,51 +401,6 @@ svg {
   padding: 8px;
   font-size: 10px;
   box-shadow: 0 2px 12px #0003;
-}
-.install-requirements {
-  font-size: 9px;
-  color: var(--olive);
-  margin: 9px 0 26px;
-}
-.install-instruction {
-  font-size: 11px;
-  color: var(--olive);
-  line-height: 1.8;
-  margin: -3px 0 13px;
-}
-.prompt-block {
-  background: #e9ecdf;
-  border-color: #d6ddca;
-  color: #36442b;
-}
-.prompt-block .copy-button[data-slot="button"] {
-  color: #657951;
-}
-.prompt-block .copy-button[data-slot="button"]:hover {
-  background: #d6e2c4;
-  color: #263b1b;
-}
-.install-hint {
-  font-size: 10px;
-  line-height: 1.8;
-  color: var(--olive);
-  margin-top: 12px;
-}
-.install-hint a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.install-content > .text-link {
-  font-size: 11px;
-  margin-top: 21px;
-}
-.runtime-note {
-  font-size: 9px;
-  color: var(--olive);
-  padding-top: 22px;
-  line-height: 1.9;
-  border-top: 1px solid #d9dece;
-  margin-top: 15px;
 }
 .faq {
   display: grid;
@@ -762,13 +595,8 @@ svg {
   .product-intro {
     gap: 7%;
   }
-  .evidence-section {
-    gap: 6%;
-    grid-template-columns: 0.8fr 1.2fr;
-  }
   .how,
   .ownership-section,
-  .get-started,
   .faq {
     gap: 7%;
   }
@@ -877,21 +705,11 @@ svg {
     max-width: 440px;
     font-size: 14px;
   }
-  .evidence-section,
   .how,
   .ownership-section,
-  .get-started,
   .faq {
     grid-template-columns: 1fr;
     gap: 42px;
-  }
-  .evidence-intro h2 {
-    margin: 23px 0;
-  }
-  .evidence-intro > p {
-    font-size: 14px;
-    max-width: 410px;
-    margin-bottom: 24px;
   }
   .how h2 {
     margin-top: 23px;
@@ -913,41 +731,6 @@ svg {
   }
   .ownership-copy > p {
     font-size: 13px;
-  }
-  .start-intro h2 {
-    margin-top: 23px;
-  }
-  .start-intro > p {
-    font-size: 16px;
-  }
-  .release-note {
-    margin-top: 23px;
-  }
-  .install-panel {
-    max-width: 530px;
-  }
-  .install-content {
-    min-height: unset;
-  }
-  .install-tabs [data-slot="tabs-trigger"] {
-    font-size: 12px;
-    padding-left: 19px;
-    padding-right: 19px;
-  }
-  .code-block pre {
-    font-size: 10px;
-  }
-  .install-requirements {
-    font-size: 9px;
-  }
-  .install-instruction {
-    font-size: 12px;
-  }
-  .install-hint {
-    font-size: 11px;
-  }
-  .runtime-note {
-    font-size: 10px;
   }
   .faq h2 {
     font-size: 52px;
