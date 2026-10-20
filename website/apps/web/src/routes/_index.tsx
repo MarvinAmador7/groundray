@@ -39,7 +39,7 @@ const DOCS = `${REPO}/blob/main/docs`;
 export function meta({}: Route.MetaArgs) {
   const title = "Groundray — Stop starting over.";
   const description =
-    "A shared brain for your team and AI. Carry what your company learns forward—with the evidence behind it. Yours to keep. Yours to move.";
+    "A shared brain for your team and AI. Carry what your company learns forward with the evidence behind it. Yours to keep. Yours to move.";
   return [
     { title },
     { name: "description", content: description },
@@ -156,7 +156,7 @@ function Hero() {
         <p className="hero-description">
           A shared brain for your team and AI.
           <br className="desktop-break" /> Carry what your company learns
-          <br className="desktop-break" /> forward—with the evidence behind it.
+          <br className="desktop-break" /> forward with the evidence behind it.
         </p>
         <HeroSetup />
         <p className="ownership">
