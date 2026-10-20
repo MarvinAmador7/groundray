@@ -1,49 +1,3 @@
-.system-lifecycle {
-  border-top: 1px solid #4b5543;
-  padding: 24px 0;
-}
-.system-lifecycle > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  align-items: baseline;
-}
-.system-lifecycle > div > p {
-  color: var(--technical-muted);
-  font-size: 11px;
-}
-.system-lifecycle ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr) auto;
-  align-items: center;
-  gap: 16px;
-}
-.system-lifecycle li {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: 500;
-}
-.system-lifecycle li > svg {
-  color: #a5b68f;
-}
-.system-inspector {
-  border-top: 1px solid #4b5543;
-  background: transparent;
-}
-.system-inspector-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 25px;
-  padding: 10px 0;
-  border-bottom: 1px solid #4b5543;
-}
 .system-detail-grid {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
@@ -139,7 +93,7 @@
   border-top: 1px solid #4b5543;
 }
 .system-explanation > h3 {
-  font: 400 clamp(30px, 3vw, 44px)/1.08 var(--font-serif);
+  font: 400 clamp(27px, 2.6vw, 36px)/1.15 var(--font-serif);
   letter-spacing: -0.02em;
   margin: 15px 0 24px;
 }
@@ -181,60 +135,11 @@
   text-decoration: underline;
   text-underline-offset: 5px;
 }
-@media (max-width: 1050px) {
-  .system-lifecycle ol {
-    gap: 10px;
-  }
-  .system-lifecycle li {
-    font-size: 10px;
-    gap: 5px;
-  }
-  .system-detail-grid {
-    padding: 28px 0;
-    gap: 27px;
-  }
-}
 @media (max-width: 760px) {
-  .system-lifecycle {
-    padding: 24px 0;
-  }
-  .system-lifecycle > div {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .system-lifecycle ol {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px 10px;
-  }
-  .system-lifecycle li {
-    font-size: 10px;
-  }
-  .system-lifecycle li:nth-child(3) > svg {
-    display: none;
-  }
-  .system-inspector-toolbar {
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
-    padding: 12px 0;
-  }
-  .system-inspector-toolbar .technical-modes {
-    gap: 0;
-  }
-  .system-inspector-toolbar .technical-modes {
-    gap: 16px;
-  }
-  .system-inspector-toolbar .technical-modes button {
-    padding: 12px 0;
-    font-size: 11px;
-  }
-  .system-mode-number {
-    display: none;
-  }
   .system-detail-grid {
     grid-template-columns: 1fr;
-    padding: 24px 0;
-    gap: 30px;
+    padding: 26px 0 0;
+    gap: 24px;
   }
   .system-example-top {
     padding: 14px;
@@ -243,7 +148,7 @@
     font-size: 10px;
   }
   .provenance-example pre {
-    font-size: 10px;
+    font-size: 11px;
     padding: 18px 14px;
   }
   .system-source-link {
@@ -253,7 +158,8 @@
     padding: 13px 14px;
   }
   .system-explanation h3 {
-    font-size: 36px;
+    font-size: 32px;
+    margin-top: 0;
   }
   .system-facts dd {
     font-size: 12px;

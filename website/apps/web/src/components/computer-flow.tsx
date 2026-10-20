@@ -1,5 +1,12 @@
-import { useState } from "react";
-import { ArrowDown, ArrowRight, Check, GitBranch } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  Check,
+  GitBranch,
+  FolderOpen,
+  Laptop,
+  Monitor,
+} from "lucide-react";
 import "../computer-flow.css";
 
 function FlowArrow() {
@@ -13,7 +20,6 @@ function FlowArrow() {
 }
 
 export function ComputerFlow() {
-  const [agent, setAgent] = useState<"Codex" | "Claude Code">("Codex");
   return (
     <figure
       className="computer-flow"
@@ -21,6 +27,9 @@ export function ComputerFlow() {
     >
       <div className="computer-flow-objects">
         <div className="computer-flow-station">
+          <div className="computer-flow-mobile-image" aria-hidden="true">
+            <FolderOpen size={34} strokeWidth={1.2} />
+          </div>
           <div className="brain-folder" aria-hidden="true">
             <div className="brain-paper brain-paper-back">
               <span>sources/</span>
@@ -52,6 +61,9 @@ export function ComputerFlow() {
         </div>
         <FlowArrow />
         <div className="computer-flow-station">
+          <div className="computer-flow-mobile-image" aria-hidden="true">
+            <Laptop size={36} strokeWidth={1.2} />
+          </div>
           <div className="cli-laptop">
             <div className="cli-laptop-lid">
               <div className="device-camera" />
@@ -98,26 +110,14 @@ export function ComputerFlow() {
         </div>
         <FlowArrow />
         <div className="computer-flow-station">
+          <div className="computer-flow-mobile-image" aria-hidden="true">
+            <Monitor size={34} strokeWidth={1.2} />
+          </div>
           <div className="agent-monitor">
             <div className="agent-monitor-frame">
               <div className="device-camera" />
               <div className="agent-monitor-screen">
-                <div
-                  className="agent-window-tabs"
-                  role="group"
-                  aria-label="Illustrated AI tool"
-                >
-                  {(["Codex", "Claude Code"] as const).map((name) => (
-                    <button
-                      type="button"
-                      key={name}
-                      aria-pressed={agent === name}
-                      onClick={() => setAgent(name)}
-                    >
-                      {name}
-                    </button>
-                  ))}
-                </div>
+                <div className="agent-window-label">Codex · Claude Code</div>
                 <div className="agent-screen-content">
                   <p className="agent-screen-prompt">
                     <span>›</span> How do we onboard a customer?
@@ -130,11 +130,7 @@ export function ComputerFlow() {
                   <div className="agent-screen-citation">
                     <span>[1]</span> onboarding.md
                   </div>
-                  <p className="agent-screen-command">
-                    {agent === "Codex"
-                      ? "$groundray:groundray"
-                      : "/groundray:groundray"}
-                  </p>
+                  <p className="agent-screen-command">Groundray plugin</p>
                 </div>
               </div>
             </div>
@@ -147,9 +143,6 @@ export function ComputerFlow() {
           </div>
         </div>
       </div>
-      <figcaption>
-        Illustrated example. Your files stay in your repository.
-      </figcaption>
     </figure>
   );
 }

@@ -43,11 +43,8 @@
 .computer-flow-arrow > svg:last-child {
   display: none;
 }
-.computer-flow > figcaption {
-  text-align: center;
-  font-size: 10px;
-  color: var(--technical-muted);
-  margin-top: 20px;
+.computer-flow-mobile-image {
+  display: none;
 }
 .brain-folder {
   position: relative;
@@ -271,28 +268,12 @@
   border-radius: 2px;
   color: #26321f;
 }
-.agent-window-tabs {
-  display: flex;
-  gap: 17px;
-  border-bottom: 1px solid #bec8b0;
-  padding: 0 14px;
+.agent-window-label {
+  padding: 10px 14px;
   background: #d6ddca;
-}
-.agent-window-tabs > button {
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid transparent;
-  padding: 10px 0 8px;
+  border-bottom: 1px solid #bec8b0;
   font-size: 9px;
-  color: #50613e;
-}
-.agent-window-tabs > button[aria-pressed="true"] {
-  border-bottom-color: #40572b;
-  color: #223617;
-}
-.agent-window-tabs > button:focus-visible {
-  outline: 2px solid #40572b;
-  outline-offset: 2px;
+  color: #40532d;
 }
 .agent-screen-content {
   padding: 18px 15px 14px;
@@ -372,10 +353,6 @@
     padding: 17px 12px 13px;
     font-size: 10px;
   }
-  .agent-window-tabs {
-    gap: 13px;
-    padding: 0 10px;
-  }
   .agent-screen-content {
     padding: 15px 11px 11px;
   }
@@ -388,39 +365,54 @@
 }
 @media (max-width: 760px) {
   .computer-flow {
-    padding: 12px 0 32px;
+    padding: 22px 0 28px;
   }
   .computer-flow-objects {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 4px;
   }
   .computer-flow-station {
+    flex-direction: row;
+    gap: 20px;
+    padding: 12px 0;
     width: 100%;
     max-width: 430px;
     margin: 0 auto;
   }
-  .brain-folder {
-    width: 215px;
-    height: 235px;
+  .computer-flow-mobile-image {
+    display: grid;
+    place-items: center;
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
+    border: 1px solid #6c8058;
+    border-radius: 8px;
+    color: #cfe8ab;
+    background: #2c3925;
   }
-  .brain-paper {
-    padding: 16px;
+  .computer-flow-station > .brain-folder,
+  .computer-flow-station > .cli-laptop,
+  .computer-flow-station > .agent-monitor {
+    display: none;
   }
   .computer-flow-caption {
-    margin-top: 21px;
+    margin: 0;
+    text-align: left;
     min-height: 0;
   }
   .computer-flow-caption h3 {
-    font-size: 29px;
+    font-size: 26px;
   }
   .computer-flow-caption p {
     font-size: 12px;
+    line-height: 1.6;
     margin-top: 6px;
   }
   .computer-flow-arrow {
     margin: 0;
     justify-content: center;
-    height: 25px;
+    width: 72px;
+    height: 14px;
   }
   .computer-flow-arrow > span,
   .computer-flow-arrow > svg:first-of-type {
@@ -428,28 +420,7 @@
   }
   .computer-flow-arrow > svg:last-child {
     display: block;
-  }
-  .cli-laptop {
-    max-width: 355px;
-  }
-  .cli-screen-content {
-    font-size: 11px;
-    padding: 20px 17px 14px;
-  }
-  .agent-monitor {
-    max-width: 315px;
-  }
-  .agent-screen-content {
-    padding: 20px 18px 17px;
-  }
-  .agent-screen-answer {
-    font-size: 13px;
-  }
-  .agent-window-tabs > button {
-    padding: 10px 0;
-    font-size: 11px;
-  }
-  .computer-flow > figcaption {
-    margin-top: 27px;
+    width: 15px;
+    height: 15px;
   }
 }

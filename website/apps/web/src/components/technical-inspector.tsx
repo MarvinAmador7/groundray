@@ -1,24 +1,21 @@
-import { useState } from "react";
 import { ArrowRight, FileText } from "lucide-react";
-import { Button } from "@website/ui/components/button";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@website/ui/components/tabs";
+import { ComputerFlow } from "./computer-flow";
 import "../technical-inspector.css";
 import { CollaborationNetwork } from "./collaboration-network";
 import { SyncNetwork } from "./sync-network";
 
 const views = [
+  { id: "overview", label: "Files & tools" },
   { id: "provenance", label: "Provenance" },
   { id: "collaboration", label: "Collaboration" },
   { id: "sync", label: "Publish & sync" },
 ] as const;
-type View = (typeof views)[number]["id"];
-const lifecycle = [
-  "Capture & draft",
-  "Propose",
-  "Review",
-  "Publish",
-  "Sync",
-  "Reindex",
-];
 const docs = "https://github.com/MarvinAmador7/groundray/blob/main/docs";
 
 function ProvenanceView() {
@@ -51,37 +48,35 @@ function ProvenanceView() {
       </div>
       <div className="system-explanation">
         <h3>
-          What you know.
+          A source behind the claim.
           <br />
-          <em>Why you believe it.</em>
+          <em>A history behind the file.</em>
         </h3>
         <dl className="system-facts">
           <div>
             <dt>Identity & origin</dt>
             <dd>
-              A stable item ID, producer, method, and timestamps record where
-              the current content came from—even if its file moves.
+              A stable ID, producer, method, and timestamps preserve an item’s
+              origin, even when its file moves.
             </dd>
           </div>
           <div>
             <dt>Evidence & version</dt>
             <dd>
-              Sources link knowledge to original records. Citations identify the
-              company brain, item, source location, and exact saved commit.
+              Original records stay attached. Citations identify the source
+              location and exact saved Git commit.
             </dd>
           </div>
           <div>
             <dt>State & review</dt>
             <dd>
-              Draft, stable, and deprecated states distinguish intended use.
-              Confidence, verification events, and review dates carry separate
-              meaning.
+              Draft status, confidence, and human verification carry different
+              meanings. A material edit invalidates prior verification.
             </dd>
           </div>
         </dl>
         <p className="system-boundary">
-          A material edit invalidates prior verification. Publishing does not
-          mark a claim verified or approved by the business.
+          Publishing does not mark a claim verified or approved by the business.
         </p>
         <a className="system-doc-link" href={`${docs}/schema.md`}>
           Inspect the knowledge format{" "}
@@ -93,55 +88,39 @@ function ProvenanceView() {
 }
 
 export function TechnicalInspector() {
-  const [view, setView] = useState<View>("provenance");
   return (
-    <>
-      <div className="system-lifecycle">
-        <ol aria-label="Knowledge lifecycle">
-          {lifecycle.map((label, i) => (
-            <li key={label}>
-              <span>{label}</span>
-              {i < lifecycle.length - 1 ? (
-                <ArrowRight size={14} aria-hidden="true" />
-              ) : null}
-            </li>
-          ))}
-        </ol>
-      </div>
-      <div className="system-inspector">
-        <div className="system-inspector-toolbar">
-          <div
-            className="technical-modes"
-            role="group"
-            aria-label="Explore the knowledge system"
-          >
-            {views.map(({ id, label }) => (
-              <Button
-                key={id}
-                variant="ghost"
-                aria-pressed={view === id}
-                aria-controls="system-detail"
-                onClick={() => setView(id)}
-              >
-                {label}
-              </Button>
-            ))}
-          </div>
+    <Tabs defaultValue="overview" className="technical-explorer">
+      <TabsList
+        className="technical-view-tabs"
+        aria-label="Explore how Groundray works"
+      >
+        {views.map(({ id, label }) => (
+          <TabsTrigger key={id} value={id}>
+            {label}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+      <TabsContent value="overview" className="technical-view-panel">
+        <ComputerFlow />
+        <div className="technical-overview-note">
+          <p>
+            Search runs locally. Retrieved evidence enters your AI tool’s
+            context under your provider’s settings.
+          </p>
+          <a href={`${docs}/cli.md`}>
+            Read the technical docs <ArrowRight size={14} aria-hidden="true" />
+          </a>
         </div>
-        <div
-          id="system-detail"
-          role="region"
-          aria-label={`${views.find((v) => v.id === view)?.label} details`}
-        >
-          {view === "provenance" ? (
-            <ProvenanceView />
-          ) : view === "collaboration" ? (
-            <CollaborationNetwork />
-          ) : (
-            <SyncNetwork />
-          )}
-        </div>
-      </div>
-    </>
+      </TabsContent>
+      <TabsContent value="provenance" className="technical-view-panel">
+        <ProvenanceView />
+      </TabsContent>
+      <TabsContent value="collaboration" className="technical-view-panel">
+        <CollaborationNetwork />
+      </TabsContent>
+      <TabsContent value="sync" className="technical-view-panel">
+        <SyncNetwork />
+      </TabsContent>
+    </Tabs>
   );
 }

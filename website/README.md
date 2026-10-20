@@ -46,7 +46,9 @@ required. Preview serves that production output locally.
   preserving a Lumen business fact, then wait for consent before previewing it.
   Tool command details and the source open on demand and pause playback. No commands or model calls run.
 - `apps/web/src/components/technical-overview.tsx` and
-  `technical-overview.css`: a short technical introduction.
+  `technical-overview.css`: a short technical introduction and one four-tab
+  explainer. Files & tools, Provenance, Collaboration, and Publish & sync show
+  one visual at a time; there is no separate lifecycle strip or nested host selector.
   `computer-flow.tsx` and `computer-flow.css` illustrate the company files,
   Groundray terminal, and AI agent as a folder, laptop, and desktop monitor. `technical-inspector.tsx` and
   `technical-inspector.css` explain provenance, collaboration, publication, and
