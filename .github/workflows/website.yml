@@ -1,0 +1,51 @@
+name: Website
+
+on:
+  pull_request:
+    paths:
+      - "website/**"
+      - ".github/workflows/website.yml"
+  push:
+    branches: [main]
+    paths:
+      - "website/**"
+      - ".github/workflows/website.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Website typecheck and static build
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Use workspace npm version
+        run: npm install --global npm@11.16.0
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run check-types
+      - name: Build static website
+        run: npm run build
+      - name: Verify prerendered page
+        run: |
+          node --input-type=module <<'JS'
+          import { readFileSync, existsSync } from 'node:fs';
+          const base = 'apps/web/build/client/';
+          const html = readFileSync(base + 'index.html', 'utf8');
+          for (const text of ['Stop', 'starting', 'over.', 'Yours to keep. Yours to move.', 'Groundray — Stop starting over.']) {
+            if (!html.includes(text)) throw new Error('Missing prerendered content: ' + text);
+          }
+          if (!existsSync(base + 'images/courtyard.webp')) throw new Error('Missing hero image');
+          JS

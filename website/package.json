@@ -1,0 +1,29 @@
+{
+  "name": "groundray-website",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "check-types": "npm run check-types --workspaces --if-present",
+    "dev:web": "npm run dev --workspace web --",
+    "preview": "npm run preview --workspace web --"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "@website/config": "*",
+    "typescript": "^6.0.3"
+  },
+  "packageManager": "npm@11.16.0",
+  "allowScripts": {
+    "esbuild": true
+  },
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=11.16.0"
+  }
+}
