@@ -3,45 +3,11 @@
   color: var(--paper);
   background: #20281e;
 }
-.technical-topline,
-.technical-toolbar,
-.technical-node-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.technical-topline {
-  padding-bottom: 27px;
-  border-bottom: 1px solid #48503e;
-}
-.technical-build-label,
-.technical-diagram-label,
-.technical-node-label,
-.technical-file-tree > span,
-.technical-runtime {
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 10px;
-  line-height: 1.6;
-  letter-spacing: 0.06em;
-}
-.technical-build-label {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--technical-muted);
-}
-.technical-build-label > span {
-  width: 6px;
-  height: 6px;
-  background: var(--lime);
-  border-radius: 50%;
-}
 .technical-intro {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   gap: 70px;
-  padding: 51px 0 49px;
+  padding: 0 0 55px;
   align-items: center;
 }
 .technical-intro h2 {
@@ -51,7 +17,7 @@
   color: var(--lime);
 }
 .technical-definition {
-  max-width: 490px;
+  max-width: 440px;
 }
 .technical-definition > p {
   font-size: 15px;
@@ -63,235 +29,58 @@
   color: var(--paper);
   font-size: 12px;
 }
-.technical-system {
-  border: 1px solid #4b5543;
-  background: #252e23;
-}
-.technical-toolbar {
-  padding: 17px 24px;
-  border-bottom: 1px solid #4b5543;
-}
 .technical-diagram-label {
   color: var(--technical-muted);
+  font:
+    10px/1.6 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  letter-spacing: 0.03em;
 }
 .technical-modes {
   display: flex;
-  gap: 4px;
-  padding: 4px;
-  border: 1px solid #515e47;
+  gap: 28px;
 }
 .technical-modes button {
-  color: #d4d8cc;
+  color: #bdc6b1;
   height: auto;
-  padding: 8px 12px;
-  font-size: 11px;
+  padding: 13px 0;
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
 }
 .technical-modes button:hover {
-  background: #3b4734;
   color: var(--paper);
+  background: transparent;
 }
 .technical-modes button[aria-pressed="true"] {
-  background: var(--lime);
-  color: #20281e;
+  color: var(--lime);
+  background: transparent;
+  border-bottom-color: var(--lime);
 }
 .technical-modes button:focus-visible {
   outline: 2px solid var(--lime);
   outline-offset: 4px;
 }
-.technical-architecture {
-  display: grid;
-  grid-template-columns: 1fr 34px 1fr 34px 1fr;
-  padding: 28px 24px;
-  align-items: stretch;
-}
-.technical-node {
-  min-width: 0;
-  border: 1px solid #4b5543;
-  padding: 22px;
-  background: #20281e;
-}
-.technical-node-label {
-  color: var(--technical-muted);
-  font-size: 9px;
-  margin-bottom: 22px;
-}
-.technical-node-label svg {
-  color: #b6c5a4;
-}
-.technical-node h3 {
-  font-family: var(--font-serif);
-  font-size: clamp(25px, 2.2vw, 34px);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-}
-.technical-node > p {
-  font-size: 12px;
-  color: var(--technical-muted);
-  line-height: 1.7;
-  margin-top: 10px;
-}
-.technical-connector {
-  display: flex;
-  align-items: center;
-  color: #a5b68f;
-}
-.technical-connector > span {
-  height: 1px;
-  background: #82946b;
-  flex: 1;
-}
-.technical-connector > svg:last-child {
-  display: none;
-}
-.technical-file-tree {
-  margin-top: 23px;
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-}
-.technical-file-tree > div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: #e1e8d6;
-}
-.technical-file-tree strong {
-  font-weight: 400;
-}
-.technical-file-tree pre {
-  margin: 9px 0 15px 2px;
-  color: #b9c1ad;
-  line-height: 1.9;
-  font-size: 11px;
-}
-.technical-file-tree > span {
-  color: #b4bea8;
-  font-size: 8px;
-  letter-spacing: 0.025em;
-}
-.technical-engine {
-  background: #d5fa8b;
-  color: #20281e;
-  border-color: #d5fa8b;
-}
-.technical-engine .technical-node-label,
-.technical-engine .technical-node-label svg {
-  color: #465b30;
-}
-.technical-engine > p {
-  color: #3d4e2a;
-}
-.technical-engine-functions {
-  display: grid;
-  gap: 12px;
-  padding: 25px 0;
-}
-.technical-engine-functions > span {
-  display: flex;
-  gap: 10px;
-  font-size: 11px;
-  line-height: 1.5;
-}
-.technical-engine-functions > span > span {
-  color: #526b37;
-  font:
-    10px/1.65 ui-monospace,
-    SFMono-Regular,
-    Consolas,
-    monospace;
-}
-.technical-runtime {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  border-top: 1px solid #a3bd70;
-  padding-top: 13px;
-  font-size: 9px;
-  letter-spacing: 0;
-}
-.technical-host-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin: 23px 0 17px;
-}
-.technical-host-list > span {
-  padding: 6px 9px;
-  border: 1px solid #59654c;
-  font-size: 11px;
-}
-.technical-host > .technical-host-detail {
-  font-size: 11px;
-  line-height: 1.8;
-}
-.technical-host > a {
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
-  margin-top: 19px;
-  font-size: 10px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
 .technical-footnote {
-  display: flex;
-  gap: 13px;
-  margin-top: 21px;
-  align-items: baseline;
-}
-.technical-footnote-mark {
-  color: var(--lime);
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-}
-.technical-footnote > p {
+  margin-top: 25px;
   font-size: 11px;
   color: var(--technical-muted);
   line-height: 1.8;
-}
-@media (min-width: 1600px) {
-  .technical-intro {
-    gap: 110px;
-  }
-  .technical-node {
-    padding: 27px;
-  }
 }
 @media (max-width: 1050px) {
   .technical-intro {
     gap: 35px;
   }
-  .technical-architecture {
-    grid-template-columns: 1fr 22px 1fr 22px 1fr;
-    padding: 22px 18px;
-  }
-  .technical-node {
-    padding: 17px;
-  }
-  .technical-runtime {
-    flex-wrap: wrap;
-  }
-  .technical-node-label {
-    font-size: 8px;
-    gap: 8px;
-  }
-  .technical-file-tree > span {
-    display: block;
-    max-width: 130px;
-  }
 }
 @media (max-width: 760px) {
-  .technical-topline {
-    align-items: flex-start;
-    gap: 15px;
-    flex-direction: column;
-  }
-  .technical-build-label {
-    font-size: 9px;
-  }
   .technical-intro {
     grid-template-columns: 1fr;
     gap: 25px;
-    padding: 36px 0;
+    padding-bottom: 36px;
   }
   .technical-intro h2 {
     font-size: clamp(41px, 8vw, 60px);
@@ -299,57 +88,11 @@
   .technical-definition > p {
     font-size: 14px;
   }
-  .technical-toolbar {
-    padding: 18px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
   .technical-modes {
     width: 100%;
+    gap: 20px;
   }
   .technical-modes button {
-    flex: 1;
-    padding: 10px 5px;
-  }
-  .technical-architecture {
-    grid-template-columns: 1fr;
-    padding: 20px 18px;
-  }
-  .technical-node {
-    padding: 22px;
-  }
-  .technical-node h3 {
-    font-size: 31px;
-  }
-  .technical-node-label {
-    font-size: 9px;
-    margin-bottom: 15px;
-  }
-  .technical-connector {
-    height: 31px;
-    justify-content: center;
-  }
-  .technical-connector > span,
-  .technical-connector > svg:first-of-type {
-    display: none;
-  }
-  .technical-connector > svg:last-child {
-    display: block;
-  }
-  .technical-file-tree {
-    margin-top: 19px;
-  }
-  .technical-file-tree > span {
-    max-width: none;
-  }
-  .technical-engine-functions {
-    padding: 21px 0;
-  }
-  .technical-runtime {
-    flex-wrap: nowrap;
-  }
-  .technical-footnote > p {
-    font-size: 11px;
+    padding: 12px 0;
   }
 }

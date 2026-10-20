@@ -43,8 +43,9 @@ required. Preview serves that production output locally.
   original record, reviewed update, and reuse by a teammate or AI conversation.
   Readers can open the sample source notes and revisit the earlier entry.
 - `apps/web/src/components/technical-overview.tsx` and
-  `technical-overview.css`: a technical explainer connecting the company Git
-  repository, local CLI, and AI plugin. `technical-inspector.tsx` and
+  `technical-overview.css`: a short technical introduction.
+  `computer-flow.tsx` and `computer-flow.css` illustrate the company files,
+  Groundray terminal, and AI agent as a folder, laptop, and desktop monitor. `technical-inspector.tsx` and
   `technical-inspector.css` explain provenance, collaboration, publication, and
   explicit versioned sync, including an interactive sync/reindex illustration.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.

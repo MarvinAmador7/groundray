@@ -13,9 +13,9 @@ import { Button } from "@website/ui/components/button";
 import "../technical-inspector.css";
 
 const views = [
-  { id: "provenance", label: "Provenance", number: "01" },
-  { id: "collaboration", label: "Collaboration", number: "02" },
-  { id: "sync", label: "Publish & sync", number: "03" },
+  { id: "provenance", label: "Provenance" },
+  { id: "collaboration", label: "Collaboration" },
+  { id: "sync", label: "Publish & sync" },
 ] as const;
 type View = (typeof views)[number]["id"];
 const lifecycle = [
@@ -53,13 +53,10 @@ function ProvenanceView() {
           </div>
         </div>
         <span className="system-example-caption">
-          ILLUSTRATIVE METADATA EXCERPT · NOT A COMPLETE FILE
+          Illustrative metadata excerpt
         </span>
       </div>
       <div className="system-explanation">
-        <span className="technical-diagram-label">
-          PROVENANCE THAT TRAVELS WITH THE FILE
-        </span>
         <h3>
           What you know.
           <br />
@@ -130,9 +127,6 @@ function CollaborationView() {
     <div className="system-collaboration">
       <div className="system-detail-heading">
         <div>
-          <span className="technical-diagram-label">
-            CHANGES ARE PROPOSALS FIRST
-          </span>
           <h3>
             One shared brain.
             <br />
@@ -146,12 +140,10 @@ function CollaborationView() {
         </p>
       </div>
       <ol className="system-roles">
-        {roles.map(({ icon: Icon, name, action, description }, i) => (
+        {roles.map(({ icon: Icon, name, action, description }) => (
           <li key={name}>
             <div className="system-role-label">
-              <span>
-                0{i + 1} / {name}
-              </span>
+              <span>{name}</span>
               <Icon size={19} aria-hidden="true" />
             </div>
             <h4>{action}</h4>
@@ -200,7 +192,7 @@ function SyncView() {
       <div className="system-sync-example">
         <div className="system-remote">
           <span className="technical-diagram-label">
-            <GitBranch size={14} aria-hidden="true" /> SHARED GIT REMOTE
+            <GitBranch size={14} aria-hidden="true" /> Shared Git remote
           </span>
           <div>
             <strong>Published version</strong>
@@ -210,7 +202,7 @@ function SyncView() {
         </div>
         <div className="system-sync-arrow">
           <ArrowDown size={19} aria-hidden="true" />
-          <span>EXPLICIT SYNC · EACH INSTALLATION</span>
+          <span>Explicit sync on each installation</span>
         </div>
         <div
           className="system-installation"
@@ -267,13 +259,10 @@ function SyncView() {
           </button>
         </div>
         <span className="system-example-caption">
-          INTERACTIVE ILLUSTRATION · RUNS NO COMMANDS
+          Interactive example · no commands run
         </span>
       </div>
       <div className="system-explanation">
-        <span className="technical-diagram-label">
-          SHARED HISTORY. EXPLICIT LOCAL VERSIONS.
-        </span>
         <h3>
           Publish once.
           <br />
@@ -321,13 +310,7 @@ export function TechnicalInspector() {
   return (
     <>
       <div className="system-lifecycle">
-        <div>
-          <span className="technical-diagram-label">
-            THE KNOWLEDGE LIFECYCLE
-          </span>
-          <p>From a new source to a shared, searchable version.</p>
-        </div>
-        <ol>
+        <ol aria-label="Knowledge lifecycle">
           {lifecycle.map((label, i) => (
             <li key={label}>
               <span>{label}</span>
@@ -340,13 +323,12 @@ export function TechnicalInspector() {
       </div>
       <div className="system-inspector">
         <div className="system-inspector-toolbar">
-          <span className="technical-diagram-label">LOOK CLOSER</span>
           <div
             className="technical-modes"
             role="group"
             aria-label="Explore the knowledge system"
           >
-            {views.map(({ id, label, number }) => (
+            {views.map(({ id, label }) => (
               <Button
                 key={id}
                 variant="ghost"
@@ -354,7 +336,6 @@ export function TechnicalInspector() {
                 aria-controls="system-detail"
                 onClick={() => setView(id)}
               >
-                <span className="system-mode-number">{number}</span>
                 {label}
               </Button>
             ))}
