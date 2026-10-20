@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -7,62 +6,10 @@ import {
   GitBranch,
   Terminal,
 } from "lucide-react";
-import { Button } from "@website/ui/components/button";
+import { TechnicalInspector } from "./technical-inspector";
 import "../technical-overview.css";
 
-const paths = {
-  answer: {
-    label: "Ask a question",
-    repositoryNote: "Decisions, procedures, definitions, and original records.",
-    command: 'groundray search query "customer onboarding" --brain team --json',
-    prompt:
-      "Use $groundray:groundray. How do we onboard a customer? Show the evidence.",
-    steps: [
-      [
-        "Find",
-        "The plugin uses the CLI to search the selected company brain locally.",
-      ],
-      [
-        "Inspect",
-        "Your AI reads the relevant knowledge and supporting source records.",
-      ],
-      [
-        "Answer",
-        "Your AI answers with citations, the reasoning, and any gaps that need a decision.",
-      ],
-    ],
-    note: "Search runs on your machine. Retrieved evidence enters your AI tool’s model context under your provider’s settings.",
-  },
-  change: {
-    label: "Share an update",
-    repositoryNote:
-      "Draft changes and their sources, preserved in Git history.",
-    command:
-      "groundray brain propose onboarding-update --brain team --apply --json",
-    prompt:
-      "Use $groundray:groundray. Propose an update to our onboarding procedure. Show me the plan first.",
-    steps: [
-      [
-        "Draft",
-        "Preview a correction or new record, then explicitly save the proposed change.",
-      ],
-      [
-        "Review",
-        "Inspect the exact proposal and its original evidence before accepting it.",
-      ],
-      [
-        "Share",
-        "Explicitly publish the accepted version. Teammates sync and rebuild their local index.",
-      ],
-    ],
-    note: "Changes, publishing, and syncing are explicit. Repository access uses your Git host’s existing permissions.",
-  },
-} as const;
-
 export function TechnicalOverview() {
-  const [mode, setMode] = useState<keyof typeof paths>("answer");
-  const path = paths[mode];
-
   return (
     <section
       id="under-the-hood"
@@ -70,7 +17,7 @@ export function TechnicalOverview() {
       aria-labelledby="technical-title"
     >
       <div className="technical-topline">
-        <span className="eyebrow">THE SHORT, TECHNICAL VERSION</span>
+        <span className="eyebrow">THE SYSTEM UNDER THE STORY</span>
         <span className="technical-build-label">
           <span /> OPEN SOURCE · LOCAL CLI · AI PLUGIN
         </span>
@@ -84,10 +31,13 @@ export function TechnicalOverview() {
         </h2>
         <div className="technical-definition">
           <p>
-            Groundray is an open-source CLI and plugin for Codex and Claude
-            Code. It keeps company knowledge in a Git repository and gives your
-            AI a workflow to find evidence, answer questions, and propose
-            changes.
+            Groundray is a Git-backed knowledge system for teams and their AI.
+            Its CLI and Codex / Claude Code plugins connect company knowledge to
+            the sources, authorship, and history behind it.
+          </p>
+          <p>
+            Capture evidence, draft a change, review the exact proposal, and
+            publish a version your teammates can explicitly sync.
           </p>
           <a
             className="text-link"
@@ -103,23 +53,9 @@ export function TechnicalOverview() {
           <span className="technical-diagram-label">
             THREE PARTS. ONE WORKFLOW.
           </span>
-          <div
-            className="technical-modes"
-            role="group"
-            aria-label="Explore Groundray workflows"
-          >
-            {(Object.keys(paths) as (keyof typeof paths)[]).map((id) => (
-              <Button
-                key={id}
-                variant="ghost"
-                aria-pressed={mode === id}
-                aria-controls="technical-path"
-                onClick={() => setMode(id)}
-              >
-                {paths[id].label}
-              </Button>
-            ))}
-          </div>
+          <span className="technical-diagram-label">
+            FILES → TOOLS → CONTEXT
+          </span>
         </div>
 
         <div className="technical-architecture">
@@ -144,6 +80,9 @@ export function TechnicalOverview() {
                 }
               </pre>
               <span>EXAMPLE STRUCTURE · MARKDOWN + SOURCES</span>
+              <p className="technical-metadata-note">
+                Identity · provenance · lifecycle · history
+              </p>
             </div>
           </article>
 
@@ -169,6 +108,12 @@ export function TechnicalOverview() {
               </span>
               <span>
                 <span>03</span> Validated, plan-first updates
+              </span>
+              <span>
+                <span>04</span> Exact-commit proposal review
+              </span>
+              <span>
+                <span>05</span> Explicit publication and sync
               </span>
             </div>
             <div className="technical-runtime">
@@ -205,60 +150,18 @@ export function TechnicalOverview() {
           </article>
         </div>
 
-        <div
-          id="technical-path"
-          className="technical-path"
-          role="region"
-          aria-label={path.label}
-        >
-          <div className="technical-path-heading">
-            <span className="technical-diagram-label">
-              {mode === "answer"
-                ? "FROM A QUESTION TO A GROUNDED ANSWER"
-                : "FROM A DRAFT TO A SHARED VERSION"}
-            </span>
-            <span>ILLUSTRATIVE WORKFLOW</span>
-          </div>
-          <ol className="technical-path-steps">
-            {path.steps.map(([title, description], index) => (
-              <li key={title}>
-                <span className="technical-step-number">0{index + 1}</span>
-                <div>
-                  <h4>{title}</h4>
-                  <p>{description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <details className="technical-command">
-            <summary>
-              See the prompt and CLI example <span aria-hidden="true">+</span>
-            </summary>
-            <div className="technical-examples">
-              <div>
-                <span>CODEX PROMPT</span>
-                <p>{path.prompt}</p>
-              </div>
-              <div>
-                <span>
-                  {mode === "answer"
-                    ? "CLI SEARCH EXAMPLE"
-                    : "CLI PROPOSAL EXAMPLE · WRITES A REMOTE REF"}
-                </span>
-                <pre>
-                  <code>{path.command}</code>
-                </pre>
-              </div>
-            </div>
-          </details>
-        </div>
+        <TechnicalInspector />
       </div>
 
       <div className="technical-footnote">
         <span className="technical-footnote-mark" aria-hidden="true">
           ↳
         </span>
-        <p>{path.note}</p>
+        <p>
+          Search and per-brain indexes run locally; indexes are rebuildable.
+          Retrieved evidence enters your AI tool’s model context under your
+          provider’s settings. Knowledge stays in your Git repository.
+        </p>
       </div>
     </section>
   );

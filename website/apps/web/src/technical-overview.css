@@ -5,8 +5,7 @@
 }
 .technical-topline,
 .technical-toolbar,
-.technical-node-label,
-.technical-path-heading {
+.technical-node-label {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,9 +19,7 @@
 .technical-diagram-label,
 .technical-node-label,
 .technical-file-tree > span,
-.technical-runtime,
-.technical-path-heading > span:last-child,
-.technical-examples > div > span {
+.technical-runtime {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   font-size: 10px;
   line-height: 1.6;
@@ -236,96 +233,6 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.technical-path {
-  padding: 25px 24px 0;
-  border-top: 1px solid #4b5543;
-}
-.technical-path-heading > span:last-child {
-  color: #aab69d;
-  font-size: 8px;
-}
-.technical-path-steps {
-  list-style: none;
-  margin: 25px 0 27px;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-}
-.technical-path-steps li {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-}
-.technical-step-number {
-  color: var(--lime);
-  font:
-    10px/1.9 ui-monospace,
-    SFMono-Regular,
-    Consolas,
-    monospace;
-}
-.technical-path-steps h4 {
-  font-size: 13px;
-  font-weight: 600;
-  margin: 0 0 8px;
-}
-.technical-path-steps p {
-  font-size: 11px;
-  color: var(--technical-muted);
-  line-height: 1.85;
-  max-width: 275px;
-}
-.technical-command {
-  border-top: 1px solid #4b5543;
-}
-.technical-command summary {
-  cursor: pointer;
-  padding: 17px 0;
-  font-size: 11px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  list-style: none;
-}
-.technical-command summary::-webkit-details-marker {
-  display: none;
-}
-.technical-command summary > span {
-  color: var(--lime);
-  font-size: 16px;
-  line-height: 1;
-}
-.technical-command[open] summary > span {
-  transform: rotate(45deg);
-}
-.technical-examples {
-  padding: 2px 0 24px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-}
-.technical-examples > div {
-  min-width: 0;
-}
-.technical-examples > div > span {
-  color: var(--technical-muted);
-  font-size: 9px;
-}
-.technical-examples p,
-.technical-examples pre {
-  margin: 9px 0 0;
-  padding: 16px;
-  border-left: 2px solid #647653;
-  background: #1b2319;
-  font:
-    11px/1.9 ui-monospace,
-    SFMono-Regular,
-    Consolas,
-    monospace;
-  overflow-wrap: anywhere;
-  white-space: pre-wrap;
-}
 .technical-footnote {
   display: flex;
   gap: 13px;
@@ -441,27 +348,6 @@
   }
   .technical-runtime {
     flex-wrap: nowrap;
-  }
-  .technical-path {
-    padding: 22px 18px 0;
-  }
-  .technical-path-heading {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-  .technical-path-steps {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    margin-top: 22px;
-  }
-  .technical-path-steps p {
-    max-width: none;
-    font-size: 12px;
-  }
-  .technical-examples {
-    grid-template-columns: 1fr;
-    gap: 18px;
   }
   .technical-footnote > p {
     font-size: 11px;

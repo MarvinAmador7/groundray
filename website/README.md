@@ -44,7 +44,9 @@ required. Preview serves that production output locally.
   Readers can open the sample source notes and revisit the earlier entry.
 - `apps/web/src/components/technical-overview.tsx` and
   `technical-overview.css`: a technical explainer connecting the company Git
-  repository, local CLI, and AI plugin, with question and update workflows.
+  repository, local CLI, and AI plugin. `technical-inspector.tsx` and
+  `technical-inspector.css` explain provenance, collaboration, publication, and
+  explicit versioned sync, including an interactive sync/reindex illustration.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 
