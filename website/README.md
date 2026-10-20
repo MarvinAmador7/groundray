@@ -32,6 +32,14 @@ required. Preview serves that production output locally.
 
 ## Structure
 
+- `/signal`: a separate dark visual variant inspired by Axiom's technical
+  aesthetic. `apps/web/src/routes/signal.tsx` and `signal.css` provide scoped
+  Geist/Geist Mono typography, original dithered artwork, a working copy-setup
+  action, an interactive fictional Ask/Trace/Remember example, an architecture
+  diagram, review/publish/sync lifecycle, ownership explanation, and FAQ.
+  Both `/` and `/signal` are statically prerendered; the original homepage is
+  preserved. The exploratory variant is marked `noindex`.
+
 - `apps/web/src/routes/_index.tsx`: landing page, GitHub quickstart links, and FAQ.
 - `apps/web/src/components/hero-setup.tsx`: agent-neutral setup prompt, one-click
   clipboard action, a modal prompt preview, and manual-copy fallback. The hero
