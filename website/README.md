@@ -32,8 +32,7 @@ required. Preview serves that production output locally.
 
 ## Structure
 
-- `apps/web/src/routes/_index.tsx`: landing page, evidence illustration,
-  installation commands, and FAQ.
+- `apps/web/src/routes/_index.tsx`: landing page, installation commands, and FAQ.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
   continuity scenario tabs, workflow illustrations, and the
@@ -46,10 +45,6 @@ required. Preview serves that production output locally.
   coworker sync. The new-project example has the agent proactively suggest
   preserving a Lumen business fact, then wait for consent before previewing it.
   Tool command details and the source open on demand and pause playback. No commands or model calls run.
-- `apps/web/src/components/company-field-guide.tsx` and
-  `company-field-guide.css`: an interactive field guide showing a lesson’s
-  original record, reviewed update, and reuse by a teammate or AI conversation.
-  Readers can open the sample source notes and revisit the earlier entry.
 - `apps/web/src/components/technical-overview.tsx` and
   `technical-overview.css`: a short technical introduction.
   `computer-flow.tsx` and `computer-flow.css` illustrate the company files,
@@ -67,9 +62,9 @@ required. Preview serves that production output locally.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 
 The hero uses a separate image asset with live HTML typography. Installation
-commands point to Groundray's current GitHub release. The evidence interaction
-uses clearly labeled fictional sample records; it does not call a model or read
-company data. The page has no analytics or automatic data collection.
+commands point to Groundray's current GitHub release. The animated examples
+use clearly labeled fictional records; they do not call a model or read company
+data. The page has no analytics or automatic data collection.
 
 ## Artwork and fonts
 

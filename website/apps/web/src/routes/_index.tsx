@@ -31,7 +31,6 @@ import {
   SheetTrigger,
 } from "@website/ui/components/sheet";
 import type { Route } from "./+types/_index";
-import { CompanyFieldGuide } from "../components/company-field-guide";
 import { TechnicalOverview } from "../components/technical-overview";
 import {
   ContinuityExplorer,
@@ -203,39 +202,6 @@ function Product() {
         </p>
       </div>
       <ContinuityExplorer />
-    </section>
-  );
-}
-function EvidenceExample() {
-  return (
-    <section
-      className="evidence-section section-padding"
-      aria-labelledby="evidence-title"
-    >
-      <div className="evidence-intro">
-        <div>
-          <span className="eyebrow">ANSWERS WITH ROOTS</span>
-          <h2 id="evidence-title">
-            What you learn
-            <br />
-            <em>
-              becomes someone’s{" "}
-              <span className="guide-keep-phrase">head start.</span>
-            </em>
-          </h2>
-        </div>
-        <div className="evidence-intro-copy">
-          <p>
-            Keep what you learned, the records behind it, and the reviewed
-            changes that made it better. Hand that context to the next person—or
-            bring it to your AI.
-          </p>
-          <a className="text-link" href={`${DOCS}/groundray-product-goal.md`}>
-            Meet the Groundray workflow <ArrowUpRight aria-hidden="true" />
-          </a>
-        </div>
-      </div>
-      <CompanyFieldGuide />
     </section>
   );
 }
@@ -587,7 +553,6 @@ export default function Home() {
         <Hero />
         <Product />
         <TechnicalOverview />
-        <EvidenceExample />
         <HowItWorks />
         <Ownership />
         <GetStarted />

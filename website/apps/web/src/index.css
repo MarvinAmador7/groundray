@@ -324,22 +324,6 @@ svg {
   color: var(--olive);
   padding-bottom: 7px;
 }
-.evidence-section {
-  background: #e9ecdf;
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 8%;
-  align-items: center;
-}
-.evidence-intro h2 {
-  margin: 27px 0;
-}
-.evidence-intro > p {
-  max-width: 330px;
-  font-size: 15px;
-  color: var(--olive);
-  margin-bottom: 30px;
-}
 .how {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -762,10 +746,6 @@ svg {
   .product-intro {
     gap: 7%;
   }
-  .evidence-section {
-    gap: 6%;
-    grid-template-columns: 0.8fr 1.2fr;
-  }
   .how,
   .ownership-section,
   .get-started,
@@ -877,21 +857,12 @@ svg {
     max-width: 440px;
     font-size: 14px;
   }
-  .evidence-section,
   .how,
   .ownership-section,
   .get-started,
   .faq {
     grid-template-columns: 1fr;
     gap: 42px;
-  }
-  .evidence-intro h2 {
-    margin: 23px 0;
-  }
-  .evidence-intro > p {
-    font-size: 14px;
-    max-width: 410px;
-    margin-bottom: 24px;
   }
   .how h2 {
     margin-top: 23px;
