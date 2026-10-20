@@ -32,12 +32,12 @@ required. Preview serves that production output locally.
 
 ## Structure
 
-- `apps/web/src/routes/_index.tsx`: landing page, installation commands, and FAQ.
+- `apps/web/src/routes/_index.tsx`: landing page, GitHub quickstart links, and FAQ.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
   continuity scenario tabs, workflow illustrations, and the
   portable brain with Codex/Claude Code logos, Terminal, and one shared CLI
-  command using the installation section’s existing clipboard control.
+  command with a clipboard control.
 - `apps/web/src/components/brain-chat-demo.tsx` and `brain-chat-demo.css`:
   animated fictional agent conversations for the continuity tabs. They show CLI
   sync and indexing before lookups, an inspectable source note, a validated draft
@@ -64,8 +64,9 @@ required. Preview serves that production output locally.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 
-The hero uses a separate image asset with live HTML typography. Installation
-commands point to Groundray's current GitHub release. The animated examples
+The hero uses a separate image asset with live HTML typography. Get started
+links open the repository’s quickstart, which documents installation for each
+supported host. The animated examples
 use clearly labeled fictional records; they do not call a model or read company
 data. The page has no analytics or automatic data collection.
 

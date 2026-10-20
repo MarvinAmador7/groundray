@@ -10,12 +10,6 @@ import {
 } from "lucide-react";
 import { Button } from "@website/ui/components/button";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@website/ui/components/tabs";
-import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -40,7 +34,6 @@ import {
 
 const REPO = "https://github.com/MarvinAmador7/groundray";
 const DOCS = `${REPO}/blob/main/docs`;
-const DOWNLOAD = `${REPO}/releases/latest/download`;
 
 export function meta({}: Route.MetaArgs) {
   const title = "Groundray — Stop starting over.";
@@ -92,7 +85,7 @@ function Brand() {
 const links = [
   { href: "#product", label: "Product" },
   { href: "#how-it-works", label: "How it works" },
-  { href: "#get-started", label: "Get started" },
+  { href: `${REPO}#get-started`, label: "Get started" },
 ];
 function Header() {
   return (
@@ -164,7 +157,7 @@ function Hero() {
           <br className="desktop-break" /> Carry what your company learns
           <br className="desktop-break" /> forward—with the evidence behind it.
         </p>
-        <a className="pill hero-cta" href="#get-started">
+        <a className="pill hero-cta" href={`${REPO}#get-started`}>
           Build your company brain <ArrowUpRight aria-hidden="true" />
         </a>
         <p className="ownership">
@@ -312,35 +305,6 @@ function Ownership() {
     </section>
   );
 }
-const installs = [
-  {
-    id: "codex",
-    title: "Codex",
-    command: `curl -fsSL ${DOWNLOAD}/install-groundray | sh`,
-    prompt:
-      "Use $groundray:groundray-setup to connect my company brain from <repository-url>.",
-    note: "Start a fresh Codex session using the executable selected by the installer. Connect your company’s brain repository:",
-    guide: `${DOCS}/groundray-plugin.md`,
-  },
-  {
-    id: "claude",
-    title: "Claude Code",
-    command: `curl -fsSL ${DOWNLOAD}/install-groundray | sh -s -- --host claude`,
-    prompt:
-      "/groundray:groundray-setup Connect my company brain from <repository-url>.",
-    note: "Start a fresh Claude Code session. Connect your company’s brain repository:",
-    guide: `${DOCS}/groundray-plugin.md`,
-  },
-  {
-    id: "terminal",
-    title: "Terminal",
-    command: `curl -fsSL ${DOWNLOAD}/install | sh`,
-    prompt:
-      'export PATH="$HOME/.local/bin:$PATH"\ngroundray setup\ngroundray brain init ./team-brain --name "Team" --slug team --no-publish',
-    note: "Add the CLI to your path, then use the guided setup and create a local brain:",
-    guide: `${DOCS}/cli.md`,
-  },
-];
 function CopyButton({ text, label }: { text: string; label: string }) {
   const [copied, setCopied] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -381,99 +345,6 @@ function CopyButton({ text, label }: { text: string; label: string }) {
             : ""}
       </span>
     </div>
-  );
-}
-function GetStarted() {
-  return (
-    <section
-      id="get-started"
-      className="get-started section-padding"
-      aria-labelledby="start-title"
-    >
-      <div className="start-intro">
-        <span className="eyebrow">GROW FROM HERE</span>
-        <h2 id="start-title">
-          Your company has
-          <br />a lot to <em>build on.</em>
-        </h2>
-        <p>Bring it with you.</p>
-        <div className="release-note">
-          <span className="status-dot" />
-          <a href={`${REPO}/releases/latest`}>Early release · v0.3.1</a>
-          <span>Open source · Apache 2.0</span>
-        </div>
-      </div>
-      <div className="install-panel">
-        <Tabs defaultValue="codex">
-          <TabsList
-            className="install-tabs"
-            aria-label="Choose your Groundray installation"
-          >
-            {installs.map((install) => (
-              <TabsTrigger key={install.id} value={install.id}>
-                {install.title}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          {installs.map((install) => (
-            <TabsContent
-              value={install.id}
-              key={install.id}
-              className="install-content"
-            >
-              <div className="install-step-label">
-                <span>01</span> Install Groundray
-              </div>
-              <div className="code-block">
-                <pre>
-                  <code>{install.command}</code>
-                </pre>
-                <CopyButton
-                  text={install.command}
-                  label={`Copy ${install.title} install command`}
-                />
-              </div>
-              <p className="install-requirements">
-                macOS & Linux · Intel & ARM
-                {install.id !== "terminal"
-                  ? ` · Git and ${install.title} CLI required`
-                  : " · Git required"}
-              </p>
-              <div className="install-step-label">
-                <span>02</span>{" "}
-                {install.id === "terminal"
-                  ? "Create your first brain"
-                  : "Connect your company brain"}
-              </div>
-              <p className="install-instruction">{install.note}</p>
-              <div className="code-block prompt-block">
-                <pre>
-                  <code>{install.prompt}</code>
-                </pre>
-                <CopyButton
-                  text={install.prompt}
-                  label={`Copy ${install.title} setup instructions`}
-                />
-              </div>
-              {install.id !== "terminal" && (
-                <p className="install-hint">
-                  Your brain is a separate Git repository. Need to create one?
-                  Use the <a href={`${DOCS}/cli.md`}>CLI guide</a>.
-                </p>
-              )}
-              <a className="text-link" href={install.guide}>
-                Read the {install.title === "Terminal" ? "CLI" : "plugin"} guide{" "}
-                <ArrowUpRight aria-hidden="true" />
-              </a>
-            </TabsContent>
-          ))}
-        </Tabs>
-        <p className="runtime-note">
-          Native CLI and keyword engine included. No separate Python, Node, or
-          QMD installation needed.
-        </p>
-      </div>
-    </section>
   );
 }
 const questions = [
@@ -566,7 +437,6 @@ export default function Home() {
         <TechnicalOverview />
         <HowItWorks />
         <Ownership />
-        <GetStarted />
         <Questions />
       </main>
       <Footer />
