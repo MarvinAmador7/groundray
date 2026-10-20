@@ -46,9 +46,8 @@ required. Preview serves that production output locally.
   `technical-overview.css`: a short technical introduction.
   `computer-flow.tsx` and `computer-flow.css` illustrate the company files,
   Groundray terminal, and AI agent as a folder, laptop, and desktop monitor. `technical-inspector.tsx` and
-  `technical-inspector.css` illustrate contributors, reviewers, and publishers
-  at their computers, plus a shared repository and two independently versioned
-  installations. The browser-only sync/reindex example updates one machine.
+  `technical-inspector.css` explain provenance, collaboration, publication, and
+  explicit versioned sync, including an interactive sync/reindex illustration.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 
