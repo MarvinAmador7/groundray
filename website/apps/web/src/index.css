@@ -324,35 +324,6 @@ svg {
   color: var(--olive);
   padding-bottom: 7px;
 }
-.moments {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid var(--line);
-}
-.moments article {
-  padding: 29px 42px 0 0;
-}
-.moments article + article {
-  border-left: 1px solid var(--line);
-  padding-left: 42px;
-}
-.moment-number {
-  font-size: 11px;
-  color: var(--olive);
-}
-.moments h3 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: 35px;
-  margin: 26px 0 12px;
-  letter-spacing: -0.02em;
-}
-.moments p {
-  color: var(--olive);
-  font-size: 13px;
-  line-height: 1.85;
-  max-width: 310px;
-}
 .evidence-section {
   background: #e9ecdf;
   display: grid;
@@ -532,44 +503,6 @@ svg {
 .how h2 {
   margin-top: 26px;
 }
-.steps {
-  margin-top: 3px;
-}
-.step {
-  display: flex;
-  gap: 22px;
-  padding: 0 0 31px;
-  border-bottom: 1px solid var(--line);
-}
-.step + .step {
-  padding-top: 30px;
-}
-.step:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-.step-number {
-  font-size: 10px;
-  color: var(--olive);
-  padding-top: 6px;
-}
-.step h3 {
-  font: 400 31px/1.15 var(--font-serif);
-  letter-spacing: -0.01em;
-  margin-bottom: 13px;
-}
-.step p {
-  color: var(--olive);
-  font-size: 13px;
-  line-height: 1.85;
-}
-.step-detail {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 0.03em;
-  color: #4e6532;
-  margin-top: 17px;
-}
 .ownership-section {
   background: #252c20;
   color: #f5f4e9;
@@ -612,96 +545,6 @@ svg {
   margin-top: 32px;
   color: var(--lime);
   font-size: 12px;
-}
-.brain-files {
-  background: #20271c;
-  border: 1px solid #546348;
-  border-radius: 5px;
-  transform: rotate(1.5deg);
-  box-shadow: 0 22px 45px #0e160d30;
-}
-.file-window-bar {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #45503c;
-  padding: 17px 20px;
-  color: #a7b296;
-  font: 10px monospace;
-}
-.file-window-bar > div {
-  display: flex;
-  gap: 5px;
-}
-.file-window-bar > div span {
-  height: 5px;
-  width: 5px;
-  border: 1px solid #708060;
-  border-radius: 50%;
-}
-.file-tree {
-  padding: 28px 32px 35px;
-  font: 12px/1.8 monospace;
-}
-.tree-root {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #e0e7d8;
-  margin-bottom: 20px;
-}
-.tree-root svg {
-  width: 25px;
-  height: 25px;
-  color: var(--lime);
-}
-.file-tag {
-  margin-left: auto;
-  font: 10px var(--font-sans);
-  border: 1px solid #576d41;
-  color: var(--lime);
-  padding: 2px 9px;
-  border-radius: 99px;
-}
-.tree-branch {
-  border-left: 1px solid #4b5b3e;
-  margin-left: 12px;
-  padding: 0 0 22px 24px;
-  position: relative;
-  color: #bccba9;
-}
-.tree-branch:before {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 1px;
-  background: #4b5b3e;
-  top: 10px;
-  left: 0;
-}
-.tree-branch:last-child {
-  padding-bottom: 0;
-}
-.tree-branch > div {
-  display: flex;
-  gap: 9px;
-  align-items: center;
-  font-size: 10px;
-  color: #94a085;
-  margin-top: 9px;
-}
-.tree-branch svg {
-  color: #707e62;
-}
-.file-window-bottom {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-top: 1px solid #45503c;
-  color: #a0ac90;
-  padding: 16px 20px;
-  font-size: 9px;
 }
 .get-started {
   display: grid;
@@ -1072,12 +915,6 @@ svg {
   .product-intro {
     gap: 7%;
   }
-  .moments article {
-    padding-right: 25px;
-  }
-  .moments article + article {
-    padding-left: 25px;
-  }
   .evidence-section {
     gap: 6%;
     grid-template-columns: 0.8fr 1.2fr;
@@ -1090,13 +927,6 @@ svg {
   }
   .example-answer h3 {
     font-size: 30px;
-  }
-  .brain-files {
-    transform: none;
-  }
-  .file-tree {
-    padding-left: 23px;
-    padding-right: 23px;
   }
   .source-tabs [data-slot="tabs-trigger"] {
     font-size: 9px;
@@ -1208,34 +1038,6 @@ svg {
     max-width: 440px;
     font-size: 14px;
   }
-  .moments {
-    grid-template-columns: 1fr;
-  }
-  .moments article,
-  .moments article + article {
-    border-left: 0;
-    border-bottom: 1px solid var(--line);
-    padding: 25px 0;
-    display: grid;
-    grid-template-columns: 38px 1fr;
-    column-gap: 10px;
-  }
-  .moment-number {
-    grid-row: span 2;
-    padding-top: 7px;
-  }
-  .moments h3 {
-    margin: 0 0 10px;
-    font-size: 31px;
-  }
-  .moments p {
-    max-width: 440px;
-    font-size: 12px;
-  }
-  .moments article:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-  }
   .evidence-section,
   .how,
   .ownership-section,
@@ -1288,16 +1090,6 @@ svg {
   }
   .ownership-copy > p {
     font-size: 13px;
-  }
-  .brain-files {
-    max-width: 530px;
-    width: 100%;
-  }
-  .file-tree {
-    padding: 25px 26px 28px;
-  }
-  .file-window-bottom {
-    font-size: 8px;
   }
   .start-intro h2 {
     margin-top: 23px;
@@ -1407,16 +1199,6 @@ svg {
   }
   .source-record blockquote {
     font-size: 20px;
-  }
-  .file-tree {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .tree-branch {
-    padding-left: 19px;
-  }
-  .tree-branch > div {
-    font-size: 9px;
   }
   .install-tabs [data-slot="tabs-trigger"] {
     padding-left: 15px;

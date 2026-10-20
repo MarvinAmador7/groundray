@@ -35,6 +35,9 @@ required. Preview serves that production output locally.
 - `apps/web/src/routes/_index.tsx`: landing page, evidence illustration,
   installation commands, and FAQ.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
+- `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
+  continuity scenarios, the evidence trail, workflow illustrations, and the
+  portable brain with host-specific prompt examples.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 

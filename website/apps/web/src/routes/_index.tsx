@@ -32,6 +32,12 @@ import {
   SheetTrigger,
 } from "@website/ui/components/sheet";
 import type { Route } from "./+types/_index";
+import {
+  ContinuityExplorer,
+  EvidenceTrail,
+  PortableBrain,
+  WorkflowVisual,
+} from "../components/value-visuals";
 
 const REPO = "https://github.com/MarvinAmador7/groundray";
 const DOCS = `${REPO}/blob/main/docs`;
@@ -164,23 +170,6 @@ function Hero() {
     </section>
   );
 }
-const moments = [
-  {
-    number: "01",
-    title: "A new teammate.",
-    text: "Give them the reasoning, not another scavenger hunt. Decisions, definitions, and procedures have somewhere to live.",
-  },
-  {
-    number: "02",
-    title: "A new project.",
-    text: "Build on what the company already knows. Bring earlier decisions and their original records into the next question.",
-  },
-  {
-    number: "03",
-    title: "A new AI tool.",
-    text: "Take your company context with you. The brain lives in your files, ready for Codex, Claude Code, or the terminal.",
-  },
-];
 function Product() {
   return (
     <section
@@ -204,15 +193,7 @@ function Product() {
           it, and what needs to happen next.
         </p>
       </div>
-      <div className="moments">
-        {moments.map((moment) => (
-          <article key={moment.number}>
-            <span className="moment-number">{moment.number} /</span>
-            <h3>{moment.title}</h3>
-            <p>{moment.text}</p>
-          </article>
-        ))}
-      </div>
+      <ContinuityExplorer />
     </section>
   );
 }
@@ -255,6 +236,7 @@ function EvidenceExample() {
           See the records behind a recommendation. Keep facts, assumptions, and
           open decisions in view.
         </p>
+        <EvidenceTrail />
         <a className="text-link" href={`${DOCS}/groundray-product-goal.md`}>
           Meet the Groundray workflow <ArrowUpRight aria-hidden="true" />
         </a>
@@ -377,9 +359,14 @@ function HowItWorks() {
           <em>A way to build on it.</em>
         </h2>
       </div>
+      <div className="workflow-heading-note">
+        <span className="eyebrow">FROM KNOWING TO MOVING FORWARD</span>
+        <p>A useful brain grows through deliberate steps.</p>
+      </div>
       <div className="steps">
         {steps.map((step) => (
           <article className="step" key={step.number}>
+            <WorkflowVisual step={step.number} />
             <span className="step-number">{step.number}</span>
             <div>
               <h3>{step.title}</h3>
@@ -426,56 +413,7 @@ function Ownership() {
           Explore the open-source project <ArrowUpRight aria-hidden="true" />
         </a>
       </div>
-      <div className="brain-files" aria-label="Example company brain folder">
-        <div className="file-window-bar">
-          <div>
-            <span />
-            <span />
-            <span />
-          </div>
-          <span>your-company-brain /</span>
-          <GitBranch size={15} aria-hidden="true" />
-        </div>
-        <div className="file-tree">
-          <div className="tree-root">
-            <Ray />
-            <span>knowledge</span>
-            <span className="file-tag">yours</span>
-          </div>
-          <div className="tree-branch">
-            <span>decisions/</span>
-            <div>
-              <FileText size={15} />
-              why-we-chose-this.md
-            </div>
-          </div>
-          <div className="tree-branch">
-            <span>procedures/</span>
-            <div>
-              <FileText size={15} />
-              customer-onboarding.md
-            </div>
-          </div>
-          <div className="tree-branch">
-            <span>definitions/</span>
-            <div>
-              <FileText size={15} />
-              what-profit-means.md
-            </div>
-          </div>
-          <div className="tree-branch">
-            <span>references/</span>
-            <div>
-              <FileText size={15} />
-              original-records.md
-            </div>
-          </div>
-        </div>
-        <div className="file-window-bottom">
-          <span className="status-dot" />
-          Local keyword search. Rebuildable indexes.
-        </div>
-      </div>
+      <PortableBrain />
     </section>
   );
 }
