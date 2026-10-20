@@ -1,13 +1,8 @@
 import { useState } from "react";
-import {
-  ArrowRight,
-  GitBranch,
-  GitCommitHorizontal,
-  GitPullRequest,
-  FileText,
-} from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
 import { Button } from "@website/ui/components/button";
 import "../technical-inspector.css";
+import { CollaborationNetwork } from "./collaboration-network";
 import { SyncNetwork } from "./sync-network";
 
 const views = [
@@ -97,90 +92,6 @@ function ProvenanceView() {
   );
 }
 
-function CollaborationView() {
-  const roles = [
-    {
-      icon: GitBranch,
-      name: "Contributor",
-      action: "Draft & propose",
-      description:
-        "Save a scoped change with its sources. Publish a new proposal ref without advancing shared main.",
-    },
-    {
-      icon: GitPullRequest,
-      name: "Reviewer",
-      action: "Inspect the exact candidate",
-      description:
-        "Read the patch and original records at a pinned proposal commit. The installed brain stays unchanged.",
-    },
-    {
-      icon: GitCommitHorizontal,
-      name: "Publisher",
-      action: "Accept the reviewed version",
-      description:
-        "Explicitly publish the exact candidate against the reviewed base, subject to Git-host permissions and rules.",
-    },
-  ];
-  return (
-    <div className="system-collaboration">
-      <div className="system-detail-heading">
-        <div>
-          <h3>
-            One shared brain.
-            <br />
-            <em>A deliberate path to change it.</em>
-          </h3>
-        </div>
-        <p>
-          Contributors, reviewers, and publishers are workflow responsibilities.
-          Your Git host controls repository access; your company decides who can
-          approve business decisions.
-        </p>
-      </div>
-      <ol className="system-roles">
-        {roles.map(({ icon: Icon, name, action, description }) => (
-          <li key={name}>
-            <div className="system-role-label">
-              <span>{name}</span>
-              <Icon size={19} aria-hidden="true" />
-            </div>
-            <h4>{action}</h4>
-            <p>{description}</p>
-          </li>
-        ))}
-      </ol>
-      <div className="system-review-versions">
-        <span>
-          <GitBranch size={15} aria-hidden="true" /> Published base{" "}
-          <strong>A</strong>
-        </span>
-        <ArrowRight size={17} aria-hidden="true" />
-        <span>
-          Proposal <strong>B</strong>
-        </span>
-        <ArrowRight size={17} aria-hidden="true" />
-        <span>
-          Review <strong>B</strong>
-        </span>
-        <ArrowRight size={17} aria-hidden="true" />
-        <span className="system-reviewed-version">
-          Publish the same <strong>B</strong>
-        </span>
-      </div>
-      <div className="system-collaboration-footer">
-        <p>
-          Changed base or moved proposal? The checked publication is refused.
-          Existing branch rules remain in force.
-        </p>
-        <a className="system-doc-link" href={`${docs}/brain-collaboration.md`}>
-          Read the collaboration contract{" "}
-          <ArrowRight size={14} aria-hidden="true" />
-        </a>
-      </div>
-    </div>
-  );
-}
-
 export function TechnicalInspector() {
   const [view, setView] = useState<View>("provenance");
   return (
@@ -225,7 +136,7 @@ export function TechnicalInspector() {
           {view === "provenance" ? (
             <ProvenanceView />
           ) : view === "collaboration" ? (
-            <CollaborationView />
+            <CollaborationNetwork />
           ) : (
             <SyncNetwork />
           )}

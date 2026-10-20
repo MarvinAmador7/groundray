@@ -47,10 +47,13 @@ required. Preview serves that production output locally.
   `computer-flow.tsx` and `computer-flow.css` illustrate the company files,
   Groundray terminal, and AI agent as a folder, laptop, and desktop monitor. `technical-inspector.tsx` and
   `technical-inspector.css` explain provenance, collaboration, publication, and
-  explicit versioned sync. `sync-network.tsx` and `sync-network.css` show a
+  explicit versioned sync. `collaboration-network.tsx` and its CSS animate a
+  sourced proposal through contributor, reviewer, and publisher, keeping the
+  same candidate commit through publication. `sync-network.tsx` and its CSS show a
   company-brain graph that animates publication, explicit coworker sync, and
-  local indexing. It plays once in view, pauses offscreen or in hidden tabs,
-  supports pause/replay, and starts at a static final state for reduced motion.
+  local indexing. Both graphs share an in-view playback clock, play once, pause
+  offscreen or in hidden tabs, support pause/replay, and start at a static final
+  state for reduced motion.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 

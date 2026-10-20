@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   ArrowRight,
   GitBranch,
@@ -8,6 +8,7 @@ import {
   UserRound,
 } from "lucide-react";
 import "../sync-network.css";
+import { useGraphPlayback } from "../hooks/use-graph-playback";
 
 const coworkers = ["You", "Coworker 1", "Coworker 2"];
 const connections = [
@@ -41,84 +42,21 @@ function phaseAt(stage: number, index: number): Phase {
 }
 
 export function SyncNetwork() {
-  const [stage, setStage] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const [complete, setComplete] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [pageVisible, setPageVisible] = useState(true);
-  const [reducedMotion, setReducedMotion] = useState<boolean | null>(null);
-  const figureRef = useRef<HTMLElement>(null);
+  const {
+    stage,
+    playing,
+    complete,
+    active,
+    reducedMotion,
+    figureRef,
+    replay,
+    toggle,
+  } = useGraphPlayback(times, duration);
   const svgRef = useRef<SVGSVGElement>(null);
   const motionRef = useRef<SVGAnimateMotionElement>(null);
-  const elapsedRef = useRef(0);
-  const stageRef = useRef(0);
-  const active =
-    playing && visible && pageVisible && !complete && reducedMotion !== null;
   const phases = coworkers.map((_, index) => phaseAt(stage, index));
   const traveling = phases.indexOf("syncing");
   const published = stage > 0;
-
-  useEffect(() => {
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    function updatePreference() {
-      setReducedMotion(preference.matches);
-      if (preference.matches) {
-        elapsedRef.current = duration;
-        stageRef.current = 8;
-        setStage(8);
-        setComplete(true);
-        setPlaying(false);
-      }
-    }
-    updatePreference();
-    preference.addEventListener("change", updatePreference);
-    return () => preference.removeEventListener("change", updatePreference);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) =>
-        setVisible(entry.isIntersecting && entry.intersectionRatio >= 0.45),
-      { threshold: 0.45 },
-    );
-    if (figureRef.current) observer.observe(figureRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const updateVisibility = () => setPageVisible(!document.hidden);
-    updateVisibility();
-    document.addEventListener("visibilitychange", updateVisibility);
-    return () =>
-      document.removeEventListener("visibilitychange", updateVisibility);
-  }, []);
-
-  useEffect(() => {
-    if (!active) return;
-    let request = 0;
-    let previous: number | null = null;
-    function tick(now: number) {
-      if (previous !== null) elapsedRef.current += now - previous;
-      previous = now;
-      if (elapsedRef.current >= duration) {
-        stageRef.current = 8;
-        setStage(8);
-        setComplete(true);
-        setPlaying(false);
-        return;
-      }
-      let next = 0;
-      for (let i = 1; i < times.length; i++)
-        if (elapsedRef.current >= times[i]) next = i;
-      if (next !== stageRef.current) {
-        stageRef.current = next;
-        setStage(next);
-      }
-      request = requestAnimationFrame(tick);
-    }
-    request = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(request);
-  }, [active]);
 
   useEffect(() => {
     if (traveling >= 0 && !reducedMotion) motionRef.current?.beginElement();
@@ -128,14 +66,6 @@ export function SyncNetwork() {
     if (active) svgRef.current?.unpauseAnimations();
     else svgRef.current?.pauseAnimations();
   }, [active]);
-
-  function replay() {
-    elapsedRef.current = 0;
-    stageRef.current = 0;
-    setStage(0);
-    setComplete(false);
-    setPlaying(true);
-  }
 
   return (
     <div className="sync-network-view">
@@ -245,9 +175,7 @@ export function SyncNetwork() {
                 playing ? "Pause sync animation" : "Play sync animation"
               }
               aria-pressed={playing}
-              onClick={() =>
-                complete ? replay() : setPlaying((value) => !value)
-              }
+              onClick={toggle}
             >
               {playing ? (
                 <Pause size={13} aria-hidden="true" />
