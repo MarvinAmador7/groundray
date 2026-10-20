@@ -4,38 +4,6 @@
   border: 1px solid #cdd3c0;
   color: #263022;
 }
-.brain-chat-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 20px 30px;
-  border-bottom: 1px solid #dce1d3;
-  background: #f0f2e8;
-}
-.brain-chat-header > div {
-  display: flex;
-  gap: 11px;
-  align-items: center;
-}
-.brain-chat-header > div > svg {
-  color: #4b6334;
-}
-.brain-chat-header > div > span {
-  font-size: 13px;
-  font-weight: 500;
-}
-.brain-chat-header small {
-  display: block;
-  font-size: 10px;
-  font-weight: 400;
-  color: #5d6a51;
-  margin-top: 4px;
-}
-.brain-chat-demo-label {
-  font-size: 10px;
-  color: #5d6a51;
-}
 .brain-chat-thread {
   height: 470px;
   overflow-y: auto;
@@ -260,13 +228,6 @@
   }
 }
 @media (max-width: 760px) {
-  .brain-chat-header {
-    padding: 16px;
-    gap: 10px;
-  }
-  .brain-chat-demo-label {
-    font-size: 8px;
-  }
   .brain-chat-thread {
     height: 470px;
   }

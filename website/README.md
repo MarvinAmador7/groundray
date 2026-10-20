@@ -40,8 +40,10 @@ required. Preview serves that production output locally.
   portable brain with host-specific prompt examples.
 - `apps/web/src/components/brain-chat-demo.tsx` and `brain-chat-demo.css`:
   animated fictional agent conversations for the continuity tabs. They show CLI
-  lookups, an inspectable source note, a validated draft preview, user confirmation,
-  local draft saving, and explicit local indexing. Tool command details and the
+  sync and indexing before lookups, an inspectable source note, a validated draft
+  preview, confirmed local saving, exact-proposal/source review, and publication
+  after a separate confirmation. Published knowledge still requires explicit
+  coworker sync. Tool command details and the
   source open on demand and pause playback. No commands or model calls run.
 - `apps/web/src/components/company-field-guide.tsx` and
   `company-field-guide.css`: an interactive field guide showing a lesson’s

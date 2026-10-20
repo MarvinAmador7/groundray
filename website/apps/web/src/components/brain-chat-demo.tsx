@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import {
   Check,
   ChevronRight,
@@ -41,10 +41,48 @@ const examples = {
       "Turn that lesson into a draft procedure in our company brain. Keep the source attached.",
   },
 } as const;
-const times = [
-  0, 900, 1800, 3000, 4500, 8000, 9500, 11000, 14500, 15700, 17500, 19000,
-];
-const duration = 21500;
+const timeline = [
+  ["question", 0],
+  ["intro", 900],
+  ["sync", 1800],
+  ["initial-index", 3000],
+  ["search", 4200],
+  ["source", 5400],
+  ["answer", 6800],
+  ["followup", 10500],
+  ["plan", 11800],
+  ["preview", 13200],
+  ["save-confirmation", 16800],
+  ["save", 18000],
+  ["draft-index", 19500],
+  ["saved", 20800],
+  ["review-request", 23000],
+  ["proposal-plan", 24200],
+  ["proposal", 25500],
+  ["review", 27000],
+  ["review-source", 28500],
+  ["review-summary", 30000],
+  ["publish-confirmation", 34000],
+  ["publish", 35400],
+  ["published", 37000],
+] as const;
+type Step = (typeof timeline)[number][0];
+const times = timeline.map(([, time]) => time);
+const stepIndex = Object.fromEntries(
+  timeline.map(([name], index) => [name, index]),
+) as Record<Step, number>;
+const duration = 40000;
+const syncCommand = "groundray brain sync mosaic-studio --json";
+const indexCommand = "groundray search index mosaic-studio --json";
+const proposalCommand =
+  "groundray brain propose launch-handoff --brain mosaic-studio --json";
+// Commit variables stand for the full commits returned by the illustrated proposal/review.
+const reviewCommand =
+  'groundray brain review launch-handoff --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --json';
+const reviewSourceCommand =
+  'groundray brain review-source launch-handoff references/captures/kickoff.md.txt --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --json';
+const publishCommand =
+  'groundray brain accept launch-handoff --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --base "$BASE_COMMIT" --json';
 const sourceCommand =
   "groundray source get references/captures/kickoff.md.txt --brain mosaic-studio --json";
 const planCommand =
@@ -87,6 +125,26 @@ function ToolCall({ label, result, command, done, inspect }: ToolProps) {
   );
 }
 
+function UserMessage({ children }: { children: ReactNode }) {
+  return (
+    <li className="brain-chat-user brain-chat-message">
+      <span className="sr-only">You: </span>
+      <p>{children}</p>
+    </li>
+  );
+}
+function AgentMessage({ children }: { children: ReactNode }) {
+  return (
+    <li className="brain-chat-agent brain-chat-message">
+      <span className="brain-chat-speaker">
+        <Leaf size={14} aria-hidden="true" />
+        Agent
+      </span>
+      {children}
+    </li>
+  );
+}
+
 export function BrainChatDemo({
   scenario,
 }: {
@@ -105,6 +163,7 @@ export function BrainChatDemo({
     pause,
   } = useGraphPlayback(times, duration);
   const threadRef = useRef<HTMLDivElement>(null);
+  const reached = (step: Step) => stage >= stepIndex[step];
 
   useEffect(() => {
     const thread = threadRef.current;
@@ -139,18 +198,10 @@ export function BrainChatDemo({
       ref={figureRef}
       className="brain-chat"
       data-stage={stage}
+      data-step={timeline[stage][0]}
       data-playing={active}
       aria-label="Animated fictional conversation showing an AI agent consulting and updating a company brain through the Groundray CLI"
     >
-      <div className="brain-chat-header">
-        <div>
-          <Leaf size={18} strokeWidth={1.4} aria-hidden="true" />
-          <span>
-            Mosaic Studio<small>Your AI + Groundray</small>
-          </span>
-        </div>
-        <span className="brain-chat-demo-label">Animated example</span>
-      </div>
       <div
         ref={threadRef}
         className="brain-chat-thread"
@@ -161,43 +212,55 @@ export function BrainChatDemo({
         onTouchStart={pause}
       >
         <ol className="brain-chat-messages" aria-label="Fictional conversation">
-          <li className="brain-chat-user brain-chat-message">
-            <span className="sr-only">You: </span>
-            <p>{example.question}</p>
-          </li>
-          {stage >= 1 ? (
-            <li className="brain-chat-agent brain-chat-message">
-              <span className="brain-chat-speaker">
-                <Leaf size={14} aria-hidden="true" />
-                Agent
-              </span>
-              <p>I’ll check the company brain and the original records.</p>
-            </li>
+          <UserMessage>
+            {example.question} Use the latest shared notes.
+          </UserMessage>
+          {reached("intro") ? (
+            <AgentMessage>
+              <p>
+                I’ll sync the latest published knowledge and refresh local
+                search before checking the original records.
+              </p>
+            </AgentMessage>
           ) : null}
-          {stage >= 2 ? (
+          {reached("sync") ? (
+            <ToolCall
+              label="Syncing recent published records…"
+              result="Latest published knowledge synced locally"
+              command={syncCommand}
+              done={reached("initial-index")}
+              inspect={inspect}
+            />
+          ) : null}
+          {reached("initial-index") ? (
+            <ToolCall
+              label="Refreshing search for the synced version…"
+              result="Local search matches the synced knowledge"
+              command={indexCommand}
+              done={reached("search")}
+              inspect={inspect}
+            />
+          ) : null}
+          {reached("search") ? (
             <ToolCall
               label="Searching company knowledge…"
               result="Found the procedure and launch decision"
               command={`groundray search query "${example.keywords}" --brain mosaic-studio --json`}
-              done={stage >= 3}
+              done={reached("source")}
               inspect={inspect}
             />
           ) : null}
-          {stage >= 3 ? (
+          {reached("source") ? (
             <ToolCall
               label="Reading the original kickoff note…"
               result="Original kickoff note retrieved"
               command={sourceCommand}
-              done={stage >= 4}
+              done={reached("answer")}
               inspect={inspect}
             />
           ) : null}
-          {stage >= 4 ? (
-            <li className="brain-chat-agent brain-chat-message">
-              <span className="brain-chat-speaker">
-                <Leaf size={14} aria-hidden="true" />
-                Agent
-              </span>
+          {reached("answer") ? (
+            <AgentMessage>
               <p>{example.answer}</p>
               <details
                 className="brain-chat-citation"
@@ -215,29 +278,22 @@ export function BrainChatDemo({
                   <cite>Fictional Mosaic Studio record · kickoff.md.txt</cite>
                 </blockquote>
               </details>
-            </li>
+            </AgentMessage>
           ) : null}
-          {stage >= 5 ? (
-            <li className="brain-chat-user brain-chat-message">
-              <span className="sr-only">You: </span>
-              <p>{example.followup}</p>
-            </li>
+          {reached("followup") ? (
+            <UserMessage>{example.followup}</UserMessage>
           ) : null}
-          {stage >= 6 ? (
+          {reached("plan") ? (
             <ToolCall
               label="Preparing a validated draft preview…"
               result="Draft preview ready · no files changed"
               command={planCommand}
-              done={stage >= 7}
+              done={reached("preview")}
               inspect={inspect}
             />
           ) : null}
-          {stage >= 7 ? (
-            <li className="brain-chat-agent brain-chat-message">
-              <span className="brain-chat-speaker">
-                <Leaf size={14} aria-hidden="true" />
-                Agent
-              </span>
+          {reached("preview") ? (
+            <AgentMessage>
               <p>
                 Here’s the draft I’d save. The original note stays attached.
               </p>
@@ -251,44 +307,108 @@ export function BrainChatDemo({
                 <small>Source: original kickoff note · agent-generated</small>
               </div>
               <p>Save this draft locally?</p>
-            </li>
+            </AgentMessage>
           ) : null}
-          {stage >= 8 ? (
-            <li className="brain-chat-user brain-chat-message">
-              <span className="sr-only">You: </span>
-              <p>Yes, save that draft.</p>
-            </li>
+          {reached("save-confirmation") ? (
+            <UserMessage>Yes, save that draft.</UserMessage>
           ) : null}
-          {stage >= 9 ? (
+          {reached("save") ? (
             <ToolCall
               label="Saving the confirmed draft…"
               result="Draft saved locally with its source"
               command={`${planCommand} --apply`}
-              done={stage >= 10}
+              done={reached("draft-index")}
               inspect={inspect}
             />
           ) : null}
-          {stage >= 10 ? (
+          {reached("draft-index") ? (
             <ToolCall
               label="Rebuilding the local search index…"
               result="Local search index is current"
-              command="groundray search index mosaic-studio --json"
-              done={stage >= 11}
+              command={indexCommand}
+              done={reached("saved")}
               inspect={inspect}
             />
           ) : null}
-          {stage >= 11 ? (
-            <li className="brain-chat-agent brain-chat-message">
-              <span className="brain-chat-speaker">
-                <Leaf size={14} aria-hidden="true" />
-                Agent
-              </span>
+          {reached("saved") ? (
+            <AgentMessage>
               <p>
-                Saved as a local draft, with the original note attached. It’s
-                searchable and ready for review. It hasn’t been published to the
-                team.
+                Saved as a local draft with its source attached. It’s searchable
+                and ready for review.
               </p>
-            </li>
+            </AgentMessage>
+          ) : null}
+          {reached("review-request") ? (
+            <UserMessage>
+              Share this draft as a proposal and review it against the original
+              note.
+            </UserMessage>
+          ) : null}
+          {reached("proposal-plan") ? (
+            <ToolCall
+              label="Checking the proposal against shared main…"
+              result="Proposal preview validated · main unchanged"
+              command={proposalCommand}
+              done={reached("proposal")}
+              inspect={inspect}
+            />
+          ) : null}
+          {reached("proposal") ? (
+            <ToolCall
+              label="Sharing the draft on a proposal ref…"
+              result="Proposal shared for review · main unchanged"
+              command={`${proposalCommand} --apply`}
+              done={reached("review")}
+              inspect={inspect}
+            />
+          ) : null}
+          {reached("review") ? (
+            <ToolCall
+              label="Inspecting the exact proposal and its patch…"
+              result="Exact proposal inspected against its base"
+              command={reviewCommand}
+              done={reached("review-source")}
+              inspect={inspect}
+            />
+          ) : null}
+          {reached("review-source") ? (
+            <ToolCall
+              label="Reading the source at the proposal’s commit…"
+              result="Original note checked at the same proposal commit"
+              command={reviewSourceCommand}
+              done={reached("review-summary")}
+              inspect={inspect}
+            />
+          ) : null}
+          {reached("review-summary") ? (
+            <AgentMessage>
+              <p>
+                The draft matches the kickoff note: confirm scope before sharing
+                a launch date. The proposal adds the procedure and keeps its
+                source attached.
+              </p>
+              <p>Publish this reviewed proposal to the team?</p>
+            </AgentMessage>
+          ) : null}
+          {reached("publish-confirmation") ? (
+            <UserMessage>Yes, publish that reviewed proposal.</UserMessage>
+          ) : null}
+          {reached("publish") ? (
+            <ToolCall
+              label="Publishing the exact reviewed proposal…"
+              result="Reviewed proposal published to the shared brain"
+              command={publishCommand}
+              done={reached("published")}
+              inspect={inspect}
+            />
+          ) : null}
+          {reached("published") ? (
+            <AgentMessage>
+              <p>
+                Published the reviewed proposal with its source and history.
+                Teammates can sync it into their own copies when they’re ready.
+              </p>
+            </AgentMessage>
           ) : null}
         </ol>
       </div>
@@ -324,7 +444,7 @@ export function BrainChatDemo({
         </div>
         <span className="sr-only" role="status">
           {complete
-            ? "Example complete. The agent consulted company evidence, previewed a draft, and saved it locally after confirmation. Scroll up to read the conversation."
+            ? "Example complete. The agent synced recent published knowledge, consulted its sources, saved a confirmed draft, reviewed the proposal and its source, and published after a separate confirmation. Teammates still sync explicitly. Scroll up to read the conversation."
             : ""}
         </span>
       </figcaption>
