@@ -43,8 +43,9 @@ required. Preview serves that production output locally.
   sync and indexing before lookups, an inspectable source note, a validated draft
   preview, confirmed local saving, exact-proposal/source review, and publication
   after a separate confirmation. Published knowledge still requires explicit
-  coworker sync. Tool command details and the
-  source open on demand and pause playback. No commands or model calls run.
+  coworker sync. The new-project example has the agent proactively suggest
+  preserving a Lumen business fact, then wait for consent before previewing it.
+  Tool command details and the source open on demand and pause playback. No commands or model calls run.
 - `apps/web/src/components/company-field-guide.tsx` and
   `company-field-guide.css`: an interactive field guide showing a lesson’s
   original record, reviewed update, and reuse by a teammate or AI conversation.

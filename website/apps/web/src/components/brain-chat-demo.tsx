@@ -24,12 +24,12 @@ const examples = {
   },
   project: {
     question:
-      "Before we plan the next launch: what did we learn last time, and why did we keep the scope small?",
-    keywords: "launch scope decision",
+      "Before we plan Lumen’s launch: what did we learn last time, and what constraints should we carry forward?",
+    keywords: "Lumen launch scope approval",
     answer:
-      "The smaller scope protected delivery. The kickoff note records why: scope was still changing when the launch date was discussed. Confirm scope before carrying a date into the next plan.",
+      "The smaller scope protected delivery. Lumen’s kickoff note also sets a specific condition: scope must be approved before we commit to a launch date.",
     followup:
-      "Capture that as a reusable launch-handoff procedure, with the original note.",
+      "Lumen’s launch depends on scope approval. This could matter in future decisions—should I save it as a business fact with the kickoff note as its source?",
   },
   tool: {
     question:
@@ -41,7 +41,7 @@ const examples = {
       "Turn that lesson into a draft procedure in our company brain. Keep the source attached.",
   },
 } as const;
-const timeline = [
+const standardTimeline = [
   ["question", 0],
   ["intro", 900],
   ["sync", 1800],
@@ -66,27 +66,47 @@ const timeline = [
   ["publish", 35400],
   ["published", 37000],
 ] as const;
-type Step = (typeof timeline)[number][0];
-const times = timeline.map(([, time]) => time);
-const stepIndex = Object.fromEntries(
-  timeline.map(([name], index) => [name, index]),
-) as Record<Step, number>;
-const duration = 40000;
+type Step = (typeof standardTimeline)[number][0] | "suggestion-confirmation";
+const projectTimeline: readonly (readonly [Step, number])[] =
+  standardTimeline.flatMap(([name, time]) =>
+    name === "followup"
+      ? ([
+          [name, time],
+          ["suggestion-confirmation", 14500],
+        ] as [Step, number][])
+      : [[name, time >= 11800 ? time + 4000 : time]],
+  );
+const standardTimes = standardTimeline.map(([, time]) => time);
+const projectTimes = projectTimeline.map(([, time]) => time);
 const syncCommand = "groundray brain sync mosaic-studio --json";
 const indexCommand = "groundray search index mosaic-studio --json";
-const proposalCommand =
-  "groundray brain propose launch-handoff --brain mosaic-studio --json";
-// Commit variables stand for the full commits returned by the illustrated proposal/review.
-const reviewCommand =
-  'groundray brain review launch-handoff --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --json';
-const reviewSourceCommand =
-  'groundray brain review-source launch-handoff references/captures/kickoff.md.txt --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --json';
-const publishCommand =
-  'groundray brain accept launch-handoff --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --base "$BASE_COMMIT" --json';
-const sourceCommand =
-  "groundray source get references/captures/kickoff.md.txt --brain mosaic-studio --json";
-const planCommand =
-  'groundray knowledge create --brain mosaic-studio --type procedure --title "Launch handoff" --description "Confirm scope before launch commitments." --actor openai/codex --method agent-generated --body-file ./launch-handoff.md --sources-file ./sources.json --confidence medium --confidence-basis "Based on the cited kickoff note; awaiting review." --json';
+const launchLesson = {
+  type: "procedure",
+  title: "Launch handoff",
+  description: "Confirm scope before launch commitments.",
+  bodyFile: "./launch-handoff.md",
+  sourcePath: "references/captures/kickoff.md.txt",
+  sourceLabel: "Original kickoff note",
+  quote: "Confirm scope before committing to a launch date.",
+  body: "Confirm scope before sharing a launch date.",
+  proposal: "launch-handoff",
+  review:
+    "The draft matches the kickoff note: confirm scope before sharing a launch date. The proposal adds the procedure and keeps its source attached.",
+};
+const lumenFact = {
+  type: "concept",
+  title: "Lumen launch constraint",
+  description:
+    "Scope approval is required before committing to Lumen’s launch date.",
+  bodyFile: "./lumen-launch-constraint.md",
+  sourcePath: "references/captures/lumen-kickoff.md.txt",
+  sourceLabel: "Original Lumen kickoff note",
+  quote: "Lumen: confirm scope approval before committing to a launch date.",
+  body: "Lumen’s launch date depends on scope approval.",
+  proposal: "lumen-launch-constraint",
+  review:
+    "The fact matches Lumen’s kickoff note: scope approval is required before committing to a launch date. The proposal keeps that source and its Lumen-specific scope.",
+};
 
 type ToolProps = {
   label: string;
@@ -151,6 +171,18 @@ export function BrainChatDemo({
   scenario: keyof typeof examples;
 }) {
   const example = examples[scenario];
+  const proactive = scenario === "project";
+  const knowledge = proactive ? lumenFact : launchLesson;
+  const timeline = proactive ? projectTimeline : standardTimeline;
+  const times = proactive ? projectTimes : standardTimes;
+  const duration = proactive ? 44000 : 40000;
+  const sourceCommand = `groundray source get ${knowledge.sourcePath} --brain mosaic-studio --json`;
+  const planCommand = `groundray knowledge create --brain mosaic-studio --type ${knowledge.type} --title "${knowledge.title}" --description "${knowledge.description}" --actor openai/codex --method agent-generated --body-file ${knowledge.bodyFile} --sources-file ./sources.json --confidence medium --confidence-basis "Based on the cited kickoff note; awaiting review." --json`;
+  const proposalCommand = `groundray brain propose ${knowledge.proposal} --brain mosaic-studio --json`;
+  // These variables stand for the full commits returned by the illustrated proposal/review.
+  const reviewCommand = `groundray brain review ${knowledge.proposal} --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --json`;
+  const reviewSourceCommand = `groundray brain review-source ${knowledge.proposal} ${knowledge.sourcePath} --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --json`;
+  const publishCommand = `groundray brain accept ${knowledge.proposal} --brain mosaic-studio --commit "$PROPOSAL_COMMIT" --base "$BASE_COMMIT" --json`;
   const {
     stage,
     playing,
@@ -163,7 +195,10 @@ export function BrainChatDemo({
     pause,
   } = useGraphPlayback(times, duration);
   const threadRef = useRef<HTMLDivElement>(null);
-  const reached = (step: Step) => stage >= stepIndex[step];
+  const reached = (step: Step) => {
+    const index = timeline.findIndex(([name]) => name === step);
+    return index >= 0 && stage >= index;
+  };
 
   useEffect(() => {
     const thread = threadRef.current;
@@ -252,8 +287,8 @@ export function BrainChatDemo({
           ) : null}
           {reached("source") ? (
             <ToolCall
-              label="Reading the original kickoff note…"
-              result="Original kickoff note retrieved"
+              label={`Reading ${knowledge.sourceLabel.toLowerCase()}…`}
+              result={`${knowledge.sourceLabel} retrieved`}
               command={sourceCommand}
               done={reached("answer")}
               inspect={inspect}
@@ -270,18 +305,30 @@ export function BrainChatDemo({
               >
                 <summary>
                   <FileText size={12} aria-hidden="true" />
-                  Original kickoff note
+                  {knowledge.sourceLabel}
                   <ChevronRight size={12} aria-hidden="true" />
                 </summary>
                 <blockquote>
-                  “Confirm scope before committing to a launch date.”
-                  <cite>Fictional Mosaic Studio record · kickoff.md.txt</cite>
+                  “{knowledge.quote}”
+                  <cite>
+                    Fictional Mosaic Studio record ·{" "}
+                    {knowledge.sourcePath.split("/").at(-1)}
+                  </cite>
                 </blockquote>
               </details>
             </AgentMessage>
           ) : null}
           {reached("followup") ? (
-            <UserMessage>{example.followup}</UserMessage>
+            proactive ? (
+              <AgentMessage>
+                <p>{example.followup}</p>
+              </AgentMessage>
+            ) : (
+              <UserMessage>{example.followup}</UserMessage>
+            )
+          ) : null}
+          {proactive && reached("suggestion-confirmation") ? (
+            <UserMessage>Yes—show me the draft first.</UserMessage>
           ) : null}
           {reached("plan") ? (
             <ToolCall
@@ -300,11 +347,14 @@ export function BrainChatDemo({
               <div className="brain-chat-draft">
                 <div>
                   <FileText size={13} aria-hidden="true" />
-                  <strong>Launch handoff</strong>
-                  <span>Draft</span>
+                  <strong>{knowledge.title}</strong>
+                  <span>{proactive ? "Draft · Business fact" : "Draft"}</span>
                 </div>
-                <p>Confirm scope before sharing a launch date.</p>
-                <small>Source: original kickoff note · agent-generated</small>
+                <p>{knowledge.body}</p>
+                <small>
+                  Source: {knowledge.sourceLabel.toLowerCase()} ·
+                  agent-generated
+                </small>
               </div>
               <p>Save this draft locally?</p>
             </AgentMessage>
@@ -382,11 +432,7 @@ export function BrainChatDemo({
           ) : null}
           {reached("review-summary") ? (
             <AgentMessage>
-              <p>
-                The draft matches the kickoff note: confirm scope before sharing
-                a launch date. The proposal adds the procedure and keeps its
-                source attached.
-              </p>
+              <p>{knowledge.review}</p>
               <p>Publish this reviewed proposal to the team?</p>
             </AgentMessage>
           ) : null}
