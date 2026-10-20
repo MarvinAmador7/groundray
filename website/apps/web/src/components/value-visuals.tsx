@@ -194,37 +194,6 @@ export function ContinuityExplorer() {
   );
 }
 
-export function EvidenceTrail() {
-  return (
-    <ol
-      className="evidence-trail"
-      aria-label="Groundray answer, evidence, and guidance workflow"
-    >
-      <li>
-        <span>01</span>
-        <div>
-          <strong>An answer you can use.</strong>
-          <small>A conclusion scoped to your question.</small>
-        </div>
-      </li>
-      <li>
-        <span>02</span>
-        <div>
-          <strong>A source you can open.</strong>
-          <small>The original record behind the claim.</small>
-        </div>
-      </li>
-      <li>
-        <span>03</span>
-        <div>
-          <strong>A next step you can own.</strong>
-          <small>What needs checking. Who needs to decide.</small>
-        </div>
-      </li>
-    </ol>
-  );
-}
-
 export function WorkflowVisual({ step }: { step: string }) {
   if (step === "01")
     return (

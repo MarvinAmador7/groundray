@@ -36,8 +36,12 @@ required. Preview serves that production output locally.
   installation commands, and FAQ.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
-  continuity scenarios, the evidence trail, workflow illustrations, and the
+  continuity scenarios, workflow illustrations, and the
   portable brain with host-specific prompt examples.
+- `apps/web/src/components/fact-graph.tsx` and `fact-graph.css`: the conceptual
+  fact lifecycle graph, including source records, reviewed versions, reusable
+  guidance, and a selectable node inspector. Connectors follow the layout
+  through responsive changes.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 

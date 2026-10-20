@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
-  ArrowRight,
   ArrowUpRight,
   Check,
   Copy,
@@ -32,9 +31,9 @@ import {
   SheetTrigger,
 } from "@website/ui/components/sheet";
 import type { Route } from "./+types/_index";
+import { FactGraph } from "../components/fact-graph";
 import {
   ContinuityExplorer,
-  EvidenceTrail,
   PortableBrain,
   WorkflowVisual,
 } from "../components/value-visuals";
@@ -197,127 +196,33 @@ function Product() {
     </section>
   );
 }
-type EvidenceId = "pricing" | "launch";
-const evidence: Record<
-  EvidenceId,
-  { path: string; quote: string; context: string }
-> = {
-  pricing: {
-    path: "decisions/lumen-pricing.md",
-    quote:
-      "The customer price is a proposal until the commercial owner approves the final terms.",
-    context:
-      "Scope: the Lumen proposal. A proposal is separate from an approved commitment.",
-  },
-  launch: {
-    path: "procedures/launch-checklist.md",
-    quote:
-      "Confirm the launch date only after delivery approval. The target date remains a planning assumption.",
-    context:
-      "Scope: customer launch communications. The approval is still an open action.",
-  },
-};
 function EvidenceExample() {
-  const [selected, setSelected] = useState<EvidenceId>("pricing");
-  const record = evidence[selected];
   return (
     <section
       className="evidence-section section-padding"
       aria-labelledby="evidence-title"
     >
       <div className="evidence-intro">
-        <span className="eyebrow">ANSWERS WITH ROOTS</span>
-        <h2 id="evidence-title">
-          An answer is only
-          <br />
-          the <em>beginning.</em>
-        </h2>
-        <p>
-          See the records behind a recommendation. Keep facts, assumptions, and
-          open decisions in view.
-        </p>
-        <EvidenceTrail />
-        <a className="text-link" href={`${DOCS}/groundray-product-goal.md`}>
-          Meet the Groundray workflow <ArrowUpRight aria-hidden="true" />
-        </a>
-      </div>
-      <div className="answer-example">
-        <div className="example-topline">
-          <span className="status-dot" />
-          <span>Illustrative example · fictional company</span>
-        </div>
-        <div className="example-question">
-          <Ray />
-          <p>What can we tell Lumen about price and launch?</p>
-        </div>
-        <div className="example-answer">
-          <span className="eyebrow">THE ANSWER</span>
-          <h3>
-            Keep the price conditional.
+        <div>
+          <span className="eyebrow">ANSWERS WITH ROOTS</span>
+          <h2 id="evidence-title">
+            Every fact has
             <br />
-            Launch follows approval.
-          </h3>
+            <em>a story.</em>
+          </h2>
+        </div>
+        <div className="evidence-intro-copy">
           <p>
-            The price is still a proposal{" "}
-            <button
-              className="citation"
-              onClick={() => setSelected("pricing")}
-              aria-label="Inspect pricing evidence"
-            >
-              1
-            </button>
-            . Confirm the launch date after delivery signs off{" "}
-            <button
-              className="citation"
-              onClick={() => setSelected("launch")}
-              aria-label="Inspect launch evidence"
-            >
-              2
-            </button>
-            .
+            Where it came from. What changed. Where it goes next. Follow the
+            evidence into a shared fact—and see how that knowledge carries
+            forward.
           </p>
+          <a className="text-link" href={`${DOCS}/groundray-product-goal.md`}>
+            Meet the Groundray workflow <ArrowUpRight aria-hidden="true" />
+          </a>
         </div>
-        <div className="source-inspector">
-          <div className="source-heading">
-            <span className="eyebrow">INSPECT THE EVIDENCE</span>
-            <span>2 records</span>
-          </div>
-          <Tabs
-            value={selected}
-            onValueChange={(value) => setSelected(value as EvidenceId)}
-          >
-            <TabsList className="source-tabs" aria-label="Example evidence">
-              <TabsTrigger value="pricing">1 · Pricing decision</TabsTrigger>
-              <TabsTrigger value="launch">2 · Launch checklist</TabsTrigger>
-            </TabsList>
-            <TabsContent
-              value={selected}
-              className="source-record"
-              key={selected}
-            >
-              <div className="record-path">
-                <FileText size={14} aria-hidden="true" />
-                <span>{record.path}</span>
-              </div>
-              <blockquote>“{record.quote}”</blockquote>
-              <p>{record.context}</p>
-            </TabsContent>
-          </Tabs>
-        </div>
-        <div className="example-next">
-          <span className="next-mark">
-            <ArrowRight size={17} aria-hidden="true" />
-          </span>
-          <p>
-            <strong>What needs deciding?</strong> Approve the commercial terms
-            and confirm delivery readiness before making a customer commitment.
-          </p>
-        </div>
-        <p className="example-disclaimer">
-          Sample records for this demonstration. This is an interactive
-          illustration, not a live AI response.
-        </p>
       </div>
+      <FactGraph />
     </section>
   );
 }

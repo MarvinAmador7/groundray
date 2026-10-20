@@ -8,6 +8,7 @@ import {
 } from "react-router";
 import "./index.css";
 import "./value-visuals.css";
+import "./fact-graph.css";
 import type { Route } from "./+types/root";
 
 export const links: Route.LinksFunction = () => [

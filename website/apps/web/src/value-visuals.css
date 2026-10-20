@@ -306,77 +306,6 @@
   margin-top: 17px;
   font-size: 10px;
 }
-.evidence-trail {
-  padding: 0;
-  margin: 0 0 32px;
-  list-style: none;
-  display: grid;
-}
-.evidence-trail li {
-  display: flex;
-  gap: 13px;
-  position: relative;
-  padding-bottom: 23px;
-}
-.evidence-trail li:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  width: 1px;
-  background: #bfcaaf;
-  top: 29px;
-  bottom: 0;
-  left: 13px;
-}
-.evidence-trail li:last-child {
-  padding-bottom: 0;
-}
-.evidence-trail li > span {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border: 1px solid #bac9a4;
-  border-radius: 50%;
-  color: #4e6336;
-  font-size: 9px;
-  background: #e0e9d3;
-}
-.evidence-trail strong {
-  display: block;
-  font-weight: 500;
-  font-size: 12px;
-  padding-top: 3px;
-}
-.evidence-trail small {
-  display: block;
-  color: var(--olive);
-  font-size: 10px;
-  line-height: 1.7;
-  margin-top: 3px;
-}
-.source-record {
-  background: #f3f2e7;
-  border: 1px solid #dadfcf;
-  margin-top: 10px;
-  padding: 16px;
-  position: relative;
-}
-.source-record::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: #bed18c;
-}
-.source-record blockquote {
-  font-size: 23px;
-}
-.example-next {
-  margin-top: 12px;
-}
 .how {
   gap: 44px 8%;
 }
@@ -1041,15 +970,6 @@
   }
   .scenario-outcome .status-dot {
     margin-top: 5px;
-  }
-  .evidence-trail {
-    margin-bottom: 28px;
-  }
-  .evidence-trail strong {
-    font-size: 12px;
-  }
-  .evidence-trail small {
-    font-size: 10px;
   }
   .how {
     gap: 35px;
