@@ -38,10 +38,10 @@ required. Preview serves that production output locally.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
   continuity scenarios, workflow illustrations, and the
   portable brain with host-specific prompt examples.
-- `apps/web/src/components/fact-graph.tsx` and `fact-graph.css`: the conceptual
-  fact lifecycle graph, including source records, reviewed versions, reusable
-  guidance, and a selectable node inspector. Connectors follow the layout
-  through responsive changes.
+- `apps/web/src/components/company-field-guide.tsx` and
+  `company-field-guide.css`: an interactive field guide showing a lesson’s
+  original record, reviewed update, and reuse by a teammate or AI conversation.
+  Readers can open the sample source notes and revisit the earlier entry.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 

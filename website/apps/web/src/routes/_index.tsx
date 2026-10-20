@@ -31,7 +31,7 @@ import {
   SheetTrigger,
 } from "@website/ui/components/sheet";
 import type { Route } from "./+types/_index";
-import { FactGraph } from "../components/fact-graph";
+import { CompanyFieldGuide } from "../components/company-field-guide";
 import {
   ContinuityExplorer,
   PortableBrain,
@@ -206,23 +206,26 @@ function EvidenceExample() {
         <div>
           <span className="eyebrow">ANSWERS WITH ROOTS</span>
           <h2 id="evidence-title">
-            Every fact has
+            What you learn
             <br />
-            <em>a story.</em>
+            <em>
+              becomes someone’s{" "}
+              <span className="guide-keep-phrase">head start.</span>
+            </em>
           </h2>
         </div>
         <div className="evidence-intro-copy">
           <p>
-            Where it came from. What changed. Where it goes next. Follow the
-            evidence into a shared fact—and see how that knowledge carries
-            forward.
+            Keep what you learned, the records behind it, and the reviewed
+            changes that made it better. Hand that context to the next person—or
+            bring it to your AI.
           </p>
           <a className="text-link" href={`${DOCS}/groundray-product-goal.md`}>
             Meet the Groundray workflow <ArrowUpRight aria-hidden="true" />
           </a>
         </div>
       </div>
-      <FactGraph />
+      <CompanyFieldGuide />
     </section>
   );
 }
