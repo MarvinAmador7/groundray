@@ -1,16 +1,14 @@
 import { useState } from "react";
 import {
-  ArrowDown,
   ArrowRight,
   GitBranch,
   GitCommitHorizontal,
   GitPullRequest,
   FileText,
-  Monitor,
-  RefreshCw,
 } from "lucide-react";
 import { Button } from "@website/ui/components/button";
 import "../technical-inspector.css";
+import { SyncNetwork } from "./sync-network";
 
 const views = [
   { id: "provenance", label: "Provenance" },
@@ -183,128 +181,6 @@ function CollaborationView() {
   );
 }
 
-function SyncView() {
-  const [step, setStep] = useState<0 | 1 | 2>(0);
-  const installed = step === 0 ? "A" : "B";
-  const indexed = step === 2 ? "B" : "A";
-  return (
-    <div className="system-detail-grid system-sync-grid">
-      <div className="system-sync-example">
-        <div className="system-remote">
-          <span className="technical-diagram-label">
-            <GitBranch size={14} aria-hidden="true" /> Shared Git remote
-          </span>
-          <div>
-            <strong>Published version</strong>
-            <span className="system-version">B</span>
-          </div>
-          <p>Publication advances the shared ref.</p>
-        </div>
-        <div className="system-sync-arrow">
-          <ArrowDown size={19} aria-hidden="true" />
-          <span>Explicit sync on each installation</span>
-        </div>
-        <div
-          className="system-installation"
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          <div className="system-example-top">
-            <span>
-              <Monitor size={15} aria-hidden="true" /> One teammate’s machine
-            </span>
-          </div>
-          <div className="system-pins">
-            <div>
-              <span>Installed brain</span>
-              <strong>{installed}</strong>
-            </div>
-            <div>
-              <span>Search index</span>
-              <strong>{indexed}</strong>
-            </div>
-          </div>
-          <p
-            className={`system-sync-state ${step === 1 ? "system-needs-index" : ""}`}
-          >
-            {step === 0
-              ? "Reading the earlier published version"
-              : step === 1
-                ? "New brain installed · reindex required"
-                : "Versions match · ready to search"}
-          </p>
-        </div>
-        <div className="system-sync-controls">
-          <Button
-            variant="ghost"
-            disabled={step !== 0}
-            onClick={() => setStep(1)}
-          >
-            1. Sync this installation
-          </Button>
-          <Button
-            variant="ghost"
-            disabled={step !== 1}
-            onClick={() => setStep(2)}
-          >
-            2. Rebuild its index
-          </Button>
-          <button
-            type="button"
-            className="system-reset"
-            onClick={() => setStep(0)}
-            aria-label="Reset sync example"
-          >
-            <RefreshCw size={14} aria-hidden="true" />
-          </button>
-        </div>
-        <span className="system-example-caption">
-          Interactive example · no commands run
-        </span>
-      </div>
-      <div className="system-explanation">
-        <h3>
-          Publish once.
-          <br />
-          <em>Sync deliberately.</em>
-        </h3>
-        <dl className="system-facts">
-          <div>
-            <dt>Install a known version</dt>
-            <dd>
-              Each brain has its own identity, repository, installed commit, and
-              local search index. Company scopes stay separate.
-            </dd>
-          </div>
-          <div>
-            <dt>Validate before advancing</dt>
-            <dd>
-              Sync checks identity, clean state, and the candidate bundle. It
-              accepts fast-forward history and refuses divergence or invalid
-              content.
-            </dd>
-          </div>
-          <div>
-            <dt>Search the matching snapshot</dt>
-            <dd>
-              After a change, rebuild the index for that saved commit. Groundray
-              refuses to search with a mismatched index.
-            </dd>
-          </div>
-        </dl>
-        <p className="system-boundary">
-          Publishing doesn’t sync the publisher or other teammates. There is no
-          background merge; prior versions remain in Git history.
-        </p>
-        <a className="system-doc-link" href={`${docs}/cli.md`}>
-          Read the sync and indexing contract{" "}
-          <ArrowRight size={14} aria-hidden="true" />
-        </a>
-      </div>
-    </div>
-  );
-}
-
 export function TechnicalInspector() {
   const [view, setView] = useState<View>("provenance");
   return (
@@ -351,7 +227,7 @@ export function TechnicalInspector() {
           ) : view === "collaboration" ? (
             <CollaborationView />
           ) : (
-            <SyncView />
+            <SyncNetwork />
           )}
         </div>
       </div>
