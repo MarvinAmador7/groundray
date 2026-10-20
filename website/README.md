@@ -42,6 +42,9 @@ required. Preview serves that production output locally.
   `company-field-guide.css`: an interactive field guide showing a lesson’s
   original record, reviewed update, and reuse by a teammate or AI conversation.
   Readers can open the sample source notes and revisit the earlier entry.
+- `apps/web/src/components/technical-overview.tsx` and
+  `technical-overview.css`: a technical explainer connecting the company Git
+  repository, local CLI, and AI plugin, with question and update workflows.
 - `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 

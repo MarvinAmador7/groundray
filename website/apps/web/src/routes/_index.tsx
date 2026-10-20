@@ -32,6 +32,7 @@ import {
 } from "@website/ui/components/sheet";
 import type { Route } from "./+types/_index";
 import { CompanyFieldGuide } from "../components/company-field-guide";
+import { TechnicalOverview } from "../components/technical-overview";
 import {
   ContinuityExplorer,
   PortableBrain,
@@ -585,6 +586,7 @@ export default function Home() {
       <main>
         <Hero />
         <Product />
+        <TechnicalOverview />
         <EvidenceExample />
         <HowItWorks />
         <Ownership />
