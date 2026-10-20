@@ -12,6 +12,7 @@ import "./company-field-guide.css";
 import type { Route } from "./+types/root";
 
 export const links: Route.LinksFunction = () => [
+  { rel: "canonical", href: "https://groundray.com/" },
   { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
   {
     rel: "preload",

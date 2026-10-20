@@ -52,7 +52,16 @@ export function meta({}: Route.MetaArgs) {
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
-    { name: "twitter:card", content: "summary" },
+    { property: "og:url", content: "https://groundray.com/" },
+    {
+      property: "og:image",
+      content: "https://groundray.com/images/courtyard.webp",
+    },
+    {
+      property: "og:image:alt",
+      content: "A fig tree in a weathered planter, in a sunlit courtyard.",
+    },
+    { name: "twitter:card", content: "summary_large_image" },
   ];
 }
 

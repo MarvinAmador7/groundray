@@ -7,7 +7,7 @@ workspace inside the Python repository; the CLI does not depend on it.
 
 ## Develop
 
-Use Node.js 24+ and npm 11.16+ (the scaffold uses npm's `allowScripts` policy).
+Use Node.js 24 and npm 11.16+ (the scaffold uses npm's `allowScripts` policy).
 From this directory:
 
 ```sh
@@ -56,3 +56,17 @@ The courtyard image was generated for this design from the user-approved hero,
 then exported to WebP for the page. Instrument Serif and Manrope are self-hosted
 Latin WOFF2 files from Google Fonts. Their SIL Open Font License notices are in
 `apps/web/public/fonts/`. See [ASSETS.md](ASSETS.md).
+
+## Vercel production
+
+Import `MarvinAmador7/groundray` and set **Root Directory** to `website`.
+The tracked `vercel.json` selects a static deployment, installs with npm 11.16.0,
+builds the workspace, and serves `apps/web/build/client/`. Node is pinned to
+24.x. Keep production on the `main` branch and keep files outside the root
+directory excluded; all website workspaces live inside `website/`.
+
+Attach `groundray.com` under the Vercel project's Domains settings. The page's
+canonical URL, social metadata, robots file, and sitemap use that exact domain.
+Vercel will show whether the existing domain needs assignment or a DNS change.
+Do not replace unrelated DNS records. The domain should serve only the production
+deployment after the build succeeds.
