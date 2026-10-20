@@ -5,12 +5,12 @@ import {
   Pause,
   Play,
   RefreshCw,
-  UserRound,
+  Laptop,
 } from "lucide-react";
 import "../sync-network.css";
 import { useGraphPlayback } from "../hooks/use-graph-playback";
 
-const coworkers = ["You", "Coworker 1", "Coworker 2"];
+const coworkers = ["Your laptop", "Maya’s laptop", "Sam’s laptop"];
 const connections = [
   "M450 0 V18 C450 56 150 38 150 88",
   "M450 0 V88",
@@ -19,14 +19,14 @@ const connections = [
 const times = [0, 1000, 2200, 3600, 4600, 6000, 7000, 8400, 9400];
 const duration = 11200;
 const captions = [
-  "Everyone is working from version A.",
+  "A reviewed update is ready. Local copies still have version A.",
   "A reviewed update is published as version B.",
   "You choose to sync the new version.",
   "Your local search index is rebuilt.",
-  "Coworker 1 syncs next. Your copy is ready.",
-  "Coworker 1 rebuilds their index.",
-  "Coworker 2 syncs when they’re ready.",
-  "Coworker 2 rebuilds their index.",
+  "Maya syncs the published version to her laptop.",
+  "Maya rebuilds her local search index.",
+  "Sam syncs when he’s ready.",
+  "Sam rebuilds his local search index.",
   "Everyone can now search the same published version.",
 ];
 type Phase = "waiting" | "syncing" | "indexing" | "ready";
@@ -71,13 +71,13 @@ export function SyncNetwork() {
     <div className="sync-network-view">
       <div className="sync-network-heading">
         <h3>
-          One company brain.
+          Publish once.
           <br />
-          <em>Everyone brings it with them.</em>
+          <em>Pick it up when you’re ready.</em>
         </h3>
         <p>
-          Publish a shared version. Coworkers explicitly sync their copies and
-          rebuild their local search indexes.
+          Publish the reviewed knowledge to your shared repository. Each
+          teammate explicitly syncs and reindexes their own local copy.
         </p>
       </div>
       <figure
@@ -95,7 +95,7 @@ export function SyncNetwork() {
         >
           <GitBranch size={26} strokeWidth={1.4} aria-hidden="true" />
           <div>
-            <strong>Company brain</strong>
+            <strong>Shared repository</strong>
             <span>Published version {published ? "B" : "A"}</span>
           </div>
           <span className="sync-network-published" key={published ? "B" : "A"}>
@@ -136,19 +136,19 @@ export function SyncNetwork() {
             return (
               <li key={name} className={"sync-coworker sync-coworker-" + phase}>
                 <div className="sync-coworker-avatar" aria-hidden="true">
-                  <UserRound size={26} strokeWidth={1.3} />
+                  <Laptop size={26} strokeWidth={1.3} />
                 </div>
                 <h4>{name}</h4>
                 <div className="sync-coworker-snapshot">
                   <dl>
                     <div>
-                      <dt>Brain</dt>
+                      <dt>Local brain</dt>
                       <dd>
                         {phase === "waiting" || phase === "syncing" ? "A" : "B"}
                       </dd>
                     </div>
                     <div>
-                      <dt>Index</dt>
+                      <dt>Search index</dt>
                       <dd>{phase === "ready" ? "B" : "A"}</dd>
                     </div>
                   </dl>

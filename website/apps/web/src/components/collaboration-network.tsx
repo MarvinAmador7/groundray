@@ -1,11 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Check,
-  FileSearch,
-  GitBranch,
-  GitCommitHorizontal,
-  GitPullRequest,
+  FileText,
+  MessageSquare,
   Pause,
   Play,
   RefreshCw,
@@ -14,46 +12,27 @@ import { useGraphPlayback } from "../hooks/use-graph-playback";
 import "../sync-network.css";
 import "../collaboration-network.css";
 
-const times = [0, 1000, 2400, 3800, 5600, 7000, 8400, 9800];
-const duration = 11600;
-const paths = [
-  "M450 0 C450 58 150 28 150 100",
-  "M180 130 H420",
-  "M480 130 H720",
-  "M750 100 C750 28 450 58 450 0",
-];
+const times = [0, 1000, 2300, 3700, 5400, 6800, 8200, 9600];
+const duration = 12000;
 const captions = [
-  "The team shares published version A.",
-  "A contributor drafts B with its supporting sources. A stays published.",
-  "The contributor shares B as a proposal, separate from main.",
-  "A reviewer inspects the patch and original records at the exact B commit.",
-  "The same candidate B moves forward for publication.",
-  "The publisher checks B against the reviewed base A.",
-  "The publisher explicitly publishes the reviewed B commit.",
-  "B is now published. Each coworker still chooses when to sync.",
+  "Maya turns a delivery experience into a draft lesson.",
+  "Her first draft includes the original kickoff note.",
+  "Sam reads the draft and checks it against that note.",
+  "Sam spots a missing condition and asks Maya to correct it.",
+  "That feedback goes back to the author.",
+  "Maya revises the lesson, keeping the source attached.",
+  "Sam inspects the revised proposal and its evidence.",
+  "The revised proposal is ready for publication. Nothing has been published yet.",
 ];
-const roles = [
-  {
-    name: "Contributor",
-    icon: GitPullRequest,
-    action: "Draft + sources",
-    start: 1,
-    done: 3,
-  },
-  {
-    name: "Reviewer",
-    icon: FileSearch,
-    action: "Patch + originals",
-    start: 3,
-    done: 5,
-  },
-  {
-    name: "Publisher",
-    icon: GitCommitHorizontal,
-    action: "Exact commit + base",
-    start: 5,
-    done: 7,
-  },
+const widePaths = [
+  "M130 140 H252",
+  "M648 140 H770",
+  "M800 110 C800 5 100 5 100 110",
+];
+const narrowPaths = [
+  "M288 48 C350 48 360 130 450 190",
+  "M450 190 C540 130 550 48 612 48",
+  "M675 25 C675 -3 225 -3 225 25",
 ];
 
 export function CollaborationNetwork() {
@@ -67,15 +46,31 @@ export function CollaborationNetwork() {
     replay,
     toggle,
   } = useGraphPlayback(times, duration);
+  const [narrow, setNarrow] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
   const motionRef = useRef<SVGAnimateMotionElement>(null);
-  const traveling = stage === 2 ? 1 : stage === 4 ? 2 : stage === 6 ? 3 : -1;
-  const published = stage === 7;
+  const traveling =
+    stage === 1 || stage === 5
+      ? 0
+      : stage === 2 || stage === 6
+        ? 1
+        : stage === 4
+          ? 2
+          : -1;
+  const revised = stage >= 5;
+  const reviewed = stage === 7;
+  const paths = narrow ? narrowPaths : widePaths;
 
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 760px)");
+    const update = () => setNarrow(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+  useEffect(() => {
     if (traveling >= 0 && !reducedMotion) motionRef.current?.beginElement();
-  }, [traveling, reducedMotion]);
-
+  }, [traveling, reducedMotion, narrow]);
   useEffect(() => {
     if (active) svgRef.current?.unpauseAnimations();
     else svgRef.current?.pauseAnimations();
@@ -85,13 +80,13 @@ export function CollaborationNetwork() {
     <div className="collaboration-network-view">
       <div className="sync-network-heading">
         <h3>
-          One shared brain.
+          Different perspectives.
           <br />
-          <em>Every change has a path.</em>
+          <em>Better company knowledge.</em>
         </h3>
         <p>
-          Draft a proposal. Inspect its sources. Publish the exact reviewed
-          version.
+          One teammate writes. Another checks the evidence. Feedback improves
+          the draft before it’s published.
         </p>
       </div>
       <figure
@@ -99,27 +94,13 @@ export function CollaborationNetwork() {
         className="collaboration-network"
         data-stage={stage}
         data-playing={active}
-        aria-label="Animated example of a proposal moving through contributor, reviewer, and publisher to the company brain"
+        aria-label="Illustrative collaboration: Maya drafts a lesson, Sam requests a correction, and Maya revises it for review"
         aria-describedby="collaboration-demo-description"
       >
-        <div
-          className={
-            "sync-network-root" + (published ? " collaboration-published" : "")
-          }
-        >
-          <GitBranch size={26} strokeWidth={1.4} aria-hidden="true" />
-          <div>
-            <strong>Company brain</strong>
-            <span>Published version {published ? "B" : "A"}</span>
-          </div>
-          <span className="sync-network-published" key={published ? "B" : "A"}>
-            {published ? "B" : "A"}
-          </span>
-        </div>
-        <div className="collaboration-graph">
+        <div className="collaboration-workspace">
           <svg
             ref={svgRef}
-            viewBox="0 0 900 240"
+            viewBox={narrow ? "0 0 900 480" : "0 0 900 340"}
             preserveAspectRatio="none"
             fill="none"
             aria-hidden="true"
@@ -131,63 +112,103 @@ export function CollaborationNetwork() {
                 vectorEffect="non-scaling-stroke"
                 className={
                   "collaboration-edge" +
-                  (stage >= [1, 2, 4, 6][index]
-                    ? " collaboration-edge-reached"
-                    : "")
+                  (stage >= [1, 2, 4][index] ? " is-used" : "")
                 }
               />
             ))}
             {traveling >= 0 && !reducedMotion ? (
-              <circle key={traveling} className="collaboration-packet" r="5">
+              <circle
+                key={`${stage}-${narrow}`}
+                className="collaboration-packet"
+                r="5"
+              >
                 <animateMotion
                   ref={motionRef}
                   path={paths[traveling]}
-                  dur="1.4s"
+                  dur="1.3s"
                   fill="freeze"
                   begin="indefinite"
                 />
               </circle>
             ) : null}
           </svg>
-          <ol className="collaboration-people">
-            {roles.map(({ name, icon: Icon, action, start, done }) => {
-              const reached = stage >= start;
-              const finished = stage >= done;
-              return (
-                <li
-                  key={name}
-                  className={
-                    "collaboration-person" +
-                    (reached ? " is-reached" : "") +
-                    (reached && !finished ? " is-working" : "")
-                  }
-                >
-                  <div className="collaboration-avatar">
-                    <Icon size={25} strokeWidth={1.3} aria-hidden="true" />
-                  </div>
-                  <h4>{name}</h4>
-                  <p>{action}</p>
-                  <span
-                    className="collaboration-candidate"
-                    aria-label={
-                      reached ? "Candidate B" : "Waiting for candidate"
-                    }
-                  >
-                    {reached ? (
-                      <>
-                        B{" "}
-                        {finished ? (
-                          <Check size={12} aria-hidden="true" />
-                        ) : null}
-                      </>
-                    ) : (
-                      "—"
-                    )}
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
+          <div
+            className={
+              "collaboration-teammate collaboration-author" +
+              (stage === 0 || stage === 1 || stage === 5 ? " is-working" : "")
+            }
+          >
+            <span className="collaboration-avatar" aria-hidden="true">
+              M
+            </span>
+            <h4>
+              Maya <span>Delivery</span>
+            </h4>
+            <p>{revised ? "Revises the lesson" : "Writes the first draft"}</p>
+          </div>
+          <div
+            className={
+              "collaboration-teammate collaboration-reviewer" +
+              (stage === 2 || stage === 3 || stage === 6 ? " is-working" : "")
+            }
+          >
+            <span className="collaboration-avatar" aria-hidden="true">
+              S
+            </span>
+            <h4>
+              Sam <span>Sales</span>
+            </h4>
+            <p>{reviewed ? "Checks the revision" : "Checks the source"}</p>
+          </div>
+          <div
+            className={
+              "collaboration-feedback" + (stage >= 3 ? " is-visible" : "")
+            }
+            aria-hidden={stage < 3}
+          >
+            <MessageSquare size={13} aria-hidden="true" />
+            <p>
+              {reviewed
+                ? "That matches the note. Ready to publish."
+                : "We need to confirm scope first."}
+            </p>
+          </div>
+          <article
+            className={"collaboration-draft" + (revised ? " is-revised" : "")}
+            aria-label="Example draft lesson"
+          >
+            <div className="collaboration-draft-top">
+              <span>
+                <FileText size={13} aria-hidden="true" /> Launch handoff
+              </span>
+              <span>{reviewed ? "Reviewed draft" : "Draft"}</span>
+            </div>
+            <p className="collaboration-lesson">
+              {stage === 0
+                ? "What should we carry into the next launch?"
+                : revised
+                  ? "Confirm scope before sharing a launch date."
+                  : "Share a launch date with every quote."}
+            </p>
+            <div className="collaboration-source">
+              <span>Original kickoff note</span>
+              <blockquote>
+                “Confirm scope before committing to a launch date.”
+              </blockquote>
+            </div>
+            <div className="collaboration-draft-status">
+              {reviewed ? (
+                <>
+                  <Check size={13} aria-hidden="true" /> Revised proposal ready
+                  to publish
+                </>
+              ) : revised ? (
+                "Updated after Sam’s feedback"
+              ) : (
+                "Maya’s proposal · not published"
+              )}
+            </div>
+          </article>
         </div>
         <figcaption>
           <p className="sync-sequence-caption">{captions[stage]}</p>
@@ -220,16 +241,16 @@ export function CollaborationNetwork() {
           </div>
           <span className="sr-only" role="status">
             {complete
-              ? "Example complete. The same candidate B was reviewed and published. Coworker copies await explicit sync."
+              ? "Example complete. Maya revised the lesson after Sam’s source check. The revised proposal is ready for publication; it has not been published or synced."
               : ""}
           </span>
         </figcaption>
       </figure>
       <div className="sync-network-note">
         <p id="collaboration-demo-description">
-          Illustrative workflow roles; Git-host permissions still apply. A moved
-          proposal or changed base blocks checked publication. Publication does
-          not record business approval or sync local copies.
+          Fictional example. Each revision is a new proposal; review pins its
+          exact commit. Publication is a separate, explicit step under your Git
+          host’s permissions.
         </p>
         <a href="https://github.com/MarvinAmador7/groundray/blob/main/docs/brain-collaboration.md">
           Collaboration docs <ArrowRight size={13} aria-hidden="true" />

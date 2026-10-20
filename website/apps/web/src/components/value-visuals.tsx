@@ -16,6 +16,7 @@ import {
   TabsTrigger,
 } from "@website/ui/components/tabs";
 import { useState } from "react";
+import { BrainChatDemo } from "./brain-chat-demo";
 
 const scenarios = [
   {
@@ -26,15 +27,7 @@ const scenarios = [
     heading: "Day one. With a head start.",
     description:
       "Give them the reasoning, not another scavenger hunt. Decisions, definitions, and procedures have somewhere to live.",
-    question: "How do we onboard a customer?",
     outcome: "The process. The exceptions. The reason why.",
-    document: "Customer onboarding",
-    lines: [
-      "Start with the discovery brief.",
-      "Confirm scope before the handoff.",
-      "Keep the customer’s original notes.",
-    ],
-    tag: "A shared starting point",
     benefit: "Less retelling. More getting started.",
   },
   {
@@ -45,15 +38,7 @@ const scenarios = [
     heading: "A fresh start. Not a blank page.",
     description:
       "Bring earlier decisions and their original records into the next project. Keep the lessons that are easy to leave behind.",
-    question: "Why did we choose this approach?",
     outcome: "The decision. The tradeoffs. The original brief.",
-    document: "The decision behind the plan",
-    lines: [
-      "A smaller scope protects delivery.",
-      "Revisit when the requirements change.",
-      "Original brief linked for context.",
-    ],
-    tag: "Reasoning carried forward",
     benefit: "Build on the lesson. Keep the context.",
   },
   {
@@ -64,18 +49,10 @@ const scenarios = [
     heading: "A different tool. The same ground.",
     description:
       "Connect your brain to Codex or Claude Code, or work from the terminal. Your company context stays in a repository you control.",
-    question: "What do I need to know before we start?",
     outcome: "Your decisions. Your procedures. Your sources.",
-    document: "Company context, ready to use",
-    lines: [
-      "Decisions and the reasoning behind them.",
-      "Procedures the team can inspect.",
-      "Original records behind the answer.",
-    ],
-    tag: "Codex · Claude Code · Terminal",
     benefit: "Choose your tool. Bring your knowledge.",
   },
-];
+] as const;
 
 function DocumentLines() {
   return (
@@ -115,68 +92,7 @@ export function ContinuityExplorer() {
           value={scenario.id}
           className="scenario-panel"
         >
-          <div className="continuity-art">
-            <div className="art-caption">
-              <span className="eyebrow">ONE BRAIN. MORE POSSIBILITIES.</span>
-              <span>Illustrative workflow</span>
-            </div>
-            <div
-              className="knowledge-stack"
-              aria-label="A shared collection of company knowledge"
-            >
-              <div className="stack-sheet sheet-back">
-                <span>Original records</span>
-                <DocumentLines />
-              </div>
-              <div className="stack-sheet sheet-middle">
-                <span>Decisions & procedures</span>
-                <DocumentLines />
-              </div>
-              <div className="brain-cover">
-                <Leaf size={27} strokeWidth={1.2} aria-hidden="true" />
-                <span>
-                  Your company
-                  <br />
-                  <em>brain.</em>
-                </span>
-                <div className="cover-rule" />
-                <small>
-                  WHAT YOU KNOW.
-                  <br />
-                  WHY YOU KNOW IT.
-                </small>
-              </div>
-              <span className="folio-strap" />
-            </div>
-            <div className="continuity-bridge" aria-hidden="true">
-              <span />
-              <ArrowRight size={18} />
-            </div>
-            <div className="context-document">
-              <span className="document-overline">
-                <FileText size={13} aria-hidden="true" />
-                {scenario.tag}
-              </span>
-              <h3>{scenario.document}</h3>
-              <DocumentLines />
-              <ul>
-                {scenario.lines.map((line) => (
-                  <li key={line}>
-                    <Check size={13} aria-hidden="true" />
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-              <span className="record-attached">
-                <GitBranch size={12} aria-hidden="true" />
-                Company records, kept in context
-              </span>
-            </div>
-            <div className="scenario-question">
-              <MessageSquare size={16} aria-hidden="true" />
-              <span>“{scenario.question}”</span>
-            </div>
-          </div>
+          <BrainChatDemo scenario={scenario.id} />
           <div className="scenario-caption">
             <div>
               <span className="eyebrow">{scenario.benefit}</span>

@@ -36,8 +36,13 @@ required. Preview serves that production output locally.
   installation commands, and FAQ.
 - `apps/web/src/index.css`: responsive layout and Groundray design tokens.
 - `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
-  continuity scenarios, workflow illustrations, and the
+  continuity scenario tabs, workflow illustrations, and the
   portable brain with host-specific prompt examples.
+- `apps/web/src/components/brain-chat-demo.tsx` and `brain-chat-demo.css`:
+  animated fictional agent conversations for the continuity tabs. They show CLI
+  lookups, an inspectable source note, a validated draft preview, user confirmation,
+  local draft saving, and explicit local indexing. Tool command details and the
+  source open on demand and pause playback. No commands or model calls run.
 - `apps/web/src/components/company-field-guide.tsx` and
   `company-field-guide.css`: an interactive field guide showing a lesson’s
   original record, reviewed update, and reuse by a teammate or AI conversation.
@@ -48,8 +53,9 @@ required. Preview serves that production output locally.
   Groundray terminal, and AI agent as a folder, laptop, and desktop monitor. `technical-inspector.tsx` and
   `technical-inspector.css` explain provenance, collaboration, publication, and
   explicit versioned sync. `collaboration-network.tsx` and its CSS animate a
-  sourced proposal through contributor, reviewer, and publisher, keeping the
-  same candidate commit through publication. `sync-network.tsx` and its CSS show a
+  fictional author/reviewer exchange: a teammate checks an attached original
+  note, requests a correction, and reviews the author’s revised proposal. This
+  ends before publication. `sync-network.tsx` and its CSS show a
   company-brain graph that animates publication, explicit coworker sync, and
   local indexing. Both graphs share an in-view playback clock, play once, pause
   offscreen or in hidden tabs, support pause/replay, and start at a static final

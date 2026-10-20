@@ -93,6 +93,7 @@ export function useGraphPlayback(times: readonly number[], duration: number) {
     reducedMotion,
     figureRef,
     replay,
+    pause: () => setPlaying(false),
     toggle: () => (complete ? replay() : setPlaying((value) => !value)),
   };
 }
