@@ -344,33 +344,6 @@
   border: 1px solid #363831;
   background: #101110;
 }
-.signal-session-chapters {
-  display: flex;
-  border-bottom: 1px solid var(--signal-line);
-}
-.signal-session-chapters button {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 16px 20px;
-  border-bottom: 1px solid transparent;
-  background: transparent;
-  color: #a6ab9c;
-  font: 10px var(--signal-mono);
-}
-.signal-session-chapters button > span {
-  font-size: 9px;
-  color: #8e9582;
-}
-.signal-session-chapters [aria-pressed="true"] {
-  background: #1b1c17;
-  color: var(--signal-accent);
-  border-bottom-color: var(--signal-accent);
-}
-.signal-session-chapters button:hover {
-  color: #f0f2e8;
-}
 .signal-agent-thread {
   position: relative;
   height: 520px;
@@ -580,10 +553,6 @@
   }
 }
 @media (max-width: 760px) {
-  .signal-session-chapters button {
-    padding: 14px 16px;
-    gap: 12px;
-  }
   .signal-agent-thread {
     padding: 21px 16px;
     height: 520px;

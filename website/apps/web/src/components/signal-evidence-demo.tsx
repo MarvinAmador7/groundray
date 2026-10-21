@@ -14,12 +14,6 @@ const TIMES = [
   0, 1600, 3200, 4500, 5800, 7400, 9200, 11300, 17400, 22000, 23800, 25800,
 ];
 const DURATION = 31000;
-type Chapter = "ask" | "trace" | "remember";
-const CHAPTERS: { value: Chapter; name: string; label: string }[] = [
-  { value: "ask", name: "Ask", label: "Inspect the answer" },
-  { value: "trace", name: "Trace", label: "Inspect the original source" },
-  { value: "remember", name: "Remember", label: "Inspect the suggested fact" },
-];
 
 // Only the visible layer streams. Assistive technology gets the complete text
 // once, without a live region announcing every character.
@@ -137,27 +131,13 @@ function ToolCall({
 
 export function SignalEvidenceDemo() {
   const playback = useGraphPlayback(TIMES, DURATION);
-  const [manualChapter, setManualChapter] = useState<Chapter | null>(null);
   const [sourceOpen, setSourceOpen] = useState(false);
   const [run, setRun] = useState(0);
   const thread = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
   const source = useRef<HTMLDetailsElement>(null);
-  const staticView = manualChapter !== null || playback.reducedMotion === true;
-  const stage = staticView
-    ? manualChapter === "remember"
-      ? 11
-      : 7
-    : playback.stage;
-  const chapter =
-    manualChapter ??
-    (playback.reducedMotion
-      ? "ask"
-      : stage >= 8
-        ? "remember"
-        : stage >= 5
-          ? "trace"
-          : "ask");
+  const staticView = playback.reducedMotion === true;
+  const stage = staticView ? TIMES.length - 1 : playback.stage;
   const active = playback.active && !staticView;
 
   useEffect(() => {
@@ -180,7 +160,6 @@ export function SignalEvidenceDemo() {
 
   function inspectSource() {
     playback.pause();
-    setManualChapter("trace");
     setSourceOpen(true);
     requestAnimationFrame(() => {
       const pane = thread.current;
@@ -191,17 +170,7 @@ export function SignalEvidenceDemo() {
         });
     });
   }
-  function inspectChapter(value: Chapter) {
-    if (value === "trace") {
-      inspectSource();
-      return;
-    }
-    playback.pause();
-    setManualChapter(value);
-    setSourceOpen(false);
-  }
   function replay() {
-    setManualChapter(null);
     setSourceOpen(false);
     setRun((value) => value + 1);
     playback.replay();
@@ -223,31 +192,12 @@ export function SignalEvidenceDemo() {
       ref={playback.figureRef}
       aria-label="Animated fictional agent session"
       data-stage={playback.stage}
-      data-mode={chapter}
       data-autoplay={!staticView}
       data-active={active}
       onFocusCapture={(event) => pauseForInspection(event.target)}
       onPointerDownCapture={(event) => pauseForInspection(event.target)}
     >
       <div className="signal-agent-window">
-        <div
-          className="signal-session-chapters"
-          role="group"
-          aria-label="Inspect the walkthrough"
-        >
-          {CHAPTERS.map((item, index) => (
-            <button
-              key={item.value}
-              type="button"
-              title={item.label}
-              aria-pressed={chapter === item.value}
-              onClick={() => inspectChapter(item.value)}
-            >
-              <span aria-hidden="true">0{index + 1}</span>
-              {item.name}
-            </button>
-          ))}
-        </div>
         <div
           className="signal-agent-thread"
           ref={thread}
@@ -410,31 +360,29 @@ export function SignalEvidenceDemo() {
         <span>
           {playback.reducedMotion
             ? "Static example"
-            : staticView
-              ? "Inspecting the example"
-              : playback.complete
-                ? "End of example"
-                : "Agent walkthrough"}
+            : playback.complete
+              ? "End of example"
+              : "Agent walkthrough"}
         </span>
         {!playback.reducedMotion && (
           <div>
             <button
               type="button"
-              onClick={() => (staticView ? replay() : playback.toggle())}
+              onClick={() => (playback.complete ? replay() : playback.toggle())}
               aria-label={
-                staticView || playback.complete
+                playback.complete
                   ? "Play walkthrough"
                   : playback.playing
                     ? "Pause walkthrough"
                     : "Resume walkthrough"
               }
             >
-              {!staticView && playback.playing ? (
+              {playback.playing ? (
                 <Pause aria-hidden="true" />
               ) : (
                 <Play aria-hidden="true" />
               )}
-              {!staticView && playback.playing ? "Pause" : "Play"}
+              {playback.playing ? "Pause" : "Play"}
             </button>
             <button
               type="button"

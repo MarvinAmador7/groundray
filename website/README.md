@@ -42,8 +42,8 @@ required. Preview serves that production output locally.
 - `apps/web/src/components/signal-evidence-demo.tsx`: an animated fictional
   agent session. It shows sync, indexing, querying, source inspection, a grounded
   answer, and a proactively suggested fact previewed after illustrative consent.
-  Chapter controls pause for inspection; playback pauses offscreen or in hidden
-  tabs, supports replay, and provides a static reduced-motion view. No commands
+  One continuous conversation pauses for source inspection, offscreen, or in hidden
+  tabs, supports pause/replay, and provides the full static reduced-motion view. No commands
   or model calls run, and no company knowledge is saved.
 - `apps/web/src/components/hero-setup.tsx`: one agent-neutral setup prompt,
   clipboard copying, a modal preview, and manual-copy fallback. Codex and Claude
