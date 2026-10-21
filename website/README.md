@@ -32,64 +32,39 @@ required. Preview serves that production output locally.
 
 ## Structure
 
-- `/signal`: a separate dark visual variant inspired by Axiom's technical
-  aesthetic. `apps/web/src/routes/signal.tsx` and `signal.css` provide scoped
-  Geist/Geist Mono typography, original dithered artwork, a working copy-setup
-  action, an interactive fictional Ask/Trace/Remember example, an architecture
-  diagram, review/publish/sync lifecycle, ownership explanation, and FAQ.
-  Both `/` and `/signal` are statically prerendered; the original homepage is
-  preserved. The exploratory variant is marked `noindex`.
-
-- `apps/web/src/routes/_index.tsx`: landing page, GitHub quickstart links, and FAQ.
-- `apps/web/src/components/hero-setup.tsx`: agent-neutral setup prompt, one-click
-  clipboard action, a modal prompt preview, and manual-copy fallback. The hero
-  identifies Codex and Claude Code plugin access and terminal-based CLI access
-  for Cursor, Gemini CLI, and OpenCode using self-hosted monochrome brand marks.
-- `apps/web/src/index.css`: responsive layout and Groundray design tokens.
-- `apps/web/src/components/value-visuals.tsx` and `value-visuals.css`: interactive
-  continuity scenario tabs, workflow illustrations, and the
-  portable brain with Codex/Claude Code logos, Terminal, and one shared CLI
-  command with a clipboard control.
-- `apps/web/src/components/brain-chat-demo.tsx` and `brain-chat-demo.css`:
-  animated fictional agent conversations for the continuity tabs. They show CLI
-  sync and indexing before lookups, an inspectable source note, a validated draft
-  preview, confirmed local saving, exact-proposal/source review, and publication
-  after a separate confirmation. Published knowledge still requires explicit
-  coworker sync. The new-project example has the agent proactively suggest
-  preserving a Lumen business fact, then wait for consent before previewing it.
-  Tool command details and the source open on demand and pause playback. No commands or model calls run.
-- `apps/web/src/components/technical-overview.tsx` and
-  `technical-overview.css`: a short technical introduction and one four-tab
-  explainer. Files & tools, Provenance, Collaboration, and Publish & sync show
-  one visual at a time; there is no separate lifecycle strip or nested host selector.
-  `computer-flow.tsx` and `computer-flow.css` illustrate the company files,
-  Groundray terminal, and AI agent as a folder, laptop, and desktop monitor. `technical-inspector.tsx` and
-  `technical-inspector.css` explain provenance, collaboration, publication, and
-  explicit versioned sync. `collaboration-network.tsx` and its CSS animate a
-  fictional author/reviewer exchange: a teammate checks an attached original
-  note, requests a correction, and reviews the author’s revised proposal. This
-  ends before publication. `sync-network.tsx` and its CSS show a
-  company-brain graph that animates publication, explicit coworker sync, and
-  local indexing. Both graphs share an in-view playback clock, play once, pause
-  offscreen or in hidden tabs, support pause/replay, and start at a static final
-  state for reduced motion.
-- `packages/ui/`: checked-in shadcn/ui Button, Tabs, Accordion, and Sheet.
+- `apps/web/src/components/groundray-page.tsx`: the production landing page.
+  Dark, dithered artwork, self-hosted Geist/Geist Mono, setup-prompt copying,
+  a compact GitHub brain-install command, architecture, the review/publish/sync
+  workflow, ownership, and FAQ. The approved design is served at `/`.
+- `apps/web/src/routes/_index.tsx`: exports the homepage and its search/social
+  metadata. `/signal` renders the same design for existing links, with `noindex`
+  and a canonical URL pointing to the homepage. Both routes are prerendered.
+- `apps/web/src/components/signal-evidence-demo.tsx`: an animated fictional
+  agent session. It shows sync, indexing, querying, source inspection, a grounded
+  answer, and a proactively suggested fact previewed after illustrative consent.
+  Chapter controls pause for inspection; playback pauses offscreen or in hidden
+  tabs, supports replay, and provides a static reduced-motion view. No commands
+  or model calls run, and no company knowledge is saved.
+- `apps/web/src/components/hero-setup.tsx`: one agent-neutral setup prompt,
+  clipboard copying, a modal preview, and manual-copy fallback. Codex and Claude
+  Code have plugin access; Cursor, Gemini CLI, and OpenCode use the CLI through
+  terminal access. Self-hosted monochrome marks identify the supported tools.
+- `apps/web/src/signal.css`: the production design, responsive layout, and demo
+  styles. `index.css` supplies shared base styles and the setup-prompt control.
+- `packages/ui/`: checked-in shadcn/ui components.
 - `bts.jsonc`: retained Better T Stack scaffold configuration.
 
-The hero uses a separate image asset with live HTML typography. Its primary
-action copies a setup prompt to paste into an agent with terminal access; it
-does not run installation commands in the browser. Get started
-links open the repository’s quickstart, which documents installation for each
-supported host. The animated examples
-use clearly labeled fictional records; they do not call a model or read company
-data. The page has no analytics or automatic data collection.
+The primary hero action copies setup instructions into the clipboard for an
+agent with terminal access. It does not install software in the browser. The
+page has no analytics, model connections, or automatic data collection.
 
 ## Artwork and fonts
 
-The courtyard image was generated for this design from the user-approved hero,
-then exported to WebP for the page. Instrument Serif and Manrope are self-hosted
-Latin WOFF2 files from Google Fonts. Their SIL Open Font License notices are in
-`apps/web/public/fonts/`. See [ASSETS.md](ASSETS.md).
+The architectural archive landscape was generated for Groundray and exported
+to WebP. Live HTML supplies the typography. Geist and Geist Mono are self-hosted
+Latin variable WOFF2 fonts under the SIL Open Font License; notices are retained
+in `apps/web/public/fonts/`. See [ASSETS.md](ASSETS.md). Earlier courtyard artwork
+and fonts remain in the repository for historical designs.
 
 ## Vercel production
 

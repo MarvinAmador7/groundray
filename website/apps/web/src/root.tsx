@@ -7,7 +7,6 @@ import {
   ScrollRestoration,
 } from "react-router";
 import "./index.css";
-import "./value-visuals.css";
 import type { Route } from "./+types/root";
 
 export const links: Route.LinksFunction = () => [
@@ -15,14 +14,14 @@ export const links: Route.LinksFunction = () => [
   { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
   {
     rel: "preload",
-    href: "/fonts/instrument-serif.woff2",
+    href: "/fonts/geist-variable.woff2",
     as: "font",
     type: "font/woff2",
     crossOrigin: "anonymous",
   },
   {
     rel: "preload",
-    href: "/fonts/manrope-latin.woff2",
+    href: "/fonts/geistmono-variable.woff2",
     as: "font",
     type: "font/woff2",
     crossOrigin: "anonymous",
@@ -34,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#151811" />
+        <meta name="theme-color" content="#090a0a" />
         <Meta />
         <Links />
       </head>
@@ -52,7 +51,7 @@ export default function App() {
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   const message =
     isRouteErrorResponse(error) && error.status === 404
-      ? "This page hasn’t put down roots."
+      ? "This page could not be found."
       : "Something went wrong.";
   return (
     <main className="error-page">
