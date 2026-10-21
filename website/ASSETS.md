@@ -1,5 +1,17 @@
 # Website assets
 
+- `apps/web/public/images/signal-landscape.webp`: original AI-generated dithered
+  architectural archive landscape for the production landing page. Generated October 20,
+  2026, exported to WebP at the original 1672 × 941 resolution. The visual
+  direction references Axiom's restrained technical design; no Axiom artwork,
+  trademarks, proprietary fonts, or source code are used.
+- `apps/web/public/fonts/geist-variable.woff2` and
+  `geistmono-variable.woff2`: Geist and Geist Mono Latin variable fonts,
+  distributed through [Fontsource](https://fontsource.org/fonts/geist) under
+  SIL Open Font License. The upstream license notices from Google Fonts are
+  retained as `GEIST-LICENSE.txt` and `GEISTMONO-LICENSE.txt`. The website
+  self-hosts these fonts without runtime third-party requests.
+
 - `apps/web/public/images/courtyard.webp`: AI-generated architectural artwork.
   Derived from the Groundray hero approved by the project owner, with all
   lettering removed and re-created as accessible HTML. Generated October 20,
@@ -22,3 +34,9 @@
   [published app icon](https://code.claude.com/docs/_mintlify/favicons/claude-code/pLsy-mRpNksna2sx/_generated/favicon/android-chrome-192x192.png).
   Both product marks identify supported tools and are self-hosted unchanged.
   Retrieved October 20, 2026. The Terminal symbol uses the existing Lucide icon.
+- `apps/web/public/images/tools/{openai,claude,cursor,gemini,opencode}-mark.svg`:
+  monochrome brand marks from [Lobe Icons](https://github.com/lobehub/lobe-icons/tree/master/packages/static-svg/icons),
+  distributed under MIT; the notice is retained as `tools/LOBE-ICONS-LICENSE.txt`.
+  Rendered as single-color masks for a consistent, unboxed hero row. The OpenAI
+  mark identifies Codex; Cursor, Gemini CLI, and OpenCode use Groundray through
+  terminal access rather than native plugin packages. Retrieved October 20, 2026.

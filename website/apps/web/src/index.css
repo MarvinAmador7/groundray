@@ -267,6 +267,174 @@ svg {
   font-size: clamp(15px, 1.35vw, 22px);
   margin-top: 25px;
 }
+.hero-setup {
+  width: min(100%, 335px);
+  margin-top: 27px;
+}
+.hero-setup-control {
+  display: flex;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--lime);
+  color: #15200d;
+}
+.hero-setup-control button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  background: transparent;
+  border: 0;
+}
+.hero-setup-control button:hover {
+  background: #e0ffad;
+}
+.hero-setup-control button:focus-visible {
+  outline: 2px solid #15200d;
+  outline-offset: -5px;
+}
+.hero-setup-control svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.hero-setup-copy {
+  flex: 1;
+  gap: 20px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.hero-setup-preview {
+  margin-left: auto;
+  padding: 5px 0 5px 5px;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #e1ddcf66;
+}
+.hero-setup-preview:hover {
+  color: var(--lime);
+}
+.hero-agents {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  font-size: 11px;
+  color: #e1ddcf;
+}
+.hero-agents ul {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hero-agents li {
+  display: flex;
+}
+.hero-agent-mark {
+  display: block;
+  width: 17px;
+  height: 17px;
+  background: currentColor;
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+body:has(.setup-dialog[open]) {
+  overflow: hidden;
+}
+.setup-dialog {
+  inset: 0;
+  margin: auto;
+  padding: 0;
+  width: min(580px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 24px 90px #0005;
+}
+.setup-dialog::backdrop {
+  background: #0b100abc;
+  backdrop-filter: blur(6px);
+}
+.setup-dialog-body {
+  position: relative;
+  padding: 38px 30px 24px;
+}
+.setup-dialog h2 {
+  font: 42px/1.05 var(--font-serif);
+  letter-spacing: -.035em;
+}
+.setup-dialog p {
+  font-size: 12px;
+  line-height: 1.65;
+  color: #5d654f;
+}
+.setup-dialog #setup-dialog-description {
+  margin-top: 10px;
+}
+.setup-dialog .setup-dialog-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+}
+.setup-dialog-close svg {
+  width: 18px;
+  height: 18px;
+}
+.setup-dialog textarea {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 40dvh, 340px);
+  resize: vertical;
+  margin: 25px 0 20px;
+  padding: 16px;
+  border: 1px solid #b4bba6;
+  border-radius: 4px;
+  background: #fffdf7;
+  color: var(--ink);
+  font: 13px/1.7 var(--font-sans);
+}
+.setup-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.setup-dialog-footer button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 15px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.setup-dialog-footer button svg {
+  width: 16px;
+  height: 16px;
+}
+.setup-dialog .setup-dialog-error:not(:empty) {
+  margin-top: 15px;
+  color: #983820;
+}
 .ownership {
   margin-top: 17px;
   line-height: 1.5;
@@ -808,4 +976,13 @@ svg {
   .text-link:hover svg {
     transform: none;
   }
+}
+
+@media (max-width: 380px) {
+  .hero-setup-copy { padding: 0 14px; gap: 12px; font-size: 14px; }
+  .hero-agents { gap: 9px; font-size: 10px; }
+  .hero-agents ul { gap: 10px; }
+  .setup-dialog-body { padding: 38px 20px 20px; }
+  .setup-dialog-footer { gap: 10px; }
+  .setup-dialog-footer p { font-size: 10px; }
 }
