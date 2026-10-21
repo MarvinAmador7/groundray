@@ -9,7 +9,7 @@ brain: decisions, procedures, definitions, and original records kept in
 Markdown and Git. Ask a business question, inspect the evidence, and propose
 updates as your company learns.
 
-[Get started](#get-started) · [How teams use it](#how-teams-use-it) ·
+[Website](https://groundray.com/) · [Get started](#get-started) · [How teams use it](#how-teams-use-it) ·
 [Documentation](#documentation) · [Releases](https://github.com/MarvinAmador7/groundray/releases)
 
 > What can we tell this customer about price and launch? Which numbers belong
