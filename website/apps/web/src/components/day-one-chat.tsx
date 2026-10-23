@@ -2,8 +2,8 @@ import { ChevronRight, FileText } from "lucide-react";
 import { useGraphPlayback } from "../hooks/use-graph-playback";
 import { ChatText, Message, ToolCall } from "./signal-evidence-demo";
 
-const TIMES = [0, 1100, 2300, 3300, 4400, 5500, 6600];
-const DURATION = 11000;
+const TIMES = [0, 1100, 2300, 3300, 4400, 5300, 6200, 7100];
+const DURATION = 12000;
 
 // A new hire's first session, played once when it scrolls into view.
 export function DayOneChat() {
@@ -53,7 +53,9 @@ export function DayOneChat() {
               name="search query"
               command={'groundray search query "release" --json'}
               result="Release notes found"
-              output={"Procedure: cut-a-release.md\nDecision: tag-driven-releases.md"}
+              output={
+                "Procedure: cut-a-release.md\nDecision: tag-driven-releases.md\nPerson: maya-chen.md (release owner)"
+              }
               done={stage >= 5}
               onInspect={pause}
             />
@@ -67,9 +69,19 @@ export function DayOneChat() {
                 onInspect={pause}
               />
             )}
+            {stage >= 6 && (
+              <ToolCall
+                name="get"
+                command="groundray get people/maya-chen.md --json"
+                result="Release owner found"
+                output="Maya Chen: release owner, Platform team. Approves releases; announce in #releases before tagging."
+                done={stage >= 7}
+                onInspect={pause}
+              />
+            )}
           </div>
         )}
-        {stage >= 6 && (
+        {stage >= 7 && (
           <Message>
             <div className="signal-session-answer">
               <ChatText text="Here’s the team’s release procedure:" {...stream} />
@@ -78,6 +90,17 @@ export function DayOneChat() {
                 <li>Bump the version in pyproject.toml.</li>
                 <li>Push a vX.Y.Z tag. The release workflow builds and publishes.</li>
               </ol>
+              <p className="signal-dayone-note">Before you push the tag, tell:</p>
+              <div className="signal-dayone-person">
+                <span className="signal-dayone-initials" aria-hidden="true">
+                  MC
+                </span>
+                <span>
+                  <strong>Maya Chen</strong>
+                  Release owner, Platform team. She approves releases in
+                  #releases.
+                </span>
+              </div>
               <span className="signal-dayone-source">
                 <FileText aria-hidden="true" /> <code>cut-a-release.md</code>
                 <ChevronRight aria-hidden="true" />
@@ -85,6 +108,10 @@ export function DayOneChat() {
               <span className="signal-dayone-source">
                 <FileText aria-hidden="true" />{" "}
                 <code>tag-driven-releases.md</code>
+                <ChevronRight aria-hidden="true" />
+              </span>
+              <span className="signal-dayone-source">
+                <FileText aria-hidden="true" /> <code>maya-chen.md</code>
                 <ChevronRight aria-hidden="true" />
               </span>
             </div>

@@ -147,7 +147,7 @@ function SignalProduct() {
 
 const dayOneQuestions = [
   "How do we cut a release?",
-  "Which service owns billing?",
+  "Who owns billing?",
   "Why do jobs run on Postgres?",
 ];
 

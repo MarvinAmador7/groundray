@@ -1334,6 +1334,39 @@
   margin: 8px 0 6px;
   padding-left: 20px;
 }
+.signal-dayone-note {
+  margin-top: 4px;
+}
+.signal-dayone-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 6px;
+  padding: 10px 14px 10px 10px;
+  border-radius: 14px;
+  background: #2a2b26;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #c9c8c1;
+}
+.signal-dayone-person strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: #f0efe8;
+}
+.signal-dayone-initials {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--signal-accent);
+  color: #1a120c;
+  font-size: 13px;
+  font-weight: 600;
+}
 .signal-dayone-source {
   display: inline-flex;
   align-items: center;
