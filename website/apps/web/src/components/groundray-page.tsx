@@ -26,7 +26,7 @@ const DOCS = `${REPO}/blob/main/docs`;
 export function groundrayMeta() {
   const title = "Groundray · a company brain for your coding agents";
   const description =
-    "Write down your team’s decisions, procedures and conventions once. Codex and Claude Code answer from that company brain and show the note behind each answer. Plain files in a Git repo you own.";
+    "Your coding agent turns the notes and decisions you already have into a company brain, and you approve what goes in. Codex and Claude Code answer from it and show the source behind each answer. Plain files in a Git repo you own.";
   return [
     { title },
     { name: "description", content: description },
@@ -107,9 +107,9 @@ function SignalHero() {
           <span>to AI.</span>
         </h1>
         <p className="signal-hero-description">
-          Write down your team’s decisions, procedures and conventions once.
-          Codex and Claude Code answer from that company brain and show the
-          note behind each answer.
+          Your agent turns the notes and decisions you already have into a
+          company brain; you approve what goes in. Codex and Claude Code answer
+          from it and show the source behind each answer.
         </p>
         <HeroSetup />
         <p className="signal-hero-ownership">
@@ -175,8 +175,8 @@ function SignalDayOne() {
         </h2>
         <p>
           They add the company brain once. Release steps, who owns which
-          service, why the queue runs on Postgres: their agent answers from what
-          the team wrote down, and links it. No week of asking around.
+          service, why the queue runs on Postgres: their agent answers from the
+          company brain, and links the source. No week of asking around.
         </p>
         <ul className="signal-dayone-questions" aria-label="Example questions">
           {dayOneQuestions.map((question) => (
