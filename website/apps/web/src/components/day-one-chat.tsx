@@ -5,7 +5,7 @@ import { ChatText, Message, ToolCall } from "./signal-evidence-demo";
 const TIMES = [0, 1100, 2300, 3300, 4400, 5500, 6600];
 const DURATION = 11000;
 
-// A new engineer's first session, played once when it scrolls into view.
+// A new hire's first session, played once when it scrolls into view.
 export function DayOneChat() {
   const playback = useGraphPlayback(TIMES, DURATION);
   const staticView = playback.reducedMotion === true;
@@ -18,7 +18,7 @@ export function DayOneChat() {
     <figure
       className="signal-session signal-dayone-chat"
       ref={playback.figureRef}
-      aria-label="Illustrative first session for a new engineer"
+      aria-label="Illustrative first session for a new hire"
       data-autoplay={!staticView}
       data-active={active || playback.complete}
     >

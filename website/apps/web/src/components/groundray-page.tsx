@@ -160,13 +160,13 @@ function SignalDayOne() {
     >
       <div>
         <h2 id="signal-dayone-title">
-          A new engineer starts;{" "}
+          A new hire starts;{" "}
           <span>their agent already knows how you ship.</span>
         </h2>
         <p>
-          They add the company brain once. Release steps, who owns which
-          service, why the queue runs on Postgres: their agent answers from the
-          company brain, and links the source. No week of asking around.
+          They add the company brain once.
+          <br />
+          No week of asking around.
         </p>
         <ul className="signal-dayone-questions" aria-label="Example questions">
           {dayOneQuestions.map((question) => (
