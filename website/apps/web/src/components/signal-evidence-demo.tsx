@@ -131,15 +131,15 @@ export function ToolCall({
         ) : (
           <LoaderCircle className="signal-searching" aria-hidden="true" />
         )}
-        <span className="signal-tool-name">{name}</span>
+        <code className="signal-tool-name">{name}</code>
         <span className="signal-tool-result">{done ? result : "Running…"}</span>
         <ChevronRight className="signal-tool-chevron" aria-hidden="true" />
       </summary>
       <div className="signal-tool-detail">
-        <span>CLI COMMAND</span>
+        <span>Command</span>
         <pre>{command}</pre>
         <span>
-          {done ? "ILLUSTRATED RESULT" : "AWAITING ILLUSTRATED RESULT"}
+          {done ? "Result" : "Waiting for result"}
         </span>
         {done && <pre className="signal-tool-output">{output}</pre>}
       </div>
@@ -294,7 +294,7 @@ export function SignalEvidenceDemo() {
           )}
           {stage >= 6 && (
             <div className="signal-session-source">
-              <span>ORIGINAL KICKOFF NOTE</span>
+              <span>Original kickoff note</span>
               <blockquote>
                 “Lumen: confirm scope approval before committing to a launch
                 date.”
@@ -311,7 +311,7 @@ export function SignalEvidenceDemo() {
                 />
                 <button type="button" onClick={inspectSource}>
                   <FileText aria-hidden="true" />
-                  [1] kickoff.md.txt
+                  <code>kickoff.md.txt</code>
                   <ChevronRight aria-hidden="true" />
                 </button>
               </div>
@@ -351,7 +351,7 @@ export function SignalEvidenceDemo() {
           {stage >= 11 && (
             <>
               <div className="signal-draft">
-                <span>DRAFT PREVIEW / NOT SAVED OR PUBLISHED</span>
+                <span>Draft preview, not saved or published</span>
                 <strong>Lumen launch constraint</strong>
                 <p>
                   Scope approval is required before committing to a launch

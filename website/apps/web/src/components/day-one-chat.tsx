@@ -79,11 +79,12 @@ export function DayOneChat() {
                 <li>Push a vX.Y.Z tag. The release workflow builds and publishes.</li>
               </ol>
               <span className="signal-dayone-source">
-                <FileText aria-hidden="true" /> cut-a-release.md
+                <FileText aria-hidden="true" /> <code>cut-a-release.md</code>
                 <ChevronRight aria-hidden="true" />
               </span>
               <span className="signal-dayone-source">
-                <FileText aria-hidden="true" /> tag-driven-releases.md
+                <FileText aria-hidden="true" />{" "}
+                <code>tag-driven-releases.md</code>
                 <ChevronRight aria-hidden="true" />
               </span>
             </div>

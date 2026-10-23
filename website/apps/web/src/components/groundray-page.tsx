@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowDown,
   ArrowUp,
@@ -97,9 +97,6 @@ function SignalHero() {
       <div className="signal-hero-wash" />
       <SignalHeader />
       <div className="signal-hero-copy">
-        <p className="signal-label">
-          <span className="signal-dot" /> A COMPANY BRAIN FOR CODING AGENTS
-        </p>
         <h1 id="signal-title">
           Stop re‑explaining
           <br />
@@ -118,7 +115,7 @@ function SignalHero() {
         </p>
       </div>
       <a href="#signal-product" className="signal-scroll">
-        <span>SEE HOW IT WORKS</span>
+        <span>See how it works</span>
         <ArrowDown aria-hidden="true" />
       </a>
     </section>
@@ -133,7 +130,6 @@ function SignalProduct() {
       aria-labelledby="signal-product-title"
     >
       <div className="signal-section-intro">
-        <p className="signal-label">ANSWERS WITH SOURCES</p>
         <h2 id="signal-product-title">
           Ask a question;
           <br />
@@ -163,7 +159,6 @@ function SignalDayOne() {
       aria-labelledby="signal-dayone-title"
     >
       <div>
-        <p className="signal-label">DAY ONE</p>
         <h2 id="signal-dayone-title">
           A new engineer starts;{" "}
           <span>their agent already knows how you ship.</span>
@@ -288,7 +283,6 @@ function SignalSystem() {
     >
       <div className="signal-section-heading">
         <div>
-          <p className="signal-label">HOW IT WORKS</p>
           <h2 id="signal-system-title">
             Install it in your agent;
             <br />
@@ -306,7 +300,6 @@ function SignalSystem() {
         {architecture.map((item) => (
           <article key={item.number}>
             <div className="signal-architecture-art">
-              <span>{item.number}</span>
               {item.icon}
               {item.number !== "03" && (
                 <ArrowRight className="signal-flow-arrow" aria-hidden="true" />
@@ -342,7 +335,6 @@ function SignalWorkflow() {
     >
       <div className="signal-section-heading">
         <div>
-          <p className="signal-label">TEAM UPDATES</p>
           <h2 id="signal-workflow-title">
             One person learns it;
             <br />
@@ -375,7 +367,6 @@ function SignalWorkflow() {
       <ol className="signal-lifecycle">
         {stages.map((stage, index) => (
           <li key={stage.name}>
-            <span className="signal-lifecycle-number">0{index + 1}</span>
             <h3>
               {stage.name}
               {index !== stages.length - 1 && <ArrowRight aria-hidden="true" />}
@@ -398,7 +389,6 @@ function SignalOwnership() {
       aria-labelledby="signal-ownership-title"
     >
       <div>
-        <p className="signal-label">NO LOCK-IN</p>
         <h2 id="signal-ownership-title">
           Plain files
           <br />
@@ -420,7 +410,7 @@ function SignalOwnership() {
         aria-label="Illustrative company brain directory"
       >
         <div className="signal-tree-title">
-          <GitBranch size={17} aria-hidden="true" /> company-brain{" "}
+          <GitBranch size={17} aria-hidden="true" /> <code>company-brain</code>{" "}
           <span>yours</span>
         </div>
         <pre>{`knowledge/\n├── decisions/\n│   └── launch-scope.md\n├── procedures/\n│   └── customer-onboarding.md\n├── definitions/\n│   └── gross-margin.md\n└── references/\n    └── captures/\n        └── kickoff.md.txt`}</pre>
@@ -461,7 +451,6 @@ function SignalQuestions() {
       aria-labelledby="signal-questions-title"
     >
       <div>
-        <p className="signal-label">A FEW DETAILS</p>
         <h2 id="signal-questions-title">
           Questions
           <br />
@@ -480,7 +469,55 @@ function SignalQuestions() {
   );
 }
 
+const REVEAL = [
+  ".signal-section h2",
+  ".signal-section h2 ~ p",
+  ".signal-section-intro > p",
+  ".signal-section-heading > p",
+  ".signal-dayone > div > p",
+  ".signal-dayone-questions",
+  ".signal-change",
+  ".signal-lifecycle li",
+  ".signal-architecture article",
+  ".signal-brain-command",
+  ".signal-file-tree",
+  ".signal-accordion [data-slot='accordion-item']",
+  ".signal-last-call > *",
+].join(", ");
+
+// Section parts rise in once, staggered within their section, as each enters.
+function useSectionReveal() {
+  useEffect(() => {
+    if (
+      !("IntersectionObserver" in window) ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    const order = new Map<Element | null, number>();
+    for (const element of document.querySelectorAll<HTMLElement>(REVEAL)) {
+      const section = element.closest("section");
+      const index = order.get(section) ?? 0;
+      order.set(section, index + 1);
+      element.style.transitionDelay = `${Math.min(index, 6) * 70}ms`;
+      element.classList.add("signal-reveal");
+      observer.observe(element);
+    }
+    return () => observer.disconnect();
+  }, []);
+}
+
 export default function GroundrayPage() {
+  useSectionReveal();
   return (
     <div className="signal">
       <a className="signal-skip" href="#signal-product">
@@ -509,7 +546,6 @@ export default function GroundrayPage() {
           className="signal-last-call"
           aria-labelledby="signal-last-title"
         >
-          <p className="signal-label">OPEN SOURCE · APACHE 2.0</p>
           <h2 id="signal-last-title">
             Start your
             <br />
