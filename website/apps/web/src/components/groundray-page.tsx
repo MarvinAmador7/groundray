@@ -182,23 +182,23 @@ function SignalDayOne() {
 const architecture = [
   {
     number: "01",
-    title: "Your company brain",
-    sub: "Markdown + original notes",
-    text: "Decisions, procedures, definitions and the notes behind them, in a Git repo your team controls.",
-    icon: <GitBranch aria-hidden="true" />,
-  },
-  {
-    number: "02",
-    title: "Groundray",
-    sub: "Command line + local search",
-    text: "Searches the brain, reads the original notes, and prepares changes for review.",
+    title: "Paste the setup prompt",
+    sub: "In Codex or Claude Code",
+    text: "Your agent installs Groundray for you, with the plugin or the command line.",
     icon: <Terminal aria-hidden="true" />,
   },
   {
+    number: "02",
+    title: "Pick your company brain",
+    sub: "A new one or your team’s",
+    text: "Start fresh or connect your team’s Git repo. It’s plain Markdown you control.",
+    icon: <GitBranch aria-hidden="true" />,
+  },
+  {
     number: "03",
-    title: "Your coding agent",
-    sub: "Plugin or terminal",
-    text: "Codex or Claude Code answers with the notes in hand. Switch tools and keep the same brain.",
+    title: "Ask your first question",
+    sub: "In the chat you already use",
+    text: "Your agent answers from the brain and shows the note behind each answer.",
     icon: (
       <span className="signal-agent-glyph" aria-hidden="true">
         {["openai", "claude", "gemini"].map((agent) => (
@@ -335,6 +335,7 @@ function SignalWorkflow() {
     >
       <div className="signal-section-heading">
         <div>
+          <p className="signal-label">ONE SHARED BRAIN FOR ALL</p>
           <h2 id="signal-workflow-title">
             One person learns it;
             <br />
