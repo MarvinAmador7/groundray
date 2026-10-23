@@ -1380,3 +1380,6 @@
     gap: 50px;
   }
 }
+.signal-last-call > p {
+  text-wrap: balance;
+}

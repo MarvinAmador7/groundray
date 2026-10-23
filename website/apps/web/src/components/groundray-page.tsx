@@ -24,9 +24,9 @@ const REPO = "https://github.com/MarvinAmador7/groundray";
 const DOCS = `${REPO}/blob/main/docs`;
 
 export function groundrayMeta() {
-  const title = "Groundray: shared memory for your team’s AI agents";
+  const title = "Groundray · a company brain for your coding agents";
   const description =
-    "Groundray keeps your team’s decisions, procedures and definitions in a Git repo you own, so Codex and Claude Code answer from them and point to the source behind each answer. Open source.";
+    "Write down your team’s decisions, procedures and conventions once. Codex and Claude Code answer from that company brain and show the note behind each answer. Plain files in a Git repo you own.";
   return [
     { title },
     { name: "description", content: description },
@@ -97,7 +97,7 @@ function SignalHero() {
       <SignalHeader />
       <div className="signal-hero-copy">
         <p className="signal-label">
-          <span className="signal-dot" /> A SHARED MEMORY FOR YOUR TEAM’S AI
+          <span className="signal-dot" /> A COMPANY BRAIN FOR CODING AGENTS
         </p>
         <h1 id="signal-title">
           Stop re‑explaining
@@ -107,13 +107,13 @@ function SignalHero() {
           <span>to AI.</span>
         </h1>
         <p className="signal-hero-description">
-          Groundray gives Codex and Claude Code your team’s decisions and
-          procedures, with the original note behind each answer, stored as
-          Markdown in a repo you own.
+          Write down your team’s decisions, procedures and conventions once.
+          Codex and Claude Code answer from that company brain and show the
+          note behind each answer.
         </p>
         <HeroSetup />
         <p className="signal-hero-ownership">
-          Free and open source. Your files stay in your repo.
+          Free and open source. Plain files you own.
         </p>
       </div>
       <a href="#signal-product" className="signal-scroll">
@@ -134,20 +134,19 @@ function SignalProduct() {
       <div className="signal-section-intro">
         <p className="signal-label">ANSWERS WITH SOURCES</p>
         <h2 id="signal-product-title">
-          Ask a question.
+          Ask a question;
           <br />
-          <span>Get the answer and the note it came from.</span>
+          <span>get the answer and the note behind it.</span>
         </h2>
         <p>
-          Ask your agent what you can promise a customer. It reads the original
-          kickoff note and answers with it attached, so you can check before you
-          repeat it.
+          Your agent searches the company brain, reads the original note, and
+          answers with it attached. Check the source before you act on it.
         </p>
         <a
           className="signal-text-link"
           href={`${DOCS}/groundray-product-goal.md`}
         >
-          Read the product overview <ArrowUpRight aria-hidden="true" />
+          See how answers work <ArrowUpRight aria-hidden="true" />
         </a>
       </div>
       <SignalEvidenceDemo />
@@ -171,13 +170,13 @@ function SignalDayOne() {
       <div>
         <p className="signal-label">DAY ONE</p>
         <h2 id="signal-dayone-title">
-          The new engineer’s agent{" "}
-          <span>already knows how you ship.</span>
+          A new engineer starts;{" "}
+          <span>their agent already knows how you ship.</span>
         </h2>
         <p>
-          They add the team’s brain once. From then on, their coding agent
-          answers from your own procedures and decisions, and links each one,
-          instead of the new hire asking around for a week.
+          They add the company brain once. Release steps, who owns which
+          service, why the queue runs on Postgres: their agent answers from what
+          the team wrote down, and links it. No week of asking around.
         </p>
         <ul className="signal-dayone-questions" aria-label="Example questions">
           {dayOneQuestions.map((question) => (
@@ -228,23 +227,23 @@ function SignalDayOne() {
 const architecture = [
   {
     number: "01",
-    title: "Your repository",
-    sub: "Markdown + original records",
-    text: "Decisions, procedures, definitions, and the sources behind them. In a separate Git repository you control.",
+    title: "Your company brain",
+    sub: "Markdown + original notes",
+    text: "Decisions, procedures, definitions and the notes behind them, in a Git repo your team controls.",
     icon: <GitBranch aria-hidden="true" />,
   },
   {
     number: "02",
     title: "Groundray",
-    sub: "Local CLI + keyword search",
-    text: "Search the brain, read the originals, and prepare changes through a deliberate, validated workflow.",
+    sub: "Command line + local search",
+    text: "Searches the brain, reads the original notes, and prepares changes for review.",
     icon: <Terminal aria-hidden="true" />,
   },
   {
     number: "03",
-    title: "Your AI agent",
-    sub: "Plugins or terminal access",
-    text: "Your agent reasons with the evidence. Carry the same company context into the tool you choose next.",
+    title: "Your coding agent",
+    sub: "Plugin or terminal",
+    text: "Codex or Claude Code answers with the notes in hand. Switch tools and keep the same brain.",
     icon: (
       <span className="signal-agent-glyph" aria-hidden="true">
         {["openai", "claude", "gemini"].map((agent) => (
@@ -276,7 +275,7 @@ function BrainCommand() {
 
   return (
     <div className="signal-brain-command">
-      <p>Point Groundray at your team’s repo. Its knowledge comes to your machine.</p>
+      <p>Add your company brain:</p>
       <div className="signal-brain-command-line">
         <span aria-hidden="true">$</span>
         <code>
@@ -301,7 +300,7 @@ function BrainCommand() {
         </button>
       </div>
       <p className="signal-brain-command-note">
-        Replace the example URL with your existing brain repository.{" "}
+        Use your own repo’s URL.{" "}
         <a href={`${DOCS}/cli.md`}>
           CLI guide <ArrowUpRight aria-hidden="true" />
         </a>
@@ -331,14 +330,14 @@ function SignalSystem() {
         <div>
           <p className="signal-label">HOW IT WORKS</p>
           <h2 id="signal-system-title">
-            Install it in your agent.
+            Install it in your agent;
             <br />
-            <span>Point it at your repo.</span>
+            <span>add your company brain.</span>
           </h2>
         </div>
         <p>
           Groundray is a command-line tool with plugins for Codex and Claude
-          Code. Your knowledge stays as Markdown in Git, and search runs on your
+          Code. The company brain is Markdown in a Git repo. Search runs on your
           machine.
         </p>
       </div>
@@ -360,19 +359,19 @@ function SignalSystem() {
         ))}
       </div>
       <p className="signal-provider-note">
-        Retrieved evidence enters your AI tool’s model context under your
-        provider’s settings. Repository access uses your Git host’s permissions.
+        Notes your agent reads go to your AI provider, like anything else it
+        reads. Who can read or change the brain is set by your Git host.
       </p>
     </section>
   );
 }
 
 const stages = [
-  { name: "Capture", text: "Keep the original record." },
-  { name: "Propose", text: "Draft a scoped change." },
-  { name: "Review", text: "Inspect the exact candidate." },
-  { name: "Publish", text: "Share the reviewed version." },
-  { name: "Sync", text: "Bring each local brain current." },
+  { name: "Capture", text: "Keep the original note." },
+  { name: "Propose", text: "Draft the change." },
+  { name: "Review", text: "Read the exact change." },
+  { name: "Publish", text: "Make it the team’s version." },
+  { name: "Sync", text: "Everyone pulls it in." },
 ];
 function SignalWorkflow() {
   return (
@@ -385,15 +384,15 @@ function SignalWorkflow() {
         <div>
           <p className="signal-label">TEAM UPDATES</p>
           <h2 id="signal-workflow-title">
-            When one person fixes something,
+            One person learns it;
             <br />
-            <span>everyone’s AI gets the fix.</span>
+            <span>every agent on the team knows it.</span>
           </h2>
         </div>
         <p>
-          Your agent drafts the change with its source attached. A teammate
-          reviews the exact wording and publishes it, and everyone else syncs.
-          Publishing is always a separate, explicit step.
+          Your agent drafts the update with its source attached. A teammate
+          reads the exact change and publishes it to the company brain. Everyone
+          else syncs and has it. Nothing is published without that step.
         </p>
       </div>
       <div className="signal-change">
@@ -410,7 +409,7 @@ function SignalWorkflow() {
         <div className="signal-change-source">
           <FileText size={14} aria-hidden="true" />
           <span>Original kickoff note attached</span>
-          <span>Review the proposal and its source together.</span>
+          <span>Read the change and its source side by side.</span>
         </div>
       </div>
       <ol className="signal-lifecycle">
@@ -426,7 +425,7 @@ function SignalWorkflow() {
         ))}
       </ol>
       <a className="signal-text-link" href={`${DOCS}/brain-collaboration.md`}>
-        Read the collaboration workflow <ArrowUpRight aria-hidden="true" />
+        See how updates work <ArrowUpRight aria-hidden="true" />
       </a>
     </section>
   );
@@ -441,18 +440,19 @@ function SignalOwnership() {
       <div>
         <p className="signal-label">NO LOCK-IN</p>
         <h2 id="signal-ownership-title">
-          Switch AI tools
+          Plain files
           <br />
-          without losing
+          your team owns;
           <br />
-          <span>what your team knows.</span>
+          <span>not a black box.</span>
         </h2>
         <p>
-          It’s Markdown in Git: read it, version it, back it up, move it. When
-          you change agents or models, point the new one at the same repo.
+          The company brain is Markdown in Git: read it, version it, back it
+          up, move it. Change agents or models and point the new one at the same
+          brain.
         </p>
         <a className="signal-text-link" href={REPO}>
-          Explore the open-source project <ArrowUpRight aria-hidden="true" />
+          See the code on GitHub <ArrowUpRight aria-hidden="true" />
         </a>
       </div>
       <div
@@ -475,23 +475,23 @@ function SignalOwnership() {
 const questions = [
   {
     q: "Is it free?",
-    a: "Yes. Groundray is open source under the Apache 2.0 license. Your brain is a Git repository on whatever host you already use.",
+    a: "Yes. Groundray is open source under Apache 2.0. Your company brain lives in a Git repo on whatever host you already use.",
   },
   {
-    q: "What do I actually install?",
-    a: "A native CLI for macOS or Linux, Intel or ARM. The package includes local keyword search. Codex and Claude Code have installable plugins; other agents can invoke the standalone CLI with terminal access. No separate Python, QMD, or model download is required for a new native setup.",
+    q: "What do I install?",
+    a: "A command-line tool for macOS or Linux, Intel or ARM, with search built in. Codex and Claude Code get a plugin; other agents with terminal access can call the command line directly. No Python or model downloads needed.",
   },
   {
-    q: "Does my company knowledge stay local?",
-    a: "Brains are Git repository checkouts on your machine. Keyword search runs locally. If an AI agent retrieves evidence, that evidence enters the agent’s model context under your chosen provider’s settings. Git synchronization uses your repository host.",
+    q: "Does my company brain stay on my machine?",
+    a: "The brain is a Git checkout on your machine, and search runs locally. When your agent reads a note, that note goes to your AI provider, like anything else the agent reads. Syncing goes through your Git host.",
   },
   {
-    q: "Can an agent silently publish changes?",
-    a: "Groundray’s workflow makes publishing and syncing explicit. An agent can propose a draft; the exact candidate and its sources can be reviewed before publication. Business approval is a company decision. Access enforcement comes from your Git host’s permissions and rules.",
+    q: "Can an agent change the brain on its own?",
+    a: "Not silently. An agent can draft a change; you can read the exact change and its source before anyone publishes it. Who may approve what is your team’s call, and your Git host’s permissions decide who can push.",
   },
   {
     q: "How ready is Groundray?",
-    a: "Groundray is an early open-source release. The CLI, Codex and Claude Code plugins, source retrieval, and proposal/review/publish/sync workflows are implemented. Real employee handoffs and the human evidence-review experience remain pilot work.",
+    a: "It’s an early open-source release. The command line, the Codex and Claude Code plugins, source lookup, and the draft, review, publish and sync steps work today. Real team handoffs and the review experience are still in pilot.",
   },
 ];
 function SignalQuestions() {
@@ -533,7 +533,7 @@ export default function GroundrayPage() {
             <FileText aria-hidden="true" /> Plain Markdown in your Git repo.
           </span>
           <span>
-            <GitBranch aria-hidden="true" /> Every answer cites its source.
+            <GitBranch aria-hidden="true" /> Every answer links its source.
           </span>
           <span>
             <Terminal aria-hidden="true" /> Works in Codex and Claude Code.
@@ -551,13 +551,13 @@ export default function GroundrayPage() {
         >
           <p className="signal-label">OPEN SOURCE · APACHE 2.0</p>
           <h2 id="signal-last-title">
-            Try it in
+            Start your
             <br />
-            <span>your agent.</span>
+            <span>company brain.</span>
           </h2>
           <p>
             Copy the setup prompt, paste it into Codex or Claude Code, and point
-            it at your team’s repo.
+            it at a Git repo. You own what goes in, and you can take it anywhere.
           </p>
           <a href="#signal-top">
             Get the setup prompt <ArrowUp aria-hidden="true" />

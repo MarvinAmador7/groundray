@@ -44,7 +44,7 @@ jobs:
           import { readFileSync, existsSync } from 'node:fs';
           const base = 'apps/web/build/client/';
           const html = readFileSync(base + 'index.html', 'utf8');
-          for (const text of ['Stop', 'your company', 'to AI.', 'Free and open source. Your files stay in your repo.', 'Groundray: shared memory for your team']) {
+          for (const text of ['Stop', 'your company', 'to AI.', 'Free and open source. Plain files you own.', 'Groundray · a company brain for your coding agents']) {
             if (!html.includes(text)) throw new Error('Missing prerendered content: ' + text);
           }
           if (!existsSync(base + 'images/archive-drawer.webp')) throw new Error('Missing hero image');
