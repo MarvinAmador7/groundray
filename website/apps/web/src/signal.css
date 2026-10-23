@@ -165,15 +165,16 @@
   white-space: nowrap;
 }
 .signal-hero h1 {
-  font-size: clamp(86px, 9.3vw, 148px);
-  line-height: 0.91;
-  letter-spacing: -0.075em;
+  font-size: clamp(64px, 6.6vw, 110px);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
   margin-left: -5px;
 }
 .signal-hero h1 span {
   color: var(--signal-accent);
 }
 .signal-hero-description {
+  max-width: 34em;
   margin-top: 29px;
   font-size: clamp(16px, 1.32vw, 21px);
   color: #b9bab3;
@@ -1052,9 +1053,6 @@
     padding-top: 70px;
     width: 65%;
   }
-  .signal-hero h1 {
-    font-size: 114px;
-  }
   .signal-hero-art {
     object-position: 56% center;
   }
@@ -1122,15 +1120,12 @@
     white-space: normal;
   }
   .signal-hero h1 {
-    font-size: clamp(94px, 20vw, 140px);
+    font-size: clamp(54px, 14vw, 72px);
   }
   .signal-hero-description {
     margin-top: 28px;
     max-width: 360px;
     font-size: 17px;
-  }
-  .signal-desktop-break {
-    display: none;
   }
   .signal .hero-setup {
     width: 320px;
@@ -1265,9 +1260,6 @@
   }
 }
 @media (max-width: 380px) {
-  .signal-hero h1 {
-    font-size: 96px;
-  }
   .signal-hero-copy {
     padding-top: 55px;
   }
@@ -1282,4 +1274,12 @@
     font-size: 9px;
     padding: 22px 15px;
   }
+}
+
+.signal-last-call > p {
+  max-width: 30em;
+  margin: 24px auto 0;
+  color: #b9bab3;
+  font-size: clamp(15px, 1.2vw, 19px);
+  line-height: 1.55;
 }
