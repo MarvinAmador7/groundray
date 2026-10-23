@@ -36,12 +36,12 @@ export function groundrayMeta() {
     { property: "og:url", content: "https://groundray.com/" },
     {
       property: "og:image",
-      content: "https://groundray.com/images/signal-landscape.webp",
+      content: "https://groundray.com/images/archive-drawer.webp",
     },
     {
       property: "og:image:alt",
       content:
-        "A dark architectural archive landscape rendered in amber dithered light.",
+        "A wall of dark card-catalog drawers with one drawer open and a single index card lit amber.",
     },
     { name: "twitter:card", content: "summary_large_image" },
   ];
@@ -87,7 +87,7 @@ function SignalHero() {
     >
       <img
         className="signal-hero-art"
-        src="/images/signal-landscape.webp"
+        src="/images/archive-drawer.webp"
         width="1672"
         height="941"
         alt=""
