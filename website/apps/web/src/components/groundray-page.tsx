@@ -155,6 +155,76 @@ function SignalProduct() {
   );
 }
 
+const dayOneQuestions = [
+  "How do we cut a release?",
+  "Which service owns billing?",
+  "Why do jobs run on Postgres?",
+];
+
+function SignalDayOne() {
+  return (
+    <section
+      className="signal-section signal-dayone"
+      id="signal-dayone"
+      aria-labelledby="signal-dayone-title"
+    >
+      <div>
+        <p className="signal-label">DAY ONE</p>
+        <h2 id="signal-dayone-title">
+          The new engineer’s agent{" "}
+          <span>already knows how you ship.</span>
+        </h2>
+        <p>
+          They add the team’s brain once. From then on, their coding agent
+          answers from your own procedures and decisions, and links each one,
+          instead of the new hire asking around for a week.
+        </p>
+        <ul className="signal-dayone-questions" aria-label="Example questions">
+          {dayOneQuestions.map((question) => (
+            <li key={question}>{question}</li>
+          ))}
+        </ul>
+      </div>
+      <figure className="signal-dayone-session">
+        <div className="signal-tree-title">
+          <Terminal size={15} aria-hidden="true" /> new-engineer · Claude Code{" "}
+          <span>example</span>
+        </div>
+        <div className="signal-dayone-log">
+          <p className="signal-dayone-command">
+            <span aria-hidden="true">$</span> groundray brain add
+            https://github.com/your-team/company-brain.git
+          </p>
+          <p className="signal-dayone-ask">
+            <span aria-hidden="true">&gt;</span> How do we cut a release?
+          </p>
+          <p className="signal-dayone-tool">
+            groundray search query "release"
+            <br />
+            groundray get procedures/cut-a-release.md
+          </p>
+          <div className="signal-dayone-answer">
+            <p>Here’s the team’s release procedure:</p>
+            <ol>
+              <li>Merge to main with CI green.</li>
+              <li>Bump the version in pyproject.toml.</li>
+              <li>Push a vX.Y.Z tag. The release workflow builds and publishes.</li>
+            </ol>
+          </div>
+        </div>
+        <figcaption className="signal-dayone-sources">
+          <span>
+            <FileText aria-hidden="true" /> Procedure · cut-a-release.md
+          </span>
+          <span>
+            <FileText aria-hidden="true" /> Decision · tag-driven-releases.md
+          </span>
+        </figcaption>
+      </figure>
+    </section>
+  );
+}
+
 const architecture = [
   {
     number: "01",
@@ -470,6 +540,7 @@ export default function GroundrayPage() {
           </span>
         </div>
         <SignalProduct />
+        <SignalDayOne />
         <SignalWorkflow />
         <SignalSystem />
         <SignalOwnership />
