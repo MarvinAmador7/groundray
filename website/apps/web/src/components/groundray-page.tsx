@@ -16,6 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@website/ui/components/accordion";
+import { DayOneChat } from "./day-one-chat";
 import { HeroSetup } from "./hero-setup";
 import { SignalEvidenceDemo } from "./signal-evidence-demo";
 import "../signal.css";
@@ -142,12 +143,6 @@ function SignalProduct() {
           Your agent searches the company brain, reads the original note, and
           answers with it attached. Check the source before you act on it.
         </p>
-        <a
-          className="signal-text-link"
-          href={`${DOCS}/groundray-product-goal.md`}
-        >
-          See how answers work <ArrowUpRight aria-hidden="true" />
-        </a>
       </div>
       <SignalEvidenceDemo />
     </section>
@@ -184,42 +179,7 @@ function SignalDayOne() {
           ))}
         </ul>
       </div>
-      <figure className="signal-dayone-session">
-        <div className="signal-tree-title">
-          <Terminal size={15} aria-hidden="true" /> new-engineer · Claude Code{" "}
-          <span>example</span>
-        </div>
-        <div className="signal-dayone-log">
-          <p className="signal-dayone-command">
-            <span aria-hidden="true">$</span> groundray brain add
-            https://github.com/your-team/company-brain.git
-          </p>
-          <p className="signal-dayone-ask">
-            <span aria-hidden="true">&gt;</span> How do we cut a release?
-          </p>
-          <p className="signal-dayone-tool">
-            groundray search query "release"
-            <br />
-            groundray get procedures/cut-a-release.md
-          </p>
-          <div className="signal-dayone-answer">
-            <p>Here’s the team’s release procedure:</p>
-            <ol>
-              <li>Merge to main with CI green.</li>
-              <li>Bump the version in pyproject.toml.</li>
-              <li>Push a vX.Y.Z tag. The release workflow builds and publishes.</li>
-            </ol>
-          </div>
-        </div>
-        <figcaption className="signal-dayone-sources">
-          <span>
-            <FileText aria-hidden="true" /> Procedure · cut-a-release.md
-          </span>
-          <span>
-            <FileText aria-hidden="true" /> Decision · tag-driven-releases.md
-          </span>
-        </figcaption>
-      </figure>
+      <DayOneChat />
     </section>
   );
 }
