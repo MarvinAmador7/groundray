@@ -193,6 +193,8 @@ export function SignalEvidenceDemo() {
     setRun((value) => value + 1);
     playback.replay();
   }
+  // Pause for a tap or keyboard focus on a control, never for a finger that is
+  // only scrolling the page across the chat.
   function pauseForInspection(target: EventTarget) {
     if (
       target instanceof HTMLElement &&
@@ -200,6 +202,10 @@ export function SignalEvidenceDemo() {
       !target.closest("[data-signal-playback]")
     )
       playback.pause();
+  }
+  function pauseForKeyboardFocus(target: EventTarget) {
+    if (target instanceof HTMLElement && target.matches(":focus-visible"))
+      pauseForInspection(target);
   }
   const stream = { active: active || playback.complete, instant: staticView };
   const pause = () => playback.pause();
@@ -212,8 +218,8 @@ export function SignalEvidenceDemo() {
       data-stage={playback.stage}
       data-autoplay={!staticView}
       data-active={active || playback.complete}
-      onFocusCapture={(event) => pauseForInspection(event.target)}
-      onPointerDownCapture={(event) => pauseForInspection(event.target)}
+      onFocusCapture={(event) => pauseForKeyboardFocus(event.target)}
+      onClickCapture={(event) => pauseForInspection(event.target)}
     >
       <div
         className="signal-agent-thread"
@@ -221,8 +227,13 @@ export function SignalEvidenceDemo() {
         role="region"
         aria-label="Illustrative agent conversation"
         tabIndex={0}
-        onFocus={pause}
-        onTouchStart={pause}
+        onFocus={(event) => {
+          if (
+            event.target === event.currentTarget &&
+            event.target.matches(":focus-visible")
+          )
+            pause();
+        }}
         onWheel={pause}
       >
         <div ref={content} key={run} className="signal-agent-transcript">

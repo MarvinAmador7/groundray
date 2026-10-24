@@ -33,10 +33,16 @@ export function useGraphPlayback(times: readonly number[], duration: number) {
   }, [duration, times]);
 
   useEffect(() => {
+    // A figure taller than the screen (a chat on a phone) never reaches 45%
+    // visible, so filling 40% of the screen also counts as in view.
     const observer = new IntersectionObserver(
       ([entry]) =>
-        setVisible(entry.isIntersecting && entry.intersectionRatio >= 0.45),
-      { threshold: 0.45 },
+        setVisible(
+          entry.isIntersecting &&
+            (entry.intersectionRatio >= 0.45 ||
+              entry.intersectionRect.height >= window.innerHeight * 0.4),
+        ),
+      { threshold: [0, 0.1, 0.2, 0.3, 0.45, 0.6, 0.8, 1] },
     );
     if (figureRef.current) observer.observe(figureRef.current);
     return () => observer.disconnect();
