@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowDown,
+  ArrowUp,
   ArrowRight,
   ArrowUpRight,
   Check,
@@ -15,6 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@website/ui/components/accordion";
+import { DayOneChat } from "./day-one-chat";
 import { HeroSetup } from "./hero-setup";
 import { SignalEvidenceDemo } from "./signal-evidence-demo";
 import "../signal.css";
@@ -23,9 +25,9 @@ const REPO = "https://github.com/MarvinAmador7/groundray";
 const DOCS = `${REPO}/blob/main/docs`;
 
 export function groundrayMeta() {
-  const title = "Groundray — Stop starting over.";
+  const title = "Groundray · a company brain for your coding agents";
   const description =
-    "A shared brain for your team and AI. Carry what your company learns forward with the evidence behind it. Yours to keep. Yours to move.";
+    "Your coding agent turns the notes and decisions you already have into a company brain, and you approve what goes in. Codex and Claude Code answer from it and show the source behind each answer. Plain files in a Git repo you own.";
   return [
     { title },
     { name: "description", content: description },
@@ -35,12 +37,12 @@ export function groundrayMeta() {
     { property: "og:url", content: "https://groundray.com/" },
     {
       property: "og:image",
-      content: "https://groundray.com/images/signal-landscape.webp",
+      content: "https://groundray.com/images/archive-drawer.webp",
     },
     {
       property: "og:image:alt",
       content:
-        "A dark architectural archive landscape rendered in amber dithered light.",
+        "A wall of dark card-catalog drawers with one drawer open and a single index card lit amber.",
     },
     { name: "twitter:card", content: "summary_large_image" },
   ];
@@ -86,7 +88,7 @@ function SignalHero() {
     >
       <img
         className="signal-hero-art"
-        src="/images/signal-landscape.webp"
+        src="/images/archive-drawer.webp"
         width="1672"
         height="941"
         alt=""
@@ -95,25 +97,25 @@ function SignalHero() {
       <div className="signal-hero-wash" />
       <SignalHeader />
       <div className="signal-hero-copy">
-        <p className="signal-label">
-          <span className="signal-dot" /> A SHARED BRAIN FOR YOUR TEAM + AI
-        </p>
         <h1 id="signal-title">
-          Stop
+          Stop re‑explaining
           <br />
-          starting
+          your company
           <br />
-          <span>over.</span>
+          <span>to AI.</span>
         </h1>
         <p className="signal-hero-description">
-          Carry what your company learns forward
-          <br className="signal-desktop-break" /> with the evidence behind it.
+          Your agent turns the notes and decisions you already have into a
+          company brain; you approve what goes in. Codex and Claude Code answer
+          from it and show the source behind each answer.
         </p>
         <HeroSetup />
-        <p className="signal-hero-ownership">Yours to keep. Yours to move.</p>
+        <p className="signal-hero-ownership">
+          Free and open source. Plain files you own.
+        </p>
       </div>
       <a href="#signal-product" className="signal-scroll">
-        <span>THERE’S MORE TO REMEMBER</span>
+        <span>See how it works</span>
         <ArrowDown aria-hidden="true" />
       </a>
     </section>
@@ -128,25 +130,51 @@ function SignalProduct() {
       aria-labelledby="signal-product-title"
     >
       <div className="signal-section-intro">
-        <p className="signal-label">CONTEXT, NOT ANOTHER CLEAN SLATE</p>
         <h2 id="signal-product-title">
-          The conversation ends.
+          Ask a question;
           <br />
-          <span>The knowledge stays.</span>
+          <span>get the answer and the note behind it.</span>
         </h2>
         <p>
-          Your decisions shouldn’t disappear into chat history. Give your team
-          and its AI a shared place for what you know, why you believe it, and
-          what comes next.
+          Your agent searches the company brain, reads the original note, and
+          answers with it attached. Check the source before you act on it.
         </p>
-        <a
-          className="signal-text-link"
-          href={`${DOCS}/groundray-product-goal.md`}
-        >
-          Meet your company brain <ArrowUpRight aria-hidden="true" />
-        </a>
       </div>
       <SignalEvidenceDemo />
+    </section>
+  );
+}
+
+const dayOneQuestions = [
+  "How do we cut a release?",
+  "Who owns billing?",
+  "Why do jobs run on Postgres?",
+];
+
+function SignalDayOne() {
+  return (
+    <section
+      className="signal-section signal-dayone"
+      id="signal-dayone"
+      aria-labelledby="signal-dayone-title"
+    >
+      <div>
+        <h2 id="signal-dayone-title">
+          A new hire starts;{" "}
+          <span>their agent already knows how you ship.</span>
+        </h2>
+        <p>
+          They add the company brain once.
+          <br />
+          No week of asking around.
+        </p>
+        <ul className="signal-dayone-questions" aria-label="Example questions">
+          {dayOneQuestions.map((question) => (
+            <li key={question}>{question}</li>
+          ))}
+        </ul>
+      </div>
+      <DayOneChat />
     </section>
   );
 }
@@ -154,23 +182,23 @@ function SignalProduct() {
 const architecture = [
   {
     number: "01",
-    title: "Your repository",
-    sub: "Markdown + original records",
-    text: "Decisions, procedures, definitions, and the sources behind them. In a separate Git repository you control.",
-    icon: <GitBranch aria-hidden="true" />,
-  },
-  {
-    number: "02",
-    title: "Groundray",
-    sub: "Local CLI + keyword search",
-    text: "Search the brain, read the originals, and prepare changes through a deliberate, validated workflow.",
+    title: "Paste the setup prompt",
+    sub: "In Codex or Claude Code",
+    text: "Your agent installs Groundray for you, with the plugin or the command line.",
     icon: <Terminal aria-hidden="true" />,
   },
   {
+    number: "02",
+    title: "Pick your company brain",
+    sub: "A new one or your team’s",
+    text: "Start fresh or connect your team’s Git repo. It’s plain Markdown you control.",
+    icon: <GitBranch aria-hidden="true" />,
+  },
+  {
     number: "03",
-    title: "Your AI agent",
-    sub: "Plugins or terminal access",
-    text: "Your agent reasons with the evidence. Carry the same company context into the tool you choose next.",
+    title: "Ask your first question",
+    sub: "In the chat you already use",
+    text: "Your agent answers from the brain and shows the note behind each answer.",
     icon: (
       <span className="signal-agent-glyph" aria-hidden="true">
         {["openai", "claude", "gemini"].map((agent) => (
@@ -202,7 +230,7 @@ function BrainCommand() {
 
   return (
     <div className="signal-brain-command">
-      <p>Add your team’s brain. Bring its knowledge to your machine.</p>
+      <p>Add your company brain:</p>
       <div className="signal-brain-command-line">
         <span aria-hidden="true">$</span>
         <code>
@@ -227,7 +255,7 @@ function BrainCommand() {
         </button>
       </div>
       <p className="signal-brain-command-note">
-        Replace the example URL with your existing brain repository.{" "}
+        Use your own repo’s URL.{" "}
         <a href={`${DOCS}/cli.md`}>
           CLI guide <ArrowUpRight aria-hidden="true" />
         </a>
@@ -255,17 +283,16 @@ function SignalSystem() {
     >
       <div className="signal-section-heading">
         <div>
-          <p className="signal-label">UNDER THE HOOD</p>
           <h2 id="signal-system-title">
-            Plain files.
+            Install it in your agent;
             <br />
-            <span>A complete workflow.</span>
+            <span>add your company brain.</span>
           </h2>
         </div>
         <p>
-          Groundray is a local CLI and agent workflow over Git-backed company
-          knowledge. Your files stay in your repository. The search index is
-          local and rebuildable.
+          Groundray is a command-line tool with plugins for Codex and Claude
+          Code. The company brain is Markdown in a Git repo. Search runs on your
+          machine.
         </p>
       </div>
       <BrainCommand />
@@ -273,7 +300,6 @@ function SignalSystem() {
         {architecture.map((item) => (
           <article key={item.number}>
             <div className="signal-architecture-art">
-              <span>{item.number}</span>
               {item.icon}
               {item.number !== "03" && (
                 <ArrowRight className="signal-flow-arrow" aria-hidden="true" />
@@ -286,19 +312,19 @@ function SignalSystem() {
         ))}
       </div>
       <p className="signal-provider-note">
-        Retrieved evidence enters your AI tool’s model context under your
-        provider’s settings. Repository access uses your Git host’s permissions.
+        Notes your agent reads go to your AI provider, like anything else it
+        reads. Who can read or change the brain is set by your Git host.
       </p>
     </section>
   );
 }
 
 const stages = [
-  { name: "Capture", text: "Keep the original record." },
-  { name: "Propose", text: "Draft a scoped change." },
-  { name: "Review", text: "Inspect the exact candidate." },
-  { name: "Publish", text: "Share the reviewed version." },
-  { name: "Sync", text: "Bring each local brain current." },
+  { name: "Capture", text: "Keep the original note." },
+  { name: "Propose", text: "Draft the change." },
+  { name: "Review", text: "Read the exact change." },
+  { name: "Publish", text: "Make it the team’s version." },
+  { name: "Sync", text: "Everyone pulls it in." },
 ];
 function SignalWorkflow() {
   return (
@@ -309,16 +335,17 @@ function SignalWorkflow() {
     >
       <div className="signal-section-heading">
         <div>
-          <p className="signal-label">A SHARED BRAIN. A SHARED HISTORY.</p>
+          <p className="signal-label">ONE SHARED BRAIN FOR ALL</p>
           <h2 id="signal-workflow-title">
-            Your team learns.
+            One person learns it;
             <br />
-            <span>Your brain evolves.</span>
+            <span>every agent on the team knows it.</span>
           </h2>
         </div>
         <p>
-          Capture new evidence. Propose a correction. Review the exact change
-          before publishing it, then explicitly sync it on another installation.
+          Your agent drafts the update with its source attached. A teammate
+          reads the exact change and publishes it to the company brain. Everyone
+          else syncs and has it. Nothing is published without that step.
         </p>
       </div>
       <div className="signal-change">
@@ -335,13 +362,12 @@ function SignalWorkflow() {
         <div className="signal-change-source">
           <FileText size={14} aria-hidden="true" />
           <span>Original kickoff note attached</span>
-          <span>Review the proposal and its source together.</span>
+          <span>Read the change and its source side by side.</span>
         </div>
       </div>
       <ol className="signal-lifecycle">
         {stages.map((stage, index) => (
           <li key={stage.name}>
-            <span className="signal-lifecycle-number">0{index + 1}</span>
             <h3>
               {stage.name}
               {index !== stages.length - 1 && <ArrowRight aria-hidden="true" />}
@@ -351,7 +377,7 @@ function SignalWorkflow() {
         ))}
       </ol>
       <a className="signal-text-link" href={`${DOCS}/brain-collaboration.md`}>
-        Read the collaboration workflow <ArrowUpRight aria-hidden="true" />
+        See how updates work <ArrowUpRight aria-hidden="true" />
       </a>
     </section>
   );
@@ -364,21 +390,20 @@ function SignalOwnership() {
       aria-labelledby="signal-ownership-title"
     >
       <div>
-        <p className="signal-label">BUILT TO BELONG TO YOU</p>
         <h2 id="signal-ownership-title">
-          Your files.
+          Plain files
           <br />
-          Your history.
+          your team owns;
           <br />
-          <span>Your way forward.</span>
+          <span>not a black box.</span>
         </h2>
         <p>
-          Tools and AI models change. Your company’s knowledge stays yours. Keep
-          it in Markdown and Git, independent of any one platform. Choose your
-          next agent or model without starting over.
+          The company brain is Markdown in Git: read it, version it, back it
+          up, move it. Change agents or models and point the new one at the same
+          brain.
         </p>
         <a className="signal-text-link" href={REPO}>
-          Explore the open-source project <ArrowUpRight aria-hidden="true" />
+          See the code on GitHub <ArrowUpRight aria-hidden="true" />
         </a>
       </div>
       <div
@@ -386,7 +411,7 @@ function SignalOwnership() {
         aria-label="Illustrative company brain directory"
       >
         <div className="signal-tree-title">
-          <GitBranch size={17} aria-hidden="true" /> company-brain{" "}
+          <GitBranch size={17} aria-hidden="true" /> <code>company-brain</code>{" "}
           <span>yours</span>
         </div>
         <pre>{`knowledge/\n├── decisions/\n│   └── launch-scope.md\n├── procedures/\n│   └── customer-onboarding.md\n├── definitions/\n│   └── gross-margin.md\n└── references/\n    └── captures/\n        └── kickoff.md.txt`}</pre>
@@ -400,20 +425,24 @@ function SignalOwnership() {
 
 const questions = [
   {
-    q: "What do I actually install?",
-    a: "A native CLI for macOS or Linux, Intel or ARM. The package includes local keyword search. Codex and Claude Code have installable plugins; other agents can invoke the standalone CLI with terminal access. No separate Python, QMD, or model download is required for a new native setup.",
+    q: "Is it free?",
+    a: "Yes. Groundray is open source under Apache 2.0. Your company brain lives in a Git repo on whatever host you already use.",
   },
   {
-    q: "Does my company knowledge stay local?",
-    a: "Brains are Git repository checkouts on your machine. Keyword search runs locally. If an AI agent retrieves evidence, that evidence enters the agent’s model context under your chosen provider’s settings. Git synchronization uses your repository host.",
+    q: "What do I install?",
+    a: "A command-line tool for macOS or Linux, Intel or ARM, with search built in. Codex and Claude Code get a plugin; other agents with terminal access can call the command line directly. No Python or model downloads needed.",
   },
   {
-    q: "Can an agent silently publish changes?",
-    a: "Groundray’s workflow makes publishing and syncing explicit. An agent can propose a draft; the exact candidate and its sources can be reviewed before publication. Business approval is a company decision. Access enforcement comes from your Git host’s permissions and rules.",
+    q: "Does my company brain stay on my machine?",
+    a: "The brain is a Git checkout on your machine, and search runs locally. When your agent reads a note, that note goes to your AI provider, like anything else the agent reads. Syncing goes through your Git host.",
+  },
+  {
+    q: "Can an agent change the brain on its own?",
+    a: "Not silently. An agent can draft a change; you can read the exact change and its source before anyone publishes it. Who may approve what is your team’s call, and your Git host’s permissions decide who can push.",
   },
   {
     q: "How ready is Groundray?",
-    a: "Groundray is an early open-source release. The CLI, Codex and Claude Code plugins, source retrieval, and proposal/review/publish/sync workflows are implemented. Real employee handoffs and the human evidence-review experience remain pilot work.",
+    a: "It’s an early open-source release. The command line, the Codex and Claude Code plugins, source lookup, and the draft, review, publish and sync steps work today. Real team handoffs and the review experience are still in pilot.",
   },
 ];
 function SignalQuestions() {
@@ -423,11 +452,10 @@ function SignalQuestions() {
       aria-labelledby="signal-questions-title"
     >
       <div>
-        <p className="signal-label">A FEW DETAILS</p>
         <h2 id="signal-questions-title">
-          Before you
+          Questions
           <br />
-          <span>make it yours.</span>
+          <span>before you install.</span>
         </h2>
       </div>
       <Accordion className="signal-accordion">
@@ -442,7 +470,55 @@ function SignalQuestions() {
   );
 }
 
+const REVEAL = [
+  ".signal-section h2",
+  ".signal-section h2 ~ p",
+  ".signal-section-intro > p",
+  ".signal-section-heading > p",
+  ".signal-dayone > div > p",
+  ".signal-dayone-questions",
+  ".signal-change",
+  ".signal-lifecycle li",
+  ".signal-architecture article",
+  ".signal-brain-command",
+  ".signal-file-tree",
+  ".signal-accordion [data-slot='accordion-item']",
+  ".signal-last-call > *",
+].join(", ");
+
+// Section parts rise in once, staggered within their section, as each enters.
+function useSectionReveal() {
+  useEffect(() => {
+    if (
+      !("IntersectionObserver" in window) ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-in");
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    const order = new Map<Element | null, number>();
+    for (const element of document.querySelectorAll<HTMLElement>(REVEAL)) {
+      const section = element.closest("section");
+      const index = order.get(section) ?? 0;
+      order.set(section, index + 1);
+      element.style.transitionDelay = `${Math.min(index, 6) * 70}ms`;
+      element.classList.add("signal-reveal");
+      observer.observe(element);
+    }
+    return () => observer.disconnect();
+  }, []);
+}
+
 export default function GroundrayPage() {
+  useSectionReveal();
   return (
     <div className="signal">
       <a className="signal-skip" href="#signal-product">
@@ -452,32 +528,36 @@ export default function GroundrayPage() {
         <SignalHero />
         <div className="signal-principles">
           <span>
-            <FileText aria-hidden="true" /> Knowledge in files you control.
+            <FileText aria-hidden="true" /> Plain Markdown in your Git repo.
           </span>
           <span>
-            <GitBranch aria-hidden="true" /> Evidence with a history.
+            <GitBranch aria-hidden="true" /> Every answer links its source.
           </span>
           <span>
-            <Terminal aria-hidden="true" /> Context for the agent you choose.
+            <Terminal aria-hidden="true" /> Works in Codex and Claude Code.
           </span>
         </div>
         <SignalProduct />
-        <SignalSystem />
+        <SignalDayOne />
         <SignalWorkflow />
+        <SignalSystem />
         <SignalOwnership />
         <SignalQuestions />
         <section
           className="signal-last-call"
           aria-labelledby="signal-last-title"
         >
-          <p className="signal-label">MAKE THE NEXT CONVERSATION COUNT</p>
           <h2 id="signal-last-title">
-            Keep what
+            Start your
             <br />
-            you <span>learn.</span>
+            <span>company brain.</span>
           </h2>
+          <p>
+            Copy the setup prompt, paste it into Codex or Claude Code, and point
+            it at a Git repo. You own what goes in, and you can take it anywhere.
+          </p>
           <a href="#signal-top">
-            Build your company brain <ArrowUpRight aria-hidden="true" />
+            Get the setup prompt <ArrowUp aria-hidden="true" />
           </a>
         </section>
       </main>

@@ -1,10 +1,10 @@
 # Website assets
 
-- `apps/web/public/images/signal-landscape.webp`: original AI-generated dithered
-  architectural archive landscape for the production landing page. Generated October 20,
-  2026, exported to WebP at the original 1672 × 941 resolution. The visual
-  direction references Axiom's restrained technical design; no Axiom artwork,
-  trademarks, proprietary fonts, or source code are used.
+- `apps/web/public/images/archive-drawer.webp`: AI-generated hero artwork for the
+  production landing page: a dark wall of card-catalog drawers with one drawer
+  open and a single index card lit amber, standing for the source note behind
+  each answer. Supplied by the project owner October 23, 2026, at 1672 × 941
+  WebP. It replaces the earlier dithered archive landscape (`signal-landscape.webp`).
 - `apps/web/public/fonts/geist-variable.woff2` and
   `geistmono-variable.woff2`: Geist and Geist Mono Latin variable fonts,
   distributed through [Fontsource](https://fontsource.org/fonts/geist) under

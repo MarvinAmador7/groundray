@@ -44,10 +44,10 @@ jobs:
           import { readFileSync, existsSync } from 'node:fs';
           const base = 'apps/web/build/client/';
           const html = readFileSync(base + 'index.html', 'utf8');
-          for (const text of ['Stop', 'starting', 'over.', 'Yours to keep. Yours to move.', 'Groundray — Stop starting over.']) {
+          for (const text of ['Stop', 'your company', 'to AI.', 'Free and open source. Plain files you own.', 'Groundray · a company brain for your coding agents']) {
             if (!html.includes(text)) throw new Error('Missing prerendered content: ' + text);
           }
-          if (!existsSync(base + 'images/signal-landscape.webp')) throw new Error('Missing hero image');
+          if (!existsSync(base + 'images/archive-drawer.webp')) throw new Error('Missing hero image');
           if (html.includes('noindex')) throw new Error('Homepage must be indexable');
-          if (!html.includes('https://groundray.com/images/signal-landscape.webp')) throw new Error('Missing current social image');
+          if (!html.includes('https://groundray.com/images/archive-drawer.webp')) throw new Error('Missing current social image');
           JS
